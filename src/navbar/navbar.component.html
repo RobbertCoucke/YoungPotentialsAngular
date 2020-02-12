@@ -1,0 +1,84 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light navigatiebalk">
+  <button class="navbar-toggler hamburger" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" (click)="toggleNavbar()"></span>
+    </button>
+  <a href="" class="navbar-brand vives_logo" title="Home" rel="home"></a>
+  
+  <div class="collapse navbar-collapse" id="navbarNavDropdown" [ngClass]="{ 'show': navbarOpen }">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Vacatures <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Over ons</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Verder studeren</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Navorming
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">PCLT</a>
+          <a class="dropdown-item" href="#">Brugge Business School </a>
+          <a class="dropdown-item" href="#">Kortrijk Business School </a>
+        </div>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+    </ul>
+  </div>
+  <div class="collapse navbar-collapse" id="navbarRegistreerDropdown" [ngClass]="{ 'show': navbarOpen }">
+      <ul class="navbar-nav registreermenu">
+        <div class="registreerdiv">
+          <li class="nav-item registrerenbtnwrapper">
+            <a class="nav-link registrerenbtn" href="#">Registreren</a>
+          </li>
+          <li class="nav-item registrerenbtnwrapper">
+            <a class="nav-link registrerenbtn" href="#">Inloggen</a>
+          </li>
+        </div>
+        <div class="wrappertaalmenu" (mouseleave)="toggleTaalMenuClose()">
+        </div>
+        <div class="taalmenu" (mouseover)="toggleTaalMenuOpen()" (click)="toggleTaalMenuOpenClose()">
+          <li class="nav-item dropdown taaldropdown">
+            <a class="nav-link dropdown-toggle taalselect"  href="#" id="navbarDropdownTaalMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+              NL
+            </a>
+            <div class="dropdown-menu dropdown-taalselect" aria-labelledby="navbarDropdownMenuLink" [ngClass]="{ 'show': taalMenuOpen }">
+              <a class="dropdown-item dropdown-taal" href="#">FR</a>
+              <a class="dropdown-item dropdown-taal" href="#">ENG </a>
+            </div>
+          </li>
+        </div>
+        
+      </ul>
+  </div>
+</nav>
+
+<!-- // <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+//   <a class="navbar-brand" href="#">
+//     Brand
+//   </a>
+
+//   <button class="navbar-toggler" type="button">
+//     <span class="navbar-toggler-icon" (click)="toggleNavbar()"></span>
+//   </button>
+
+
+//   <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+//     <ul class="navbar-nav mr-auto">
+//       <li class="nav-item">
+//         <a class="nav-link" href="#">Item 1</a>
+//       </li>
+
+//       <li class="nav-item">
+//         <a class="nav-link" href="#">Item 2</a>
+//       </li>
+//     </ul>
+//   </div>
+// </nav> -->
