@@ -9,7 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { VactureDetailComponent } from './vacture-detail/vacture-detail.component';
 import { VactureFilterComponent } from './vacture-filter/vacture-filter.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './navbar/navbar.component'
 import { AddVacAnonymousComponent } from './add-vac-anonymous/add-vac-anonymous.component'
 @NgModule({
   declarations: [
