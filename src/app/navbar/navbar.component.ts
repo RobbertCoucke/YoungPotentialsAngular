@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
@@ -8,6 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
   navbarOpen = false;
   taalMenuOpen = false;
+  
+  languages=["nl","fr", "en"];
+  dropdownLanguages=["fr","en"];
+  selectedLanguage= "nl";
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
@@ -30,7 +35,20 @@ export class NavbarComponent implements OnInit {
     return false;
   }
 
-  constructor() { }
+  useLanguage(language: string) {
+    this.translate.use(language);
+
+    this.changeLanguage(language);
+  }
+
+  changeLanguage(language: string){
+    this.selectedLanguage = language;
+    this.dropdownLanguages = this.languages.filter(e => e !== this.selectedLanguage);
+  }
+
+  constructor(private translate: TranslateService) {
+    translate.setDefaultLang('nl');
+  }
 
   ngOnInit() {
   }
