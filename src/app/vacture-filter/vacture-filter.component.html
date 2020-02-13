@@ -1,0 +1,41 @@
+
+      <!-- Free Tier -->
+      <div class="card mb-5 mb-lg-0">
+        <div class="card-body">
+          <h5 class="card-title text-muted text-uppercase">Filter:</h5>
+          <hr>
+          <div id="list1" class="dropdown-check-list" tabindex="100">
+            <span class="anchor">Select Fruits : </span>
+            <!-- <ul class="items">
+                <li><input class="input" type="checkbox" />Soort </li>
+                <li><input type="checkbox" class="input" />StudieGebied
+                <ul>
+                  <li><input ng-model="selected[x.id]" type="checkbox" class="input" />HWB </li>
+                  <li><input type="checkbox" class="input" />Biotechniek </li>
+                </ul></li>
+                <li><input type="checkbox" class="input" />Regio
+                  <ul>
+                    <li><input type="checkbox" class="input" />Kortrijk </li>
+                    <li><input type="checkbox" class="input" />Vives </li>
+                  </ul>
+                </li> -->
+
+                <ul *ngFor="let gebied of studiegebied">
+                  <li (click)="onSelect(gebied)">
+                    <input class="input" type="checkbox" value="{{gebied}}" (change)="checkboxHandler($event)" name="studieGebiedVives" [checked]="false" />
+                    {{gebied}}
+                          <ul *ngFor="let op of dictionary[gebied]" >
+                            <li>
+                              <input class="input" type="checkbox" value="{{op}}"  [checked]="false" />
+                              {{op}}
+                              </li>
+                          </ul>
+                      
+                  </li>
+                </ul>
+                
+            
+        </div>
+          <a href="#" class="btn btn-block btn-primary text-uppercase" ng-click="get_all_checked">Button</a>
+        </div>
+      </div>

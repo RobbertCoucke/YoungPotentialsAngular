@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "projectYoungPotentials"
+    }
+  },
+  "defaultProject": "projectYoungPotentials",
+  "cli": {
+    "analytics": false
+  }
 }
