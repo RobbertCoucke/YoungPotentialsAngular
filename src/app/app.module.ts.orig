@@ -3,14 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+<<<<<<< HEAD
 import { VactureItemComponent } from './vacture-item/vacture-item.component';
 import { VacturesComponent } from './vactures/vactures.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { VactureDetailComponent } from './vacture-detail/vacture-detail.component';
 import { VactureFilterComponent } from './vacture-filter/vacture-filter.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { AddVacAnonymousComponent } from './add-vac-anonymous/add-vac-anonymous.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,8 +19,16 @@ import { AddVacAnonymousComponent } from './add-vac-anonymous/add-vac-anonymous.
     ProfileEditComponent,
     VactureDetailComponent,
     VactureFilterComponent,
+=======
+import { NavbarComponent } from './navbar/navbar.component';
+import { AddVacAnonymousComponent } from './add-vac-anonymous/add-vac-anonymous.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
     NavbarComponent,
     AddVacAnonymousComponent
+>>>>>>> master
   ],
   imports: [
     BrowserModule,
