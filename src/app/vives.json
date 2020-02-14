@@ -1,0 +1,12 @@
+{
+    "studieGebieds": [
+        {
+            "id" : 1,
+            "name": "HWB"
+        },
+        {
+            "id" : 2,
+            "name": "Bio"
+        }
+    ]
+}

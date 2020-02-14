@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class VactureFilterComponent implements OnInit {
 
   selectedGebied: string = '';
-  show : boolean = false;
 
   selectedgebieds = [];
 
@@ -34,11 +33,21 @@ export class VactureFilterComponent implements OnInit {
     return gebied == "HWB"
   }
 
+
+
+  d = {}; 
+  
   onSelect(gebied) : void{
-    if (gebied == "HWB" && this.checkgebied(gebied))
+    const key = gebied;
+    if(this.d[gebied] == null )
     {
-      this.show = true;
+      this.d[key] = this.dictionary[gebied];
+    }else{
+
+      this.d[key] = null;
     }
+    console.log(this.d)
+
   }
 
   checkboxHandler (event: any) {

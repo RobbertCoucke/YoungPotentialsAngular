@@ -24,12 +24,15 @@
                   <li (click)="onSelect(gebied)">
                     <input class="input" type="checkbox" value="{{gebied}}" (change)="checkboxHandler($event)" name="studieGebiedVives" [checked]="false" />
                     {{gebied}}
-                          <ul *ngFor="let op of dictionary[gebied]" >
+                    <div *ngIf="d[gebied]">
+                           <ul *ngFor="let op of d[gebied]" >
                             <li>
                               <input class="input" type="checkbox" value="{{op}}"  [checked]="false" />
                               {{op}}
                               </li>
                           </ul>
+                    </div>
+
                       
                   </li>
                 </ul>

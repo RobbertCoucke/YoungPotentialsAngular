@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VactureItemComponent } from './vacture-item/vacture-item.component';
@@ -11,6 +10,8 @@ import { VactureDetailComponent } from './vacture-detail/vacture-detail.componen
 import { VactureFilterComponent } from './vacture-filter/vacture-filter.component';
 import { NavbarComponent } from './navbar/navbar.component'
 import { AddVacAnonymousComponent } from './add-vac-anonymous/add-vac-anonymous.component'
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { AddVacAnonymousComponent } from './add-vac-anonymous/add-vac-anonymous.
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
