@@ -2,5 +2,14 @@
     "demo": {
         "title": "Demonstration traduction",
         "text": "Ceci est une simple demonstration avec ngx-translate"
+    },
+    "navbar": {
+        "overview": "Vacatures",
+        "about": "Qui sommes nous",
+        "studying": "Poursuivre les études",
+        "research": "Recherche",
+        "contact": "Contact",
+        "signup": "Inscrire",
+        "login": "Connexion"
     }
 }

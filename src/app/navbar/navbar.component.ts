@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 
+import { TranslateCacheService } from 'ngx-translate-cache';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -34,11 +36,12 @@ export class NavbarComponent implements OnInit {
     */
     return false;
   }
+  
 
   useLanguage(language: string) {
     this.translate.use(language);
-
     this.changeLanguage(language);
+    console.log(getCookie("language"))
   }
 
   changeLanguage(language: string){
@@ -46,11 +49,32 @@ export class NavbarComponent implements OnInit {
     this.dropdownLanguages = this.languages.filter(e => e !== this.selectedLanguage);
   }
 
-  constructor(private translate: TranslateService) {
-    translate.setDefaultLang('nl');
-  }
+  // constructor(private translate: TranslateService) {
+  //   translate.setDefaultLang('nl');
 
+  // }
+  constructor(private translate: TranslateService,
+      translateCacheService: TranslateCacheService) {
+        translate.setDefaultLang('nl');
+        translateCacheService.init();
+  }
+  
   ngOnInit() {
+    if(getCookie("language")!==null)
+    {
+      this.selectedLanguage= getCookie("language");
+      this.changeLanguage(this.selectedLanguage);
+    }
   }
 
+}
+
+
+export function getCookie(name: string) {
+  const value = "; " + document.cookie;
+  const parts = value.split("; " + name + "=");
+  
+  if (parts.length == 2) {
+      return parts.pop().split(";").shift();
+  }
 }

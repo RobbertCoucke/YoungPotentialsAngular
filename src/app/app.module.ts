@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-<<<<<<< HEAD
 import { NavbarComponent } from './navbar/navbar.component';
 
 // import ngx-translate and the http loader
@@ -11,16 +10,17 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 
-=======
+import {TranslateService} from '@ngx-translate/core';
+import { TranslateCacheModule, TranslateCacheSettings, TranslateCacheService } from 'ngx-translate-cache';
+
 import { VactureItemComponent } from './vacture-item/vacture-item.component';
 import { VacturesComponent } from './vactures/vactures.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { VactureDetailComponent } from './vacture-detail/vacture-detail.component';
 import { VactureFilterComponent } from './vacture-filter/vacture-filter.component';
-import { NavbarComponent } from './navbar/navbar.component'
 import { AddVacAnonymousComponent } from './add-vac-anonymous/add-vac-anonymous.component'
->>>>>>> master
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +45,15 @@ import { AddVacAnonymousComponent } from './add-vac-anonymous/add-vac-anonymous.
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
         }
+    }),
+    TranslateCacheModule.forRoot({
+      cacheService: {
+        provide: TranslateCacheService,
+        useFactory: translateCacheFactory,
+        deps: [TranslateService, TranslateCacheSettings]
+      },
+      cacheName: 'language', // default value is 'lang'.
+      cacheMechanism: 'Cookie', // default value is 'LocalStorage'.
     })
   ],
   providers: [],
@@ -55,4 +64,11 @@ export class AppModule { }
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
+}
+
+export function translateCacheFactory(
+  translateService: TranslateService,
+  translateCacheSettings: TranslateCacheSettings
+) {
+  return new TranslateCacheService(translateService, translateCacheSettings);
 }
