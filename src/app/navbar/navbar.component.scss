@@ -52,10 +52,13 @@ $grijs: gray;
     color: $wit;
     padding: 0px 15px;
     line-height: 28px;
+    transition: transform .2s;
 }
+
+
 .nav-link.registrerenbtn:hover{
     color: $wit;
-    text-decoration: underline;
+    transform: scale(1.1);
 }
 .nav-link.registrerenbtn:focus{
     outline: 1px dotted $grijs;

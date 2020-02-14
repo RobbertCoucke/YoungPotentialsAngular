@@ -19,7 +19,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { VactureDetailComponent } from './vacture-detail/vacture-detail.component';
 import { VactureFilterComponent } from './vacture-filter/vacture-filter.component';
-import { AddVacAnonymousComponent } from './add-vac-anonymous/add-vac-anonymous.component'
+import { AddVacAnonymousComponent } from './add-vac-anonymous/add-vac-anonymous.component';
+import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './footer/footer.component'
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { AddVacAnonymousComponent } from './add-vac-anonymous/add-vac-anonymous.
     VactureDetailComponent,
     VactureFilterComponent,
     NavbarComponent,
-    AddVacAnonymousComponent
+    AddVacAnonymousComponent,
+    HomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

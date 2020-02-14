@@ -5,3 +5,18 @@ ul li {
 .input{
     margin-right: 5px;
 }
+
+.btn-primary
+{
+    box-shadow: none;
+    padding: 5px 50px;
+    border: none;
+    border-radius: 40px;
+    background: #E50001;
+    transition: transform .2s;
+}
+
+.btn-primary:hover
+{
+    transform: scale(1.1);
+}
