@@ -60,7 +60,7 @@ export class NavbarComponent implements OnInit {
   }
   
   ngOnInit() {
-    if(getCookie("language")!==null)
+    if(getCookie("language")!==undefined)
     {
       this.selectedLanguage= getCookie("language");
       this.changeLanguage(this.selectedLanguage);
