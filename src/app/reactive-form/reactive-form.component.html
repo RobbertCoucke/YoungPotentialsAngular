@@ -218,6 +218,7 @@
                 type="submit"
                 class="btn btn-success"
                 (click)="onSubmit()"
+                [disabled]="!uploadVacForm.valid"
               >
                 Verzenden
               </button>
