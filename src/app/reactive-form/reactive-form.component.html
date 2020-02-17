@@ -176,7 +176,7 @@
                       multiple
                       (selectionChange)="changeRatio($event)"
                     >
-                      <mat-option>-- None --</mat-option>
+                      <mat-option>None</mat-option>
 
                       <ng-container *ngFor="let s of keuzeA">
                         <mat-optgroup
@@ -262,9 +262,8 @@
                 type="submit"
                 class="btn btn-success"
                 (click)="onSubmit()"
-                
+                [disabled]="!uploadVacForm.valid"
               >
-              [disabled]="!uploadVacForm.valid"
                 Verzenden
               </button>
             </div>
