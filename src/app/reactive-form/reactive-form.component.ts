@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Validators, FormGroup, FormBuilder } from "@angular/forms";
+import { Validators, FormGroup, FormBuilder, FormArray } from "@angular/forms";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
@@ -49,11 +49,16 @@ export class ReactiveFormComponent implements OnInit {
   filteredSteden: Observable<Stad[]>; // Array met alle steden in België gefilterd
 
   /**
-   * Formcontrols voor locatie - opleiding - studiegebied
+   * Formcontrols
    */
-  locatieControl = new FormControl();
+  locatieControl = new FormControl("", Validators.required);
   studiegebiedControl = new FormControl("", Validators.required);
   opleidingControl = new FormControl("", Validators.required);
+  titel = new FormControl("", [Validators.required]);
+  email = new FormControl("", [Validators.required, Validators.email]);
+  bedrijfsnaam = new FormControl("", [Validators.required]);
+  beschrijving = new FormControl("", [Validators.required]);
+  vacatureBestand = new FormControl("", [Validators.required]);
 
   submitted = false; // false: form niet submited | true: form submitted
 
@@ -183,22 +188,28 @@ export class ReactiveFormComponent implements OnInit {
     this.steden = cities;
     this.minDate = new Date();
     this.maxDate = new Date();
-    this.minDate.setDate(this.minDate.getDate());
-    this.maxDate.setDate(this.maxDate.getDate() + 182);
+    this.minDate.setDate(this.minDate.getDate()); // min datum is de dag zelf
+    this.maxDate.setDate(this.maxDate.getDate() + 182); // we stellen de maxium datum in op 6 maanden = 182 dagen
   }
 
   ngOnInit() {
+    /**
+     * @description filteren steden op naam
+     */
     this.filteredSteden = this.locatieControl.valueChanges.pipe(
       startWith(""),
       map(value => (typeof value === "string" ? value : value.name)),
       map(name => (name ? this._filter(name) : this.steden.slice()))
     );
 
+    /**
+     * @description formvalidatie in groep
+     */
     this.uploadVacForm = this.fb.group({
       titel: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
       bedrijfsnaam: ["", Validators.required],
-      locatie: ["", Validators.required],
+      locatie: [this.locatieControl.value, Validators.required],
       beschrijving: ["", Validators.required],
       vacaturebestand: ["", Validators.required],
       vacatureCB: [false, Validators.required],
@@ -207,7 +218,6 @@ export class ReactiveFormComponent implements OnInit {
       einddatum: ["", Validators.required]
     });
   }
-
   /**
    * @description vult de lijsten op basis van geselecteerd studiegebied
    * @param opleiding geselecteerd studiegebied
@@ -278,5 +288,58 @@ export class ReactiveFormComponent implements OnInit {
    */
   changeRatio(event: MatSelectChange) {
     console.log(event.value);
+  }
+
+  /**
+   * @description error messages die worden opgeroepen bij een invalid veld
+   * @return een error message
+   */
+
+  getErrorMessageTitel() {
+    return this.titel.hasError("required") ? "U moet een titel opgeven" : "";
+  }
+
+  getErrorMessageEmail() {
+    return this.email.hasError("required")
+      ? "U moet een email opgeven"
+      : this.email.hasError("email")
+      ? "Geen geldige email"
+      : "";
+  }
+
+  getErrorMessageBedrijfsnaam() {
+    return this.titel.hasError("required")
+      ? "U moet een bedrijfsnaam opgeven"
+      : "";
+  }
+
+  getErrorMessageBeschrijving() {
+    return this.titel.hasError("required")
+      ? "U moet een beschrijving opgeven"
+      : "";
+  }
+
+  getErrorMessagelocatieControl() {
+    return this.locatieControl.hasError("required")
+      ? "U moet een locatie selecteren"
+      : "";
+  }
+
+  getErrorMessageVacatureBestand() {
+    return this.vacatureBestand.hasError("required")
+      ? "Je moet een bestand uploaden"
+      : "";
+  }
+
+  getErrorMessagestudiegebiedControl() {
+    return this.studiegebiedControl.hasError("required")
+      ? "U moet een studiegebied selecteren"
+      : "";
+  }
+
+  getErrorMessageopleidingControl() {
+    return this.opleidingControl.hasError("required")
+      ? "U moet een opleiding selecteren"
+      : "";
   }
 }

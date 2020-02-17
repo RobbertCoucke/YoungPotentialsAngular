@@ -11,72 +11,37 @@
             [formGroup]="uploadVacForm"
             (ngSubmit)="onSubmit(uploadVacForm)"
           >
-            <div class="form-group">
-              <label>Titel</label>
-              <input type="text" class="form-control" formControlName="titel" />
-              <span
-                class="text-danger"
-                *ngIf="
-                  (uploadVacFormControl.titel.touched || submitted) &&
-                  uploadVacFormControl.titel.errors?.required
-                "
-              >
-                Titel is required
-              </span>
-            </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input
-                type="email"
-                class="form-control"
-                formControlName="email"
-                placeholder="example@gmail.com"
-              />
-              <span
-                class="text-danger"
-                *ngIf="
-                  (uploadVacFormControl.email.touched || submitted) &&
-                  uploadVacFormControl.email.errors?.required
-                "
-              >
-                Email is required
-              </span>
-              <span
-                class="text-danger"
-                *ngIf="
-                  uploadVacFormControl.email.touched &&
-                  uploadVacFormControl.email.errors?.email
-                "
-              >
-                Enter a valid email address
-              </span>
-            </div>
+
+          <div class="form-group">
+          <mat-form-field class="example-full-width" required>
+            <mat-label>Titel vacature</mat-label>
+            <input matInput type="text" [formControl]="titel">
+            <mat-error *ngIf="titel.invalid">{{getErrorMessageTitel()}}</mat-error>
+          </mat-form-field>
+          </div>
+
+          <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <mat-label>Geef je email op</mat-label>
+            <input matInput placeholder="test@example.com" [formControl]="email" required>
+            <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <mat-label>Geef de bedrijfsnaam op</mat-label>
+            <input matInput  [formControl]="bedrijfsnaam" required>
+            <mat-error *ngIf="bedrijfsnaam.invalid">{{getErrorMessageBedrijfsnaam()}}</mat-error>
+          </mat-form-field>
+        </div>
 
             <div class="form-group">
-              <label>Bedrijfsnaam</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="bedrijfsnaam"
-              />
-              <span
-                class="text-danger"
-                *ngIf="
-                  (uploadVacFormControl.bedrijfsnaam.touched || submitted) &&
-                  uploadVacFormControl.bedrijfsnaam.errors?.required
-                "
-              >
-                Bedrijfsnaam is required
-              </span>
-            </div>
-
-            <div class="form-group">
-              <mat-form-field class="example-full-width">
-                <label>Locatie</label>
+              <mat-form-field class="example-full-width" required>
+                <mat-label>Kies een stad</mat-label>
                 <input
                   required
-                  class="form-control"
-                  formControlName="locatie"
+
                   type="text"
                   aria-label="Stad"
                   matInput
@@ -84,6 +49,7 @@
                   [matAutocomplete]="auto"
                   [(ngModel)]="locatieValue"
                 />
+                <mat-error *ngIf="locatieControl.invalid">{{getErrorMessageBedrijfsnaam()}}</mat-error>
                 <mat-autocomplete
                   #auto="matAutocomplete"
                   [displayWith]="displayLocatie"
@@ -100,22 +66,13 @@
             </div>
 
             <div class="form-group">
-              <label>Beschrijving</label>
-              <textarea
-                class="descriptionBox"
-                formControlName="beschrijving"
-                class="form-control"
-              ></textarea>
-              <span
-                class="text-danger"
-                *ngIf="
-                  (uploadVacFormControl.beschrijving.touched || submitted) &&
-                  uploadVacFormControl.beschrijving.errors?.required
-                "
-              >
-                Beschrijving is required
-              </span>
-            </div>
+            <mat-form-field class="example-full-width">
+              <mat-label>Beschrijving</mat-label>
+              <input matInput [formControl]="beschrijving" required>
+              <mat-error *ngIf="beschrijving.invalid">{{getErrorMessageBeschrijving()}}</mat-error>
+              <textarea matInput></textarea>
+            </mat-form-field>
+          </div>
 
             <div class="form-group"><label>Uploaden vacature</label></div>
             <div class="input-group mb-3">
@@ -124,17 +81,18 @@
                   type="file"
                   class="custom-file-input"
                   id="file"
-                  formControlName="vacaturebestand"
+                  [formControl]="vacatureBestand"
                 />
+                <mat-error *ngIf="beschrijving.invalid">{{getErrorMessageBeschrijving()}}</mat-error>
                 <label class="custom-file-label" for="inputGroupFile01"
                   >Kies bestand</label
                 >
               </div>
             </div>
 
-            <label>Studiegebied</label>
+
             <div class="form-group">
-              <mat-form-field formControlName="studiegebied">
+              <mat-form-field  class="example-full-width">
                 <mat-label>Selecteer een studiegebied</mat-label>
                 <mat-select
                   matNativeControl
@@ -152,9 +110,8 @@
                   </mat-option>
                 </mat-select>
                 <mat-error *ngIf="studiegebiedControl.hasError('required')"
-                  >U moet een studiegebied selecteren</mat-error
+                  >{{getErrorMessagestudiegebiedControl()}}</mat-error
                 >
-                <mat-hint>{{ studiegebiedControl.value?.sound }}</mat-hint>
               </mat-form-field>
 
               <p>Uw keuzes: {{ selectedSTG }}</p>
@@ -175,9 +132,8 @@
                       placeholder="Select afstudeerrichting"
                       multiple
                       (selectionChange)="changeRatio($event)"
+                      [formControl]="opleidingControl"
                     >
-                      <mat-option>None</mat-option>
-
                       <ng-container *ngFor="let s of keuzeA">
                         <mat-optgroup
                           *ngIf="opleiding.name === s.viewValue"
@@ -195,13 +151,13 @@
                       </ng-container>
                     </mat-select>
                     <mat-error *ngIf="opleidingControl.hasError('required')"
-                      >U moet een opleiding selecteren</mat-error
+                      >{{getErrorMessageopleidingControl()}}</mat-error
                     >
-                    <mat-hint>{{ opleidingControl.value?.sound }}</mat-hint>
                   </mat-form-field>
                 </mat-expansion-panel>
               </mat-accordion>
             </div>
+
 
             <div class="form-group">
               <label>Type</label>
@@ -262,7 +218,6 @@
                 type="submit"
                 class="btn btn-success"
                 (click)="onSubmit()"
-                [disabled]="!uploadVacForm.valid"
               >
                 Verzenden
               </button>
