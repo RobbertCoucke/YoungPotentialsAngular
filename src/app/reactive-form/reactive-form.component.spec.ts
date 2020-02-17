@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddVacAnonymousComponent } from './add-vac-anonymous.component';
+import { ReactiveFormComponent } from './reactive-form.component';
 
-describe('AddVacAnonymousComponent', () => {
-  let component: AddVacAnonymousComponent;
-  let fixture: ComponentFixture<AddVacAnonymousComponent>;
+describe('ReactiveFormComponent', () => {
+  let component: ReactiveFormComponent;
+  let fixture: ComponentFixture<ReactiveFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddVacAnonymousComponent ]
+      declarations: [ ReactiveFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddVacAnonymousComponent);
+    fixture = TestBed.createComponent(ReactiveFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
