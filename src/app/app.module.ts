@@ -18,6 +18,15 @@ import { HomeComponent } from "./home/home.component";
 import { FooterComponent } from "./footer/footer.component";
 import { ReactiveFormComponent } from "./reactive-form/reactive-form.component";
 
+// used to create fake backend
+import { fakeBackendProvider } from './_helpers';
+
+
+
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { AdminComponent } from './admin/admin.component';
+import { LoginComponent } from './login/login.component';
+
 /**
  * * Material Angular UI imports
  */
@@ -44,7 +53,7 @@ import { ButtonsModule } from "ngx-bootstrap/buttons";
  */
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import {
   TranslateCacheModule,
@@ -58,14 +67,36 @@ import {
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
+import { AuthGuard } from './_guards';
+import { Role } from './_models';
+
 const appRoutes: Routes = [
   { path: "", component: HomeComponent},
   { path: "vactures", component: VacturesComponent},
   { path: "vacture-toevoegen", component: ReactiveFormComponent},
   { path: "vacture-detail", component: VactureDetailComponent},
   { path: "profiel", component:ProfileComponent},
-  { path: "profiel-bewerken", component:ProfileEditComponent}
-]
+  { path: "profiel-bewerken", component:ProfileEditComponent},
+
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [AuthGuard]
+},
+{
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
+},
+{
+    path: 'login',
+    component: LoginComponent
+},
+
+// otherwise redirect to home
+{ path: '**', redirectTo: '' }
+];
 
 
 @NgModule({
@@ -80,7 +111,9 @@ const appRoutes: Routes = [
     NavbarComponent,
     HomeComponent,
     FooterComponent,
-    ReactiveFormComponent
+    ReactiveFormComponent,
+    AdminComponent,
+    LoginComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -118,7 +151,11 @@ const appRoutes: Routes = [
       cacheMechanism: "Cookie" // default value is 'LocalStorage'.
     })
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
