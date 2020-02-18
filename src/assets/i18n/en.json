@@ -1,0 +1,15 @@
+{
+    "demo": {
+        "title": "Translation demo",
+        "text": "This is a simple demonstration app for ngx-translate"
+    },
+    "navbar": {
+        "overview": "Offer",
+        "about": "About us",
+        "studying": "Pursue studies",
+        "research": "Research",
+        "contact": "Contact",
+        "signup": "Sign up",
+        "login": "Log in"
+    }
+}

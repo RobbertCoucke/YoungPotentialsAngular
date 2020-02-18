@@ -16,6 +16,12 @@
     border: none;
     border-radius: 40px;
     background: #E50001;
+    transition: transform .2s;
+}
+
+.btn-primary:hover
+{
+    transform: scale(1.1);
 }
 
 #vacature

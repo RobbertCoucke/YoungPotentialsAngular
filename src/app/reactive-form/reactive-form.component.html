@@ -1,0 +1,233 @@
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          <h3>Nieuwe vacature toevoegen</h3>
+        </div>
+        <div class="card-body">
+          <form
+            class="form"
+            [formGroup]="uploadVacForm"
+            (ngSubmit)="onSubmit(uploadVacForm)"
+          >
+
+          <div class="form-group">
+          <mat-form-field class="example-full-width" required>
+            <mat-label>Titel vacature</mat-label>
+            <input matInput type="text" [formControl]="titel">
+            <mat-error *ngIf="titel.invalid">{{getErrorMessageTitel()}}</mat-error>
+          </mat-form-field>
+          </div>
+
+          <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <mat-label>Geef je email op</mat-label>
+            <input matInput placeholder="test@example.com" [formControl]="email" required>
+            <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <mat-label>Geef de bedrijfsnaam op</mat-label>
+            <input matInput  [formControl]="bedrijfsnaam" required>
+            <mat-error *ngIf="bedrijfsnaam.invalid">{{getErrorMessageBedrijfsnaam()}}</mat-error>
+          </mat-form-field>
+        </div>
+
+            <div class="form-group">
+              <mat-form-field class="example-full-width" required>
+                <mat-label>Kies een stad</mat-label>
+                <input
+                  required
+
+                  type="text"
+                  aria-label="Stad"
+                  matInput
+                  [formControl]="locatieControl"
+                  [matAutocomplete]="auto"
+                  [(ngModel)]="locatieValue"
+                />
+                <mat-error *ngIf="locatieControl.invalid">{{getErrorMessageBedrijfsnaam()}}</mat-error>
+                <mat-autocomplete
+                  #auto="matAutocomplete"
+                  [displayWith]="displayLocatie"
+                  (stedenSelected)="onSelectionChangedLocatie($event)"
+                >
+                  <mat-option
+                    *ngFor="let stad of filteredSteden | async"
+                    [value]="stad"
+                  >
+                    {{ stad.name }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <mat-label>Beschrijving</mat-label>
+              <input matInput [formControl]="beschrijving" required>
+              <mat-error *ngIf="beschrijving.invalid">{{getErrorMessageBeschrijving()}}</mat-error>
+              <textarea matInput></textarea>
+            </mat-form-field>
+          </div>
+
+            <div class="form-group"><label>Uploaden vacature</label></div>
+            <div class="input-group mb-3">
+              <div class="custom-file" id="inputlabel">
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  id="file"
+                  [formControl]="vacatureBestand"
+                />
+                <mat-error *ngIf="beschrijving.invalid">{{getErrorMessageBeschrijving()}}</mat-error>
+                <label class="custom-file-label" for="inputGroupFile01"
+                  >Kies bestand</label
+                >
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <mat-form-field  class="example-full-width">
+                <mat-label>Selecteer een studiegebied</mat-label>
+                <mat-select
+                  matNativeControl
+                  required
+                  [formControl]="studiegebiedControl"
+                  [(ngModel)]="selectedSTG"
+                  (ngModelChange)="changeOpleidingDiv()"
+                >
+                  <mat-option>None</mat-option>
+                  <mat-option
+                    *ngFor="let studiegebied of studiegebieden"
+                    [value]="studiegebied.name"
+                  >
+                    {{ studiegebied.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="studiegebiedControl.hasError('required')"
+                  >{{getErrorMessagestudiegebiedControl()}}</mat-error
+                >
+              </mat-form-field>
+
+              <p>Uw keuzes: {{ selectedSTG }}</p>
+            </div>
+
+            <div class="form-group">
+              <label>Opleidingen:</label>
+              <mat-accordion formControlName="opleiding">
+                <mat-expansion-panel *ngFor="let opleiding of keuzeO">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      {{ opleiding.name }}
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                  <mat-form-field>
+                    <mat-select
+                      placeholder="Select afstudeerrichting"
+                      multiple
+                      (selectionChange)="changeRatio($event)"
+                      [formControl]="opleidingControl"
+                    >
+                      <ng-container *ngFor="let s of keuzeA">
+                        <mat-optgroup
+                          *ngIf="opleiding.name === s.viewValue"
+                          [label]="s.name"
+                        >
+                          <ng-container *ngFor="let f of keuzeK">
+                            <mat-option
+                              *ngIf="f.viewValue === s.name"
+                              [value]="f.value"
+                            >
+                              {{ f.name }}
+                            </mat-option>
+                          </ng-container>
+                        </mat-optgroup>
+                      </ng-container>
+                    </mat-select>
+                    <mat-error *ngIf="opleidingControl.hasError('required')"
+                      >{{getErrorMessageopleidingControl()}}</mat-error
+                    >
+                  </mat-form-field>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+
+
+            <div class="form-group">
+              <label>Type</label>
+              <div>
+                <div class="chiller_cb">
+                  <input
+                    id="myCheckbox"
+                    type="checkbox"
+                    formControlName="vacatureCB"
+                  />
+                  <label for="myCheckbox">Vacature</label>
+                  <span></span>
+                </div>
+                <div class="chiller_cb">
+                  <input
+                    id="myCheckbox2"
+                    type="checkbox"
+                    formControlName="stageCB"
+                  />
+                  <label for="myCheckbox2">Stage</label>
+                  <span></span>
+                </div>
+                <div class="chiller_cb">
+                  <input
+                    id="myCheckbox3"
+                    type="checkbox"
+                    formControlName="vrijwilligerswerkCB"
+                  />
+                  <label for="myCheckbox3">Vrijwilligerswerk</label>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+
+            <div><label>Zichtbaar tot</label></div>
+            <div class="row">
+              <div class="col-xs-12 col-12 col-md-4 form-group">
+                <input
+                  type="text"
+                  placeholder="Selecteer een datum"
+                  class="form-control"
+                  bsDatepicker
+                  [bsConfig]="{
+                    dateInputFormat: 'MM/DD/YYYY',
+                    containerClass: 'theme-red',
+                    selectFromOtherMonth: true
+                  }"
+                  formControlName="einddatum"
+                  [minDate]="minDate"
+                  [maxDate]="maxDate"
+                  placement="top"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button
+                type="submit"
+                class="btn btn-success"
+                (click)="onSubmit()"
+                [disabled]="!uploadVacForm.valid"
+              >
+                Verzenden
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
