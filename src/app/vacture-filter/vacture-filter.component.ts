@@ -39,7 +39,7 @@ export class VactureFilterComponent implements OnInit {
   
   onSelect(gebied) : void{
     const key = gebied;
-    if(this.d[gebied] == null )
+    if(this.d[key] == null )
     {
       this.d[key] = this.dictionary[gebied];
     }else{

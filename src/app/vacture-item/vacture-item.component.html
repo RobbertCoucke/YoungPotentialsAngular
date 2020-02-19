@@ -1,12 +1,12 @@
 
-        <div routerLink="/vacture-detail" class="card item">
+        <div class="card item">
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-1">
-                  <i class="material-icons icon">favorite_border</i>
+                  <i (click)="onLike()" class="material-icons icon">{{liked ? 'favorite' : 'favorite_border' }}</i>
                 </div>
                 <div class="col-lg-9 textContainer">
-                  <h5 class="rood">R&D Laborant</h5>
+                  <h5 routerLink="/vacture-detail" class="rood">R&D Laborant</h5>
                   <h6 class="card-price"><span class="period">Lab Support | Vlaanderen en Brussel | 13-08-2019 |</span></h6>
                 </div>
               </div>
@@ -26,10 +26,10 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-1">
-                  <i class="material-icons icon">favorite_border</i>
+                  <i (click)="onLike()" class="material-icons icon">{{liked ? 'favorite' : 'favorite_border' }}</i>
                 </div>
                 <div class="col-lg-9 textContainer">
-                  <h5 class="rood">R&D Laborant</h5>
+                  <h5 routerLink="/vacture-detail" class="rood">R&D Laborant</h5>
                   <h6 class="card-price"><span class="period">Lab Support | Vlaanderen en Brussel | 13-08-2019 |</span></h6>
                 </div>
               </div>

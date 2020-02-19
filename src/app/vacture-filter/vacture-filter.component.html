@@ -6,20 +6,25 @@
           <hr>
           <div id="list1" class="dropdown-check-list" tabindex="100">
 
-                <ul *ngFor="let gebied of studiegebied">
-                  <li (click)="onSelect(gebied)">
-                    <input class="input" type="checkbox" value="{{gebied}}" (change)="checkboxHandler($event)" name="studieGebiedVives" [checked]="false" />
-                    {{gebied}}
+                <ul class="row" *ngFor="let gebied of studiegebied">
+                  
+                      <li>
+                        <input class="input" type="checkbox" value="{{gebied}}" (change)="checkboxHandler($event)" name="studieGebiedVives" [checked]="false" /> 
+                          <div class="filterContainer" (click)="onSelect(gebied)">
+                              
+                          {{gebied}}
+                          <i  class="material-icons icon">arrow_drop_down</i>
+                        </div>
+
+
                     <div *ngIf="d[gebied]">
                            <ul *ngFor="let op of d[gebied]" >
                             <li>
-                              <input class="input" type="checkbox" value="{{op}}"  [checked]="false" />
+                              <input class="input" type="checkbox" (change)="checkboxHandler($event)" value="{{op}}"  [checked]="false" />
                               {{op}}
                               </li>
                           </ul>
                     </div>
-
-                      
                   </li>
                 </ul>
                    
