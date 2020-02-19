@@ -2,6 +2,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "src",
+    "paths": {
+      "@/*": [
+          "app/*"
+      ]
+  },
     "outDir": "./dist/out-tsc",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
@@ -20,6 +25,7 @@
       "es2018",
       "dom"
     ]
+    
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
