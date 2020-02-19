@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StudiegebiedService } from '../_services/studiegebied/studiegebied.service'
+import { StudieGebied } from '@/Model/StudieGebied';
 
 @Component({
   selector: 'app-vacture-filter',
@@ -24,9 +26,10 @@ export class VactureFilterComponent implements OnInit {
     "Sociaal":["Robbert", "Nicolas"]
   };
 
-  constructor() { }
+  constructor(private studieService: StudiegebiedService) { }
 
   ngOnInit() {
+    this.showData();
   }
 
   checkgebied(gebied) : boolean {
@@ -67,6 +70,12 @@ export class VactureFilterComponent implements OnInit {
         this.selectedgebieds = this.selectedgebieds.filter(item => item !== this.selectedGebied)
         console.log(this.selectedgebieds)
       }
+    }
+
+    showData() {
+      this.studieService.getAllStudieGebieds().subscribe((res) => {
+        console.log(res);
+      });
     }
 
 }
