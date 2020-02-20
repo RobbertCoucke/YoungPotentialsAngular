@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
-import { catchError, retry, map } from 'rxjs/operators';
-import { StudieGebied } from '@/Model/StudieGebied';
+import { throwError, from, Observable } from 'rxjs';
+import { catchError, retry, map, tap } from 'rxjs/operators';
+import { Studiegebied } from 'app/_models/studiegebied';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,12 @@ export class StudiegebiedService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllStudieGebieds(){
-    return this.http.get<StudieGebied[]>(`${this.apiUrl}/studiegebied`).pipe();
+  studiegebieds: Studiegebied[];
+
+  public getAllStudieGebieds(): Observable<any[]>{
+    return this.http.get<Studiegebied[]>(`${this.apiUrl}/studiegebied`).pipe(
+      tap(result => this.studiegebieds = result)
+    );
   }
 
   handleError(error: HttpErrorResponse)

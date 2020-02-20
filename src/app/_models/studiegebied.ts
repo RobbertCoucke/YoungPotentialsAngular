@@ -1,15 +1,15 @@
-import { Opleiding } from './opleiding';
+import { Opleiding } from './Opleiding';
 
 export class Studiegebied{
     id: string;
     naam : string;
     kleur: string;
-    opleidings: [Opleiding];
+    opleidings: Opleiding[];
 
-    constructor(studiegebiedResponse: any){
-        this.id = studiegebiedResponse.Id;
-        this.naam = studiegebiedResponse.studiegebied1;
-        this.kleur = studiegebiedResponse.kleur;
-        this.opleidings = studiegebiedResponse.opleidings;
+    constructor(id: string, name: string, kleur: string, o: any[]){
+        this.id = id;
+        this.naam = name;
+        this.kleur = kleur;
+        this.opleidings = o;
     };
 }
