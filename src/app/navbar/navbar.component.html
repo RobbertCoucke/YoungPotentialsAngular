@@ -35,13 +35,13 @@
   <div class="collapse navbar-collapse" id="navbarRegistreerDropdown" [ngClass]="{ 'show': navbarOpen }">
       <ul class="navbar-nav registreermenu">
         <div class="registreerdiv">
-          <li class="nav-item registrerenbtnwrapper">
+          <li *ngIf="!currentUser" class="nav-item registrerenbtnwrapper">
             <a routerLink="/registreren" routerLinkActive="active"class="nav-link registrerenbtn">{{"navbar.signup" | translate}}</a>
           </li>
-          <li class="nav-item registrerenbtnwrapper">
+          <li *ngIf="!currentUser" class="nav-item registrerenbtnwrapper">
             <a routerLink="/login" routerLinkActive="active" class="nav-link registrerenbtn">{{"navbar.login" | translate}}</a>
           </li>
-          <li class="nav-item registrerenbtnwrapper">
+          <li *ngIf="currentUser"  class="nav-item registrerenbtnwrapper">
             <a class="nav-link registrerenbtn" (click)="logout()">Logout</a>
           </li>
         </div>

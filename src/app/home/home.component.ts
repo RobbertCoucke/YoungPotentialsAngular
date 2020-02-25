@@ -19,9 +19,9 @@ export class HomeComponent implements OnInit {
      {this.currentUser = this.authenticationService.currentUserValue;}
 
      ngOnInit() {
-      this.userService.getById(this.currentUser.id).pipe(first()).subscribe(user => {
-          this.userFromApi = user;
-      });
+      // this.userService.getById(this.currentUser.id).pipe(first()).subscribe(user => {
+      //     this.userFromApi = user;
+      // });
   }
 
 }
