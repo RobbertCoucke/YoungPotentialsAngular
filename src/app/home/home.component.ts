@@ -12,7 +12,6 @@ import { UserService } from '@/_services';
 })
 export class HomeComponent implements OnInit {
   currentUser: User;
-    userFromApi: User;
 
   constructor(private userService: UserService,
     private authenticationService: AuthenticationService)
