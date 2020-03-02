@@ -7,8 +7,8 @@
     background-color: #E50001;
   }
 
-  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
-    background-color: #E50001 !important; /* Red background for example */
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
+    background-color: #E50001 !important; 
 }
 
 .list{
@@ -22,8 +22,27 @@
 
 .buttons{
     display:inline-block;
-    margin-right: 10px;
-    margin-top: 10px;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #E50001;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 300;
+    color: #FFFFFF;
+    text-align: center;
+    transition: all 0.2s;
+    background-color: #E50001;
+}
+
+.buttons:hover{
+    color:#FFFFFF;
+    background-color: #ff1f1f;
+}
+
+.buttons:disabled{
+    border-color: gray;
+    background-color: gray;
 }
 
 .center {

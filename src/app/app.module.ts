@@ -61,6 +61,7 @@ import {
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { SollicitatieDialogComponent } from './sollicitatie-dialog/sollicitatie-dialog.component';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { SollicitatieDialogComponent } from './sollicitatie-dialog/sollicitatie-
     HomeComponent,
     FooterComponent,
     ReactiveFormComponent,
-    SollicitatieDialogComponent
+    SollicitatieDialogComponent,
+    UploadComponent
   ],
   imports: [
     ReactiveFormsModule,
