@@ -1,1 +1,24 @@
-<p>favorieten works!</p>
+<div class="container">
+    <div *ngIf="offerList">
+        <div *ngFor="let offer of offerList" class="card item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-1">
+                  <i (click)="onLike(offer.id)" class="material-icons icon">favorite</i>
+                </div>
+                <div class="col-lg-9 textContainer">
+                  <h5 routerLink="/vacture-detail" class="rood">{{offer.vacature.title}}</h5>
+                  <h6 class="card-price"><span class="period">{{offer.vacature.name}} | {{offer.vacature.cityName}} | {{offer.vacature.created}} |</span></h6>
+                </div>
+              </div>
+              <hr>
+              <div class="section">
+                <p>{{offer.vacature.description}}</p>
+              <span class="badge badge-pill badge-danger label ">Handelwetenschappen</span>
+              <span class="badge badge-pill badge-danger label">Sociaal-agogisch werk</span>
+              <span class="badge badge-pill badge-danger label">Biotechniek</span>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>

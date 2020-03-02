@@ -1,9 +1,10 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from '@/_models';
+import { Register } from '@/_models/register';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -19,8 +20,8 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(`${config.apiUrl}/users/authenticate`, { username, password })
+    login(email: string, password: string) {
+        return this.http.post<any>(`https://youngpotentials.azurewebsites.net/user/authenticate`, { email, password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {
@@ -37,5 +38,18 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+    }
+
+    register(reg: Register) {
+
+        return this.http.post<any>('https://youngpotentials.azurewebsites.net/user/authenticate', reg)
+        .pipe(map(user => {
+            //register succesful if there's a jwt token in the response
+            if(user && user.token){
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+            }
+        }))
+
     }
 }
