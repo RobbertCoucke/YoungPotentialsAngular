@@ -69,6 +69,7 @@ import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
 import { AuthGuard } from './_guards';
 import { Role } from './_models';
+import { FavorietenComponent } from './favorieten/favorieten.component';
 
 const appRoutes: Routes = [
   { path: "", component: HomeComponent},
@@ -113,7 +114,8 @@ const appRoutes: Routes = [
     FooterComponent,
     ReactiveFormComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    FavorietenComponent
   ],
   imports: [
     ReactiveFormsModule,
