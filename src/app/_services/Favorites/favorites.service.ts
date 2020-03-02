@@ -21,6 +21,4 @@ export class FavoritesService {
   deleteFavorite(id: number){
     return this.http.delete<any>(`http://youngpotentials.azurewebsites.net/favorites/${id}`);
   }
-
-
 }
