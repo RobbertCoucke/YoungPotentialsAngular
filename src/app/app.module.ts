@@ -18,6 +18,8 @@ import { HomeComponent } from "./home/home.component";
 import { FooterComponent } from "./footer/footer.component";
 import { ReactiveFormComponent } from "./reactive-form/reactive-form.component";
 
+
+
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
 
@@ -69,6 +71,7 @@ import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
 import { AuthGuard } from './_guards';
 import { Role } from './_models';
+import { RegisterComponent } from './register/register.component';
 
 const appRoutes: Routes = [
   { path: "", component: HomeComponent},
@@ -77,6 +80,8 @@ const appRoutes: Routes = [
   { path: "vacture-detail", component: VactureDetailComponent},
   { path: "profiel", component:ProfileComponent},
   { path: "profiel-bewerken", component:ProfileEditComponent},
+  //{ path: "inloggen", component:LoginComponent},
+  { path: "registreren", component:RegisterComponent},
 
   {
     path: '',
@@ -113,7 +118,8 @@ const appRoutes: Routes = [
     FooterComponent,
     ReactiveFormComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     ReactiveFormsModule,
