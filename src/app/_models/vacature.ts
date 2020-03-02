@@ -1,5 +1,3 @@
-import { count } from 'rxjs/operators';
-
 export class Vacature
 {
     id: number;

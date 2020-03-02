@@ -22,3 +22,4 @@ export class FavoritesService {
     return this.http.delete<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/favorites/${id}`);
   }
 }
+
