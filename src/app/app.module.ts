@@ -73,6 +73,7 @@ import {
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { SollicitatieDialogComponent } from './sollicitatie-dialog/sollicitatie-dialog.component';
+import { UploadComponent } from './upload/upload.component';
 
 import { AuthGuard } from './_guards';
 import { Role } from './_models';
@@ -125,8 +126,8 @@ const appRoutes: Routes = [
     AdminComponent,
     LoginComponent,
     RegisterComponent,
-    SollicitatieDialogComponent
-
+    SollicitatieDialogComponent,
+    UploadComponent
   ],
   imports: [
     ReactiveFormsModule,
