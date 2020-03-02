@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import Vacature from '../../_models/vacature';
+import {Vacature} from '../../_models/vacature';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class VacatureService {
   constructor(private http: HttpClient) { }
 
   getAllVacatures() {
-    return this.http.get<any>(`http://youngpotentials.azurewebsites.net/offer/getAll`);
+    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/getAll`);
   }
 
   getAllVacaturesByCompany(companyId: number) {
