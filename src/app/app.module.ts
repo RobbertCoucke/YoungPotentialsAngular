@@ -42,6 +42,10 @@ import { MatInputModule } from "@angular/material/input";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatCardModule } from "@angular/material/card";
 import { MatExpansionModule } from "@angular/material/expansion";
+import {MatStepperModule} from '@angular/material/stepper'; 
+import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog'; 
 
 /**
  * * Anuglar Bootstrap imports
@@ -68,6 +72,8 @@ import {
  */
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
+import { SollicitatieDialogComponent } from './sollicitatie-dialog/sollicitatie-dialog.component';
+import { UploadComponent } from './upload/upload.component';
 
 import { AuthGuard } from './_guards';
 import { Role } from './_models';
@@ -119,7 +125,9 @@ const appRoutes: Routes = [
     ReactiveFormComponent,
     AdminComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SollicitatieDialogComponent,
+    UploadComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -135,6 +143,10 @@ const appRoutes: Routes = [
     MatCardModule,
     MatExpansionModule,
     NgMultiSelectDropDownModule,
+    MatStepperModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot(),
     // ngx-translate and the loader module
@@ -157,12 +169,16 @@ const appRoutes: Routes = [
       cacheMechanism: "Cookie" // default value is 'LocalStorage'.
     })
   ],
+
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     // provider used to create fake backend
     fakeBackendProvider],
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [
+    SollicitatieDialogComponent
+  ]
 })
 export class AppModule {}
 
