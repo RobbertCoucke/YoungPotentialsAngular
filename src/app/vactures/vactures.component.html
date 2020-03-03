@@ -6,8 +6,14 @@
         </div>
         <div class="col-lg-7">
             <p style="color: red;" *ngIf="!currentUser">{{favoriteError}}</p>
-            <app-vacture-item *ngFor="let vacature of vacatures" [favorite]="vacature" (removeEvent)="removeEventAbstract($event)"   [currentUser]="currentUser" ></app-vacture-item>
-        </div>
+
+            <ng-container *ngFor="let vacature of vacatures">
+            <ng-container *ngIf="vacature.vacature.description != null">
+            <app-vacture-item [favorite]="vacature" (removeEvent)="removeEventAbstract($event)"   [currentUser]="currentUser" ></app-vacture-item>
+                </ng-container>
+
+        </ng-container>
+    </div>
     </div>
 </div>
 

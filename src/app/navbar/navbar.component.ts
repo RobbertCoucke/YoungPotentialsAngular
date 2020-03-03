@@ -23,15 +23,6 @@ export class NavbarComponent implements OnInit {
       return this.currentUser && this.currentUser.role === Role.Admin;
   }
 
-  isLoggedIn()
-  {
-    
-  }
-
-  isLoggedOut()
-  {
-
-  }
 
   logout() {
       this.authenticationService.logout();
