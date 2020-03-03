@@ -10,42 +10,24 @@
       <ul class="row"><h6>STUDIEGEBIEDEN:</h6>  
             <div *ngFor="let gebied of studiegebieds" class="l">
                 <li>
-                    <input class="input" type="checkbox" value="{{gebied.id}}" (change)="checkboxHandler($event)" name="studieGebiedVives" [checked]="false" /> 
+                    <input class="input" type="checkbox" value="{{gebied.id}}" (change)="check($event)" name="studieGebiedVives" [checked]="isSelected(gebied.id)" /> 
                     <div class="filterContainer" (click)="onSelectStudie(gebied.id)">
                               
                          {{gebied.naam}}
-                        <i  class="material-icons icon">arrow_drop_down</i>
+                         <div class="icon">
+                          <i *ngIf="s[gebied.id]; else arrow_up"  class="material-icons">arrow_drop_down</i>
+                        </div>
+                        <ng-template #arrow_up class="icon">
+                          <i  class="material-icons">arrow_right</i>
+                        </ng-template>
                      </div>
                         <div *ngIf="s[gebied.id]">
                           <ul *ngFor="let op of s[gebied.id]" >
                            <li>
-                             <input class="input" type="checkbox" (change)="checkboxHandler($event)"  value="{{op.id}}"  [checked]="false" />
-                             <div class="filterContainer" (click)="onSelectOpleiding(op.id)">
+                             <input class="input" type="checkbox" (change)="check($event)"  value="{{op.id}}"  [checked]="isSelected(op.id)" />
+                             <div class="filterContainer" >
                                   {{op.naam}}
-                                  <i  class="material-icons icon">arrow_drop_down</i>
-                             </div>
-                             <div *ngIf="o[op.id]">
-                              <ul *ngFor="let af of o[op.id]">
-                                <li>
-                                <div class="filterContainer" (click)="onSelectAfstudeerrichting(af.id)">
-                                   <input class="input" type="checkbox" value="{{af.id}}" (change)="checkboxHandler($event)"  [checked]="false" />
-                                  {{af.naam}}
-                                  <i  class="material-icons icon">arrow_drop_down</i>
-                                </div>
-                                <div *ngIf="k[af.id]">
-                                  <ul *ngFor="let k of k[af.id]">
-                                    <li>
-                                      <div class="filterContainer">
-                                        <input class="input" type="checkbox" value="{{k.id}}" (change)="checkboxHandler($event)"  [checked]="false" />
-                                        {{k.naam}}
-                                      </div>
-                                    </li>
-                                  </ul>
-  
-                                  </div>
-
-                                </li>
-                              </ul> 
+                                  <!-- <i  class="material-icons icon">arrow_drop_down</i> -->
                              </div>
                              </li>
                          </ul>
@@ -58,7 +40,7 @@
                    
       </div>
     <div class="text-center">
-          <a href="#" class="btn btn-primary" ng-click="get_all_checked">Filter toepassen</a>
+          <button  class="btn btn-primary" (click)="removeSelected()">Filter verwijderen</button>
     </div>
   </div>
 </div>

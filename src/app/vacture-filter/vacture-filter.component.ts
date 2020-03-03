@@ -13,37 +13,93 @@ import { Keuze } from '@/_models/Keuze';
 })
 export class VactureFilterComponent implements OnInit {
 
-  selectedGebied: string;
+  //selectedGebied: string;
   //array for all Studiegebied objects
   studiegebieds: Studiegebied[] = [];
   //array for all opleiding objects
   opleidingsArray : Opleiding[] = [];
-  //array for all Afstudeerrichting object
-  afstudeerrichtinsgArray : Afstudeerrichting[] = [];
-  //array for all keuze object
-  keuzesArray : Keuze[] = [];
+  testgebieds: Studiegebied[] = [];
 
   selectedgebieds = [];
 
 
   
 
-  constructor(private studieService: StudiegebiedService) { }
+  constructor(private studieService: StudiegebiedService) { 
+    this.showData();
+  }
 
   ngOnInit() {
-    this.showData();
-    console.log(this.keuzesArray);
+    
   }
 
-  checkgebied(gebied) : boolean {
-    return gebied == "HWB"
+
+
+  
+  check (event) {
+    console.log("initiate checkboxevent");
+    console.log(this.studiegebieds);
+    //get the selected value
+    var selectedVal = event.target.value;
+    //console.log(selectedVal);
+
+    //check if checkbox is checked to add or unchecked to delete
+    if(event.target.checked){
+
+      var selectedObject = this.findStudiegebied(selectedVal);
+       if(selectedObject === undefined){
+ 
+         selectedObject = this.findOpleiding(selectedVal);
+    
+        
+
+         //check if studiegebied is already in selected
+         let updateObject = this.selectedgebieds.find(s => s.id === selectedObject.id);
+
+         if(updateObject != undefined){    
+         let index = this.selectedgebieds.indexOf(updateObject);
+
+         updateObject.opleidings.push(selectedObject.opleidings[0]);
+         this.selectedgebieds[index] = updateObject;
+ 
+         }else{
+           this.selectedgebieds.push(selectedObject);
+           //console.log(this.studiegebieds);
+         }
+        
+       }else{
+         this.selectedgebieds.push(selectedObject);
+
+       }
+
+      
+      
+
+    }
+    else{
+
+
+      this.selectedgebieds = this.selectedgebieds.filter(s => s.id !== selectedVal);
+      
+      
+
+    }
+
+
+    console.log(this.selectedgebieds);
+    
+
+
   }
+
+  // checkgebied(gebied) : boolean {
+  //   return gebied == "HWB"
+  // }
 
 
 
   s = {}; 
   o = {};
-  k = {};
 
   
    onSelectStudie(id) : void{
@@ -58,76 +114,67 @@ export class VactureFilterComponent implements OnInit {
       this.s[key] = null;
     }
 
+
+    
+
   } 
 
-
-  onSelectOpleiding(id){
-    const key = id;
-    var selectedOpleiding = this.opleidingsArray.filter(op => op.id == id);
-    var afstudeerrichtings = selectedOpleiding[0].afstudeerrichtings;
-    if(this.o[key] == null)
-    {
-      this.o[key] = afstudeerrichtings;
-    }else{
-      this.o[key] = null;
-    }
-
+  removeSelected(){
+    this.selectedgebieds = [];
   }
 
-  onSelectAfstudeerrichting(id)
-  {
-    const key = id;
-    var selectedAfstudeerrichting = this.afstudeerrichtinsgArray.filter(k => k.id == id);
-    var keuzes = selectedAfstudeerrichting[0].keuzes;
-    if(this.k[key] == null)
-    {
-      this.k[key] = keuzes;
-    }else{
-      this.k[key] = null;
+  private findStudiegebied(id){
+      return this.studiegebieds.find(s => s.id === id);
+
     }
 
-  }
+    private findOpleiding(id){
+      for(let i=0; i<this.studiegebieds.length; i++){
 
+        for(let j=0; j<this.studiegebieds[i].opleidings.length; j++){
+        var object = this.studiegebieds[i].opleidings[j];
 
+          if(object.id === id){
+            var result = this.studiegebieds[i];
+            var test = new Studiegebied(result.id, result.naam, result.kleur, result.opleidings.filter(o => o.id === object.id));
+            //result.opleidings = result.opleidings.filter(o => o.id === object.id);
 
-  checkboxHandler (event: any) {
-    //get the selected value
-    var selectedId = event.target.value;
-    console.log(selectedId);
-    //get the selected Studiegebied object from the array
-    //var selectedStudiegebied  = this.studiegebieds.filter(item => item.id == selectedId);
-    //get the opleidings of the object
-    //var opleidings = selectedStudiegebied[0].opleidings;
-    //get of the item checked or not
-    //var checked = event.target.checked;
-    /*
-    hier controleer ik of de object in de array bestaat of niet als het bestaat dan krijg ik de index of de object anders krijg ik -1
-    als het -1 voeg ik alle opleidings van geselecteerde studiegebied aan een dictionary om tonnen aan scherm,
-    anderes weet ik dat het object geselecteerd was en verwijder het van de dictionary.
-    */
-    //var object = this.selectedgebieds.indexOf(selectedStudiegebied[0])
-/*     if(checked)
-    {
-     if(object == -1)
-        {
-            this.selectedgebieds.push(selectedStudiegebied[0]);
-            this.s[selectedStudiegebied[0].id] = opleidings ;
+            return test;
+          }
         }
-    }
-    else{
-        this.selectedgebieds = this.selectedgebieds.filter(item => item !== selectedStudiegebied[0]);
-        this.s[selectedStudiegebied[0].id] = null;
       }
-    } */ 
-  }
+      return null;
+      
+    }
+
+    isSelected(id){
+      for(let i=0; i<this.selectedgebieds.length; i++){
+        if(this.selectedgebieds[i].id===id){
+          return true;
+        }
+
+        for(let j=0; j<this.selectedgebieds[i].opleidings.length; j++){
+          var object = this.selectedgebieds[i].opleidings[j];
+          if(object.id === id){
+
+
+            return true;
+          }
+        }
+      }
+      return false;
+      
+    }
+
+
 
 
     //get Observable data from server
     showData(){
       this.studieService.getAllStudieGebieds().subscribe((res) => {
         this.studiegebieds = this.mapJSONToModel(res);
+        this.testgebieds = this.mapJSONToModel(res);
       })
-      
     }
 
     //data mapping
@@ -140,30 +187,7 @@ export class VactureFilterComponent implements OnInit {
         {
            opleidingsArray.forEach((o) => {
            var afstudeerrichtingsArray = o.afstudeerrichting;
-           var afstudeerrichtings : Afstudeerrichting[] = [];
-
-           if(afstudeerrichtingsArray.length != 0)
-           {
-                afstudeerrichtingsArray.forEach((a) => {
-                var keuzeArray = a.keuze;
-                var keuzes : Keuze[] = [];
-                if(keuzeArray.length != 0)
-                {
-                  keuzeArray.forEach((k) => {
-                    var keuzeModel = new Keuze(k.id, k.keuze1);
-                    keuzes.push(keuzeModel);
-                    this.keuzesArray.push(keuzeModel);
-                  })
-                  
-                }
-                
-                var afModel = new Afstudeerrichting(a.id,a.afstudeerrichtingNaam, keuzes);
-                afstudeerrichtings.push(afModel);
-                this.afstudeerrichtinsgArray.push(afModel);
-
-             })
-
-           }             
+           var afstudeerrichtings : Afstudeerrichting[] = [];            
            var op = new Opleiding(o.id, o.naamOpleiding, afstudeerrichtings);
            opleidings.push(op);
            this.opleidingsArray.push(op);
@@ -179,3 +203,8 @@ export class VactureFilterComponent implements OnInit {
 
 
   }
+
+
+  //alle opleidingen aangevinkd -> studiegebied ook aangevinkt
+  //studiegebied aangevinkt ook alle opleidingen aanvinken
+  //opleiding aangevinkt ook studiegebied aanvinken???

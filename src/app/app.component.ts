@@ -25,9 +25,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.getData();
-    console.log(this.data);
     this.showConfig();
-    console.log(this.s)
   }
 
   get isAdmin() {

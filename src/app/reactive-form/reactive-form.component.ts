@@ -271,7 +271,6 @@ export class ReactiveFormComponent implements OnInit {
    * @param uploadVacForm form
    */
   onSubmit(uploadVacForm) {
-    console.log(this.uploadVacForm.value);
   }
 
   /**
@@ -287,7 +286,6 @@ export class ReactiveFormComponent implements OnInit {
    * @param event wanneer de selectie wordt aangepast
    */
   changeRatio(event: MatSelectChange) {
-    console.log(event.value);
   }
 
   /**
