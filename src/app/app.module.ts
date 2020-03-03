@@ -79,6 +79,7 @@ import { AuthGuard } from './_guards';
 import { Role } from './_models';
 import { RegisterComponent } from './register/register.component';
 import { FavorietenComponent } from './favorieten/favorieten.component';
+import { NavormingComponent } from './navorming/navorming.component';
 
 const appRoutes: Routes = [
   { path: "", component: HomeComponent},
@@ -90,6 +91,7 @@ const appRoutes: Routes = [
   //{ path: "inloggen", component:LoginComponent},
   { path: "registreren", component:RegisterComponent},
   { path: "favorieten", component:FavorietenComponent},
+  { path: "navorming", component:NavormingComponent},
 
   {
     path: '',
@@ -130,7 +132,8 @@ const appRoutes: Routes = [
     FavorietenComponent,
     RegisterComponent,
     SollicitatieDialogComponent,
-    UploadComponent
+    UploadComponent,
+    NavormingComponent
   ],
   imports: [
     ReactiveFormsModule,
