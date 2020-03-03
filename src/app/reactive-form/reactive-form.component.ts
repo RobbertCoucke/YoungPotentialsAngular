@@ -59,6 +59,8 @@ export class ReactiveFormComponent implements OnInit {
   bedrijfsnaam = new FormControl("", [Validators.required]);
   beschrijving = new FormControl("", [Validators.required]);
   vacatureBestand = new FormControl("", [Validators.required]);
+  einddatum = new FormControl( "", [Validators.required]);
+  typeControl = new FormControl("", Validators.required);
 
   submitted = false; // false: form niet submited | true: form submitted
 
@@ -76,6 +78,13 @@ export class ReactiveFormComponent implements OnInit {
   keuzeO: Opleiding[];
   keuzeA: Afstudeerrichting[];
   keuzeK: Keuze[];
+
+  types: Array<any> = [
+    {name: 'Vacature', value: 'Vacature'},      
+    {name: 'Stage', value: 'Stage'},      
+    {name: 'Vrijwilligerswerk', value: 'Vrijwilligerswerk'},      
+  ];
+
 
   /**
    * ! dummy data
@@ -190,8 +199,11 @@ export class ReactiveFormComponent implements OnInit {
     this.maxDate = new Date();
     this.minDate.setDate(this.minDate.getDate()); // min datum is de dag zelf
     this.maxDate.setDate(this.maxDate.getDate() + 182); // we stellen de maxium datum in op 6 maanden = 182 dagen
+    this.uploadVacForm = this.fb.group({
+      checkArray: this.fb.array([], [Validators.required])
+    })
   }
-
+  
   ngOnInit() {
     /**
      * @description filteren steden op naam
@@ -218,6 +230,7 @@ export class ReactiveFormComponent implements OnInit {
       einddatum: ["", Validators.required]
     });
   }
+
   /**
    * @description vult de lijsten op basis van geselecteerd studiegebied
    * @param opleiding geselecteerd studiegebied
@@ -290,6 +303,23 @@ export class ReactiveFormComponent implements OnInit {
     console.log(event.value);
   }
 
+  onCheckboxChange(e) {
+    const checkArray: FormArray = this.uploadVacForm.get('checkArray') as FormArray;
+  
+    if (e.target.checked) {
+      checkArray.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      checkArray.controls.forEach((item: FormControl) => {
+        if (item.value == e.target.value) {
+          checkArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+  }
+
   /**
    * @description error messages die worden opgeroepen bij een invalid veld
    * @return een error message
@@ -340,6 +370,18 @@ export class ReactiveFormComponent implements OnInit {
   getErrorMessageopleidingControl() {
     return this.opleidingControl.hasError("required")
       ? "U moet een opleiding selecteren"
+      : "";
+  }
+
+  getErrorMessageEinddatumControl() {
+    return this.einddatum.hasError("required")
+      ? "U moet een einddatum selecteren"
+      : "";
+  }
+
+  getErrorMessageTypeControl() {
+    return this.typeControl.hasError("required")
+      ? "U moet minstens 1 type selecteren"
       : "";
   }
 }

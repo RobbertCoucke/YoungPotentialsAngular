@@ -13,7 +13,7 @@
           >
 
           <div class="form-group">
-          <mat-form-field class="example-full-width" required>
+          <mat-form-field class="example-full-width">
             <mat-label>Titel vacature</mat-label>
             <input matInput type="text" [formControl]="titel">
             <mat-error *ngIf="titel.invalid">{{getErrorMessageTitel()}}</mat-error>
@@ -23,7 +23,7 @@
           <div class="form-group">
           <mat-form-field class="example-full-width">
             <mat-label>Geef je email op</mat-label>
-            <input matInput placeholder="test@example.com" [formControl]="email" required>
+            <input matInput placeholder="test@example.com" [formControl]="email">
             <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
           </mat-form-field>
         </div>
@@ -31,17 +31,15 @@
         <div class="form-group">
           <mat-form-field class="example-full-width">
             <mat-label>Geef de bedrijfsnaam op</mat-label>
-            <input matInput  [formControl]="bedrijfsnaam" required>
+            <input matInput  [formControl]="bedrijfsnaam">
             <mat-error *ngIf="bedrijfsnaam.invalid">{{getErrorMessageBedrijfsnaam()}}</mat-error>
           </mat-form-field>
         </div>
 
             <div class="form-group">
-              <mat-form-field class="example-full-width" required>
+              <mat-form-field class="example-full-width">
                 <mat-label>Kies een stad</mat-label>
                 <input
-                  required
-
                   type="text"
                   aria-label="Stad"
                   matInput
@@ -66,15 +64,18 @@
             </div>
 
             <div class="form-group">
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width" hintLabel="Max 300 characters">
               <mat-label>Beschrijving</mat-label>
-              <input matInput [formControl]="beschrijving" required>
+              <input matInput [formControl]="beschrijving" #input maxlength="300">
+              <mat-hint align="end">{{input.value?.length || 0}}/300</mat-hint>
               <mat-error *ngIf="beschrijving.invalid">{{getErrorMessageBeschrijving()}}</mat-error>
               <textarea matInput></textarea>
             </mat-form-field>
           </div>
 
-            <div class="form-group"><label>Uploaden vacature</label></div>
+          
+            <div class="form-group">
+              <label>Uploaden vacature</label></div>
             <div class="input-group mb-3">
               <div class="custom-file" id="inputlabel">
                 <input
@@ -82,13 +83,13 @@
                   class="custom-file-input"
                   id="file"
                   [formControl]="vacatureBestand"
+                  accept=".pdf"
                 />
-                <mat-error *ngIf="beschrijving.invalid">{{getErrorMessageBeschrijving()}}</mat-error>
-                <label class="custom-file-label" for="inputGroupFile01"
-                  >Kies bestand</label
-                >
+                <label class="custom-file-label" for="inputGroupFile01" >Kies bestand</label>
               </div>
             </div>
+            <span> <mat-error *ngIf="vacatureBestand.invalid">{{getErrorMessageVacatureBestand()}}</mat-error></span>
+           
 
 
             <div class="form-group">
@@ -96,7 +97,6 @@
                 <mat-label>Selecteer een studiegebied</mat-label>
                 <mat-select
                   matNativeControl
-                  required
                   [formControl]="studiegebiedControl"
                   [(ngModel)]="selectedSTG"
                   (ngModelChange)="changeOpleidingDiv()"
@@ -158,38 +158,25 @@
               </mat-accordion>
             </div>
 
-
             <div class="form-group">
               <label>Type</label>
-              <div>
-                <div class="chiller_cb">
-                  <input
-                    id="myCheckbox"
-                    type="checkbox"
-                    formControlName="vacatureCB"
-                  />
-                  <label for="myCheckbox">Vacature</label>
-                  <span></span>
-                </div>
-                <div class="chiller_cb">
-                  <input
-                    id="myCheckbox2"
-                    type="checkbox"
-                    formControlName="stageCB"
-                  />
-                  <label for="myCheckbox2">Stage</label>
-                  <span></span>
-                </div>
-                <div class="chiller_cb">
-                  <input
-                    id="myCheckbox3"
-                    type="checkbox"
-                    formControlName="vrijwilligerswerkCB"
-                  />
-                  <label for="myCheckbox3">Vrijwilligerswerk</label>
-                  <span></span>
-                </div>
-              </div>
+              <mat-form-field  class="example-full-width">
+                <mat-label>Selecteer het type vacature</mat-label>
+                <mat-select
+                  matNativeControl
+                  [formControl]="typeControl"
+                >
+                  <mat-option
+                    *ngFor="let type of types"
+                    [value]="type.name"
+                  >
+                    {{ type.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="typeControl.hasError('required')"
+                >{{getErrorMessageTypeControl()}}</mat-error
+              >
+              </mat-form-field>
             </div>
 
             <div><label>Zichtbaar tot</label></div>
@@ -201,17 +188,20 @@
                   class="form-control"
                   bsDatepicker
                   [bsConfig]="{
-                    dateInputFormat: 'MM/DD/YYYY',
+                    dateInputFormat: 'DD/MM/YYYY',
                     containerClass: 'theme-red',
                     selectFromOtherMonth: true
                   }"
-                  formControlName="einddatum"
+                  [formControl]="einddatum"
                   [minDate]="minDate"
                   [maxDate]="maxDate"
                   placement="top"
                 />
+                <mat-error *ngIf="einddatum.hasError('required')"
+                >{{ getErrorMessageEinddatumControl()}}</mat-error>
               </div>
             </div>
+
 
             <div class="form-group">
               <button

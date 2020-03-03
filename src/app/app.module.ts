@@ -16,6 +16,8 @@ import { VactureFilterComponent } from "./vacture-filter/vacture-filter.componen
 import { HomeComponent } from "./home/home.component";
 import { FooterComponent } from "./footer/footer.component";
 import { ReactiveFormComponent } from "./reactive-form/reactive-form.component";
+import { SollicitatieDialogComponent } from './sollicitatie-dialog/sollicitatie-dialog.component';
+import { UploadComponent } from './upload/upload.component';
 
 /**
  * * Material Angular UI imports
@@ -60,8 +62,6 @@ import {
  */
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
-import { SollicitatieDialogComponent } from './sollicitatie-dialog/sollicitatie-dialog.component';
-import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +77,7 @@ import { UploadComponent } from './upload/upload.component';
     FooterComponent,
     ReactiveFormComponent,
     SollicitatieDialogComponent,
-    UploadComponent
+    UploadComponent,
   ],
   imports: [
     ReactiveFormsModule,
