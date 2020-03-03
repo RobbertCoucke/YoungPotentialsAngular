@@ -22,26 +22,24 @@ export class FavorietenComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
    }
 
-   onLike(id: number)
-   {
-     this.favorieteService.deleteFavorite(id);
-     console.log(id)
-     //this.ngOnInit();
-   }
 
   ngOnInit() {
     this.favorieteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe( (data) => {
-      console.log(data);
+
       this.offerList = this.mapJSONToModel(data);
-      console.log(this.offerList);
     });
 
   } 
 
+  removeEvent(favorite: Favoriet){
+
+    setTimeout( () => this.offerList = this.offerList.filter(o => o !== favorite), 1000);
+  }
+
   mapJSONToModel(data) : any[] {
     var list: Favoriet[] = [];
     data.forEach(f => {
-      var vacature = new Vacature(f.offer);
+      var vacature = new Vacature(f.vacature);
       var favoriet = new Favoriet(f.id, vacature);
       list.push(favoriet);
     });
@@ -49,8 +47,5 @@ export class FavorietenComponent implements OnInit {
     return list;
   }
 
-/*   10577
-  10578
-  10579 */
 
 }

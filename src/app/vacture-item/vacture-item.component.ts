@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { Favoriet } from '@/_models/favoriet';
+import { Vacature } from '@/_models/vacature';
+import { Router } from '@angular/router';
+import { FavoritesService } from '@/_services/Favorites/favorites.service';
+import { User } from '@/_models';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-vacture-item',
@@ -8,19 +14,47 @@ import { Component, OnInit } from '@angular/core';
 export class VactureItemComponent implements OnInit {
   liked = false;
 
-  constructor() { }
+  @Input() favorite: Favoriet;
+  @Input() currentUser: User;
+  @Output() removeEvent: EventEmitter<Favoriet> = new EventEmitter<Favoriet>();
+  favorietId: number;
+  vacature: Vacature;
+  
+  
+
+  constructor(
+    private router: Router,
+    private favorietService: FavoritesService) { }
 
   ngOnInit(): void {
+    this.favorietId = this.favorite.id;
+    this.vacature = this.favorite.vacature;
+    if(this.favorietId != null){
+      this.liked = true;
+    }
+
+  }
+
+  detailClick(){
+    //this.router.navigate
+
   }
 
   onLike(){
     if(this.liked)
     {
       this.liked = false;
+      if(this.currentUser){
+        this.favorietService.deleteFavorite(this.favorietId).subscribe();
+        this.removeEvent.emit(this.favorite);
+      }
+      //deletefavorite(vacature.id, currentUser.id)
     }else{
       this.liked = true;
+      if(this.currentUser){
+        this.favorietService.addFavorite(this.currentUser.id, this.vacature.id).subscribe();
+      }
     }
-    console.log(this.liked);
   }
 
 }

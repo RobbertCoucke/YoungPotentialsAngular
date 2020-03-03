@@ -1,3 +1,5 @@
+
+
 export class Vacature
 {
     id: number;
