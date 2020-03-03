@@ -42,10 +42,11 @@ import { MatInputModule } from "@angular/material/input";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatCardModule } from "@angular/material/card";
 import { MatExpansionModule } from "@angular/material/expansion";
-import {MatStepperModule} from '@angular/material/stepper'; 
-import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
-import {MatDialogModule} from '@angular/material/dialog'; 
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 /**
  * * Anuglar Bootstrap imports
@@ -153,6 +154,7 @@ const appRoutes: Routes = [
     MatCheckboxModule,
     MatDialogModule,
     MatIconModule,
+    MatPaginatorModule,
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot(),
     // ngx-translate and the loader module
