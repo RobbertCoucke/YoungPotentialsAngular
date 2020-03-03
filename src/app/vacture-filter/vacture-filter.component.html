@@ -1,38 +1,60 @@
 
       <!-- Free Tier -->
-      <div class="card mb-5 mb-lg-0">
-        <div class="card-body">
-          <h5 class="card-title text-muted text-uppercase">Filter:</h5>
-          <hr>
-          <div id="list1" class="dropdown-check-list" tabindex="100">
-            <span class="anchor">Select Fruits : </span>
-            <!-- <ul class="items">
-                <li><input class="input" type="checkbox" />Soort </li>
-                <li><input type="checkbox" class="input" />StudieGebied
-                <ul>
-                  <li><input ng-model="selected[x.id]" type="checkbox" class="input" />HWB </li>
-                  <li><input type="checkbox" class="input" />Biotechniek </li>
-                </ul></li>
-                <li><input type="checkbox" class="input" />Regio
-                  <ul>
-                    <li><input type="checkbox" class="input" />Kortrijk </li>
-                    <li><input type="checkbox" class="input" />Vives </li>
-                  </ul>
-                </li> -->
+<div>
+  <div class="card mb-5 mb-lg-0">
+    <div class="card-body">
+      <h5 class="card-title text-muted text-uppercase">Filter:</h5>
+        <hr>
+        <div id="list1" class="dropdown-check-list" tabindex="100"></div>
 
-                <ul *ngFor="let gebied of studiegebied">
-                  <li (click)="onSelect(gebied)">
-                    <input class="input" type="checkbox" value="{{gebied}}" (change)="checkboxHandler($event)" name="studieGebiedVives" [checked]="false" />
-                    {{gebied}}
-                          <ul *ngFor="let op of dictionary[gebied]" >
-                            <li>
-                              <input class="input" type="checkbox" value="{{op}}"  [checked]="false" />
-                              {{op}}
-                              </li>
-                          </ul>
-                      
-                  </li>
-                </ul>
+      <ul class="row"><h6>STUDIEGEBIEDEN:</h6>  
+            <div *ngFor="let gebied of studiegebieds" class="l">
+                <li>
+                    <input class="input" type="checkbox" value="{{gebied.id}}" (change)="checkboxHandler($event)" name="studieGebiedVives" [checked]="false" /> 
+                    <div class="filterContainer" (click)="onSelectStudie(gebied.id)">
+                              
+                         {{gebied.naam}}
+                        <i  class="material-icons icon">arrow_drop_down</i>
+                     </div>
+                        <div *ngIf="s[gebied.id]">
+                          <ul *ngFor="let op of s[gebied.id]" >
+                           <li>
+                             <input class="input" type="checkbox" (change)="checkboxHandler($event)"  value="{{op.id}}"  [checked]="false" />
+                             <div class="filterContainer" (click)="onSelectOpleiding(op.id)">
+                                  {{op.naam}}
+                                  <i  class="material-icons icon">arrow_drop_down</i>
+                             </div>
+                             <div *ngIf="o[op.id]">
+                              <ul *ngFor="let af of o[op.id]">
+                                <li>
+                                <div class="filterContainer" (click)="onSelectAfstudeerrichting(af.id)">
+                                   <input class="input" type="checkbox" value="{{af.id}}" (change)="checkboxHandler($event)"  [checked]="false" />
+                                  {{af.naam}}
+                                  <i  class="material-icons icon">arrow_drop_down</i>
+                                </div>
+                                <div *ngIf="k[af.id]">
+                                  <ul *ngFor="let k of k[af.id]">
+                                    <li>
+                                      <div class="filterContainer">
+                                        <input class="input" type="checkbox" value="{{k.id}}" (change)="checkboxHandler($event)"  [checked]="false" />
+                                        {{k.naam}}
+                                      </div>
+                                    </li>
+                                  </ul>
+  
+                                  </div>
+
+                                </li>
+                              </ul> 
+                             </div>
+                             </li>
+                         </ul>
+                   </div>
+                </li>
+            </div>
+                  
+
+        </ul> 
                    
       </div>
     <div class="text-center">

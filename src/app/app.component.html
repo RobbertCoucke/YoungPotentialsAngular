@@ -1,16 +1,25 @@
+
+
 <app-navbar></app-navbar>
-
-<app-home></app-home>
-
-<div class="container">
-    <app-vactures></app-vactures>
-    <app-vacture-detail></app-vacture-detail>
-    <app-profile></app-profile>
-    <app-profile-edit></app-profile-edit>
-    <app-reactive-form></app-reactive-form>
-</div>
-
+<router-outlet></router-outlet>
 <app-footer></app-footer>
 
 
+<!--<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/">Home</a>
+        <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin">Admin</a>
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+</nav>
 
+ 
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div> -->

@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from '@angular/router';
 
 /**
  * * Components imports
@@ -18,6 +19,17 @@ import { FooterComponent } from "./footer/footer.component";
 import { ReactiveFormComponent } from "./reactive-form/reactive-form.component";
 import { SollicitatieDialogComponent } from './sollicitatie-dialog/sollicitatie-dialog.component';
 import { UploadComponent } from './upload/upload.component';
+
+
+
+// used to create fake backend
+import { fakeBackendProvider } from './_helpers';
+
+
+
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { AdminComponent } from './admin/admin.component';
+import { LoginComponent } from './login/login.component';
 
 /**
  * * Material Angular UI imports
@@ -49,7 +61,7 @@ import { ButtonsModule } from "ngx-bootstrap/buttons";
  */
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import {
   TranslateCacheModule,
@@ -62,6 +74,43 @@ import {
  */
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
+
+import { AuthGuard } from './_guards';
+import { Role } from './_models';
+import { RegisterComponent } from './register/register.component';
+import { FavorietenComponent } from './favorieten/favorieten.component';
+
+const appRoutes: Routes = [
+  { path: "", component: HomeComponent},
+  { path: "vactures", component: VacturesComponent},
+  { path: "vacture-toevoegen", component: ReactiveFormComponent},
+  { path: "vacture-detail", component: VactureDetailComponent},
+  { path: "profiel", component:ProfileComponent},
+  { path: "profiel-bewerken", component:ProfileEditComponent},
+  //{ path: "inloggen", component:LoginComponent},
+  { path: "registreren", component:RegisterComponent},
+  { path: "favorieten", component:FavorietenComponent},
+
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [AuthGuard]
+},
+{
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
+},
+{
+    path: 'login',
+    component: LoginComponent
+},
+
+// otherwise redirect to home
+{ path: '**', redirectTo: '' }
+];
+
 
 @NgModule({
   declarations: [
@@ -76,6 +125,10 @@ import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
     HomeComponent,
     FooterComponent,
     ReactiveFormComponent,
+    AdminComponent,
+    LoginComponent,
+    FavorietenComponent,
+    RegisterComponent,
     SollicitatieDialogComponent,
     UploadComponent,
   ],
@@ -101,6 +154,7 @@ import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
     ButtonsModule.forRoot(),
     // ngx-translate and the loader module
     HttpClientModule,
+    RouterModule.forRoot( appRoutes, { enableTracing: true}),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -118,9 +172,14 @@ import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
       cacheMechanism: "Cookie" // default value is 'LocalStorage'.
     })
   ],
-  providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [
+
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider],
+    bootstrap: [AppComponent],
+    entryComponents: [
     SollicitatieDialogComponent
   ]
 })

@@ -1,11 +1,13 @@
 
-<div>
+<div class="container">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-5">
             <app-vacture-filter></app-vacture-filter>
         </div>
-        <div class="col-lg-8">
-            <app-vacture-item></app-vacture-item>
+        <div class="col-lg-7">
+            <p style="color: red;" *ngIf="!currentUser">{{favoriteError}}</p>
+            <app-vacture-item *ngFor="let vacature of vacatures" [favorite]="vacature" (removeEvent)="removeEventAbstract($event)"   [currentUser]="currentUser" ></app-vacture-item>
         </div>
     </div>
 </div>
+

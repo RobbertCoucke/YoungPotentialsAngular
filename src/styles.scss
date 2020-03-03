@@ -1,4 +1,9 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "~bootstrap/dist/css/bootstrap.css";
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.container{
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+
