@@ -45,9 +45,8 @@ export class VacturesComponent implements OnInit {
        else{
         this.vacatureService.getAllVacatures().subscribe(v => {
       v.forEach(element => {
-        if(!this.checkIfVacatureAlreadyExists(element)){
           this.vacatures.push(new Favoriet(null, element));
-        }
+        
       });
     });
       }

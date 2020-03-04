@@ -84,7 +84,7 @@ const appRoutes: Routes = [
   { path: "", component: HomeComponent},
   { path: "vactures", component: VacturesComponent},
   { path: "vacture-toevoegen", component: ReactiveFormComponent},
-  { path: "vacture-detail", component: VactureDetailComponent},
+  { path: "vacature-details/:id", component: VactureDetailComponent},
   { path: "profiel", component:ProfileComponent},
   { path: "profiel-bewerken", component:ProfileEditComponent},
   //{ path: "inloggen", component:LoginComponent},

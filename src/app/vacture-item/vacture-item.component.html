@@ -5,13 +5,13 @@
                 <div class="col-lg-1">
                   <i (click)="onLike()" class="material-icons icon">{{liked ? 'favorite' : 'favorite_border' }}</i>
                 </div>
-                <div (click)="detailClick()" class="col-lg-9 textContainer">
-                  <h5  class="rood">{{vacature.title}}</h5>
+                <div (click)="detailClick(vacature)" class="col-lg-9 textContainer">
+                  <a [routerLink]="['/vacature-details', vacature.id]"><h5  class="rood">{{vacature.title}}</h5></a>
                   <h6 class="card-price"><span class="period">{{vacature.companyName}} | {{vacature.address}} | {{vacature.created}} |</span></h6>
                 </div>
               </div>
               <hr>
-              <div (click)="detailClick()" class="section">
+              <div (click)="detailClick(vacature)" class="section">
                 <p>{{vacature.description.substring(0,200)}} ... </p>
               <span class="badge badge-pill badge-danger label ">Handelwetenschappen</span>
               <span class="badge badge-pill badge-danger label">Sociaal-agogisch werk</span>
