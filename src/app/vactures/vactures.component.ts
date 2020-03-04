@@ -5,6 +5,7 @@ import { User } from '@/_models';
 import { VacatureService } from '@/_services/Vacature/vacature.service';
 import { Favoriet } from '@/_models/favoriet';
 import { Vacature } from '@/_models/vacature';
+import { StudieGebied } from '@/Model/StudieGebied';
 
 @Component({
   selector: 'app-vactures',
@@ -51,6 +52,31 @@ export class VacturesComponent implements OnInit {
       });
     });
       }
+  }
+
+  handleFilter(filterArr: StudieGebied[]){
+    console.log(filterArr);
+    this.vacatureService.filterVacatures(filterArr).subscribe(vacatures => {
+      console.log(vacatures);
+      if(vacatures.length > 0){
+        this.vacatures = [];
+      console.log(vacatures);
+        vacatures.foreach( v => {
+
+          this.favorites.forEach( f => {
+            if(v.id === f.vacature.id){
+              this.vacatures.push(f);
+            }else{
+              this.vacatures.push(new Favoriet(null, v));
+            }
+          })
+
+
+        });
+
+      }
+    });
+
   }
 
   removeEventAbstract(favorite: Favoriet){

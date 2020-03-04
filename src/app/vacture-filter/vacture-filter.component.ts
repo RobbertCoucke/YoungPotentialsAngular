@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { StudiegebiedService } from '../_services/studiegebied/studiegebied.service'
 import { Studiegebied } from '@/_models/studiegebied';
 import { Opleiding } from '@/_models/Opleiding';
@@ -12,6 +12,9 @@ import { Keuze } from '@/_models/Keuze';
   styleUrls: ['./vacture-filter.component.scss']
 })
 export class VactureFilterComponent implements OnInit {
+
+  
+  @Output() filterEvent: EventEmitter<Studiegebied[]> = new EventEmitter<Studiegebied[]>();
 
   //selectedGebied: string;
   //array for all Studiegebied objects
@@ -102,7 +105,10 @@ export class VactureFilterComponent implements OnInit {
     }
 
 
-    console.log(this.selectedgebieds);
+    if(this.selectedgebieds === []){
+      console.log("empty")
+    }
+    this.filterEvent.emit(this.selectedgebieds);
     
 
 
