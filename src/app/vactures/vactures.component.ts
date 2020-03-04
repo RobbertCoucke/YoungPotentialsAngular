@@ -12,8 +12,9 @@ import { Vacature } from '@/_models/vacature';
   styleUrls: ['./vactures.component.scss']
 })
 export class VacturesComponent implements OnInit {
-
+  items : any[] = [];
   currentUser: User;
+  pageOfItems: Array<any>;
   vacatures: Favoriet[] = [];
   favorites: Favoriet[] = [];
   favoriteError = "liking and unliking offers will not be saved unless you login";
@@ -36,6 +37,7 @@ export class VacturesComponent implements OnInit {
                this.vacatures.push(new Favoriet(null, element));
              }
            });
+           this.items = this.vacatures;
          });
       
       });
@@ -47,10 +49,18 @@ export class VacturesComponent implements OnInit {
       v.forEach(element => {
         if(!this.checkIfVacatureAlreadyExists(element)){
           this.vacatures.push(new Favoriet(null, element));
-        }
+            }
+        });
+      this.items = this.vacatures;
       });
-    });
       }
+  }
+
+  // ChangePage
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+    console.log(this.pageOfItems);
   }
 
   removeEventAbstract(favorite: Favoriet){

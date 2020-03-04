@@ -18,6 +18,8 @@ import { HomeComponent } from "./home/home.component";
 import { FooterComponent } from "./footer/footer.component";
 import { ReactiveFormComponent } from "./reactive-form/reactive-form.component";
 
+// Paging
+import { JwPaginationComponent } from 'jw-angular-pagination';
 
 
 // used to create fake backend
@@ -116,57 +118,58 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    VactureItemComponent,
-    VacturesComponent,
-    ProfileComponent,
-    ProfileEditComponent,
-    VactureDetailComponent,
-    VactureFilterComponent,
-    NavbarComponent,
-    HomeComponent,
-    FooterComponent,
-    ReactiveFormComponent,
-    AdminComponent,
-    LoginComponent,
-    FavorietenComponent,
-    RegisterComponent,
-    SollicitatieDialogComponent,
-    UploadComponent,
-    NavormingComponent
-  ],
-  imports: [
-    ReactiveFormsModule,
-    BrowserModule,
-    AppRoutingModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatMenuModule,
-    MatCardModule,
-    MatExpansionModule,
-    NgMultiSelectDropDownModule,
-    MatStepperModule,
-    MatCheckboxModule,
-    MatDialogModule,
-    MatIconModule,
-    MatPaginatorModule,
-    BsDatepickerModule.forRoot(),
-    ButtonsModule.forRoot(),
-    // ngx-translate and the loader module
-    HttpClientModule,
-    RouterModule.forRoot( appRoutes, { enableTracing: true}),
+   declarations: [
+      AppComponent,
+      VactureItemComponent,
+      VacturesComponent,
+      ProfileComponent,
+      ProfileEditComponent,
+      VactureDetailComponent,
+      VactureFilterComponent,
+      NavbarComponent,
+      HomeComponent,
+      FooterComponent,
+      ReactiveFormComponent,
+      AdminComponent,
+      LoginComponent,
+      FavorietenComponent,
+      RegisterComponent,
+      SollicitatieDialogComponent,
+      UploadComponent,
+      NavormingComponent,
+      JwPaginationComponent
+   ],
+   imports: [
+      ReactiveFormsModule,
+      BrowserModule,
+      AppRoutingModule,
+      MatAutocompleteModule,
+      MatFormFieldModule,
+      MatSelectModule,
+      MatInputModule,
+      HttpClientModule,
+      BrowserAnimationsModule,
+      MatMenuModule,
+      MatCardModule,
+      MatExpansionModule,
+      NgMultiSelectDropDownModule,
+      MatStepperModule,
+      MatCheckboxModule,
+      MatDialogModule,
+      MatIconModule,
+      MatPaginatorModule,
+      BsDatepickerModule.forRoot(),
+      ButtonsModule.forRoot(),
+      //ngx-translateandtheloadermodule
+      HttpClientModule,
+      RouterModule.forRoot(appRoutes,
+      {enableTracing: true}),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
-      }
-    }),
+      }}),
     TranslateCacheModule.forRoot({
       cacheService: {
         provide: TranslateCacheService,
