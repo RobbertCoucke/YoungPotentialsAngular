@@ -4,10 +4,7 @@ import {
 } from "@angular/material";
 import { SollicitatieDialogComponent } from "app/sollicitatie-dialog/sollicitatie-dialog.component";
 import { ActivatedRoute, Router } from '@angular/router';
-import { Vacature } from '@/_models/vacature';
-import { VacatureService } from '@/_services/Vacature/vacature.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { VacatureService } from '@/_services/Vacature/vacature.service';  
 
 @Component({
   selector: 'app-vacture-detail',
@@ -18,6 +15,7 @@ export class VactureDetailComponent  {
   id: number;
   private $vacature: any;
   vacature : object;
+  student : boolean;
 
   
   constructor(private dialog: MatDialog, private route: ActivatedRoute, 
@@ -40,6 +38,7 @@ export class VactureDetailComponent  {
   }
 
  ngOnInit(): void {
+   this.student == true;
  }
 
  clicked(){

@@ -26,7 +26,23 @@
     background: #E50001;
     border: none;
   }
-  
+
+  .btnContainer{
+    display: block;
+  }
+
+.btn-danger{
+  margin-right: 3px;
+  border-radius: 20px;
+}
+
+  .simple-form input:invalid {
+    border-left: 2px solid red;
+  }
+
+  .margin {
+    margin-bottom: 10px;
+  }
   // .form-label-group {
   //   position: relative;
   //   margin-bottom: 1rem;
