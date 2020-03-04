@@ -21,7 +21,6 @@ export class VactureFilterComponent implements OnInit {
   studiegebieds: Studiegebied[] = [];
   //array for all opleiding objects
   opleidingArray : Opleiding[] = [];
-  testgebieds: Studiegebied[] = [];
 
   selectedgebieds = [];
 
@@ -40,7 +39,6 @@ export class VactureFilterComponent implements OnInit {
 
   
   check (event) {
-    console.log(this.studiegebieds);
     //get the selected value
     var selectedVal = event.target.value;
     //console.log(selectedVal);
@@ -105,10 +103,12 @@ export class VactureFilterComponent implements OnInit {
     }
 
 
-    // if(this.selectedgebieds === []){
-    //   this.filterEvent.emit(this.studiegebieds);
-    // }
+     if(this.selectedgebieds.length < 1){
+       this.filterEvent.emit(null);
+     }else{
      this.filterEvent.emit(this.selectedgebieds);
+     }
+     
     
 
 
@@ -141,15 +141,32 @@ export class VactureFilterComponent implements OnInit {
 
   } 
 
+  /**
+   * @description verwijdert alle filters
+   */
   removeSelected(){
     this.selectedgebieds = [];
+
+    this.filterEvent.emit(null);
   }
 
+
+  /**
+   * @description zoekt het studiegebiedsObject adhv het id
+   * @param studiegebiedId
+   * @return studiegebiedsObject
+   */
   private findStudiegebied(id){
       return this.studiegebieds.find(s => s.id === id);
 
     }
 
+
+    /**
+   * @description zoekt het opleidingsobject met het daarbijhorende studiegebiedsobject
+   * @param opleidingId
+   * @return StudiegebiedObject met daarin het gezochte opleidingsObject
+   */
     private findOpleiding(id){
       for(let i=0; i<this.studiegebieds.length; i++){
 
@@ -169,6 +186,12 @@ export class VactureFilterComponent implements OnInit {
       
     }
 
+
+    /**
+   * @description kijkt het of id in de geselecteerde filters voorkomt
+   * @param id
+   * @return true => element bevindt zich in gekozen filters | false => element bevindt zich niet in gekozen filters.
+   */
     isSelected(id){
       for(let i=0; i<this.selectedgebieds.length; i++){
         if(this.selectedgebieds[i].id===id){
@@ -195,7 +218,6 @@ export class VactureFilterComponent implements OnInit {
     showData(){
       this.studieService.getAllStudieGebieds().subscribe((res) => {
         this.studiegebieds = this.mapJSONToModel(res);
-        this.testgebieds = this.mapJSONToModel(res);
       })
     }
 
@@ -226,7 +248,3 @@ export class VactureFilterComponent implements OnInit {
 
   }
 
-
-  //alle opleidingen aangevinkd -> studiegebied ook aangevinkt
-  //studiegebied aangevinkt ook alle opleidingen aanvinken
-  //opleiding aangevinkt ook studiegebied aanvinken???
