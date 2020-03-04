@@ -9,8 +9,8 @@ import { User, Role } from '@/_models';
 export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const users: User[] = [
-            { id: 1, username: 'admin', password: 'admin', firstName: 'Admin', lastName: 'User', role: Role.Admin },
-            { id: 2, username: 'user', password: 'user', firstName: 'Normal', lastName: 'User', role: Role.User }
+            { id: 1, email: 'admin', password: 'admin', firstName: 'Admin', lastName: 'User', role: Role.Admin },
+            { id: 2, email: 'user', password: 'user', firstName: 'Normal', lastName: 'User', role: Role.User }
         ];
 
         const authHeader = request.headers.get('Authorization');
@@ -23,11 +23,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             // authenticate - public
             if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
-                const user = users.find(x => x.username === request.body.username && x.password === request.body.password);
+                const user = users.find(x => x.email === request.body.username && x.password === request.body.password);
                 if (!user) return error('Username or password is incorrect');
                 return ok({
                     id: user.id,
-                    username: user.username,
+                    email: user.email,
                     firstName: user.firstName,
                     lastName: user.lastName,
                     role: user.role,

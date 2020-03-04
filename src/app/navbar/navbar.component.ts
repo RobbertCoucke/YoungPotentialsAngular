@@ -3,6 +3,12 @@ import {TranslateService} from '@ngx-translate/core';
 
 import { TranslateCacheService } from 'ngx-translate-cache';
 
+//login logout
+import { AuthenticationService } from './../_services/Authentication/authentication.service';
+import { User, Role } from './../_models';
+import { Router } from '@angular/router';
+//
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -10,6 +16,29 @@ import { TranslateCacheService } from 'ngx-translate-cache';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+// voor login / logout procedure
+  currentUser: User;
+
+  get isAdmin() {
+      return this.currentUser && this.currentUser.role === Role.Admin;
+  }
+
+  isLoggedIn()
+  {
+    
+  }
+
+  isLoggedOut()
+  {
+
+  }
+
+  logout() {
+      this.authenticationService.logout();
+      this.router.navigate(['/login']);
+  }
+
+//
   navbarOpen = false;
   taalMenuOpen = false;
   
@@ -55,10 +84,21 @@ export class NavbarComponent implements OnInit {
 
   // }
   constructor(private translate: TranslateService,
-      translateCacheService: TranslateCacheService) {
+      translateCacheService: TranslateCacheService,
+      // login logout
+      private router: Router,
+      private authenticationService: AuthenticationService) 
+      // 
+      {
         translate.setDefaultLang('nl');
         translateCacheService.init();
+        // login logout
+        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+        // 
+
   }
+ 
+
   
   ngOnInit() {
     if(getCookie("language")!==undefined)
@@ -67,7 +107,6 @@ export class NavbarComponent implements OnInit {
       this.changeLanguage(this.selectedLanguage);
     }
   }
-
 }
 
 
@@ -78,4 +117,6 @@ export function getCookie(name: string) {
   if (parts.length == 2) {
       return parts.pop().split(";").shift();
   }
+
 }
+
