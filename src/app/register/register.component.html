@@ -7,45 +7,68 @@
             <div class="row">
               <div class="col-md-9 col-lg-8 mx-auto">
                 <img class="mb-4" src="../../assets/images/vives_logo.png">
+                <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                 <h3 class="login-heading mb-4">Maak een account aan!</h3>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-                  <div class="form-label-group">
-                    <input type="text" id="inputName" class="form-control" placeholder="Voornaam" required autofocus>
-                    <label for="inputName"></label>
+                  <div class="form-label-group margin">
+                    <input type="text" formControlName="firstName" class="form-control" placeholder="Voornaam" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                      <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-label-group margin">
+                    <input type="text" ormControlName="lastName" class="form-control" placeholder="Familienaam" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                      <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                    </div>
                   </div>
 
-                  <div class="form-label-group">
-                    <input type="text" id="inputFamilyName" class="form-control" placeholder="Familienaam" required autofocus>
-                    <label for="inputFamilyName"></label>
+
+                  <div class="form-label-group margin">
+                    <input type="text" ormControlName="CompanyName" class="form-control" placeholder="Bedrijfsnaam" [ngClass]="{ 'is-invalid': submitted && f.CompanyName.errors }" />
+                    <div *ngIf="submitted && f.CompanyName.errors" class="invalid-feedback">
+                      <div *ngIf="f.CompanyName.errors.required">Company Name is required</div>
+                    </div>
                   </div>
 
-                  <div class="form-label-group">
-                    <input type="text" id="CompanyName" class="form-control" placeholder="Bedrijfsnaam" required autofocus>
-                    <label for="inputCompanyName"></label>
-                  </div>
-
-                  <div class="form-label-group">
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                    <label for="inputEmail"></label>
+                  <div class="form-label-group margin">
+                    <input type="email" ormControlName="Email" class="form-control" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.Email.errors }" />
+                    <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+                      <div *ngIf="f.Email.errors.required">Email is required</div>
+                    </div>
                   </div>
   
-                  <div class="form-label-group">
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                    <label for="inputPassword"></label>
+                  <div class="form-label-group margin">
+                    <input type="password" formControlName="password" class="form-control" placeholder="Password"[ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                       <div *ngIf="f.password.errors.required">Password is required</div>
+                       <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                    </div>
                   </div>
-                  <div class="form-label-group">
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Repeat password" required>
-                    <label for="inputPassword"></label>
+
+                  <div class="form-label-group margin">
+                    <input type="password" formControlName="password" class="form-control" placeholder="Password"[ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                       <div *ngIf="f.password.errors.required">Password is required</div>
+                       <div *ngIf="f.password.errors.minlength">Password must be the same as above</div>
+                    </div>
                   </div>
   
-                  <div class="custom-control custom-checkbox mb-3">
-                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                    <label class="custom-control-label" for="customCheck1">Remember password</label>
-                  </div>
-                  <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Registreer</button>
+                  <!-- <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Registreer</button>
                   <div class="text-center">
-                    <a class="small" href="#">Forgot password?</a></div>
+                    <a class="small" href="#">Forgot password?</a>
+                  </div> -->
+
+                  <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Register
+                    </button>
+                    <a routerLink="/login" class="btn btn-link">Cancel</a>
+                  </div>
+
                 </form>
               </div>
             </div>
@@ -53,4 +76,45 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
+  <!-- <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+  <h2>Register</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+              <div *ngIf="f.firstName.errors.required">First Name is required</div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+              <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+              <div *ngIf="f.username.errors.required">Username is required</div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+              <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+          </div>
+      </div>
+      <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Register
+          </button>
+          <a routerLink="/login" class="btn btn-link">Cancel</a>
+      </div>
+  </form> -->

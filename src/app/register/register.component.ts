@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../_services/Authentication/authentication.service'
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Register } from '@/_models/register';
@@ -30,7 +30,14 @@ export class RegisterComponent implements OnInit {
      }
 
   ngOnInit() {
-    this.registerForm = this.formBuilder.group(Register);
+    //this.registerForm = this.formBuilder.group(Register); //
+    this.registerForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      companyName: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+  });
   }
 
   get f() { return this.registerForm.controls; }
