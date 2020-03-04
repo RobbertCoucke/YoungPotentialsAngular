@@ -68,7 +68,7 @@ private commonvalidators = [
       description: [''],
       url: [''],
       cvUrl: [''],
-      address: []
+      address: ['']
 
     }, {
       validator: MustMatch('password', 'confirmPassword')
@@ -110,11 +110,13 @@ private commonvalidators = [
     //const reg = this.getRegisterModel();
 
     //stop here if form is invalid
-    console.log(this.isStudent);
-      if (this.registerForm.invalid) {
-        console.log("invalid");
-        return;
-    }
+    // console.log(this.isStudent);
+    //   if (this.registerForm.invalid) {
+    //     console.log("invalid");
+    //     return;
+    // }
+
+    console.log(this.registerForm.controls.value);
 
     this.loading = true;     
     var regModel = this.getRegisterModel();
@@ -124,9 +126,7 @@ private commonvalidators = [
 
 
 
-     this.authenticationService.register(regModel)
-        .pipe(first())
-        .subscribe(
+     this.authenticationService.register(regModel).subscribe(
             data => {
                 this.router.navigate([this.returnUrl]);
             },
@@ -141,8 +141,9 @@ private commonvalidators = [
     var model = new Register(controls.email.value, controls.password.value, this.isStudent);
     model.telephone = controls.telephone.value;
     //model.city = controls.city.value;
-    model.zipCode = controls.zipCode.value;
+    model.zipCode = Number(controls.zipCode.value);
     model.address = controls.address.value;
+    model.city = controls.city.value;
 
     if(this.isStudent){
       model.name = controls.lastName.value;

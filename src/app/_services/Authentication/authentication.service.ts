@@ -41,15 +41,15 @@ export class AuthenticationService {
     }
 
     register(reg: Register) {
-
-        return this.http.post<any>('https://youngpotentials.azurewebsites.net/user/register', reg)
+        console.log(reg);
+        return this.http.post<any>('http://localhost:60213/user/register', reg)
         .pipe(map(user => {
             //register succesful if there's a jwt token in the response
             if(user && user.token){
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
             }
-        }))
+        }));
 
     }
 }
