@@ -93,19 +93,20 @@ export class VactureFilterComponent implements OnInit {
   checkboxHandler (event: any) {
     //get the selected value
     var selectedId = event.target.value;
+    console.log(selectedId);
     //get the selected Studiegebied object from the array
-    var selectedStudiegebied  = this.studiegebieds.filter(item => item.id == selectedId);
+    //var selectedStudiegebied  = this.studiegebieds.filter(item => item.id == selectedId);
     //get the opleidings of the object
-    var opleidings = selectedStudiegebied[0].opleidings;
+    //var opleidings = selectedStudiegebied[0].opleidings;
     //get of the item checked or not
-    var checked = event.target.checked;
+    //var checked = event.target.checked;
     /*
     hier controleer ik of de object in de array bestaat of niet als het bestaat dan krijg ik de index of de object anders krijg ik -1
     als het -1 voeg ik alle opleidings van geselecteerde studiegebied aan een dictionary om tonnen aan scherm,
     anderes weet ik dat het object geselecteerd was en verwijder het van de dictionary.
     */
-    var object = this.selectedgebieds.indexOf(selectedStudiegebied[0])
-    if(checked)
+    //var object = this.selectedgebieds.indexOf(selectedStudiegebied[0])
+/*     if(checked)
     {
      if(object == -1)
         {
@@ -117,7 +118,8 @@ export class VactureFilterComponent implements OnInit {
         this.selectedgebieds = this.selectedgebieds.filter(item => item !== selectedStudiegebied[0]);
         this.s[selectedStudiegebied[0].id] = null;
       }
-    } 
+    } */ 
+  }
 
 
     //get Observable data from server

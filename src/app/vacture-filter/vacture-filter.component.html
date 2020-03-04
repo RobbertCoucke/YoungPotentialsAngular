@@ -1,7 +1,7 @@
 
       <!-- Free Tier -->
-      <div>
-<div class="card mb-5 mb-lg-0">
+<div>
+  <div class="card mb-5 mb-lg-0">
     <div class="card-body">
       <h5 class="card-title text-muted text-uppercase">Filter:</h5>
         <hr>
@@ -19,22 +19,24 @@
                         <div *ngIf="s[gebied.id]">
                           <ul *ngFor="let op of s[gebied.id]" >
                            <li>
-                             <input class="input" type="checkbox" (change)="checkboxHandler($event)" value="{{op.naam}}"  [checked]="false" />
+                             <input class="input" type="checkbox" (change)="checkboxHandler($event)"  value="{{op.id}}"  [checked]="false" />
                              <div class="filterContainer" (click)="onSelectOpleiding(op.id)">
                                   {{op.naam}}
+                                  <i  class="material-icons icon">arrow_drop_down</i>
                              </div>
                              <div *ngIf="o[op.id]">
                               <ul *ngFor="let af of o[op.id]">
                                 <li>
                                 <div class="filterContainer" (click)="onSelectAfstudeerrichting(af.id)">
-                                   <input class="input" type="checkbox" value="{{af.naam}}"  [checked]="false" />
+                                   <input class="input" type="checkbox" value="{{af.id}}" (change)="checkboxHandler($event)"  [checked]="false" />
                                   {{af.naam}}
+                                  <i  class="material-icons icon">arrow_drop_down</i>
                                 </div>
                                 <div *ngIf="k[af.id]">
                                   <ul *ngFor="let k of k[af.id]">
                                     <li>
                                       <div class="filterContainer">
-                                        <input class="input" type="checkbox" value="{{k.naam}}"  [checked]="false" />
+                                        <input class="input" type="checkbox" value="{{k.id}}" (change)="checkboxHandler($event)"  [checked]="false" />
                                         {{k.naam}}
                                       </div>
                                     </li>

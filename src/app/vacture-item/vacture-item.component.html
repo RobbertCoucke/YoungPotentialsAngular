@@ -5,42 +5,18 @@
                 <div class="col-lg-1">
                   <i (click)="onLike()" class="material-icons icon">{{liked ? 'favorite' : 'favorite_border' }}</i>
                 </div>
-                <div class="col-lg-9 textContainer">
-                  <h5 routerLink="/vacture-detail" class="rood">R&D Laborant</h5>
-                  <h6 class="card-price"><span class="period">Lab Support | Vlaanderen en Brussel | 13-08-2019 |</span></h6>
+                <div (click)="detailClick(vacature)" class="col-lg-9 textContainer">
+                  <a [routerLink]="['/vacature-details', vacature.id]"><h5  class="rood">{{vacature.title}}</h5></a>
+                  <h6 class="card-price"><span class="period">{{vacature.companyName}} | {{vacature.address}} | {{vacature.created}} |</span></h6>
                 </div>
               </div>
               <hr>
-              <div class="section">
-                <p>Lab Support is gespecialiseerd in recrutering in en rond het laboratorium voor vaste en tijdelijke functies op A2, Bachelor, Master of PhD-niveau binnen
-                   de (petro)chemie, farmacie, voeding, biotechnologie, cosmetica. Lab Support creëerde het concept van recrutering door wetenschappers, voor wetensch...
-                </p>
+              <div (click)="detailClick(vacature)" class="section">
+                <p>{{vacature.description.substring(0,200)}} ... </p>
               <span class="badge badge-pill badge-danger label ">Handelwetenschappen</span>
               <span class="badge badge-pill badge-danger label">Sociaal-agogisch werk</span>
               <span class="badge badge-pill badge-danger label">Biotechniek</span>
               </div>
             </div>
-          </div>
-  
-          <div class="card item">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-lg-1">
-                  <i (click)="onLike()" class="material-icons icon">{{liked ? 'favorite' : 'favorite_border' }}</i>
-                </div>
-                <div class="col-lg-9 textContainer">
-                  <h5 routerLink="/vacture-detail" class="rood">R&D Laborant</h5>
-                  <h6 class="card-price"><span class="period">Lab Support | Vlaanderen en Brussel | 13-08-2019 |</span></h6>
-                </div>
-              </div>
-              <hr>
-              <div class="section">
-                <p>Lab Support is gespecialiseerd in recrutering in en rond het laboratorium voor vaste en tijdelijke functies op A2, Bachelor, Master of PhD-niveau binnen
-                   de (petro)chemie, farmacie, voeding, biotechnologie, cosmetica. Lab Support creëerde het concept van recrutering door wetenschappers, voor wetensch...
-                </p>
-              <span class="badge badge-pill badge-danger label ">Handelwetenschappen</span>
-              <span class="badge badge-pill badge-danger label">Sociaal-agogisch werk</span>
-              <span class="badge badge-pill badge-danger label">Biotechniek</span>
-              </div>
-            </div>
+
           </div>

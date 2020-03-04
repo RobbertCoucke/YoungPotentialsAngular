@@ -1,0 +1,16 @@
+<div class="field">
+    <div class="file is-danger has-name is-boxed">
+      <label class="file-label">
+        <input class="file-input" type="file" formControlName="fileupload" accept=".pdf" #file  placeholder="Choose file" (change)="uploadFile(file.files)">
+        <span class="file-cta">
+          <span class="file-icon">
+            <mat-icon>folder_open</mat-icon>
+            <i class="fas fa-cloud-upload-alt"></i>
+          </span>
+          <span class="file-label">
+            Kies een file...
+          </span>
+        </span>
+      </label>
+    </div>
+  </div>

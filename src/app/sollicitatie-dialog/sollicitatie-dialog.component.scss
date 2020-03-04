@@ -1,0 +1,71 @@
+.description-full-width {
+    width: 100%;
+
+}
+
+::ng-deep .mat-horizontal-stepper-header .mat-step-icon {
+    background-color: #E50001;
+  }
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate, .mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate {
+    background-color: #E50001 !important; 
+}
+
+.list{
+    margin-top: 5px;
+}
+
+.mat-raised-button{
+    background-color:#E50001;
+    color: white;
+}
+
+.buttons{
+    display:inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #E50001;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 300;
+    color: #FFFFFF;
+    text-align: center;
+    transition: all 0.2s;
+    background-color: #E50001;
+}
+
+.buttons:hover{
+    color:#FFFFFF;
+    background-color: #ff1f1f;
+}
+
+.buttons:disabled{
+    border-color: gray;
+    background-color: gray;
+}
+
+.center {
+    text-align: center;
+    background-color: #E50001;;
+    height: 120px;
+    width: auto;
+    margin-top: 10px;
+}
+
+.center-text {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    line-height: 180px;
+    height: 180px;
+    width: 807px;
+    border-style: solid;
+    border-color: gray;
+    border-width: 1px;
+}
+
+.mat-icon {
+    font-size: 100px;
+    vertical-align: middle;
+  }

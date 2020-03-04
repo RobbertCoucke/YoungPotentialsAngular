@@ -11,6 +11,9 @@
         <a class="nav-link" href="#">{{"navbar.overview" | translate}} <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" routerLink="/favorieten" routerLinkActive="active">Favoriete</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="#">{{"navbar.about" | translate}}</a>
       </li>
       <li class="nav-item">
@@ -35,15 +38,23 @@
   <div class="collapse navbar-collapse" id="navbarRegistreerDropdown" [ngClass]="{ 'show': navbarOpen }">
       <ul class="navbar-nav registreermenu">
         <div class="registreerdiv">
-          <li class="nav-item registrerenbtnwrapper">
+          <div *ngIf="!currentUser">
+          <li  class="nav-item registrerenbtnwrapper">
             <a routerLink="/registreren" routerLinkActive="active"class="nav-link registrerenbtn">{{"navbar.signup" | translate}}</a>
           </li>
           <li class="nav-item registrerenbtnwrapper">
             <a routerLink="/login" routerLinkActive="active" class="nav-link registrerenbtn">{{"navbar.login" | translate}}</a>
           </li>
-          <li class="nav-item registrerenbtnwrapper">
+        </div>
+        <div *ngIf="currentUser" >
+          <li  class="nav-item registrerenbtnwrapper">
             <a class="nav-link registrerenbtn" (click)="logout()">Logout</a>
           </li>
+          <li   class="">
+            <p class="" >{{currentUser.email}}</p>
+          </li>
+        </div>
+          
         </div>
         <div class="wrappertaalmenu" (mouseleave)="toggleTaalMenuClose()">
         </div>
