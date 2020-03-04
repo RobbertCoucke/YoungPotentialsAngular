@@ -20,7 +20,7 @@ export class VactureFilterComponent implements OnInit {
   //array for all Studiegebied objects
   studiegebieds: Studiegebied[] = [];
   //array for all opleiding objects
-  opleidingsArray : Opleiding[] = [];
+  opleidingArray : Opleiding[] = [];
   testgebieds: Studiegebied[] = [];
 
   selectedgebieds = [];
@@ -61,7 +61,7 @@ export class VactureFilterComponent implements OnInit {
          if(updateObject != undefined){    
          let index = this.selectedgebieds.indexOf(updateObject);
 
-         updateObject.opleidings.push(selectedObject.opleidings[0]);
+         updateObject.opleiding.push(selectedObject.opleiding[0]);
          this.selectedgebieds[index] = updateObject;
  
          }else{
@@ -89,12 +89,12 @@ export class VactureFilterComponent implements OnInit {
          let updateObject = this.selectedgebieds.find(s => s.id === studiegebied.id);
         
          let index = this.selectedgebieds.indexOf(updateObject);
-        if(this.selectedgebieds[index].opleidings.length === 1){
+        if(this.selectedgebieds[index].opleiding.length === 1){
            this.selectedgebieds = this.selectedgebieds.filter(s => s.id != studiegebied.id);
          }else{
 
           var gebied = this.selectedgebieds[index];
-          var newStudiegebied = new Studiegebied(gebied.id, gebied.naam, gebied.kleur, this.selectedgebieds[index].opleidings.filter(o => o.id != selectedVal));
+          var newStudiegebied = new Studiegebied(gebied.id, gebied.naam, gebied.kleur, this.selectedgebieds[index].opleiding.filter(o => o.id != selectedVal));
            this.selectedgebieds[index] = newStudiegebied;
          }
 
@@ -105,10 +105,10 @@ export class VactureFilterComponent implements OnInit {
     }
 
 
-    if(this.selectedgebieds === []){
-      console.log("empty")
-    }
-    this.filterEvent.emit(this.selectedgebieds);
+    // if(this.selectedgebieds === []){
+    //   this.filterEvent.emit(this.studiegebieds);
+    // }
+     this.filterEvent.emit(this.selectedgebieds);
     
 
 
@@ -127,10 +127,10 @@ export class VactureFilterComponent implements OnInit {
    onSelectStudie(id) : void{
     const key = id;
     var selectedStudiegebied  = this.studiegebieds.filter(item => item.id == key);
-    var opleidings = selectedStudiegebied[0].opleidings;
+    var opleiding = selectedStudiegebied[0].opleiding;
     if(this.s[key] == null )
     {
-      this.s[key] = opleidings
+      this.s[key] = opleiding
     }else{
 
       this.s[key] = null;
@@ -153,13 +153,13 @@ export class VactureFilterComponent implements OnInit {
     private findOpleiding(id){
       for(let i=0; i<this.studiegebieds.length; i++){
 
-        for(let j=0; j<this.studiegebieds[i].opleidings.length; j++){
-        var object = this.studiegebieds[i].opleidings[j];
+        for(let j=0; j<this.studiegebieds[i].opleiding.length; j++){
+        var object = this.studiegebieds[i].opleiding[j];
 
           if(object.id === id){
             var result = this.studiegebieds[i];
-            var test = new Studiegebied(result.id, result.naam, result.kleur, result.opleidings.filter(o => o.id === object.id));
-            //result.opleidings = result.opleidings.filter(o => o.id === object.id);
+            var test = new Studiegebied(result.id, result.naam, result.kleur, result.opleiding.filter(o => o.id === object.id));
+            //result.opleiding = result.opleiding.filter(o => o.id === object.id);
 
             return test;
           }
@@ -175,8 +175,8 @@ export class VactureFilterComponent implements OnInit {
           return true;
         }
 
-        for(let j=0; j<this.selectedgebieds[i].opleidings.length; j++){
-          var object = this.selectedgebieds[i].opleidings[j];
+        for(let j=0; j<this.selectedgebieds[i].opleiding.length; j++){
+          var object = this.selectedgebieds[i].opleiding[j];
           if(object.id === id){
 
 
@@ -203,20 +203,20 @@ export class VactureFilterComponent implements OnInit {
     mapJSONToModel(res) : any[] {
       var list : Studiegebied[] = [];
       res.forEach(element => {
-        var opleidings: Opleiding[] = [];
-        var opleidingsArray = element.opleiding;
-        if(opleidingsArray.length != 0)
+        var opleiding: Opleiding[] = [];
+        var opleidingArray = element.opleiding;
+        if(opleidingArray.length != 0)
         {
-           opleidingsArray.forEach((o) => {
+           opleidingArray.forEach((o) => {
            var afstudeerrichtingsArray = o.afstudeerrichting;
            var afstudeerrichtings : Afstudeerrichting[] = [];            
            var op = new Opleiding(o.id, o.naamOpleiding, afstudeerrichtings);
-           opleidings.push(op);
-           this.opleidingsArray.push(op);
+           opleiding.push(op);
+           this.opleidingArray.push(op);
            });
 
         } 
-        var model = new Studiegebied(element.id, element.studiegebied1, element.kleur, opleidings);
+        var model = new Studiegebied(element.id, element.studiegebied1, element.kleur, opleiding);
         list.push(model);
       });
 

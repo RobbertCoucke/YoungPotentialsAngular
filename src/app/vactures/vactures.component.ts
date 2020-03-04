@@ -32,6 +32,7 @@ export class VacturesComponent implements OnInit {
         this.favorites = f;
         f.forEach(element => this.vacatures.push(new Favoriet(element.id, element.vacature)));
          this.vacatureService.getAllVacatures().subscribe(v => {
+           console.log(v);
            v.forEach(element => {
              if(!this.checkIfVacatureAlreadyExists(element)){
                this.vacatures.push(new Favoriet(null, element));
@@ -54,28 +55,49 @@ export class VacturesComponent implements OnInit {
       }
   }
 
-  handleFilter(filterArr: StudieGebied[]){
+  filterVacatures(filterArr){
     console.log(filterArr);
     this.vacatureService.filterVacatures(filterArr).subscribe(vacatures => {
-      console.log(vacatures);
-      if(vacatures.length > 0){
-        this.vacatures = [];
-      console.log(vacatures);
-        vacatures.foreach( v => {
+      
+      this.vacatures = [];
+    for(let i=0; i<vacatures.length;i++){
+      if(this.favorites.length > 0){
+        let inFavorites = null;
+        for(let j=0; j< this.favorites.length; j++){
+          if(vacatures[i].id===this.favorites[j].vacature.id){
+            inFavorites = this.favorites[j];
+          }
 
-          this.favorites.forEach( f => {
-            if(v.id === f.vacature.id){
-              this.vacatures.push(f);
-            }else{
-              this.vacatures.push(new Favoriet(null, v));
-            }
-          })
+        }
 
-
-        });
-
+        if(inFavorites){
+          this.vacatures.push(inFavorites);
+        }else{
+          this.vacatures.push(new Favoriet(null, vacatures[i]));
+        }
+      
+      }else{
+        this.vacatures.push(new Favoriet(null, vacatures[i]));
       }
-    });
+      
+    }
+  });
+  }
+
+
+
+  handleFilter(filterArr: StudieGebied[]){
+    
+    if(this.currentUser != null){
+      this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
+        this.favorites = f;
+        this.filterVacatures(filterArr);
+
+      })
+    }else{
+      this.filterVacatures(filterArr);
+    }
+    
 
   }
 
