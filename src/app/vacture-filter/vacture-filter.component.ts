@@ -37,7 +37,6 @@ export class VactureFilterComponent implements OnInit {
 
   
   check (event) {
-    console.log("initiate checkboxevent");
     console.log(this.studiegebieds);
     //get the selected value
     var selectedVal = event.target.value;
@@ -69,6 +68,7 @@ export class VactureFilterComponent implements OnInit {
         
        }else{
          this.selectedgebieds.push(selectedObject);
+         
 
        }
 
@@ -78,8 +78,24 @@ export class VactureFilterComponent implements OnInit {
     }
     else{
 
+      
+      var length = this.selectedgebieds.length;
+      this.selectedgebieds = this.selectedgebieds.filter(s => s.id != selectedVal);
+      if(length === this.selectedgebieds.length){
+         var studiegebied =this.findOpleiding(selectedVal);
+         let updateObject = this.selectedgebieds.find(s => s.id === studiegebied.id);
+        
+         let index = this.selectedgebieds.indexOf(updateObject);
+        if(this.selectedgebieds[index].opleidings.length === 1){
+           this.selectedgebieds = this.selectedgebieds.filter(s => s.id != studiegebied.id);
+         }else{
 
-      this.selectedgebieds = this.selectedgebieds.filter(s => s.id !== selectedVal);
+          var gebied = this.selectedgebieds[index];
+          var newStudiegebied = new Studiegebied(gebied.id, gebied.naam, gebied.kleur, this.selectedgebieds[index].opleidings.filter(o => o.id != selectedVal));
+           this.selectedgebieds[index] = newStudiegebied;
+         }
+
+      }
       
       
 
