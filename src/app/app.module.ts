@@ -58,6 +58,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { BsDatepickerModule } from "ngx-bootstrap";
 import { ButtonsModule } from "ngx-bootstrap/buttons";
 
+
 /**
  * * import ngx-translate and the http loader
  */

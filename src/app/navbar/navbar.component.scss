@@ -28,9 +28,27 @@ $grijs: gray;
     border-color: transparent;
 }
 
+.flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.flex-child {
+    -webkit-box-flex: 1 1 auto;
+    -moz-box-flex:  1 1 auto;
+    -webkit-flex:  1 1 auto;
+    -ms-flex:  1 1 auto;
+    flex:  1 1 auto;
+    padding-right: 5px;
+}
+
 .registrerenbtnwrapper{
     
-    padding: 0;
+    display:inline-block;
+    margin-right:5px;
     
 }
 .registreermenu{
