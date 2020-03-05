@@ -29,7 +29,7 @@ export class VacturesComponent implements OnInit {
 
   fillVacatures(){
     console.log("filling");
-    if(this.currentUser != null && this.currentUser.role == Role.Company){
+    if(this.currentUser != null && this.currentUser.role == Role.User){
       this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
        this.favorites = f;
        f.forEach(element => this.vacatures.push(new Favoriet(element.id, element.vacature)));

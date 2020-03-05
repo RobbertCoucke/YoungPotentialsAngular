@@ -104,9 +104,9 @@ private commonvalidators = [
 
      //stop here if form is invalid
      console.log(this.isStudent);
-       if (this.registerForm.invalid) {
-         return;
-    }
+       //if (this.registerForm.invalid) {
+         //return;
+   // }
 
     console.log(this.registerForm.controls.value);
 
