@@ -34,8 +34,8 @@ private passwordValidators = [
 ];
 
 private nameValidators = [
-  Validators.maxLength(250),
-  Validators.minLength(5),
+  Validators.maxLength(50),
+
 ];
 
 private commonvalidators = [
@@ -128,7 +128,7 @@ private commonvalidators = [
 
      this.authenticationService.register(regModel).subscribe(
             data => {
-                this.router.navigate([this.returnUrl]);
+                this.router.navigate([""]);
             },
             error => {
                 this.error = error;
