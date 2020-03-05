@@ -27,13 +27,13 @@ export class UploadComponent implements OnInit {
 
     let fileToUpload = <File>files[0];
     const formData = new FormData();
-    formData.append('file', fileToUpload, fileToUpload.name);
+    formData.append('file', fileToUpload);
     
     if(fileToUpload.size > 1024 * 1024 * 20 ) {
       console.log("Max toegelaten file groote is 20 mb.")
       return;
     }
-
+    console.log("posting");
     this.http.post('https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/upload', formData, {reportProgress: true, observe: 'events'})
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
@@ -42,6 +42,9 @@ export class UploadComponent implements OnInit {
           this.message = 'Upload success.';
           this.onUploadFinished.emit(event.body);
         }
+      }, 
+        error => {
+          console.log(error);
       });
   }
 }
