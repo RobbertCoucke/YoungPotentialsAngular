@@ -30,6 +30,8 @@ export class VacturesComponent implements OnInit {
   fillVacatures(){
     this.vacatures = [];
     console.log("filling");
+    console.log(this.currentUser.role);
+    console.log(Role.Company);
     if(this.currentUser != null && this.currentUser.role == Role.User){
       this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
        this.favorites = f;
@@ -40,9 +42,10 @@ export class VacturesComponent implements OnInit {
               this.vacatures.push(new Favoriet(null, element));
             }
           });
-        });
+          this.items = [];
         this.items = this.vacatures;
-        console.log(this.items);
+        });
+        
      
      });
       
