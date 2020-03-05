@@ -12,12 +12,14 @@ import { Vacature } from '@/_models/vacature';
   styleUrls: ['./vactures.component.scss']
 })
 export class VacturesComponent implements OnInit {
-  items : any[] = [];
+  items: any[] = [];
   currentUser: User;
   pageOfItems: Array<any>;
   vacatures: Favoriet[] = [];
   favorites: Favoriet[] = [];
   favoriteError = "liking and unliking offers will not be saved unless you login";
+
+  loading: boolean = true;
   
   constructor(private authenticationService : AuthenticationService,
               private vacatureService: VacatureService, private favoriteService: FavoritesService ) { 
@@ -37,6 +39,8 @@ export class VacturesComponent implements OnInit {
                this.vacatures.push(new Favoriet(null, element));
              }
            });
+           console.log("Hello :)");
+           console.log(this.vacatures);
            this.items = this.vacatures;
          });
       
@@ -58,9 +62,21 @@ export class VacturesComponent implements OnInit {
 
   // ChangePage
   onChangePage(pageOfItems: Array<any>) {
+    console.log("oncChange PAGE")
     // update current page of items
     this.pageOfItems = pageOfItems;
+    //If page of vacatures is loaded
+    if(pageOfItems.length != 0)
+    {
+      this.onLoad();
+    }
     console.log(this.pageOfItems);
+  }
+
+  //loader
+  onLoad() {
+    this.loading = false;
+    console.log("Load van de vacatures")
   }
 
   removeEventAbstract(favorite: Favoriet){

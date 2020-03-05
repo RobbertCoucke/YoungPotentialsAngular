@@ -1,9 +1,9 @@
-.page-item.number-item{
-    min-width: 40px;
+.loader{
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.section{
-    background-color: red;
-}
-.page-item.number-item.active{
-    background-color: red;
+.loadspinner{
+    width: 100px;
 }

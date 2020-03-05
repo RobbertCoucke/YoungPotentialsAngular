@@ -5,13 +5,18 @@
             <app-vacture-filter></app-vacture-filter>
         </div>
         <div class="text-center col-lg-7">
-            <ng-container *ngFor="let vacature of pageOfItems">
-                <ng-container *ngIf="vacature.vacature.description != null">
-                    <app-vacture-item [favorite]="vacature" (removeEvent)="removeEventAbstract($event)"   [currentUser]="currentUser" ></app-vacture-item>
-                </ng-container>
-            </ng-container>
             <div>
-                <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+                <ng-container *ngFor="let vacature of pageOfItems" >
+                    <ng-container *ngIf="vacature.vacature.description != null">
+                        <app-vacture-item [favorite]="vacature" (removeEvent)="removeEventAbstract($event)"   [currentUser]="currentUser" ></app-vacture-item>
+                    </ng-container>
+                </ng-container>
+                <div>
+                    <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+                </div>
+            </div>
+            <div *ngIf="loading" class="loader">
+                <img src="../../assets/images/loading.gif" alt="loading ..." class="loadspinner"/>
             </div>
         </div>
     </div>
