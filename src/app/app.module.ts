@@ -72,6 +72,7 @@ import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { AuthGuard } from './_guards';
 import { Role } from './_models';
 import { RegisterComponent } from './register/register.component';
+import { FaqComponent } from './faq/faq.component';
 
 const appRoutes: Routes = [
   { path: "", component: HomeComponent},
@@ -80,6 +81,7 @@ const appRoutes: Routes = [
   { path: "vacture-detail", component: VactureDetailComponent},
   { path: "profiel", component:ProfileComponent},
   { path: "profiel-bewerken", component:ProfileEditComponent},
+  { path: "faq", component:FaqComponent},
   //{ path: "inloggen", component:LoginComponent},
   { path: "registreren", component:RegisterComponent},
 
@@ -119,7 +121,8 @@ const appRoutes: Routes = [
     ReactiveFormComponent,
     AdminComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    FaqComponent
   ],
   imports: [
     ReactiveFormsModule,
