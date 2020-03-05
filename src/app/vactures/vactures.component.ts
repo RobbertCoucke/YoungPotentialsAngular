@@ -22,6 +22,8 @@ export class VacturesComponent implements OnInit {
   items: any[] = [];
   pageOfItems: Array<any>;
   loading: boolean = true;
+  error: boolean =false;
+  loadingFilter: boolean = true;
 
   // tslint:disable-next-line: no-trailing-whitespace
   
@@ -33,6 +35,7 @@ export class VacturesComponent implements OnInit {
 
   // tslint:disable-next-line: one-line
   fillVacatures(){
+    this.vacatures= [];
     console.log("filling");
     // tslint:disable-next-line: whitespace
     if(this.currentUser != null && this.currentUser.role === Role.Company){
@@ -45,8 +48,10 @@ export class VacturesComponent implements OnInit {
               this.vacatures.push(new Favoriet(null, element));
             }
           });
+          this.items = this.vacatures;
+          this.loadingFilter =true;
         });
-        this.items = this.vacatures;
+        
       });
     }
     else{
@@ -55,17 +60,28 @@ export class VacturesComponent implements OnInit {
           this.vacatures.push(new Favoriet(null, element));
         });
       this.items = this.vacatures;
+      this.loadingFilter =true;
       });
     }
   }
 
   onChangePage(pageOfItems: Array<any>){
+    console.log("On change page vacature")
+    console.log(pageOfItems)
     //update current page of items
     this.pageOfItems = pageOfItems;
     //If page of vacatures is loaded
     if(pageOfItems.length != 0)
     {
+      this.error=false;
       this.onLoad();
+    }
+    else
+    {
+      if(this.loading!=true)
+      {
+        this.error=true;
+      }
     }
   }
 
@@ -77,7 +93,6 @@ export class VacturesComponent implements OnInit {
 
   ngOnInit() {
     this.fillVacatures();
-     
   }
 
   filterVacatures(filterArr){
@@ -106,12 +121,30 @@ export class VacturesComponent implements OnInit {
       
     }
     this.items = this.vacatures;
+    console.log("FILTER: ")
+    console.log(this.items)
+
+    if(this.items.length == 0)
+    {
+      this.loading = false;
+      this.error = true;
+    }
+    else
+    {
+      this.loadingFilter = true;
+    }
   });
   }
 
 
 
   handleFilter(filterArr){
+    console.log("Handling filter");
+
+    this.loadingFilter=false;
+    this.error=false;
+    this.loading = true;
+
     if(filterArr === null){
       this.fillVacatures();
     }else{

@@ -3,7 +3,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-1">
-                  <i (click)="onLike()" class="material-icons icon">{{liked ? 'favorite' : 'favorite_border' }}</i>
+                  <i (click)="onLike()" class="material-icons icon likeVacature">{{liked ? 'favorite' : 'favorite_border' }}</i>
                 </div>
                 <div (click)="detailClick(vacature)" class="col-lg-9 textContainer">
                   <a [routerLink]="['/vacature-details', vacature.id]"><h5  class="rood">{{vacature.title}}</h5></a>

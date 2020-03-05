@@ -16,7 +16,7 @@ ul li {
     transition: transform .2s;
 }
 
-.btn-primary:hover
+.btn-primary:hover, .btn-primary:focus
 {
     transform: scale(1.1);
 }
@@ -33,4 +33,27 @@ ul li {
 .l{
     display: block;
     width: 100%;
+}
+
+.filterContainer{
+    display: inline-flex;
+}
+
+.filterContainer.filterStudiegebied{
+    cursor: pointer;
+}
+.filterbody{
+    min-height: 450px;
+}
+.filterTekst{
+    margin:0;
+    display: inline-flex;
+}
+.filterverwijderenwrapper{
+    margin-bottom: 15px;
+}
+.filterIcon{
+    width:25px;
+    margin-left: 0;
+    position: relative;
 }
