@@ -33,7 +33,7 @@ export interface Stad {
 @Component({
   selector: "app-reactive-form",
   templateUrl: "./reactive-form.component.html",
-  styleUrls: ["./reactive-form.component.css"]
+  styleUrls: ["./reactive-form.component.scss"]
 })
 export class ReactiveFormComponent implements OnInit {
   uploadVacForm: FormGroup; // Aanmaken formgroup om alle values van form in 1 object/group te stoppen
@@ -65,24 +65,15 @@ export class ReactiveFormComponent implements OnInit {
   maxDate: Date; // max datum datepicker
 
   /**
-   *  arrays die opgevuld zullen met data uit db/dummy data afhankelijk van user input
+   * @description Array met types
    */
-  // keuzeSTB: Studiegebied[];
-  keuzeO: Opleiding[];
-  keuzeA: Afstudeerrichting[];
-  keuzeK: Keuze[];
-
-  public edited = false;
-
   types: Array<any> = [
     { name: "Vacature", value: "Vacature" },
     { name: "Stage", value: "Stage" },
     { name: "Vrijwilligerswerk", value: "Vrijwilligerswerk" }
   ];
 
-  studiegebieden: any[] = [];
-
-  // ! einde dummy data
+  studiegebieden: any[] = []; // declaratie array voor in te laden studiegebieden
 
   constructor(
     private fb: FormBuilder,
@@ -120,42 +111,6 @@ export class ReactiveFormComponent implements OnInit {
       vacaturebestand: ["", Validators.required],
       einddatum: ["", Validators.required]
     });
-  }
-
-  /**
-   *
-   * @description Weergeven studiegebieden
-   *
-   */
-  testshowSTG() {
-    this.studiegebieden.forEach(element => {
-      //console.log(element.id + " " + element.studiegebied1);
-      console.log(element.opleiding);
-      // element.opleiding.forEach(element => {
-      //     console.log(element);
-      // });
-    });
-  }
-
-  /**
-   * @description vult de lijsten op basis van geselecteerd studiegebied
-   * @param opleiding geselecteerd studiegebied
-   */
-  // changeOpleidingDiv(studiegebied) {
-  //   if (this.selectedSTG == "handelswetenschappen en bedrijfskunde") {
-  //     this.keuzeA = this.AfstudeerrichtingenHantal;
-  //     this.keuzeO = this.opleidingenHantal;
-  //     this.keuzeK = this.KeuzesHantal;
-  //   } else if (this.selectedSTG == "biotechniek") {
-  //     this.keuzeA = this.AfstudeerrichtingBio;
-  //     this.keuzeO = this.opleidingenBio;
-  //     this.keuzeK = this.KeuzesBio;
-  //   }
-  //   this.selectedopleiding = undefined;
-  // }
-
-  changeOpleidingDiv(studiegebied) {
-    this.edited = true;
   }
 
   /**
@@ -205,37 +160,9 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   /**
-   * @description houdt de geselecteerde afstudeerrichtingen bij en post deze in de console
-   * @param event wanneer de selectie wordt aangepast
-   */
-  changeRatio(event: MatSelectChange) {
-    console.log(event.value);
-  }
-
-  onCheckboxChange(e) {
-    const checkArray: FormArray = this.uploadVacForm.get(
-      "checkArray"
-    ) as FormArray;
-
-    if (e.target.checked) {
-      checkArray.push(new FormControl(e.target.value));
-    } else {
-      let i: number = 0;
-      checkArray.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
-          checkArray.removeAt(i);
-          return;
-        }
-        i++;
-      });
-    }
-  }
-
-  /**
    * @description error messages die worden opgeroepen bij een invalid veld
    * @return een error message
    */
-
   getErrorMessageTitel() {
     return this.titel.hasError("required") ? "U moet een titel opgeven" : "";
   }
