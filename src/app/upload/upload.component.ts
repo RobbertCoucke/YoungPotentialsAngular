@@ -34,7 +34,7 @@ export class UploadComponent implements OnInit {
       return;
     }
 
-    this.http.post('http://localhost:60213/api/upload', formData, {reportProgress: true, observe: 'events'})
+    this.http.post('https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/upload', formData, {reportProgress: true, observe: 'events'})
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
           this.progress = Math.round(100 * event.loaded / event.total);

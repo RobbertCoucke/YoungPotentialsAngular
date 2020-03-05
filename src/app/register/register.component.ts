@@ -54,7 +54,6 @@ private commonvalidators = [
      }
 
   ngOnInit() {
-    //de nodige validatie toevoegen
     this.registerForm = this.formBuilder.group({
       myBedrijfCheckbox: [''],
       firstName: ['',this.nameValidators],

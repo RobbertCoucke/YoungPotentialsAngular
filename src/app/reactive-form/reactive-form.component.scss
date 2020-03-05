@@ -1,0 +1,55 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.btn-success {
+  background-color: #e50001;
+  border-color: #e50001;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+.example-h2 {
+  margin: 10px;
+}
+
+.btn-success:hover {
+  background-color: red;
+  border-color: red;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
+
+body {
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+::ng-deep .mat-select-content {
+  width: 2000px;
+  background-color: red;
+  font-size: 10px;
+}
+
+.card-header {
+  background-color: #e50001;
+  color: white;
+}

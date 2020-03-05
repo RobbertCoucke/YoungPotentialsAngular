@@ -1,0 +1,24 @@
+<p *ngIf="totaal.length === 0">Loading data ...</p>
+
+<div *ngIf="totaal.length > 0">
+<ng-select 
+  class="custom"
+  placeholder="selecteer het studiegebied of de opleidingen"
+  [items]="totaal"
+  [multiple]="true"
+  bindLabel="opleidingsnaam"
+  groupBy="studiegebied"
+  [selectableGroup]="true"
+  [closeOnSelect]="false"
+  bindValue="opleidingsnaam"
+  [(ngModel)]="selectedOpleiding">
+>
+<ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+        <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.studiegebied | uppercase}}
+    </ng-template>
+    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+        <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.opleidingsnaam}}
+    </ng-template>
+</ng-select>
+</div>
+
