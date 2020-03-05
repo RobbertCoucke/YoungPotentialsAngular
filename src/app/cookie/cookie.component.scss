@@ -1,0 +1,60 @@
+$gray: #343a40;
+$white: #fff;
+
+.sliding-popup-bottom{
+    height: auto; 
+    width: 100%; 
+    z-index: 1;
+    position: fixed;
+    background-color: $gray;
+    opacity: 0.95;
+    color: $white;
+
+    
+    animation: moveIn 1s;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+    // -moz-animation: moveIn 2s;
+    // -moz-animation-delay: 5s;
+    // -webkit-animation-name: moveIn;
+    // -webkit-animation-duration: 2s;
+    // -webkit-animation-delay: 5s;
+}
+
+@keyframes moveIn {
+    from {bottom: -50px;}
+    to {bottom: 0}
+}
+.popup-content.info{
+    margin:15px auto;
+    max-width:1100px;
+    display: flex;
+}
+#popup-buttons{
+    display: flex;
+    justify-content: space-between;
+    padding:20px 0;
+    min-width:300px;
+
+}
+
+.btn-primary
+{
+    box-shadow: none;
+    padding: 3px 40px;
+    border: none;
+    border-radius: 40px;
+    background: #E50001;
+    transition: transform .2s;
+}
+
+.btn-primary:hover, .btn-primary:focus
+{
+    transform: scale(1.1);
+}
+
+.hyperlink{
+    color: $white;
+    text-decoration: underline;
+    cursor: pointer;
+}
