@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@/_services';
 import { FavoritesService } from '@/_services/Favorites/favorites.service';
-import { User } from '@/_models';
+import { User, Role } from '@/_models';
 import { VacatureService } from '@/_services/Vacature/vacature.service';
 import { Favoriet } from '@/_models/favoriet';
 import { Vacature } from '@/_models/vacature';
@@ -26,7 +26,7 @@ export class VacturesComponent implements OnInit {
   }
 
   fillVacatures(){
-    if(this.currentUser != null){
+    if(this.currentUser != null && this.currentUser.role == Role.Company){
       this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
        this.favorites = f;
        f.forEach(element => this.vacatures.push(new Favoriet(element.id, element.vacature)));
