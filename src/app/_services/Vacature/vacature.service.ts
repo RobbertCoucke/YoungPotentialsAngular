@@ -38,4 +38,9 @@ export class VacatureService {
     return this.http.delete<any>(`http://youngpotentials.azurewebsites.net/offer/${vacatureId}`);
   }
 
+  getVacatureById(vacatureId: number)
+  {
+    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/${vacatureId}`);
+  }
+
 }

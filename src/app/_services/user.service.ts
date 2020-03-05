@@ -14,4 +14,22 @@ export class UserService {
     getById(id: number) {
         return this.http.get<User>(`${config.apiUrl}/users/${id}`);
     }
+// voor user registratie
+    register(register) {
+        return this.http.post(`${config.apiUrl}/register`, register);
+    }
+
+// originele lijn
+// register(user) {
+//     return this.http.post(`${config.apiUrl}/users/register`, user);
+// }
+
+
+// nog niet in gebruik
+    delete(id) {
+        return this.http.delete(`${config.apiUrl}/users/${id}`);
+    }
+
+
 }
+

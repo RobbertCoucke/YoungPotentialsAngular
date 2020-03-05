@@ -4,14 +4,13 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 import { User, Role } from '@/_models';
-
+//
+let users = JSON.parse(localStorage.getItem('users')) || [];
+//
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const users: User[] = [
-            { id: 1, email: 'admin', password: 'admin', firstName: 'Admin', lastName: 'User', role: Role.Admin },
-            { id: 2, email: 'user', password: 'user', firstName: 'Normal', lastName: 'User', role: Role.User }
-        ];
+        const { url, method, headers, body } = request;
 
         const authHeader = request.headers.get('Authorization');
         const isLoggedIn = authHeader && authHeader.startsWith('Bearer fake-jwt-token');
@@ -64,10 +63,51 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         .pipe(materialize())
         .pipe(delay(500))
         .pipe(dematerialize());
+//
+        function handleRoute() {
+            switch (true) {
+                case url.endsWith('/users/authenticate') && method === 'POST':
+                    return authenticate();
+                case url.endsWith('/users/register') && method === 'POST':
+                    return register();
+                default:
+                    // pass through any requests not handled above
+                    return next.handle(request);
+            }    
+        }
 
+        // route functions
+
+        function authenticate() {
+            const { username, password } = body;
+            const user = users.find(x => x.username === username && x.password === password);
+            if (!user) return error('Username or password is incorrect');
+            return ok({
+                id: user.id,
+                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                token: 'fake-jwt-token'
+            })
+        }
+
+        function register() {
+            const user = body
+
+            if (users.find(x => x.username === user.username)) {
+                return error('Username "' + user.username + '" is already taken')
+            }
+
+            user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
+
+            return ok();
+        }
+//
         // private helper functions
 
-        function ok(body) {
+        function ok(body?) {
             return of(new HttpResponse({ status: 200, body }));
         }
 

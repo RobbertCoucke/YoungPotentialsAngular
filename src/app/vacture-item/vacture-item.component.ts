@@ -35,8 +35,8 @@ export class VactureItemComponent implements OnInit {
 
   }
 
-  detailClick(){
-    //this.router.navigate
+  detailClick(vacature){
+    this.router.navigate(['/vacature-details'], { queryParams: { id: vacature.id }});
 
   }
 

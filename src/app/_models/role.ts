@@ -2,4 +2,5 @@
     User = 'User',
     Admin = 'Admin',
     Company = 'Company'
+
 }
