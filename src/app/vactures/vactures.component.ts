@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@/_services';
 import { FavoritesService } from '@/_services/Favorites/favorites.service';
-import { User } from '@/_models';
+import { User, Role } from '@/_models';
 import { VacatureService } from '@/_services/Vacature/vacature.service';
 import { Favoriet } from '@/_models/favoriet';
 import { Vacature } from '@/_models/vacature';
+import { StudieGebied } from '@/Model/StudieGebied';
 
 @Component({
   selector: 'app-vactures',
@@ -12,14 +13,17 @@ import { Vacature } from '@/_models/vacature';
   styleUrls: ['./vactures.component.scss']
 })
 export class VacturesComponent implements OnInit {
-  items: any[] = [];
+
   currentUser: User;
-  pageOfItems: Array<any>;
   vacatures: Favoriet[] = [];
   favorites: Favoriet[] = [];
+  // tslint:disable-next-line: quotemark
   favoriteError = "liking and unliking offers will not be saved unless you login";
-
+  items: any[] = [];
+  pageOfItems: Array<any>;
   loading: boolean = true;
+
+  // tslint:disable-next-line: no-trailing-whitespace
   
   constructor(private authenticationService : AuthenticationService,
               private vacatureService: VacatureService, private favoriteService: FavoritesService ) { 
@@ -27,56 +31,100 @@ export class VacturesComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    //this is fucked up code fix this shitty code 
-     if(this.currentUser != null){
-       this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
+  // tslint:disable-next-line: one-line
+  fillVacatures(){
+    console.log("filling");
+    // tslint:disable-next-line: whitespace
+    if(this.currentUser != null && this.currentUser.role === Role.Company){
+      this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
         this.favorites = f;
         f.forEach(element => this.vacatures.push(new Favoriet(element.id, element.vacature)));
-         this.vacatureService.getAllVacatures().subscribe(v => {
-           v.forEach(element => {
-             if(!this.checkIfVacatureAlreadyExists(element)){
-               this.vacatures.push(new Favoriet(null, element));
-             }
-           });
-           console.log("Hello :)");
-           console.log(this.vacatures);
-           this.items = this.vacatures;
-         });
-      
-      });
-       
-      
-       }
-       else{
         this.vacatureService.getAllVacatures().subscribe(v => {
-      v.forEach(element => {
-        if(!this.checkIfVacatureAlreadyExists(element)){
-          this.vacatures.push(new Favoriet(null, element));
+          v.forEach(element => {
+            if(!this.checkIfVacatureAlreadyExists(element)){
+              this.vacatures.push(new Favoriet(null, element));
             }
+          });
+        });
+        this.items = this.vacatures;
+      });
+    }
+    else{
+      this.vacatureService.getAllVacatures().subscribe(v => {
+        v.forEach(element => {
+          this.vacatures.push(new Favoriet(null, element));
         });
       this.items = this.vacatures;
       });
-      }
+    }
   }
 
-  // ChangePage
-  onChangePage(pageOfItems: Array<any>) {
-    console.log("oncChange PAGE")
-    // update current page of items
+  onChangePage(pageOfItems: Array<any>){
+    //update current page of items
     this.pageOfItems = pageOfItems;
     //If page of vacatures is loaded
     if(pageOfItems.length != 0)
     {
       this.onLoad();
     }
-    console.log(this.pageOfItems);
   }
 
   //loader
   onLoad() {
     this.loading = false;
     console.log("Load van de vacatures")
+  }
+
+  ngOnInit() {
+    this.fillVacatures();
+     
+  }
+
+  filterVacatures(filterArr){
+    this.vacatureService.filterVacatures(filterArr).subscribe(vacatures => {
+      
+      this.vacatures = [];
+    for(let i=0; i<vacatures.length;i++){
+      if(this.favorites.length > 0){
+        let inFavorites = null;
+        for(let j=0; j< this.favorites.length; j++){
+          if(vacatures[i].id===this.favorites[j].vacature.id){
+            inFavorites = this.favorites[j];
+          }
+
+        }
+
+        if(inFavorites){
+          this.vacatures.push(inFavorites);
+        }else{
+          this.vacatures.push(new Favoriet(null, vacatures[i]));
+        }
+      
+      }else{
+        this.vacatures.push(new Favoriet(null, vacatures[i]));
+      }
+      
+    }
+    this.items = this.vacatures;
+  });
+  }
+
+
+
+  handleFilter(filterArr){
+    if(filterArr === null){
+      this.fillVacatures();
+    }else{
+    if(this.currentUser != null){
+      this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
+        this.favorites = f;
+        this.filterVacatures(filterArr);
+      });
+    }else{
+      this.filterVacatures(filterArr);
+    }
+  }
+    
   }
 
   removeEventAbstract(favorite: Favoriet){

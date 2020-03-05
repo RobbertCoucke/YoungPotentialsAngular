@@ -62,7 +62,6 @@ export class NavbarComponent implements OnInit {
   useLanguage(language: string) {
     this.translate.use(language);
     this.changeLanguage(language);
-    console.log(getCookie("language"))
   }
 
   changeLanguage(language: string){

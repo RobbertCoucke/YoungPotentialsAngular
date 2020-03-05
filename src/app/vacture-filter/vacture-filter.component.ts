@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { StudiegebiedService } from '../_services/studiegebied/studiegebied.service'
 import { Studiegebied } from '@/_models/studiegebied';
 import { Opleiding } from '@/_models/Opleiding';
@@ -13,113 +13,205 @@ import { Keuze } from '@/_models/Keuze';
 })
 export class VactureFilterComponent implements OnInit {
 
-  selectedGebied: string;
+  
+  @Output() filterEvent: EventEmitter<Studiegebied[]> = new EventEmitter<Studiegebied[]>();
+
+  //selectedGebied: string;
   //array for all Studiegebied objects
   studiegebieds: Studiegebied[] = [];
   //array for all opleiding objects
-  opleidingsArray : Opleiding[] = [];
-  //array for all Afstudeerrichting object
-  afstudeerrichtinsgArray : Afstudeerrichting[] = [];
-  //array for all keuze object
-  keuzesArray : Keuze[] = [];
+  opleidingArray : Opleiding[] = [];
 
   selectedgebieds = [];
 
 
   
 
-  constructor(private studieService: StudiegebiedService) { }
+  constructor(private studieService: StudiegebiedService) { 
+    this.showData();
+  }
 
   ngOnInit() {
-    this.showData();
-    console.log(this.keuzesArray);
+    
   }
 
-  checkgebied(gebied) : boolean {
-    return gebied == "HWB"
+
+
+  
+  check (event) {
+    //get the selected value
+    var selectedVal = event.target.value;
+    //console.log(selectedVal);
+
+    //check if checkbox is checked to add or unchecked to delete
+    if(event.target.checked){
+
+      var selectedObject = this.findStudiegebied(selectedVal);
+       if(selectedObject === undefined){
+ 
+         selectedObject = this.findOpleiding(selectedVal);
+    
+        
+
+         //check if studiegebied is already in selected
+         let updateObject = this.selectedgebieds.find(s => s.id === selectedObject.id);
+
+         if(updateObject != undefined){    
+         let index = this.selectedgebieds.indexOf(updateObject);
+
+         updateObject.opleiding.push(selectedObject.opleiding[0]);
+         this.selectedgebieds[index] = updateObject;
+ 
+         }else{
+           this.selectedgebieds.push(selectedObject);
+           //console.log(this.studiegebieds);
+         }
+        
+       }else{
+         this.selectedgebieds.push(selectedObject);
+         
+
+       }
+
+      
+      
+
+    }
+    else{
+
+      
+      var length = this.selectedgebieds.length;
+      this.selectedgebieds = this.selectedgebieds.filter(s => s.id != selectedVal);
+      if(length === this.selectedgebieds.length){
+         var studiegebied =this.findOpleiding(selectedVal);
+         let updateObject = this.selectedgebieds.find(s => s.id === studiegebied.id);
+        
+         let index = this.selectedgebieds.indexOf(updateObject);
+        if(this.selectedgebieds[index].opleiding.length === 1){
+           this.selectedgebieds = this.selectedgebieds.filter(s => s.id != studiegebied.id);
+         }else{
+
+          var gebied = this.selectedgebieds[index];
+          var newStudiegebied = new Studiegebied(gebied.id, gebied.naam, gebied.kleur, this.selectedgebieds[index].opleiding.filter(o => o.id != selectedVal));
+           this.selectedgebieds[index] = newStudiegebied;
+         }
+
+      }
+      
+      
+
+    }
+
+
+     if(this.selectedgebieds.length < 1){
+       this.filterEvent.emit(null);
+     }else{
+     this.filterEvent.emit(this.selectedgebieds);
+     }
+     
+    
+
+
   }
+
+  // checkgebied(gebied) : boolean {
+  //   return gebied == "HWB"
+  // }
 
 
 
   s = {}; 
   o = {};
-  k = {};
 
   
    onSelectStudie(id) : void{
     const key = id;
     var selectedStudiegebied  = this.studiegebieds.filter(item => item.id == key);
-    var opleidings = selectedStudiegebied[0].opleidings;
+    var opleiding = selectedStudiegebied[0].opleiding;
     if(this.s[key] == null )
     {
-      this.s[key] = opleidings
+      this.s[key] = opleiding
     }else{
 
       this.s[key] = null;
     }
 
+
+    
+
   } 
 
+  /**
+   * @description verwijdert alle filters
+   */
+  removeSelected(){
+    this.selectedgebieds = [];
 
-  onSelectOpleiding(id){
-    const key = id;
-    var selectedOpleiding = this.opleidingsArray.filter(op => op.id == id);
-    var afstudeerrichtings = selectedOpleiding[0].afstudeerrichtings;
-    if(this.o[key] == null)
-    {
-      this.o[key] = afstudeerrichtings;
-    }else{
-      this.o[key] = null;
-    }
-
-  }
-
-  onSelectAfstudeerrichting(id)
-  {
-    const key = id;
-    var selectedAfstudeerrichting = this.afstudeerrichtinsgArray.filter(k => k.id == id);
-    var keuzes = selectedAfstudeerrichting[0].keuzes;
-    if(this.k[key] == null)
-    {
-      this.k[key] = keuzes;
-    }else{
-      this.k[key] = null;
-    }
-
+    this.filterEvent.emit(null);
   }
 
 
+  /**
+   * @description zoekt het studiegebiedsObject adhv het id
+   * @param studiegebiedId
+   * @return studiegebiedsObject
+   */
+  private findStudiegebied(id){
+      return this.studiegebieds.find(s => s.id === id);
 
-  checkboxHandler (event: any) {
-    //get the selected value
-    var selectedId = event.target.value;
-    console.log(selectedId);
-    //get the selected Studiegebied object from the array
-    //var selectedStudiegebied  = this.studiegebieds.filter(item => item.id == selectedId);
-    //get the opleidings of the object
-    //var opleidings = selectedStudiegebied[0].opleidings;
-    //get of the item checked or not
-    //var checked = event.target.checked;
-    /*
-    hier controleer ik of de object in de array bestaat of niet als het bestaat dan krijg ik de index of de object anders krijg ik -1
-    als het -1 voeg ik alle opleidings van geselecteerde studiegebied aan een dictionary om tonnen aan scherm,
-    anderes weet ik dat het object geselecteerd was en verwijder het van de dictionary.
-    */
-    //var object = this.selectedgebieds.indexOf(selectedStudiegebied[0])
-/*     if(checked)
-    {
-     if(object == -1)
-        {
-            this.selectedgebieds.push(selectedStudiegebied[0]);
-            this.s[selectedStudiegebied[0].id] = opleidings ;
+    }
+
+
+    /**
+   * @description zoekt het opleidingsobject met het daarbijhorende studiegebiedsobject
+   * @param opleidingId
+   * @return StudiegebiedObject met daarin het gezochte opleidingsObject
+   */
+    private findOpleiding(id){
+      for(let i=0; i<this.studiegebieds.length; i++){
+
+        for(let j=0; j<this.studiegebieds[i].opleiding.length; j++){
+        var object = this.studiegebieds[i].opleiding[j];
+
+          if(object.id === id){
+            var result = this.studiegebieds[i];
+            var test = new Studiegebied(result.id, result.naam, result.kleur, result.opleiding.filter(o => o.id === object.id));
+            //result.opleiding = result.opleiding.filter(o => o.id === object.id);
+
+            return test;
+          }
         }
-    }
-    else{
-        this.selectedgebieds = this.selectedgebieds.filter(item => item !== selectedStudiegebied[0]);
-        this.s[selectedStudiegebied[0].id] = null;
       }
-    } */ 
-  }
+      return null;
+      
+    }
+
+
+    /**
+   * @description kijkt het of id in de geselecteerde filters voorkomt
+   * @param id
+   * @return true => element bevindt zich in gekozen filters | false => element bevindt zich niet in gekozen filters.
+   */
+    isSelected(id){
+      for(let i=0; i<this.selectedgebieds.length; i++){
+        if(this.selectedgebieds[i].id===id){
+          return true;
+        }
+
+        for(let j=0; j<this.selectedgebieds[i].opleiding.length; j++){
+          var object = this.selectedgebieds[i].opleiding[j];
+          if(object.id === id){
+
+
+            return true;
+          }
+        }
+      }
+      return false;
+      
+    }
+
+
 
 
     //get Observable data from server
@@ -127,50 +219,26 @@ export class VactureFilterComponent implements OnInit {
       this.studieService.getAllStudieGebieds().subscribe((res) => {
         this.studiegebieds = this.mapJSONToModel(res);
       })
-      
     }
 
     //data mapping
     mapJSONToModel(res) : any[] {
       var list : Studiegebied[] = [];
       res.forEach(element => {
-        var opleidings: Opleiding[] = [];
-        var opleidingsArray = element.opleiding;
-        if(opleidingsArray.length != 0)
+        var opleiding: Opleiding[] = [];
+        var opleidingArray = element.opleiding;
+        if(opleidingArray.length != 0)
         {
-           opleidingsArray.forEach((o) => {
+           opleidingArray.forEach((o) => {
            var afstudeerrichtingsArray = o.afstudeerrichting;
-           var afstudeerrichtings : Afstudeerrichting[] = [];
-
-           if(afstudeerrichtingsArray.length != 0)
-           {
-                afstudeerrichtingsArray.forEach((a) => {
-                var keuzeArray = a.keuze;
-                var keuzes : Keuze[] = [];
-                if(keuzeArray.length != 0)
-                {
-                  keuzeArray.forEach((k) => {
-                    var keuzeModel = new Keuze(k.id, k.keuze1);
-                    keuzes.push(keuzeModel);
-                    this.keuzesArray.push(keuzeModel);
-                  })
-                  
-                }
-                
-                var afModel = new Afstudeerrichting(a.id,a.afstudeerrichtingNaam, keuzes);
-                afstudeerrichtings.push(afModel);
-                this.afstudeerrichtinsgArray.push(afModel);
-
-             })
-
-           }             
+           var afstudeerrichtings : Afstudeerrichting[] = [];            
            var op = new Opleiding(o.id, o.naamOpleiding, afstudeerrichtings);
-           opleidings.push(op);
-           this.opleidingsArray.push(op);
+           opleiding.push(op);
+           this.opleidingArray.push(op);
            });
 
         } 
-        var model = new Studiegebied(element.id, element.studiegebied1, element.kleur, opleidings);
+        var model = new Studiegebied(element.id, element.studiegebied1, element.kleur, opleiding);
         list.push(model);
       });
 
@@ -179,3 +247,4 @@ export class VactureFilterComponent implements OnInit {
 
 
   }
+

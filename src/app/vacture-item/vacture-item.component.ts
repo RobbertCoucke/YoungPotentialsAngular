@@ -35,8 +35,8 @@ export class VactureItemComponent implements OnInit {
 
   }
 
-  detailClick(){
-    //this.router.navigate
+  detailClick(vacature){
+    this.router.navigate(['/vacature-details'], { queryParams: { id: vacature.id }});
 
   }
 
@@ -53,6 +53,7 @@ export class VactureItemComponent implements OnInit {
       this.liked = true;
       if(this.currentUser){
         this.favorietService.addFavorite(this.currentUser.id, this.vacature.id).subscribe();
+        
       }
     }
   }

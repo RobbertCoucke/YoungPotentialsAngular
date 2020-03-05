@@ -11,6 +11,8 @@ export class VacatureService {
 
   getAllVacatures() {
     return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/getAll`);
+    
+    //return this.http.get<any>(`http://localhost:60213/offer/getAll`);
   }
 
   getAllVacaturesByCompany(companyId: number) {
@@ -26,12 +28,19 @@ export class VacatureService {
   }
 
   filterVacatures(filters: Object){
-    return this.http.post<any>(`http://youngpotentials.azurewebsites.net/offer/filter`,filters);
+    return this.http.post<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/filter`,{ids: filters});
+    
+    //return this.http.post<any>(`http://localhost:60213/offer/filter`,{ids: filters});
 
   }
 
   deleteVacature(vacatureId: number){
     return this.http.delete<any>(`http://youngpotentials.azurewebsites.net/offer/${vacatureId}`);
+  }
+
+  getVacatureById(vacatureId: number)
+  {
+    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/${vacatureId}`);
   }
 
 }

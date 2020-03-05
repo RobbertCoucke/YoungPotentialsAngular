@@ -17,7 +17,6 @@
     position: relative;
   }
   
-  
   .file.is-danger .file-cta {
     background-color: #E50001;
     border-color: transparent;
@@ -25,7 +24,7 @@
   }
   
   .file.is-danger:hover .file-cta, .file.is-danger.is-hovered .file-cta {
-    background-color: #E50001;
+    background-color: #ff1f1f;
     border-color: transparent;
     color: #fff;
   }
