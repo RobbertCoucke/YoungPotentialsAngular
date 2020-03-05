@@ -2,7 +2,7 @@
         <div class="card item">
             <div class="card-body">
               <div class="row">
-                <div class="col-lg-1">
+                <div *ngIf="showLike" class="col-lg-1">
                   <i (click)="onLike()" class="material-icons icon">{{liked ? 'favorite' : 'favorite_border' }}</i>
                 </div>
                 <div (click)="detailClick(vacature)" class="col-lg-9 textContainer">
@@ -13,9 +13,9 @@
               <hr>
               <div (click)="detailClick(vacature)" class="section">
                 <p>{{vacature.description.substring(0,200)}} ... </p>
-              <span class="badge badge-pill badge-danger label ">Handelwetenschappen</span>
-              <span class="badge badge-pill badge-danger label">Sociaal-agogisch werk</span>
-              <span class="badge badge-pill badge-danger label">Biotechniek</span>
+              </div>
+              <div *ngIf="showTrashcan" class="col-lg-1">
+                <i (click)="delete()" class="material-icons icon">delete</i>
               </div>
             </div>
 

@@ -93,6 +93,9 @@ import { NgSelectModule } from "@ng-select/ng-select";
 import { FormsModule } from "@angular/forms";
 import { SelectStudiegebiedenComponent } from "./select-studiegebieden/select-studiegebieden.component";
 import { NavormingComponent } from './navorming/navorming.component';
+import { VerifyComponent } from './verify/verify.component';
+import { CompanyVacaturesComponent } from './company-vacatures/company-vacatures.component';
+import { CompanyItemComponent } from './company-item/company-item.component';
 
 const appRoutes: Routes = [
   { path: "", component: HomeComponent},
@@ -151,7 +154,10 @@ const appRoutes: Routes = [
     FaqComponent,
     SelectStudiegebiedenComponent, 
     NavormingComponent,
-    JwPaginationComponent
+    JwPaginationComponent,
+    VerifyComponent,
+    CompanyVacaturesComponent,
+    CompanyItemComponent
   ],
   imports: [
     ReactiveFormsModule,
