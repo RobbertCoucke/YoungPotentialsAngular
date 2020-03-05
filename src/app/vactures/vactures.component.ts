@@ -5,6 +5,7 @@ import { User } from '@/_models';
 import { VacatureService } from '@/_services/Vacature/vacature.service';
 import { Favoriet } from '@/_models/favoriet';
 import { Vacature } from '@/_models/vacature';
+import { StudieGebied } from '@/Model/StudieGebied';
 
 @Component({
   selector: 'app-vactures',
@@ -24,32 +25,84 @@ export class VacturesComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    //this is fucked up code fix this shitty code 
-     if(this.currentUser != null){
-       this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
-        this.favorites = f;
-        f.forEach(element => this.vacatures.push(new Favoriet(element.id, element.vacature)));
-         this.vacatureService.getAllVacatures().subscribe(v => {
-           v.forEach(element => {
-             if(!this.checkIfVacatureAlreadyExists(element)){
-               this.vacatures.push(new Favoriet(null, element));
-             }
-           });
-         });
-      
-      });
-       
-      
-       }
-       else{
+  fillVacatures(){
+    if(this.currentUser != null){
+      this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
+       this.favorites = f;
+       f.forEach(element => this.vacatures.push(new Favoriet(element.id, element.vacature)));
         this.vacatureService.getAllVacatures().subscribe(v => {
-      v.forEach(element => {
-          this.vacatures.push(new Favoriet(null, element));
-        
-      });
-    });
+          v.forEach(element => {
+            if(!this.checkIfVacatureAlreadyExists(element)){
+              this.vacatures.push(new Favoriet(null, element));
+            }
+          });
+        });
+     
+     });
+      
+     
       }
+      else{
+       this.vacatureService.getAllVacatures().subscribe(v => {
+     v.forEach(element => {
+       
+         this.vacatures.push(new Favoriet(null, element));
+
+     });
+   });
+     }
+  }
+
+  ngOnInit() {
+    this.fillVacatures();
+     
+  }
+
+  filterVacatures(filterArr){
+    this.vacatureService.filterVacatures(filterArr).subscribe(vacatures => {
+      
+      this.vacatures = [];
+    for(let i=0; i<vacatures.length;i++){
+      if(this.favorites.length > 0){
+        let inFavorites = null;
+        for(let j=0; j< this.favorites.length; j++){
+          if(vacatures[i].id===this.favorites[j].vacature.id){
+            inFavorites = this.favorites[j];
+          }
+
+        }
+
+        if(inFavorites){
+          this.vacatures.push(inFavorites);
+        }else{
+          this.vacatures.push(new Favoriet(null, vacatures[i]));
+        }
+      
+      }else{
+        this.vacatures.push(new Favoriet(null, vacatures[i]));
+      }
+      
+    }
+  });
+  }
+
+
+
+  handleFilter(filterArr){
+    if(filterArr === null){
+      this.fillVacatures();
+    }else{
+    if(this.currentUser != null){
+      this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
+        this.favorites = f;
+        this.filterVacatures(filterArr);
+
+      })
+    }else{
+      this.filterVacatures(filterArr);
+    }
+  }
+    
   }
 
   removeEventAbstract(favorite: Favoriet){

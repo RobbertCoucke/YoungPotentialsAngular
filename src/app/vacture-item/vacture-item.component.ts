@@ -53,6 +53,7 @@ export class VactureItemComponent implements OnInit {
       this.liked = true;
       if(this.currentUser){
         this.favorietService.addFavorite(this.currentUser.id, this.vacature.id).subscribe();
+        
       }
     }
   }

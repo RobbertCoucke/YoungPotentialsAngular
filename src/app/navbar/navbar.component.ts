@@ -23,15 +23,6 @@ export class NavbarComponent implements OnInit {
       return this.currentUser && this.currentUser.role === Role.Admin;
   }
 
-  isLoggedIn()
-  {
-    
-  }
-
-  isLoggedOut()
-  {
-
-  }
 
   logout() {
       this.authenticationService.logout();
@@ -71,7 +62,6 @@ export class NavbarComponent implements OnInit {
   useLanguage(language: string) {
     this.translate.use(language);
     this.changeLanguage(language);
-    console.log(getCookie("language"))
   }
 
   changeLanguage(language: string){
