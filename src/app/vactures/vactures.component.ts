@@ -18,11 +18,16 @@ export class VacturesComponent implements OnInit {
   vacatures: Favoriet[] = [];
   favorites: Favoriet[] = [];
   // tslint:disable-next-line: quotemark
-  favoriteError = "liking and unliking offers will not be saved unless you login";
+  favoriteError = "liking and unliking offers will not be saved unless you login as a Student";
   items: any[] = [];
   pageOfItems: Array<any>;
+
+  /*
+   * Veld die bijhoudt indien de loading image moet worden getoond, hij start op true zodat wanneer de pagina inlaadt
+   * de load image wordt getoond totdat alle vacatures zijn ingeladen.
+  */
   loading: boolean = true;
-  error: boolean =false;
+  //Houdt bij wanneer de vacatures moeten getoond worden, indien er geen vacatures zijn wordt een foutmelding getoond.
   loadingFilter: boolean = true;
 
   // tslint:disable-next-line: no-trailing-whitespace
@@ -38,7 +43,7 @@ export class VacturesComponent implements OnInit {
     this.vacatures= [];
     console.log("filling");
     // tslint:disable-next-line: whitespace
-    if(this.currentUser != null && this.currentUser.role === Role.Company){
+    if(this.currentUser != null && this.currentUser.role === Role.User){
       this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
         this.favorites = f;
         f.forEach(element => this.vacatures.push(new Favoriet(element.id, element.vacature)));
@@ -48,7 +53,9 @@ export class VacturesComponent implements OnInit {
               this.vacatures.push(new Favoriet(null, element));
             }
           });
+          //Alle vacatures worden in de variabele items gekopieerd omdat deze wordt gebruikt bij het pagineren.
           this.items = this.vacatures;
+          //Indien alle vacatures geladen zijn word de div waarin de vacatures zitten zichtbaar gemaakt.
           this.loadingFilter =true;
         });
         
@@ -59,36 +66,39 @@ export class VacturesComponent implements OnInit {
         v.forEach(element => {
           this.vacatures.push(new Favoriet(null, element));
         });
+      //Alle vacatures worden in de variabele items gekopieerd omdat deze wordt gebruikt bij het pagineren.
       this.items = this.vacatures;
+      //Indien alle vacatures geladen zijn word de div waarin de vacatures zitten zichtbaar gemaakt.
       this.loadingFilter =true;
       });
     }
   }
 
+  /**
+   * @description Deze functie zorgt voor de vacatures op te delen in pagina's.
+   * @param pageOfItems De items de moeten gepagineerd worden.
+   */
   onChangePage(pageOfItems: Array<any>){
-    console.log("On change page vacature")
-    console.log(pageOfItems)
     //update current page of items
     this.pageOfItems = pageOfItems;
-    //If page of vacatures is loaded
-    if(pageOfItems.length != 0)
+
+    //Controle indien pageOfItems niet leeg is.
+    if(pageOfItems.length !== 0)
     {
-      this.error=false;
-      this.onLoad();
+      //Indien niet leeg, afbeelden van de lijst met vacatures.
+      this.loadingFilter = true;
+      //Verbergen van de loader image.
+      this.loading = false;
     }
     else
     {
-      if(this.loading!=true)
+      //Indien leeg, controleren als er nog wordt geladen
+      if(this.loading !== true)
       {
-        this.error=true;
+        //Indien het laden klaar is, wordt een foutmelding getoond dat er geen vacatures zijn.
+        this.loadingFilter = false;
       }
     }
-  }
-
-  //loader
-  onLoad() {
-    this.loading = false;
-    console.log("Load van de vacatures")
   }
 
   ngOnInit() {
@@ -120,17 +130,19 @@ export class VacturesComponent implements OnInit {
       }
       
     }
+    //Alle vacatures worden in de variabele items gekopieerd omdat deze wordt gebruikt bij het pagineren.
     this.items = this.vacatures;
-    console.log("FILTER: ")
-    console.log(this.items)
 
+    //Controle om te checken als items leeg is.
     if(this.items.length == 0)
     {
+      //Indien leeg, wordt loader image verborgen en wordt er een foutmelding getoond dat er geen vacatures zijn.
       this.loading = false;
-      this.error = true;
+      this.loadingFilter = false;
     }
     else
     {
+      //Indien niet leeg wordt de lijst van vacatures afgebeeld.
       this.loadingFilter = true;
     }
   });
@@ -139,10 +151,9 @@ export class VacturesComponent implements OnInit {
 
 
   handleFilter(filterArr){
-    console.log("Handling filter");
-
-    this.loadingFilter=false;
-    this.error=false;
+    //Indien een filter wordt aangeklikt wordt de lijst met vacatures onzichtbaar gemaakt.
+    this.loadingFilter = false;
+    //De load image wordt getoond wanneer een filter wordt aangeklikt.
     this.loading = true;
 
     if(filterArr === null){
