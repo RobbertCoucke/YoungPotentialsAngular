@@ -20,6 +20,10 @@ import { ReactiveFormComponent } from "./reactive-form/reactive-form.component";
 import { SollicitatieDialogComponent } from "./sollicitatie-dialog/sollicitatie-dialog.component";
 import { UploadComponent } from "./upload/upload.component";
 
+// Paging
+import { JwPaginationComponent } from 'jw-angular-pagination';
+
+
 // used to create fake backend
 import { fakeBackendProvider } from "./_helpers";
 
@@ -40,10 +44,12 @@ import { MatInputModule } from "@angular/material/input";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatCardModule } from "@angular/material/card";
 import { MatExpansionModule } from "@angular/material/expansion";
-import { MatStepperModule } from "@angular/material/stepper";
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatIconModule } from "@angular/material/icon";
-import { MatDialogModule } from "@angular/material/dialog";
+
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 /**
  * * Anuglar Bootstrap imports
@@ -86,6 +92,7 @@ import { FaqComponent } from './faq/faq.component';
 import { NgSelectModule } from "@ng-select/ng-select";
 import { FormsModule } from "@angular/forms";
 import { SelectStudiegebiedenComponent } from "./select-studiegebieden/select-studiegebieden.component";
+import { NavormingComponent } from './navorming/navorming.component';
 
 const appRoutes: Routes = [
   { path: "", component: HomeComponent},
@@ -97,8 +104,10 @@ const appRoutes: Routes = [
   { path: "faq", component:FaqComponent},
 
   //{ path: "inloggen", component:LoginComponent},
-  { path: "registreren", component: RegisterComponent },
-  { path: "favorieten", component: FavorietenComponent },
+
+  { path: "registreren", component:RegisterComponent},
+  { path: "favorieten", component:FavorietenComponent},
+  { path: "navorming", component:NavormingComponent},
 
   {
     path: "",
@@ -140,7 +149,9 @@ const appRoutes: Routes = [
     SollicitatieDialogComponent,
     UploadComponent,
     FaqComponent,
-    SelectStudiegebiedenComponent
+    SelectStudiegebiedenComponent, 
+    NavormingComponent,
+    JwPaginationComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -161,6 +172,7 @@ const appRoutes: Routes = [
     MatDialogModule,
     MatIconModule,
     NgSelectModule,
+    MatPaginatorModule,
     FormsModule,
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot(),
@@ -172,8 +184,7 @@ const appRoutes: Routes = [
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
-      }
-    }),
+      }}),
     TranslateCacheModule.forRoot({
       cacheService: {
         provide: TranslateCacheService,

@@ -4,16 +4,16 @@
         <div class="col-lg-5">
             <app-vacture-filter  (filterEvent)="handleFilter($event)" ></app-vacture-filter>
         </div>
-        <div class="col-lg-7">
-            <p style="color: red;" *ngIf="!currentUser">{{favoriteError}}</p>
-
-            <ng-container *ngFor="let vacature of vacatures">
-            <ng-container *ngIf="vacature.vacature.description != null">
-            <app-vacture-item [favorite]="vacature" (removeEvent)="removeEventAbstract($event)"   [currentUser]="currentUser" ></app-vacture-item>
+        <div class="text-center col-lg-7">
+            <ng-container *ngFor="let vacature of pageOfItems">
+                <ng-container *ngIf="vacature.vacature.description != null">
+                    <app-vacture-item [favorite]="vacature" (removeEvent)="removeEventAbstract($event)"   [currentUser]="currentUser" ></app-vacture-item>
                 </ng-container>
-
-        </ng-container>
-    </div>
+            </ng-container>
+            <div>
+                <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+            </div>
+        </div>
     </div>
 </div>
 

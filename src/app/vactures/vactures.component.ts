@@ -18,6 +18,8 @@ export class VacturesComponent implements OnInit {
   vacatures: Favoriet[] = [];
   favorites: Favoriet[] = [];
   favoriteError = "liking and unliking offers will not be saved unless you login";
+  items : any[] = [];
+  pageOfItems: Array<any>;
   
   constructor(private authenticationService : AuthenticationService,
               private vacatureService: VacatureService, private favoriteService: FavoritesService ) { 
@@ -26,6 +28,7 @@ export class VacturesComponent implements OnInit {
   }
 
   fillVacatures(){
+    console.log("filling");
     if(this.currentUser != null && this.currentUser.role == Role.Company){
       this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
        this.favorites = f;
@@ -37,6 +40,7 @@ export class VacturesComponent implements OnInit {
             }
           });
         });
+        this.items = this.vacatures;
      
      });
       
@@ -49,8 +53,14 @@ export class VacturesComponent implements OnInit {
          this.vacatures.push(new Favoriet(null, element));
 
      });
+     this.items = this.vacatures;
    });
      }
+  }
+
+  onChangePage(pageOfItems: Array<any>){
+    //update current page of items
+    this.pageOfItems = pageOfItems;
   }
 
   ngOnInit() {
@@ -83,6 +93,7 @@ export class VacturesComponent implements OnInit {
       }
       
     }
+    this.items = this.vacatures;
   });
   }
 
