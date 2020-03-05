@@ -28,6 +28,7 @@ export class VacturesComponent implements OnInit {
   }
 
   fillVacatures(){
+    this.vacatures = [];
     console.log("filling");
     if(this.currentUser != null && this.currentUser.role == Role.Company){
       this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
@@ -41,6 +42,7 @@ export class VacturesComponent implements OnInit {
           });
         });
         this.items = this.vacatures;
+        console.log(this.items);
      
      });
       
@@ -53,7 +55,9 @@ export class VacturesComponent implements OnInit {
          this.vacatures.push(new Favoriet(null, element));
 
      });
+     this.items = [];
      this.items = this.vacatures;
+     console.log(this.items);
    });
      }
   }
