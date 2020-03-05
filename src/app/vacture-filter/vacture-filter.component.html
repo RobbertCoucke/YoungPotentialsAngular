@@ -7,7 +7,7 @@
         <hr>
         <div id="list1" class="dropdown-check-list" tabindex="100"></div>
 
-      <ul class="row"><h6>STUDIEGEBIEDEN:</h6>  
+      <ul class="row"><h6>{{"filter.studiegebieden" | translate}}</h6>  
             <div *ngFor="let gebied of studiegebieds" class="l">
                 <li>
                     <input class="input" type="checkbox" value="{{gebied.id}}" (change)="check($event)" name="studieGebiedVives" [checked]="isSelected(gebied.id)" /> 
@@ -40,7 +40,7 @@
                    
       </div>
     <div class="text-center">
-          <button  class="btn btn-primary" (click)="removeSelected()">Filter verwijderen</button>
+          <button  class="btn btn-primary" (click)="removeSelected()">{{"filter.filterverwijderen" | translate}}</button>
     </div>
   </div>
 </div>

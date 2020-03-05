@@ -152,12 +152,11 @@ private commonvalidators = [
 
   studentClicked(){
     this.isStudent = true;
-    this.title = "Make a student account"
+    
   }
 
   bedrijfClicked() {
     this.isStudent = false;
-    this.title = "Make a Company account"
   }
 
 

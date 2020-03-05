@@ -3,13 +3,107 @@
         "title": "Vertaal demo",
         "text": "Dit is een simpele demonstratie app voor ngx-translate"
     },
+
     "navbar": {
         "overview": "Vacatures",
+        "favorieten": "Favorieten",
         "about": "Over ons",
         "studying": "Verder studeren",
         "research": "Navorming",
         "contact": "Contact",
         "signup": "Registreren",
         "login": "Inloggen"
+    },
+
+    "home": {
+        "titel": "Wij brengen aanstormend talent in contact met het werkveld én omgekeerd!",
+        "subtitel": "Digitaal rekruteringsplatform voor studenten Katholieke Hogeschool VIVES en bedrijven | organisaties",
+        "vacatures": "Vacatures",
+        "stages": "Stages",
+        "jobstudent": "Jobstudent",
+        "verderst": "Verder studeren",
+        "navorming": "Navorming"
+    },
+
+    "footer": {
+        "subtitel": "Wij brengen aanstormend talent in contact met het werkveld én omgekeerd!",
+
+        "titelbedr": "Bedrijven",
+        "vaclink": "Vacature toevoegen",
+
+        "titelstud": "Studenten",
+        "overzichtvac": "Overzicht vacatures",
+        "stages": "Stages",
+        "jobstudent": "Jobstudent",
+        "verderst": "Verder studeren",
+        "navorming": "Navorming"
+    },
+
+    "filter": {
+        "studiegebieden": "STUDIEGEBIEDEN:",
+        "filterverwijderen": "Filter verwijderen"
+    },
+
+    "register":{
+        "titel1": "Maak hier uw account!",
+        "titel2": "Maak een bedrijfsaccount",
+
+        "registerstud": "Maak een studentenaccount aan",
+        "registerbedr": "Maak een bedrijfsnaccount aan",
+
+        "voornaamreq": "Voornaam invullen is verplicht!",
+        "voornaam": "Voornaam",
+        "famnaamreq": "Familienaam invullen is verplicht!",
+        "famnaam": "Familienaam",
+        "bedrijfsnaamreq": "Bedrijfsnaam invullen is verplicht!",
+        "bedrijfsnaam": "Bedrijfsnaam",
+        "emailreq": "Email invullen is verplicht!",
+        "emailpatern": "Gelieve een geldig emailadres in te vullen!",
+        "email": "Emailadres",
+        "nummer": "Gsm nummer",
+        "postcode": "Postcode",
+        "stadreq": "Stad invullen is verplicht!",
+        "stad": "Stad",
+        "bedrijfsbeschrijvingreq": "Bedrijfsbeschrijving invullen is verplicht!",
+        "bedrijfsbeschrijving": "Bedrijfsbeschrijving",
+        "adres": "Adres",
+        "wachtwoordreq": "Wachtwoord invullen is verplicht!",
+        "wachtwoordpatern": "Gelieve een wachtwoord met minimum 6 karakters in te vullen!",
+        "wachtwoord": "Wachtwoord",
+        "herhaalwwreq": "Wachtwoord herhalen is verplicht!",
+        "herhaalwwpatern": "Wachtwoorden moeten gelijk zijn aan elkaar!",
+        "herhaalww": "Wachtwoord herhalen",
+
+        "registreer": "REGISTREER"
+    },
+
+    "faq":{
+        "titelstudent": "Student | Werkzoekende",
+        "titelbedrijf": "Bedrijf",
+        "titelalgemeen": "Algemeen",
+
+        "vraagaccstud": "V: Waarom heb ik een account nodig als student / werkzoekende?",
+        "antwoordaccstud": "A: Als u een account aanmaakt, kunt u vacatures en/of stages toevoegen aan uw favoriete lijst. U kunt ook solliciteren via YoungPotentials en uw CV in uw profiel laten opslaan.",
+
+        "vraagfilter": "V: Hoe kan ik de vacatures filteren?",
+        "antwoordfilter": "A: Wanneer u op de vacature webpagina bent, is er een filtercomponent. Klik op het studiegebied waarop u wilt filteren. Als u uw filterkeuze wilt beperken, kunt u ook filteren op de subcategorie van dat studiegebied als die er is.",
+        "antwoordfilter2": "Iets om te onthouden: de studiegebieden zijn verdeeld in bachelor en graduaat graad.",
+
+        "vraagapply": "V: hoe kan ik solliciteren voor een vacature?",
+        "antwoordapply": "A: Eerst en vooral moet je ingelogd zijn. Zodra u bent ingelogd kunt u op de vacature klikken die u wilt aanvragen. Als u dat hebt gedaan verschijnt er een detailscherm van de offerte. In dit venster heeft u de optie 'solliciteer nu'. Na het klikken op die knop wordt u doorgestuurd naar een formulier waar u de stappen moet volgen.",
+
+        "vraagaccbedr": "V: Waarom heb ik als bedrijf een account nodig?",
+        "antwoordaccbedr": "A: De enige manier om een vacature/stage te uploaden is door een account aan te maken.",
+
+        "vraaguploadvac": "V: Hoe kan ik een vacature uploaden?",
+        "antwoorduploadvac": "A: Klik in het navigatiemenu of onderaan de webpagina op de knop 'vacature toevoegen'. Daarna wordt u doorgestuurd naar een invulformulier. Volg de stappen en vul alle verplichte velden in.",
+        "antwoorduploadvac2": "Upload de vacature naar het formulier door op de knop 'bladeren' te klikken. Na het uploaden kunt u selecteren tot welk studiegebied en welke subcategorie (indien aanwezig) de vacature behoort. U moet ook het type vacature selecteren en een datum instellen voor hoe lang de aanbieding zichtbaar zal zijn op YoungPotentials. De maximale tijd is zes maanden. Als u wilt dat deze langer online staat, moet u de vacature opnieuw uploaden.",
+        "antwoorduploadvac3": "Als dit alles klaar is, kunt u op verzenden klikken.",
+
+        "vraagopwebsite": "V: Waarom staat mijn geüploade vacature niet op de website?",
+        "antwoordopwebsite": "A: Als u voor de eerste keer uploadt, moeten we eerst uw account en vacature controleren. Zodra alles in orde is, vindt u uw vacature op de vacature pagina. Als uw account is geverifieerd, kunt u meteen een vacature uploaden.",
+
+        "vraagww": "V: Wat moet ik doen als ik mijn wachtwoord ben vergeten?",
+        "antwoordww": "A: Nog steeds in ontwikkeling dus maak deze zin af als dat deel klaar is..."
     }
 }

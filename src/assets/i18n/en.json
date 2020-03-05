@@ -5,11 +5,105 @@
     },
     "navbar": {
         "overview": "Offer",
+        "favorieten": "Favorits",
         "about": "About us",
         "studying": "Pursue studies",
         "research": "Research",
         "contact": "Contact",
         "signup": "Sign up",
         "login": "Log in"
+    },
+
+    "home": {
+        "titel": "We bring up-and-coming talent into contact with the work field and vice versa!",
+        "subtitel": "Digital recruitment platform for students at VIVES University of Applied Sciences and companies | organizations",
+        "vacatures": "Job offers",
+        "stages": "Internships",
+        "jobstudent": "Student jobs",
+        "verderst": "Pursue studies",
+        "navorming": "Research" 
+    },
+
+    "footer": {
+        "subtitel": "We bring up-and-coming talent into contact with the work field and vice versa!",
+
+        "titelbedr": "Companies",
+        "vaclink": "Add job offer",
+
+        "titelstud": "Students",
+        "overzichtvac": "Overview job offers",
+        "stages": "Internships",
+        "jobstudent": "Student jobs",
+        "verderst": "Pursue studies",
+        "navorming": "Research"
+    },
+
+    "filter": {
+        "studiegebieden": "STUDY AREAS:",
+        "filterverwijderen": "Remove filter"
+    },
+
+    "register":{
+        "titel1": "Make here your account!",
+        "titel2": "Make a company account",
+
+        "registerstud": "Create a student account",
+        "registerbedr": "Create a company account",
+
+        "voornaamreq": "First name is required!",
+        "voornaam": "First name",
+        "famnaamreq": "Family name is required!",
+        "famnaam": "Family name",
+        "bedrijfsnaamreq": "Company name is required!",
+        "bedrijfsnaam": "Company name",
+        "emailreq": "Email is required!",
+        "emailpatern": "Please fill in a valid email address!",
+        "email": "Email address",
+        "nummer": "Phone number",
+        "postcode": "Zip code",
+        "stadreq": "City is required!",
+        "stad": "City",
+        "bedrijfsbeschrijvingreq": "Company description is required!",
+        "bedrijfsbeschrijving": "Company description",
+        "adres": "Address",
+        "wachtwoordreq": "Password is required!",
+        "wachtwoordpatern": "Please enter a password with a minimum of 6 characters!",
+        "wachtwoord": "Password",
+        "herhaalwwreq": "Password repeat is required!",
+        "herhaalwwpatern": "Passwords must be the same!",
+        "herhaalww": "Repeat password",
+
+        "registreer": "REGISTER"
+    },
+
+    "faq":{
+        "titelstudent": "Student | Job seeker",
+        "titelbedrijf": "Company",
+        "titelalgemeen": "General",
+
+        "vraagaccstud": "Q: Why do I need an account as a student / job seeker?",
+        "antwoordaccstud": "A: If you create an account you can add job offers and/or internships to your favorite list. You can also apply for the job through YoungPotentials and get your CV saved in your profile.",
+
+        "vraagfilter": "Q: how do I filter the job offers?",
+        "antwoordfilter": "A: When you are on the offer webpage there is a filter component. Click on the study area you want to filter on. If you want to reduce your filter selection, you can also filter on the subcategory of that study area if there one.",
+        "antwoordfilter2": "Something to keep in mind: the study areas are devided in bachelor and graduate degree.",
+
+        "vraagapply": "Q: how can I apply for the job offer?",
+        "antwoordapply": "A: First of al you need to be logged in. Once you are logged in you can click on the offer you want to apply for. When you have done that a detail window of the offer wil pop up. In this window you have the option button 'apply now'. After clicking on that button  you will be redirected to a form where you have to follow the steps.",
+
+        "vraagaccbedr": "Q: Why do I need an account as a company?",
+        "antwoordaccbedr": "A: The only way to upload a job offer/internship is by creating an account.",
+
+        "vraaguploadvac": "Q: How do I upload a job offer?",
+        "antwoorduploadvac": "A: Click in the navigation menu or on the bottom of the webpage on the 'add offer' button. After that you will be redirected to a fill in form. Follow the steps and fill in all the required fields.",
+        "antwoorduploadvac2": "Upload the offer to the form by clicking on the 'browse' button. After uploading you can select to which study area and subcategory (if there is any) the offer belongs. You also have to select the type of offer and set a date for how long the offer will be visable on YoungPotentials. The maximum time is six months. If you want it to be longer you have to re-upload the offer.",
+        "antwoorduploadvac3": "When this is all done you can click on send.",
+
+        "vraagopwebsite": "Q: Why is my uploaded job offer not on the website?",
+        "antwoordopwebsite": "A: If you upload for the first time we have to verify your account and job offer first. Once everything is fine you will find your job offer on the offer webpage. When your account has been verified you will be able to upload job offers right away.",
+
+        "vraagww": "Q: What to do when I forgot my password?",
+        "antwoordww": "A: Still in development so complete this sentence when that part is done..."
     }
+
 }
