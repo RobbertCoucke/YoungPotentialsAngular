@@ -54,6 +54,7 @@ private commonvalidators = [
      }
 
   ngOnInit() {
+
     this.registerForm = this.formBuilder.group({
       myBedrijfCheckbox: [''],
       firstName: ['',this.nameValidators],
@@ -91,16 +92,6 @@ private commonvalidators = [
       }
     }) 
 
-    /* if(this.isStudent)
-    {
-      this.registerForm.get('companyName').setValidators(this.nameValidators.concat(Validators.required));
-        this.registerForm.get('description').setValidators(this.commonvalidators);
-        this.registerForm.get('url').setValidators(this.commonvalidators);
-    }
-    else{
-      this.registerForm.get('firstName').setValidators(this.nameValidators.concat(Validators.required));
-        this.registerForm.get('lastName').setValidators(this.nameValidators.concat(Validators.required));
-    } */
   }
 
   get registerformControls() { return this.registerForm.controls; }

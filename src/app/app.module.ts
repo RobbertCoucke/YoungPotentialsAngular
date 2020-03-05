@@ -79,6 +79,8 @@ import { AuthGuard } from './_guards';
 import { Role } from './_models';
 import { RegisterComponent } from './register/register.component';
 import { FavorietenComponent } from './favorieten/favorieten.component';
+import { FaqComponent } from './faq/faq.component';
+
 
 const appRoutes: Routes = [
   { path: "", component: HomeComponent},
@@ -87,6 +89,7 @@ const appRoutes: Routes = [
   { path: "vacature-details/:id", component: VactureDetailComponent},
   { path: "profiel", component:ProfileComponent},
   { path: "profiel-bewerken", component:ProfileEditComponent},
+  { path: "faq", component:FaqComponent},
   //{ path: "inloggen", component:LoginComponent},
   { path: "registreren", component:RegisterComponent},
   { path: "favorieten", component:FavorietenComponent},
@@ -130,7 +133,9 @@ const appRoutes: Routes = [
     FavorietenComponent,
     RegisterComponent,
     SollicitatieDialogComponent,
-    UploadComponent
+    UploadComponent,
+    FaqComponent
+
   ],
   imports: [
     ReactiveFormsModule,
