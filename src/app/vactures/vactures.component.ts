@@ -29,9 +29,7 @@ export class VacturesComponent implements OnInit {
 
   fillVacatures(){
     this.vacatures = [];
-    console.log("filling");
-    console.log(this.currentUser.role);
-    console.log(Role.Company);
+  
     if(this.currentUser != null && this.currentUser.role == Role.User){
       this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
        this.favorites = f;

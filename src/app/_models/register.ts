@@ -12,7 +12,7 @@ export class Register {
     password: string;
     telephone: string;
     city: string;
-    zipCode: number;
+    zipCode: string;
     address: string;
     isStudent: boolean;
 

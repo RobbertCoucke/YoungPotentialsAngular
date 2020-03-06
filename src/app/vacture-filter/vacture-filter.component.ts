@@ -25,7 +25,7 @@ export class VactureFilterComponent implements OnInit {
   selectedgebieds = [];
 
 
-  
+  //TODO add types
 
   constructor(private studieService: StudiegebiedService) { 
     this.showData();
