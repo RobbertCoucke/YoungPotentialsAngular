@@ -1,138 +1,133 @@
-/* Declaraties colors */ 
+/* Declaraties colors */
 
-$rood:#e50001;
+$rood: #e50001;
 $wit: white;
 $grijs: gray;
 
-
 /* CSS */
 
-
-#navbarRegistreerDropdown{
-    justify-content: flex-end;
+#navbarRegistreerDropdown {
+  justify-content: flex-end;
 }
 
-.vives_logo{
-    color: $wit;
-    width: 50px;
-    height: 60px;
-    background-image: url("../../assets/images/vives_logo.png");
-    background-size: 50px;
-    background-repeat: no-repeat;
-    text-align: center;
-    margin: 4px 20px 0 10px;
-    display: block;
+.vives_logo {
+  color: $wit;
+  width: 50px;
+  height: 60px;
+  background-image: url("../../assets/images/vives_logo.png");
+  background-size: 50px;
+  background-repeat: no-repeat;
+  text-align: center;
+  margin: 4px 20px 0 10px;
+  display: block;
 }
 
-.navbar-toggler.hamburger{
-    border-color: transparent;
+.navbar-toggler.hamburger {
+  border-color: transparent;
 }
 
 .flex {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
 }
 
 .flex-child {
-    -webkit-box-flex: 1 1 auto;
-    -moz-box-flex:  1 1 auto;
-    -webkit-flex:  1 1 auto;
-    -ms-flex:  1 1 auto;
-    flex:  1 1 auto;
-    padding-right: 5px;
+  -webkit-box-flex: 1 1 auto;
+  -moz-box-flex: 1 1 auto;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding-right: 10px;
 }
 
-.registrerenbtnwrapper{
-    
-    display:inline-block;
-    margin-right:5px;
-    
+.registrerenbtnwrapper {
+  display: inline-block;
+  margin-right: 5px;
 }
-.registreermenu{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 265px;
-    margin-right:20px;
+.registreermenu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 265px;
+  margin-right: 20px;
 }
-.registreerdiv{
-    display: flex;
-    width: 210px;
-    justify-content: space-between;
+.registreerdiv {
+  display: flex;
+  width: 210px;
+  justify-content: space-between;
 }
 
-.nav-link.registrerenbtn{
-    border-radius: 20px;
-    background-color: $rood;
-    color: $wit;
-    padding: 0px 15px;
-    line-height: 28px;
-    transition: transform .2s;
+.nav-link.registrerenbtn {
+  border-radius: 20px;
+  background-color: $rood;
+  color: $wit;
+  padding: 0px 15px;
+  line-height: 28px;
+  transition: transform 0.2s;
 }
 
-
-.nav-link.registrerenbtn:hover{
-    color: $wit;
-    transform: scale(1.1);
+.nav-link.registrerenbtn:hover {
+  color: $wit;
+  transform: scale(1.1);
 }
-.nav-link.registrerenbtn:focus{
-    outline: 1px dotted $grijs;
-    color: $wit;
-    text-decoration: underline;
-}
-
-.nav-link.taalselect{
-    background-color: $grijs;
-    border-radius: 50px;
-    font-size: 12px;
-    color: $wit;
-    width: 34px;
-    text-align: center;
-}
-.nav-link.taalselect::after{
-    display: none;
+.nav-link.registrerenbtn:focus {
+  outline: 1px dotted $grijs;
+  color: $wit;
+  text-decoration: underline;
 }
 
-.nav-link.taalselect:hover{
-    color: $wit;
-    text-decoration: underline;
+.nav-link.taalselect {
+  background-color: $grijs;
+  border-radius: 50px;
+  font-size: 12px;
+  color: $wit;
+  width: 34px;
+  text-align: center;
 }
-.nav-link.taalselect:focus{
-    outline: 1px dotted $grijs;
-    color: $wit;
-    text-decoration: underline;
+.nav-link.taalselect::after {
+  display: none;
 }
-.dropdown-taalselect{
-    width: 50px;
-    min-width:0;
+
+.nav-link.taalselect:hover {
+  color: $wit;
+  text-decoration: underline;
 }
-.dropdown-taal{
-    padding: 2.5px 5px;
+.nav-link.taalselect:focus {
+  outline: 1px dotted $grijs;
+  color: $wit;
+  text-decoration: underline;
 }
-.wrappertaalmenu{
-    position:absolute;
-    width:75px;
-    height:140px;
-    right:13px;
-    top:15px;
+.dropdown-taalselect {
+  width: 50px;
+  min-width: 0;
+}
+.dropdown-taal {
+  padding: 2.5px 5px;
+}
+.wrappertaalmenu {
+  position: absolute;
+  width: 75px;
+  height: 140px;
+  right: 13px;
+  top: 15px;
 }
 
 @media only screen and (max-width: 900px) {
-    .registreermenu {
-        margin: 20px auto 10px;
-    }
-    .taaldropdown{
-        margin-top:10px;
-        margin-left:15px;
-    }
-    #navbarDropdownTaalMenuLink{
-        margin:0 auto;
-    }
+  .registreermenu {
+    margin: 20px auto 10px;
   }
+  .taaldropdown {
+    margin-top: 10px;
+    margin-left: 15px;
+  }
+  #navbarDropdownTaalMenuLink {
+    margin: 0 auto;
+  }
+}
 
-  .c{
-      margin-bottom: 150px;
-  }
+.c {
+  margin-bottom: 150px;
+}
