@@ -52,5 +52,10 @@ export class SollicitatieDialogComponent implements OnInit{
       ? "Geen geldige email"
       : "";
   }
+
+  str: string;
+sendValues(): void {
+  console.log(this.str);
+}
 }
 

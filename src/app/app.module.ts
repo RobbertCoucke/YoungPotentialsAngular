@@ -58,6 +58,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { BsDatepickerModule } from "ngx-bootstrap";
 import { ButtonsModule } from "ngx-bootstrap/buttons";
 
+
 /**
  * * import ngx-translate and the http loader
  */
@@ -93,9 +94,12 @@ import { NgSelectModule } from "@ng-select/ng-select";
 import { FormsModule } from "@angular/forms";
 import { SelectStudiegebiedenComponent } from "./select-studiegebieden/select-studiegebieden.component";
 import { NavormingComponent } from './navorming/navorming.component';
+
 import { VerifyComponent } from './verify/verify.component';
 import { CompanyVacaturesComponent } from './company-vacatures/company-vacatures.component';
 import { CompanyItemComponent } from './company-item/company-item.component';
+
+import { CookieComponent } from './cookie/cookie.component';
 
 const appRoutes: Routes = [
   { path: "", component: HomeComponent},
@@ -157,7 +161,8 @@ const appRoutes: Routes = [
     JwPaginationComponent,
     VerifyComponent,
     CompanyVacaturesComponent,
-    CompanyItemComponent
+    CompanyItemComponent,
+    CookieComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -186,6 +191,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }),
     TranslateModule.forRoot({
+
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
