@@ -104,6 +104,64 @@
 
         "vraagww": "Q: What to do when I forgot my password?",
         "antwoordww": "A: Still in development so complete this sentence when that part is done..."
+    },
+
+    "react":{
+        "titel": "Add a new vacancy",
+        "titelvac": "Title vacancy",
+        "mail": "Enter your email",
+        "bedrijf": "Enter your company name",
+        "stad": "Choose a city",
+        "beschrijving": "Description",
+        "upload": "Upload vacancy",
+        "bestand": "Choose a file",
+        "titeltype": "Type",
+        "type": "Select the type of vacancy",
+        "zichtbaar": "Visible until",
+        "verzenden": "Send"
+    },
+
+    "sollicitatie":{
+        "email": "Email validation",
+        "controle": "Check the data",
+        "controlemail": "Check your email",
+        "ontvanger": "Email receiver",
+        "opmerking": "Note for the receiver",
+        "opmerkingachter": "Leave a comment",
+        "hintlabel": "Max 300 characters",
+        "volgende": "Next",
+        "upload": "Upload application letter",
+        "sollinfo": "You can upload your application letter below. It will be added as an attachment to the mail.",
+        "terug": "Back",
+        "voorwaarden": "General terms and conditions",
+        "voorwtekst": "By sending your application, you agree to the",
+        "voorwtekst2": "general terms and conditions",
+        "voorwtekst3": "and",
+        "voorwtekst4": "privacy policy",
+        "voorwtekst5": "from Youngpotentials.org.",
+        "akkoord": "I agree to the terms and conditions",
+        "versturen": "Send",
+        "verstuurd": "Sent",
+        "sollverstuurd": "Your application has been sent!"
+    },
+
+    "upload":{
+        "kies": "Choose a file..."
+    },
+
+    "detail":{
+        "bijlage": "Open attachment",
+        "solliciteer": "Apply now!"
+    },
+
+    "login":{
+        "welkom": "Welcome back!",
+        "email": "Email address",
+        "emailreq": "Email is required",
+        "wachtwoord": "Password",
+        "wachtwoordreq": "Password is required",
+        "wwonthouden": "Remember password",
+        "inloggen": "Log in"
     }
 
 }

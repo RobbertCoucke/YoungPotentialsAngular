@@ -105,5 +105,65 @@
 
         "vraagww": "V: Wat moet ik doen als ik mijn wachtwoord ben vergeten?",
         "antwoordww": "A: Nog steeds in ontwikkeling dus maak deze zin af als dat deel klaar is..."
+    },
+
+    "react":{
+        "titel": "Nieuwe vacature toevoegen",
+        "titelvac": "Titel vacature",
+        "mail": "Geef je email op",
+        "bedrijf": "Geef e bedrijfsnaam op",
+        "stad": "Kies een stad",
+        "beschrijving": "Beschrijving",
+        "upload": "Uploaden vacature",
+        "bestand": "Kies een bestand",
+        "titeltype": "Type",
+        "type": "Selecteer het type vacature",
+        "zichtbaar": "Zichtbaar tot",
+        "verzenden": "Verzenden",
+        "test": "dit is een test"
+    },
+
+    "sollicitatie":{
+        "email": "Email validatie",
+        "controle": "Controleer de gegevens",
+        "controlemail": "Controleer uw email",
+        "ontvanger": "Email ontvanger",
+        "opmerking": "Opmerking voor de ontvanger",
+        "opmerkingachter": "Laat een opmerking achter",
+        "hintlabel": "Maximum 300 karakters",
+        "volgende": "Volgende",
+        "upload": "Uploaden sollicitatiebrief",
+        "sollinfo": "Hieronder kunt u uw sollicitatiebrief uploaden. Deze zal als bijlage aan de mail toegevoegd worden.",
+        "terug": "Terug",
+        "voorwaarden": "Algemene voorwaarden",
+        "voorwtekst": "Door het versturen van jouw sollicitatie gaat u akkoord met de",
+        "voorwtekst2": "algemene voorwaarden",
+        "voorwtekst3": "en",
+        "voorwtekst4": "privacy policy",
+        "voorwtekst5": "van Youngpotentials.org.",
+        "akkoord": "Ik ga akkoord met de algemene voorwaarden",
+        "versturen": "Versturen",
+        "verstuurd": "Verstuurd",
+        "sollverstuurd": "Uw sollicitatie is verstuurd!"
+    },
+
+    "upload":{
+        "kies": "Kies een bestand..."
+    },
+
+    "detail":{
+        "bijlage": "Open bijlage",
+        "solliciteer": "Solliciteer nu!"
+    },
+
+    "login":{
+        "welkom": "Welkom terug!",
+        "email": "Emailadres",
+        "emailreq": "Email is verplicht",
+        "wachtwoord": "Wachtwoord",
+        "wachtwoordreq": "Wachtwoord is verplicht",
+        "wwonthouden": "Wachtwoord onthouden",
+        "inloggen": "Inloggen"
     }
+
 }

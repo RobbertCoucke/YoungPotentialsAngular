@@ -1,76 +1,76 @@
 <mat-horizontal-stepper linear  #stepper>
     <mat-step [stepControl]="firstFormGroup" [editable]="editable" >
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Email validatie</ng-template>   
+        <ng-template matStepLabel>{{"sollicitatie.email" | translate}}</ng-template>   
         <div class="list">
-          <h3 class="semi-bold">Email validatie</h3>
-          <p>Controleer de gegevens</p>
+          <h3 class="semi-bold">{{"sollicitatie.email" | translate}}</h3>
+          <p>{{"sollicitatie.controle" | translate}}</p>
         </div>
         <mat-form-field class="description-full-width">
-          <mat-label>Controleer uw email</mat-label>
+          <mat-label>{{"sollicitatie.controlemail" | translate}}</mat-label>
           <input matInput [formControl]="senderCtrl">
           <mat-error *ngIf="senderCtrl.invalid">{{getErrorMessageEmail()}}</mat-error>
         </mat-form-field>
         <mat-form-field class="description-full-width">
-            <mat-label>Email ontvanger</mat-label>
+            <mat-label>{{"sollicitatie.ontvanger" | translate}}</mat-label>
             <input matInput [value]="emailReciever" readonly>
           </mat-form-field>
-          <p>Opmerking voor de ontvanger</p>
-          <mat-form-field class="description-full-width" hintLabel="Max 300 characters">
-            <mat-label>Laat een opmerking achter</mat-label>
+          <p>{{"sollicitatie.opmerking" | translate}}</p>
+          <mat-form-field class="description-full-width" hintLabel='{{"sollicitatie.hintlabel" | translate}}'>
+            <mat-label>{{"sollicitatie.opmerkingachter" | translate}}</mat-label>
             <input matInput #input maxlength="300">
             <mat-hint align="end">{{input.value?.length || 0}}/300</mat-hint>
             <textarea matInput class="descriptionBox"></textarea>
           </mat-form-field>
         <div>
-          <button mat-raised-button matStepperNext class="buttons" >Next</button>
+          <button mat-raised-button matStepperNext class="buttons" >{{"sollicitatie.volgende" | translate}}</button>
         </div>
       </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup" [editable]="editable">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Uploaden sollicitatiebrief</ng-template>
+        <ng-template matStepLabel>{{"sollicitatie.upload" | translate}}</ng-template>
         <div class="list">
-        <h3 class="semi-bold">Uploaden sollicitatiebrief</h3>
-        <p>Hieronder kunt u uw sollicitatiebrief uploaden. Deze zal als bijlage aan de mail toegevoegd worden.</p>
+        <h3 class="semi-bold">{{"sollicitatie.upload" | translate}}</h3>
+        <p>{{"sollicitatie.sollinfo" | translate}}</p>
         </div>
       <div class="list">
         <app-upload></app-upload>
       </div>
       <footer>
       <div class="list">
-          <button mat-raised-button class="buttons" matStepperPrevious >Back</button>
-          <button mat-raised-button class="buttons" matStepperNext >Next</button>
+          <button mat-raised-button class="buttons" matStepperPrevious >{{"sollicitatie.terug" | translate}}</button>
+          <button mat-raised-button class="buttons" matStepperNext >{{"sollicitatie.volgende" | translate}}</button>
         </div>
       </footer>
       </form>
     </mat-step>
     <mat-step [stepControl]="thirdFormGroup" [editable]="editable">
       <form [formGroup]="thirdFormGroup">
-        <ng-template matStepLabel>Algemene voorwaarden</ng-template>
+        <ng-template matStepLabel>{{"sollicitatie.voorwaarden" | translate}}</ng-template>
 
         <div class="list">
-          <h3 class="semi-bold">Algemene voorwaarden</h3>
+          <h3 class="semi-bold">{{"sollicitatie.voorwaarden" | translate}}</h3>
         </div>
         
-        <p>Door het versturen van jouw sollicitatie gaat u akkoord met de <a href="#">algemene voorwaarden</a>
-            en <a href="#">privacy policy</a> van Youngpotentials.org.</p>
+        <p>{{"sollicitatie.voorwtekst" | translate}} <a href="#">{{"sollicitatie.voorwtekst2" | translate}}</a>
+          {{"sollicitatie.voorwtekst3" | translate}} <a href="#">{{"sollicitatie.voorwtekst4" | translate}}</a> {{"sollicitatie.voorwtekst5" | translate}}</p>
 
-         <mat-checkbox (change)="changeCheck($event)" [formControl]="checkbox">Ik ga akkoord met de algemene voorwaarden</mat-checkbox>
+         <mat-checkbox (change)="changeCheck($event)" [formControl]="checkbox">{{"sollicitatie.akkoord" | translate}}</mat-checkbox>
         <div>
-          <button mat-raised-button class="buttons"  matStepperPrevious >Back</button>
-          <button mat-raised-button class="buttons"  matStepperNext  [disabled]=disabledAgreement (click)="editable=!editable">Versturen</button>
+          <button mat-raised-button class="buttons"  matStepperPrevious >{{"sollicitatie.terug" | translate}}</button>
+          <button mat-raised-button class="buttons"  matStepperNext  [disabled]=disabledAgreement (click)="editable=!editable">{{"sollicitatie.versturen" | translate}}</button>
         </div>
 
 
       </form>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Verstuurd</ng-template>
+      <ng-template matStepLabel>{{"sollicitatie.verstuurd" | translate}}</ng-template>
 
         
           <div class="center"><mat-icon [ngStyle]="{'color':'white'}"> email</mat-icon></div>
-          <div class="center-text">  <h3>Uw sollicitatie is verstuurd!</h3></div>
+          <div class="center-text">  <h3>{{"sollicitatie.sollverstuurd" | translate}}</h3></div>
         
 
     </mat-step>
