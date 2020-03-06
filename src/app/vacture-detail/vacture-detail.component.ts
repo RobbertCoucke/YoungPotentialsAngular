@@ -29,11 +29,9 @@ export class VactureDetailComponent  {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(SollicitatieDialogComponent, {
-      width: "900px",
+      width: "1200px",
       height: "500px",
     });
-    
-
     console.log(this.$vacature);
   }
 

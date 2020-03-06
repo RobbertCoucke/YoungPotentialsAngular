@@ -95,6 +95,8 @@ import { FormsModule } from "@angular/forms";
 import { SelectStudiegebiedenComponent } from "./select-studiegebieden/select-studiegebieden.component";
 import { NavormingComponent } from './navorming/navorming.component';
 
+import {AngularStickyThingsModule} from '@w11k/angular-sticky-things';
+
 const appRoutes: Routes = [
   { path: "", component: HomeComponent},
   { path: "vactures", component: VacturesComponent},
@@ -175,6 +177,7 @@ const appRoutes: Routes = [
     NgSelectModule,
     MatPaginatorModule,
     FormsModule,
+    AngularStickyThingsModule,
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot(),
     // ngx-translate and the loader module

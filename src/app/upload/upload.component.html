@@ -1,7 +1,7 @@
 <div class="field">
     <div class="file is-danger has-name is-boxed">
       <label class="file-label">
-        <input class="file-input" type="file" formControlName="fileupload" accept=".pdf" #file  placeholder="Choose file" (change)="uploadFile(file.files)">
+        <input class="file-input" type="file"[(ngModel)]="fileValue" (ngModelChange)="checkIfHasFile()" accept=".pdf" #file  placeholder="Choose file" (change)="uploadFile(file.files)">
         <span class="file-cta">
           <span class="file-icon">
             <mat-icon>folder_open</mat-icon>

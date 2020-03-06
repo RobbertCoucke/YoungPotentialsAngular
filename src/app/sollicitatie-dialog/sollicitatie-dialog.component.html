@@ -1,94 +1,154 @@
-<mat-horizontal-stepper linear  #stepper>
-    <mat-step [stepControl]="firstFormGroup" [editable]="editable" >
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Email validatie</ng-template>   
-        <div class="list">
-          <h3 class="semi-bold">Email validatie</h3>
-          <p>Controleer de gegevens</p>
-        </div>
-        <mat-form-field class="description-full-width">
-          <mat-label>Controleer uw email</mat-label>
-          <input matInput [formControl]="senderCtrl">
-          <mat-error *ngIf="senderCtrl.invalid">{{getErrorMessageEmail()}}</mat-error>
-        </mat-form-field>
-        <mat-form-field class="description-full-width">
-            <mat-label>Email ontvanger</mat-label>
-            <input matInput [value]="emailReciever" readonly>
-          </mat-form-field>
-          <!-- <mat-form-field class="description-full-width" hintLabel="Max 300 characters">
-            <mat-label>Laat een opmerking achter</mat-label>
-            <input matInput #input maxlength="300">
-            <mat-hint align="end">{{input.value?.length || 0}}/300</mat-hint>
-            <textarea matInput class="descriptionBox"></textarea>
-          </mat-form-field> -->
-        <div>
-          <button mat-raised-button matStepperNext class="buttons" >Next</button>
-        </div>
-      </form>
-    </mat-step>
+<mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="firstFormGroup" [editable]="editable">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Email validatie</ng-template>
+      <div class="list">
+        <h3 class="semi-bold">Email validatie</h3>
+        <p>
+          Controleer onderstaande gegevens.<br />Uw eigen email kan nog
+          aangepast worden.<br />
+        </p>
+      </div>
+      <mat-form-field class="description-full-width">
+        <mat-label>Controleer uw email</mat-label>
+        <input matInput [formControl]="senderCtrl" class="form-control" />
+        <mat-error *ngIf="senderCtrl.invalid">{{
+          getErrorMessageEmail()
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="description-full-width">
+        <mat-label>Email ontvanger</mat-label>
+        <input matInput [value]="emailReciever" readonly />
+      </mat-form-field>
+      <div>
+        <button mat-raised-button matStepperNext class="buttons">Next</button>
+      </div>
+    </form>
+  </mat-step>
 
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Email inhoud</ng-template>
-        <div class="list">
-          <h3 class="semi-bold">Email inhoud</h3>
-        </div>
-        
+  <mat-step [stepControl]="secondFormGroup" [editable]="editable">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Email inhoud</ng-template>
+      <div class="list">
+        <h3 class="semi-bold">Email validatie</h3>
+        <p>Typ hier de inhoud van de email.</p>
+      </div>
+      <mat-form-field class="description-full-width" appearance="outline">
+        <mat-label>onderwerp</mat-label>
+        <input matInput [formControl]="onderwerpControl" class="form-control" />
+        <mat-error *ngIf="onderwerpControl.invalid">
+          {{ getErrorMessageRequiredOnderwerp() }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="description-full-width" appearance="outline">
+        <mat-label>Inhoud</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="9"
+          cdkAutosizeMaxRows="30"
+          [formControl]="bodyControl"
+        ></textarea>
+        <mat-error *ngIf="bodyControl.invalid">
+          {{ getErrorMessageRequiredBody() }}
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-raised-button matStepperPrevious class="buttons">
+          Back
+        </button>
+        <button mat-raised-button matStepperNext class="buttons">Next</button>
+      </div>
+    </form>
+  </mat-step>
 
-        <div>
-          <button mat-button matStepperPrevious class="buttons">Back</button>
-          <button mat-button matStepperNext class="buttons">Next</button>
-        </div>
-      </form>
-    </mat-step>
-    
-    <mat-step [stepControl]="secondFormGroup" [editable]="editable">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Uploaden sollicitatiebrief</ng-template>
-        <div class="list">
-        <h3 class="semi-bold">Uploaden sollicitatiebrief</h3>
-        <p>Hieronder kunt u uw sollicitatiebrief uploaden. Deze zal als bijlage aan de mail toegevoegd worden.</p>
-        </div>
+  <mat-step [stepControl]="thirdFormGroup" [editable]="editable">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Uploaden CV</ng-template>
+      <div class="list">
+        <h3 class="semi-bold">Uploaden CV</h3>
+        <p>
+          U heeft nog geen CV toegevoegd aan uw account. Om te kunnen solliciteren is een CV verplicht.
+        </p>
+      </div>
       <div class="list">
         <app-upload></app-upload>
       </div>
       <footer>
-      <div class="list">
-          <button mat-raised-button class="buttons" matStepperPrevious >Back</button>
-          <button mat-raised-button class="buttons" matStepperNext >Next</button>
+        <div class="list">
+          <button mat-raised-button class="buttons" matStepperPrevious>
+            Back
+          </button>
+          <button mat-raised-button class="buttons" matStepperNext>Next</button>
         </div>
       </footer>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="thirdFormGroup" [editable]="editable">
-      <form [formGroup]="thirdFormGroup">
-        <ng-template matStepLabel>Algemene voorwaarden</ng-template>
+    </form>
+  </mat-step>
 
+  <mat-step [stepControl]="FourthFormGroup" [optional]="true" [editable]="editable">
+    <form [formGroup]="FourthFormGroup">
+      <ng-template matStepLabel>Uploaden sollicitatiebrief</ng-template>
+      <div class="list">
+        <h3 class="semi-bold">Uploaden sollicitatiebrief</h3>
+        <p>
+          Hieronder kunt u uw sollicitatiebrief uploaden. Deze zal als bijlage
+          aan de mail toegevoegd worden.
+        </p>
+      </div>
+      <div class="list">
+        <app-upload></app-upload>
+      </div>
+      <footer>
         <div class="list">
-          <h3 class="semi-bold">Algemene voorwaarden</h3>
+          <button mat-raised-button class="buttons" matStepperPrevious>
+            Back
+          </button>
+          <button mat-raised-button class="buttons" matStepperNext>Next</button>
         </div>
-        
-        <p>Door het versturen van jouw sollicitatie gaat u akkoord met de <a href="#">algemene voorwaarden</a>
-            en <a href="#">privacy policy</a> van Youngpotentials.org.</p>
+      </footer>
+    </form>
+  </mat-step>
 
-         <mat-checkbox (change)="changeCheck($event)" [formControl]="checkbox">Ik ga akkoord met de algemene voorwaarden</mat-checkbox>
-        <div>
-          <button mat-raised-button class="buttons"  matStepperPrevious >Back</button>
-          <button mat-raised-button class="buttons"  matStepperNext  [disabled]=disabledAgreement (click)="editable=!editable">Versturen</button>
-        </div>
+  <mat-step [stepControl]="FifthFormGroup" [editable]="editable">
+    <form [formGroup]="FifthFormGroup">
+      <ng-template matStepLabel>Algemene voorwaarden</ng-template>
 
+      <div class="list">
+        <h3 class="semi-bold">Algemene voorwaarden</h3>
+      </div>
 
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Verstuurd</ng-template>
+      <p>
+        Door het versturen van jouw sollicitatie gaat u akkoord met de
+        <a href="#">algemene voorwaarden</a> en
+        <a href="#">privacy policy</a> van Youngpotentials.org.
+      </p>
 
-        
-          <div class="center"><mat-icon [ngStyle]="{'color':'white'}"> email</mat-icon></div>
-          <div class="center-text">  <h3>Uw sollicitatie is verstuurd!</h3></div>
-        
+      <mat-checkbox (change)="changeCheck($event)" [formControl]="checkbox" [(ngModel)]="checkboxValue"
+        >Ik ga akkoord met de algemene voorwaarden</mat-checkbox
+      >
+      <div>
+        <button mat-raised-button class="buttons" matStepperPrevious>
+          Back
+        </button>
+        <button
+          mat-raised-button
+          class="buttons"
+          matStepperNext
+          [disabled]="disabledAgreement"
+          (click)="editable = !editable"
+        >
+          Versturen
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Verstuurd</ng-template>
 
-    </mat-step>
-  </mat-horizontal-stepper>
-  
- 
+    <div class="center">
+      <mat-icon [ngStyle]="{ color: 'white' }"> email</mat-icon>
+    </div>
+    <div class="center-text"><h3>Uw sollicitatie is verstuurd!</h3></div>
+  </mat-step>
+</mat-horizontal-stepper>
