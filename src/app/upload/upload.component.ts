@@ -1,52 +1,69 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { HttpEventType, HttpClient } from '@angular/common/http';
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { HttpEventType, HttpClient } from "@angular/common/http";
+import { FormControl, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'app-upload',
-  templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.scss']
+  selector: "app-upload",
+  templateUrl: "./upload.component.html",
+  styleUrls: ["./upload.component.scss"],
 })
-
-
 export class UploadComponent implements OnInit {
+  hasFile: boolean;
+
+
+
+  fileValue: string;
 
   public progress: number;
   public message: string;
   @Output() public onUploadFinished = new EventEmitter();
- 
-  constructor(private http: HttpClient) { }
 
-  ngOnInit() {
-
+  constructor(private http: HttpClient) {
   }
 
-  public uploadFile = (files) => {
+  ngOnInit() {}
+
+  public uploadFile = files => {
     if (files.length === 0) {
       return;
     }
 
     let fileToUpload = <File>files[0];
     const formData = new FormData();
-    formData.append('file', fileToUpload);
-    
-    if(fileToUpload.size > 1024 * 1024 * 20 ) {
-      console.log("Max toegelaten file groote is 20 mb.")
+    formData.append("file", fileToUpload);
+
+    if (fileToUpload.size > 1024 * 1024 * 20) {
+      console.log("Max toegelaten file groote is 20 mb.");
       return;
     }
     console.log("posting");
-    this.http.post('http://localhost:60213/upload', formData)
-       .subscribe(
-         //event => {
+    this.http.post("http://localhost:60213/upload", formData).subscribe(
+      //event => {
       //   if (event.type === HttpEventType.UploadProgress)
       //     this.progress = Math.round(100 * event.loaded / event.total);
       //   else if (event.type === HttpEventType.Response) {
       //     this.message = 'Upload success.';
       //     this.onUploadFinished.emit(event.body);
       //   }
-      // }, 
-        error => {
-          console.log(error);
-      });
+      // },
+      error => {
+        console.log(error);
+      }
+    );
+  };
+
+  @Output() messageEvent = new EventEmitter<boolean>();
+
+  public checkIfHasFile() {
+
+    if (this.fileValue === "") {
+      this.hasFile = false;
+      return false;
+    } else {
+      this.hasFile = true;
+      return true;
+    }
+
+    this.messageEvent.emit(this.hasFile)
   }
 }
-
