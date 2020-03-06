@@ -3,7 +3,7 @@ import { Favoriet } from '@/_models/favoriet';
 import { Vacature } from '@/_models/vacature';
 import { Router } from '@angular/router';
 import { FavoritesService } from '@/_services/Favorites/favorites.service';
-import { User } from '@/_models';
+import { User, Role } from '@/_models';
 import { EventEmitter } from '@angular/core';
 
 @Component({
@@ -44,14 +44,14 @@ export class VactureItemComponent implements OnInit {
     if(this.liked)
     {
       this.liked = false;
-      if(this.currentUser){
+      if(this.currentUser && this.currentUser.role == Role.User){
         this.favorietService.deleteFavorite(this.favorietId).subscribe();
         this.removeEvent.emit(this.favorite);
       }
       //deletefavorite(vacature.id, currentUser.id)
     }else{
       this.liked = true;
-      if(this.currentUser){
+      if(this.currentUser && this.currentUser.role == Role.User){
         this.favorietService.addFavorite(this.currentUser.id, this.vacature.id).subscribe();
         
       }

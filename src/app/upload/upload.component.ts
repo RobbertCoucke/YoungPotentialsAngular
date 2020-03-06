@@ -34,15 +34,16 @@ export class UploadComponent implements OnInit {
       return;
     }
     console.log("posting");
-    this.http.post('https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/upload', formData, {reportProgress: true, observe: 'events'})
-      .subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress)
-          this.progress = Math.round(100 * event.loaded / event.total);
-        else if (event.type === HttpEventType.Response) {
-          this.message = 'Upload success.';
-          this.onUploadFinished.emit(event.body);
-        }
-      }, 
+    this.http.post('http://localhost:60213/upload', formData)
+       .subscribe(
+         //event => {
+      //   if (event.type === HttpEventType.UploadProgress)
+      //     this.progress = Math.round(100 * event.loaded / event.total);
+      //   else if (event.type === HttpEventType.Response) {
+      //     this.message = 'Upload success.';
+      //     this.onUploadFinished.emit(event.body);
+      //   }
+      // }, 
         error => {
           console.log(error);
       });
