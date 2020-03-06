@@ -95,6 +95,7 @@ import { FormsModule } from "@angular/forms";
 import { SelectStudiegebiedenComponent } from "./select-studiegebieden/select-studiegebieden.component";
 import { NavormingComponent } from './navorming/navorming.component';
 import { CookieComponent } from './cookie/cookie.component';
+import { PagingComponent } from './paging/paging.component';
 
 const appRoutes: Routes = [
   { path: "", component: HomeComponent},
@@ -154,7 +155,8 @@ const appRoutes: Routes = [
       SelectStudiegebiedenComponent,
       NavormingComponent,
       JwPaginationComponent,
-      CookieComponent
+      CookieComponent,
+      PagingComponent
    ],
    imports: [
       ReactiveFormsModule,
@@ -179,7 +181,7 @@ const appRoutes: Routes = [
       FormsModule,
       BsDatepickerModule.forRoot(),
       ButtonsModule.forRoot(),
-      //ngx-translateandtheloadermodule\r\nHttpClientModule,
+      //ngx-translateandtheloadermodule\\r\\nHttpClientModule,
       HttpClientModule,
       RouterModule.forRoot(appRoutes, { enableTracing: true }),
       TranslateModule.forRoot({
