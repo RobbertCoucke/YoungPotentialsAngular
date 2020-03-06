@@ -13,10 +13,10 @@ export class CompanyService {
   }
 
   verifyCompany(companyId: number) {
-    return this.http.put<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/company/verify`, { companyId: companyId});
+    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/company/verify/${companyId}`);
   }
 
   deleteFavorite(companyId: number){
-    return this.http.put<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/company/unverify`, {companyId: companyId});
+    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/company/unverify/${companyId}`);
   }
 }

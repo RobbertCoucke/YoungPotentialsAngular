@@ -1,3 +1,4 @@
+import { Vacature } from './vacature';
 
 export class Company{
     id: number;
@@ -8,11 +9,12 @@ export class Company{
     address : string;
     isStudent: boolean;
 
-    companyId: number;
+    userId: number;
     description: string;
     url: string;
     companyName: string;
     verified: boolean;
+    offers : Vacature[];
 
 
 }

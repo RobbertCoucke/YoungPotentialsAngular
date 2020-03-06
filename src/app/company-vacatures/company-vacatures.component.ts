@@ -26,7 +26,7 @@ export class CompanyVacaturesComponent implements OnInit {
         this.userService.getById(this.currentUser.id).subscribe(c => {
           //this.company = c;
           //get all vacatures by companyId
-          this.vacatureService.getAllVacaturesByCompany(this.company.companyId).subscribe(vacatures => {
+          this.vacatureService.getAllVacaturesByCompany(this.company.id).subscribe(vacatures => {
               //transfer vacatureObject to FavoriteObject for vacature-listItem and add to vacaturesList
               vacatures.array.forEach(element => {
                 this.vacatures.push(new Favoriet(null, element));

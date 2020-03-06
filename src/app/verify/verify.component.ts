@@ -22,22 +22,20 @@ export class VerifyComponent implements OnInit {
 
     this.authenticationService.currentUser.subscribe(u => {
       this.currentUser = u;
-      if(this.currentUser.role !== Role.Admin){
+       if(this.currentUser.role !== Role.Admin){
         this.router.navigate(['/']);
       }
     });
 
-    this.companyService.getAllUnverifiedCompanies().subscribe(c => this.companies = c);
+    this.companyService.getAllUnverifiedCompanies().subscribe(c => {
+      
+      this.companies = c;
+      console.log(this.companies);
+    });
    }
 
 
-   verifyCompany(companyId){
-      this.companyService.verifyCompany(companyId).subscribe();
-   }
-
-   unverifyCompany(companyId){
-      this.companyService.verifyCompany(companyId).subscribe();
-   }
+   
 
   ngOnInit() {
   }

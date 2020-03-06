@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { CompanyService } from '@/_services/Company/company.service';
+import { Company } from '@/_models';
 
 @Component({
   selector: 'app-company-item',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompanyItemComponent implements OnInit {
 
-  constructor() { }
+  @Input() company: Company;
+
+  constructor(private companyService: CompanyService) { }
 
   ngOnInit() {
   }
+
+
+  verifyCompany(){
+    this.companyService.verifyCompany(this.company.id).subscribe();
+ }
+
+ unverifyCompany(){
+    this.companyService.verifyCompany(this.company.id).subscribe();
+ }
 
 }

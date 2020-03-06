@@ -13,6 +13,10 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/favorieten" routerLinkActive="active">Favoriete</a>
       </li>
+      <li *ngIf="currentUser && currentUser.role === 'Admin'" class="nav-item">
+        <a class="nav-link" routerLink="/verify" routerLinkActive="active">verify</a>
+      </li>
+      
       <li class="nav-item">
         <a class="nav-link" href="#">{{"navbar.about" | translate}}</a>
       </li>
