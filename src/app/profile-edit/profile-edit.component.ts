@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { from } from 'rxjs';
 import { Register } from '@/_models/register';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { UpdateUser } from '@/_models/updateUser';
 
 @Component({
   selector: 'app-profile-edit',
@@ -17,7 +18,8 @@ export class ProfileEditComponent implements OnInit {
   submitted = false;
   error = '';
   currentUser : User;
-  user: Register;  
+  user: UpdateUser;  
+  id: number;
   isStudent : boolean; 
 
   private emailValidators = [
@@ -36,34 +38,46 @@ export class ProfileEditComponent implements OnInit {
   Validators.required
 ]
   constructor(private userservice: UserService, private authenticatieService: AuthenticationService,
-     private router: Router, private formBuilder : FormBuilder) {
-      if (this.authenticatieService.currentUserValue == null) { 
+     private router: Router, private formBuilder : FormBuilder){
+   }
+
+  ngOnInit() {
+    if (this.authenticatieService.currentUserValue == null) { 
+      alert("Invalid action.");
       this.router.navigate(['/']);
     }else{
       this.authenticatieService.currentUser.subscribe(x => this.currentUser = x);
     }  
-   }
-
-  ngOnInit() {
         this.updateForm = this.formBuilder.group({
           firstName: [''],
-          lastName:[''],
+          lastName: [''],
           description: [''],
           city: [''],
           url: [''],
           cvUrl: [''],
-          email: [],
-          address: [],
-          companyName: [],
-          zipCode: []
+          email: [''],
+          telefoonn: [''],
+          address: [''],
+          companyName: [''],
+          zipCode: ['']
         })
         this.userservice.getById(this.currentUser.id).subscribe(data => {
-          console.log(data);
+          //console.log(data);
+          this.id = data.userId;
+          //console.log(this.id);
           this.handleData(data);
+          //console.log(this.user)
+          this.updateform();
+          if(this.isStudent)
+          {
+            this.updateFormStudent();
+          }else{
+            this.updateFormCompany();
+          }
           });
         console.log(this.currentUser);
 
-        if(this.user.isStudent) {
+        if(this.isStudent) {
           console.log(this.isStudent);
           this.updateForm.get('companyName').setValidators(this.nameValidators.concat(Validators.required));
           this.updateForm.get('description').setValidators(this.commonvalidators);
@@ -80,7 +94,7 @@ export class ProfileEditComponent implements OnInit {
 
   handleData(data)
   {
-    this.user = new Register(data.email, " " , data.isStudent);
+    this.user = new UpdateUser(data.email, data.isStudent);
 
     if(data.isStudent)
     {
@@ -103,5 +117,82 @@ export class ProfileEditComponent implements OnInit {
   }
 
   get updateFormControls() { return this.updateForm.controls; }
+
+  onSubmit() {
+    this.submitted = true;
+    console.log(this.updateForm);
+    if(this.updateForm.invalid)
+    {
+      return;
+    }
+      var updateModel = this.getModel();
+      this.userservice.updateUser(this.id ,updateModel).subscribe( data => {
+        this.router.navigate([""]);
+      }, 
+      error => {
+        this.error = error;
+      })
+    
+
+
+  }
+
+    //get de register model nadat de gebruiker zijn data ingevuld heb
+    getModel(){
+      var controls = this.updateFormControls;
+      //elke gebruiker moet zin email, password invullen
+      var model = new UpdateUser(controls.email.value, this.isStudent);
+      model.telephone = controls.telefoonn.value;
+      //model.city = controls.city.value;
+      model.zipCode = controls.zipCode.value;
+      model.address = controls.address.value;
+      model.city = controls.city.value;
+  
+      //de student moet zijn naam, voorname en CV geven.
+      if(this.isStudent){
+        model.name = controls.lastName.value;
+        model.firstName = controls.firstName.value;
+        model.cvUrl = controls.cvUrl.value;
+      }
+      //bedrijf moet een beschrijving, url en naam geven
+      else{
+  
+        model.description = controls.description.value;
+        model.url = controls.url.value;
+        model.companyName = controls.companyName.value;
+      }
+  
+      return model;
+  
+    }
+
+  updateform()
+  {
+    this.updateForm.patchValue({
+      city: this.user.city,
+      zipCode: this.user.zipCode,
+      email: this.user.email,
+      telefoonn: this.user.telephone,
+      address: this.user.address
+
+    })
+  }
+
+  updateFormStudent()
+  {
+    this.updateForm.patchValue({
+      firstName: this.user.firstName,
+      lastName: this.user.name,
+      cvUrl: this.user.cvUrl
+    })
+  }
+
+  updateFormCompany(){
+    this.updateForm.patchValue({
+      companyName: this.user.companyName,
+      url: this.user.companyName,
+      description: this.user.description
+    })
+  }
 
 }

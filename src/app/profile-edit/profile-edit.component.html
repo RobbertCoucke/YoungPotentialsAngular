@@ -5,12 +5,12 @@
     <form class="simple-form" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
       <div class="row ruimte">
           <div *ngIf="isStudent" class="col-md-6 mb-3">
-            <label for="inputNaam"><h5>Naam</h5></label>
+            <label><h5>Naam</h5></label>
             <input type="text" class="form-control" formControlName="firstName"
-                   placeholder="Voornaam" />
+                   placeholder="Voornaam"/>
           </div>
           <div *ngIf="isStudent" class="col-md-6 mb-3">
-            <label for="inputFamilienaam"><h5>Familienaam</h5></label>
+            <label><h5>Familienaam</h5></label>
             <input type="text" class="form-control"
                    formControlName="lastName"
                    placeholder="Familienaam"/>
@@ -18,39 +18,40 @@
       </div>
 
       <div *ngIf="!isStudent" class="form-label-group ruimte">
-        <label for="inputBedrijfsnaam"><h5>Bedrijfsnaam</h5></label>
+        <label><h5>Bedrijfsnaam</h5></label>
         <input type="text" class="form-control"
                    formControlName="companyName"
+                
                    placeholder="Bedrijfsnaam"/>
       </div>
 
       <div class="form-label-group ruimte">
-        <label for="inputEmail"><h5>E-mailadres</h5></label>
+        <label><h5>E-mailadres</h5></label>
         <input type="text" class="form-control" formControlName="email"
                    placeholder="Email Address" required/>
       </div>
 
       <div *ngIf="!isStudent" class="form-label-group ruimte">
-        <label for="inputDescription"><h5>Description</h5></label>
-        <input type="email" class="form-control" value="{{user.description}}" formControlName="description"
+        <label><h5>Description</h5></label>
+        <input type="email" class="form-control" formControlName="description"
         placeholder="Bedrijf Beschrijving" >
       </div>
 
       <div *ngIf="!isStudent" class="form-label-group ruimte">
-        <label for="inputUrl"><h5>Url</h5></label>
-        <input type="text" class="form-control" value="{{user.url}}" formControlName="inputUrl"
+        <label><h5>Url</h5></label>
+        <input type="text" class="form-control" formControlName="url"
         placeholder="Url">
       </div>
 
 
       <div class="row ruimte">
         <div class="col-md-6 mb-3">
-            <label for="inputStad"><h5>Stad</h5></label>
+            <label><h5>Stad</h5></label>
             <input type="text" class="form-control" formControlName="city"
                    placeholder="City" required/> 
         </div>
         <div class="col-md-6 mb-3">
-            <label for="inputPostcode"><h5>Postcode</h5></label>
+            <label><h5>Postcode</h5></label>
             <input type="text" class="form-control" formControlName="zipCode"
                    placeholder="Zipcode" 
             />
@@ -58,16 +59,23 @@
       </div>  
 
       <div *ngIf="isStudent" class="form-label-group ruimte">
-        <label for="inputCv"><h5>Straat + nr</h5></label>
-        <input type="text" class="form-control" formControlName="cvUrl"
+        <label><h5>CV</h5></label>
+        <input type="text" class="form-control" value="" formControlName="cvUrl"
         placeholder="CvUrl" 
+        />
+      </div>
+
+      <div class="form-label-group ruimte">
+        <label><h5>Telefoonn nummer</h5></label>
+        <input type="text" class="form-control" value="" formControlName="telefoonn"
+        placeholder="Telefoonn" 
         />
       </div>
       
 
       <div class="form-label-group ruimte">
-        <label for="inputStraat"><h5>Straat + nr</h5></label>
-        <input type="text" class="form-control" formControlName="address"
+        <label><h5>Straat + nr</h5></label>
+        <input type="text" class="form-control" value="" formControlName="address"
         placeholder="Address" 
         />
       </div>
