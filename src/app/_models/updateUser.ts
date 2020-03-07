@@ -1,9 +1,7 @@
+export class UpdateUser {
 
-export class Register {
-
-    constructor(email: string, password: string, isStudent: boolean){
+    constructor(email: string, isStudent: boolean){
         this.email= email;
-        this.password = password;
         this.isStudent = isStudent;
     }
 
@@ -12,7 +10,6 @@ export class Register {
 
     //user
     email: string;
-    password: string;
     telephone: string;
     city: string;
     zipCode: string;
