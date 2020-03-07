@@ -10,11 +10,14 @@
       <li class="nav-item active">
         <a class="nav-link" href="#">{{"navbar.overview" | translate}} <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="currentUser && currentUser.role === 'User'" class="nav-item">
         <a class="nav-link" routerLink="/favorieten" routerLinkActive="active">Favoriete</a>
       </li>
       <li *ngIf="currentUser && currentUser.role === 'Admin'" class="nav-item">
         <a class="nav-link" routerLink="/verify" routerLinkActive="active">verify</a>
+      </li>
+      <li *ngIf="currentUser && currentUser.role === 'Company'" class="nav-item">
+        <a class="nav-link" routerLink="/owned" routerLinkActive="active">eigen vacatures</a>
       </li>
       
       <li class="nav-item">

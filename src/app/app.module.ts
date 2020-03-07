@@ -102,6 +102,7 @@ import { CompanyItemComponent } from './company-item/company-item.component';
 import { CookieComponent } from './cookie/cookie.component';
 
 const appRoutes: Routes = [
+  { path: "owned", component : CompanyVacaturesComponent},
   { path: "verify", component: VerifyComponent},
   { path: "", component: HomeComponent},
   { path: "vactures", component: VacturesComponent},

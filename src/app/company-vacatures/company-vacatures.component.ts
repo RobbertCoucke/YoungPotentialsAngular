@@ -22,7 +22,7 @@ export class CompanyVacaturesComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(u => {
       
       //get company by user Id
-      if(this.currentUser.role == Role.Company){
+      if(this.currentUser && this.currentUser.role == Role.Company){
         this.userService.getById(this.currentUser.id).subscribe(c => {
           //this.company = c;
           //get all vacatures by companyId

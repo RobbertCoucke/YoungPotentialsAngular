@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
       return this.currentUser && this.currentUser.role === Role.Admin;
   }
 
+  
 
   logout() {
       this.authenticationService.logout();

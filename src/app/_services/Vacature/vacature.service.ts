@@ -10,6 +10,8 @@ export class VacatureService {
   constructor(private http: HttpClient) { }
 
   getAllVacatures() {
+    //options corsheader  HttpClient CORS header
+        //anders checken wadaze versturen in header met die rare link me breakpoint in backend en da nadoen
     return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/getAll`);
     
     //return this.http.get<any>(`http://localhost:60213/offer/getAll`);
