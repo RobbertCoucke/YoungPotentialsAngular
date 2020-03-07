@@ -1,9 +1,16 @@
-.page-item.number-item{
-    min-width: 40px;
+.loader{
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.section{
-    background-color: red;
+.loadspinner{
+    width: 100px;
 }
-.page-item.number-item.active{
-    background-color: red;
+.vacaturebody{
+    min-height: 550px;
+}
+.paging-center{
+    display:flex;
+    justify-content: center;
 }

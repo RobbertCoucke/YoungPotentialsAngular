@@ -1,0 +1,84 @@
+$gray: #343a40;
+$white: #fff;
+
+.sliding-popup-bottom{
+    height: auto; 
+    width: 100%; 
+    z-index: 1;
+    position: fixed;
+    background-color: $gray;
+    opacity: 0.85;
+    color: $white;
+
+    animation: moveIn 1s;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes moveIn {
+    from {bottom: -50px;}
+    to {bottom: 0}
+}
+.popup-content.info{
+    margin:15px auto;
+    max-width:1100px;
+    display: flex;
+    padding:0 20px;
+}
+#popup-buttons{
+    display: flex;
+    justify-content: space-between;
+    padding:20px 0;
+    min-width:300px;
+    height: 72px;
+}
+
+.btn-primary
+{
+    box-shadow: none;
+    padding: 3px 40px;
+    border: none;
+    border-radius: 40px;
+    background: #E50001;
+    transition: transform .2s;
+}
+
+.btn-primary:hover, .btn-primary:focus
+{
+    transform: scale(1.1);
+}
+
+.hyperlink{
+    color: $white;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Mobile responsiveness */
+@media only screen and (max-width: 900px) {
+    .popup-content.info{
+        flex-direction: column;
+    }
+    #popup-buttons{
+        justify-content: center;
+    }
+    .decline-button{
+        margin-left: 20px;
+    }
+}
+@media only screen and (max-width: 350px) {
+    .popup-content.info{
+        font-size: 14px;
+    }
+    #popup-buttons{
+        flex-direction: column;
+        min-width: initial;
+    }
+    .decline-button{
+        margin-left: 0;
+    }
+    .agree-button, .decline-button{
+        margin-top: 10px;
+        width:100%;
+    }
+}

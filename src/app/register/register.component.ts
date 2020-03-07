@@ -137,7 +137,7 @@ private commonvalidators = [
     var model = new Register(controls.email.value, controls.password.value, this.isStudent);
     model.telephone = controls.telephone.value;
     //model.city = controls.city.value;
-    model.zipCode = Number(controls.zipCode.value);
+    model.zipCode = controls.zipCode.value;
     model.address = controls.address.value;
     model.city = controls.city.value;
 
@@ -162,12 +162,11 @@ private commonvalidators = [
   //register als student
   studentClicked(){
     this.isStudent = true;
-    this.title = "Make a student account"
+    
   }
   //register als bedrijf
   bedrijfClicked() {
     this.isStudent = false;
-    this.title = "Make a Company account"
   }
 
 

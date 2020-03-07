@@ -8,16 +8,16 @@
             <div class="row">
               <div class="col-md-9 col-lg-8 mx-auto">
                 <img class="mb-4" src="../../assets/images/vives_logo.png">
-                <h3 class="login-heading mb-4">Welcome back!</h3>
+                <h2 class="login-heading mb-4">{{"login.welkom" | translate}}</h2>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                   <div class="form-label-group">
                     <!-- <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                     <label for="inputEmail">Email address</label> -->
 
                     <label for="username"></label>
-                    <input type="text" formControlName="username" class="form-control" placeholder="Email address" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                    <input type="text" formControlName="username" class="form-control" placeholder='{{"login.email" | translate}}' [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                        <div *ngIf="f.username.errors.required">Username is required</div>
+                        <div *ngIf="f.username.errors.required">{{"login.emailreq" | translate}}</div>
                      </div>
                   </div>
   
@@ -26,22 +26,22 @@
                     <label for="inputPassword">Password</label> -->
 
                     <label for="password"></label>
-                    <input type="password" formControlName="password" class="form-control" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <input type="password" formControlName="password" class="form-control" placeholder='{{"login.wachtwoord" | translate}}' [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="f.password.errors.required">{{"login.wachtwoordreq" | translate}}</div>
                      </div>
                   </div>
   
                   <div class="custom-control custom-checkbox mb-3">
                     <input type="checkbox" class="custom-control-input" id="customCheck1">
-                    <label class="custom-control-label" for="customCheck1">Remember password</label>
+                    <label class="custom-control-label" for="customCheck1">{{"login.wwonthouden" | translate}}</label>
                   </div>
 
                   <!-- <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
                   <div class="text-center">-->
 
                   <div class="form-group">
-                      <button [disabled]="loading" class="btn btn-primary btn-login">Login</button>
+                      <button [disabled]="loading" class="btn btn-primary btn-login">{{"login.inloggen" | translate}}</button>
                       <img *ngIf="loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                   </div>
                   <!-- <div *ngIf="error" class="alert alert-danger">{{error}}</div>

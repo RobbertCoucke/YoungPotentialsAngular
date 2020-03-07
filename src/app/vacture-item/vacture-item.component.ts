@@ -3,8 +3,9 @@ import { Favoriet } from '@/_models/favoriet';
 import { Vacature } from '@/_models/vacature';
 import { Router } from '@angular/router';
 import { FavoritesService } from '@/_services/Favorites/favorites.service';
-import { User } from '@/_models';
+import { User, Role } from '@/_models';
 import { EventEmitter } from '@angular/core';
+import { VacatureService } from '@/_services/Vacature/vacature.service';
 
 @Component({
   selector: 'app-vacture-item',
@@ -14,9 +15,11 @@ import { EventEmitter } from '@angular/core';
 export class VactureItemComponent implements OnInit {
   liked = false;
 
+  @Input() showTrashcan : boolean
+  @Input() showLike : boolean;
   @Input() favorite: Favoriet;
   @Input() currentUser: User;
-  @Output() removeEvent: EventEmitter<Favoriet> = new EventEmitter<Favoriet>();
+  @Output() removeFavoriteEvent: EventEmitter<Favoriet> = new EventEmitter<Favoriet>();
   favorietId: number;
   vacature: Vacature;
   
@@ -24,7 +27,8 @@ export class VactureItemComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private favorietService: FavoritesService) { }
+    private favorietService: FavoritesService,
+    private vacatureService : VacatureService) { }
 
   ngOnInit(): void {
     this.favorietId = this.favorite.id;
@@ -40,18 +44,22 @@ export class VactureItemComponent implements OnInit {
 
   }
 
+  delete(){
+    this.vacatureService.deleteVacature(this.vacature.id).subscribe();
+  }
+
   onLike(){
     if(this.liked)
     {
       this.liked = false;
-      if(this.currentUser){
+      if(this.currentUser && this.currentUser.role == Role.User){
         this.favorietService.deleteFavorite(this.favorietId).subscribe();
-        this.removeEvent.emit(this.favorite);
+        this.removeFavoriteEvent.emit(this.favorite);
       }
       //deletefavorite(vacature.id, currentUser.id)
     }else{
       this.liked = true;
-      if(this.currentUser){
+      if(this.currentUser && this.currentUser.role == Role.User){
         this.favorietService.addFavorite(this.currentUser.id, this.vacature.id).subscribe();
         
       }

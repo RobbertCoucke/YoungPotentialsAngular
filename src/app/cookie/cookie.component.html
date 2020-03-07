@@ -1,0 +1,14 @@
+<div id="sliding-popup" class="sliding-popup-bottom" *ngIf="show">
+  <div class="popup-content info">
+    <div id="popup-text">
+      <p class="removeMarginbottom">
+        Hogeschool VIVES maakt gebruik van cookies om je gebruikservaring te optimaliseren. 
+        Klik op Akkoord om in te stemmen met het gebruik van deze cookies of op Meer weten voor onze privacyverklaring. <a href="#" class="hyperlink">Meer weten</a>
+      </p>
+    </div>
+    <div id="popup-buttons">
+      <button type="button" class="agree-button eu-cookie-compliance-secondary-button btn-primary" (click)="btnClick(true)">Akkoord</button>
+      <button type="button" class="decline-button eu-cookie-compliance-default-button btn-primary" (click)="btnClick(false)">Negeer</button>
+    </div>
+  </div>
+</div>

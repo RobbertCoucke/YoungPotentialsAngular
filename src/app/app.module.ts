@@ -21,8 +21,7 @@ import { SollicitatieDialogComponent } from "./sollicitatie-dialog/sollicitatie-
 import { UploadComponent } from "./upload/upload.component";
 
 // Paging
-import { JwPaginationComponent } from 'jw-angular-pagination';
-
+import { JwPaginationComponent } from "jw-angular-pagination";
 
 // used to create fake backend
 import { fakeBackendProvider } from "./_helpers";
@@ -45,11 +44,11 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatCardModule } from "@angular/material/card";
 import { MatExpansionModule } from "@angular/material/expansion";
 
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDialogModule} from '@angular/material/dialog';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatStepperModule } from "@angular/material/stepper";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatIconModule } from "@angular/material/icon";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 /**
  * * Anuglar Bootstrap imports
@@ -81,33 +80,40 @@ import {
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
-
-import { AuthGuard } from './_guards';
-import { Role } from './_models';
-import { RegisterComponent } from './register/register.component';
-import { FavorietenComponent } from './favorieten/favorieten.component';
-import { FaqComponent } from './faq/faq.component';
-
+import { AuthGuard } from "./_guards";
+import { Role } from "./_models";
+import { RegisterComponent } from "./register/register.component";
+import { FavorietenComponent } from "./favorieten/favorieten.component";
+import { FaqComponent } from "./faq/faq.component";
 
 import { NgSelectModule } from "@ng-select/ng-select";
 import { FormsModule } from "@angular/forms";
 import { SelectStudiegebiedenComponent } from "./select-studiegebieden/select-studiegebieden.component";
-import { NavormingComponent } from './navorming/navorming.component';
+import { NavormingComponent } from "./navorming/navorming.component";
+
+import { VerifyComponent } from "./verify/verify.component";
+import { CompanyVacaturesComponent } from "./company-vacatures/company-vacatures.component";
+import { CompanyItemComponent } from "./company-item/company-item.component";
+
+import { CookieComponent } from "./cookie/cookie.component";
+import { PagingComponent } from "./paging/paging.component";
+import { AngularStickyThingsModule } from "@w11k/angular-sticky-things";
 
 const appRoutes: Routes = [
-  { path: "", component: HomeComponent},
-  { path: "vactures", component: VacturesComponent},
-  { path: "vacture-toevoegen", component: ReactiveFormComponent},
-  { path: "vacature-details/:id", component: VactureDetailComponent},
-  { path: "profiel", component:ProfileComponent},
-  { path: "profiel-bewerken", component:ProfileEditComponent},
-  { path: "faq", component:FaqComponent},
+  { path: "verify", component: VerifyComponent },
+  { path: "", component: HomeComponent },
+  { path: "vactures", component: VacturesComponent },
+  { path: "vacture-toevoegen", component: ReactiveFormComponent },
+  { path: "vacature-details/:id", component: VactureDetailComponent },
+  { path: "profiel", component: ProfileComponent },
+  { path: "profiel-bewerken", component: ProfileEditComponent },
+  { path: "faq", component: FaqComponent },
 
   //{ path: "inloggen", component:LoginComponent},
 
-  { path: "registreren", component:RegisterComponent},
-  { path: "favorieten", component:FavorietenComponent},
-  { path: "navorming", component:NavormingComponent},
+  { path: "registreren", component: RegisterComponent },
+  { path: "favorieten", component: FavorietenComponent },
+  { path: "navorming", component: NavormingComponent },
 
   {
     path: "",
@@ -149,9 +155,14 @@ const appRoutes: Routes = [
     SollicitatieDialogComponent,
     UploadComponent,
     FaqComponent,
-    SelectStudiegebiedenComponent, 
+    SelectStudiegebiedenComponent,
     NavormingComponent,
-    JwPaginationComponent
+    JwPaginationComponent,
+    CookieComponent,
+    PagingComponent,
+    VerifyComponent,
+    CompanyVacaturesComponent,
+    CompanyItemComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -174,9 +185,10 @@ const appRoutes: Routes = [
     NgSelectModule,
     MatPaginatorModule,
     FormsModule,
+    AngularStickyThingsModule,
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot(),
-    // ngx-translate and the loader module
+    //ngx-translateandtheloadermodule\\r\\nHttpClientModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }),
     TranslateModule.forRoot({
@@ -184,7 +196,8 @@ const appRoutes: Routes = [
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
-      }}),
+      }
+    }),
     TranslateCacheModule.forRoot({
       cacheService: {
         provide: TranslateCacheService,
