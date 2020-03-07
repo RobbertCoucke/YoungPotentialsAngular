@@ -3,7 +3,7 @@
     <div class="col-md-8 mx-auto">
       <div class="card">
         <div class="card-header">
-          <h3>Nieuwe vacature toevoegen</h3>
+          <h3>{{"react.titel" | translate}}</h3>
         </div>
         <div class="card-body">
           <form
@@ -13,7 +13,7 @@
           >
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <mat-label>Titel vacature</mat-label>
+                <mat-label>{{"react.titelvac" | translate}}</mat-label>
                 <input matInput type="text" [formControl]="titel" />
                 <mat-error *ngIf="titel.invalid">{{
                   getErrorMessageTitel()
@@ -23,7 +23,7 @@
           
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <mat-label>Geef je email op</mat-label>
+                <mat-label>{{"react.mail" | translate}}</mat-label>
                 <input
                   matInput
                   placeholder="test@example.com"
@@ -37,7 +37,7 @@
 
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <mat-label>Geef de bedrijfsnaam op</mat-label>
+                <mat-label>{{"react.bedrijf" | translate}}</mat-label>
                 <input matInput [formControl]="bedrijfsnaam" />
                 <mat-error *ngIf="bedrijfsnaam.invalid">{{
                   getErrorMessageBedrijfsnaam()
@@ -47,7 +47,7 @@
 
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <mat-label>Kies een stad</mat-label>
+                <mat-label>{{"react.stad" | translate}}</mat-label>
                 <input
                   type="text"
                   aria-label="Stad"
@@ -79,7 +79,7 @@
                 class="example-full-width"
                 hintLabel="Max 300 characters"
               >
-                <mat-label>Beschrijving</mat-label>
+                <mat-label>{{"react.beschrijving" | translate}}</mat-label>
                 <input
                   matInput
                   [formControl]="beschrijving"
@@ -97,7 +97,7 @@
             </div>
 
             <div class="form-group">
-              <label>Uploaden vacature</label>
+              <label>{{"react.upload" | translate}}</label>
             </div>
             <!-- <div class="input-group mb-3">
               <div class="custom-file" id="inputlabel">
@@ -109,7 +109,7 @@
                   accept=".pdf"
                 />
                 <label class="custom-file-label" for="inputGroupFile01"
-                  >Kies bestand</label
+                  >{{"react.bestand" | translate}}</label
                 >
               </div> 
             </div>-->
@@ -120,7 +120,7 @@
             </div>
             
             <div class="form-group">
-              <label>Type</label>
+              <label>{{"react.type" | translate}}</label>
               <mat-form-field class="example-full-width">
                 <mat-label>Selecteer het type vacature</mat-label>
                 <mat-select matNativeControl [formControl]="typeControl">
@@ -134,7 +134,7 @@
               </mat-form-field>
             </div>
 
-            <div><label>Zichtbaar tot</label></div>
+            <div><label>{{"react.zichtbaar" | translate}}</label></div>
             <div class="row">
               <div class="col-xs-12 col-12 col-md-4 form-group">
                 <input
@@ -164,7 +164,7 @@
                 class="btn btn-success"
                 (click)="onSubmit()"
               >
-                Verzenden
+              {{"react.verzenden" | translate}}
               </button>
             </div>
           </form>

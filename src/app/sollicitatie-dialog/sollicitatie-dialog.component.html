@@ -1,3 +1,4 @@
+
 <mat-horizontal-stepper linear #stepper>
   <mat-step [stepControl]="firstFormGroup" [editable]="editable">
     <form [formGroup]="firstFormGroup">
@@ -72,10 +73,12 @@
           U heeft nog geen CV toegevoegd aan uw account. Om te kunnen solliciteren is een CV verplicht.
         </p>
       </div>
+
       <div class="list">
         <app-upload></app-upload>
       </div>
       <footer>
+
         <div class="list">
           <button mat-raised-button class="buttons" matStepperPrevious>
             Back
@@ -85,6 +88,8 @@
       </footer>
     </form>
   </mat-step>
+
+
 
   <mat-step [stepControl]="FourthFormGroup" [optional]="true" [editable]="editable">
     <form [formGroup]="FourthFormGroup">
@@ -101,6 +106,7 @@
       </div>
       <footer>
         <div class="list">
+
           <button mat-raised-button class="buttons" matStepperPrevious>
             Back
           </button>
@@ -113,10 +119,10 @@
   <mat-step [stepControl]="FifthFormGroup" [editable]="editable">
     <form [formGroup]="FifthFormGroup">
       <ng-template matStepLabel>Algemene voorwaarden</ng-template>
-
       <div class="list">
         <h3 class="semi-bold">Algemene voorwaarden</h3>
       </div>
+
 
       <p>
         Door het versturen van jouw sollicitatie gaat u akkoord met de
