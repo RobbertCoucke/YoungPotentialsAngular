@@ -11,18 +11,18 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 })
 export class StudieService {
 
-  configUrl = 'D:\angular\YoungPotentialsAngular\src\app\vives.json';
+  // configUrl = 'D:\angular\YoungPotentialsAngular\src\app\vives.json';
 
-  constructor(private http: HttpClient) { }
+  // constructor(private http: HttpClient) { }
 
-  getData(): Observable<StudieGebied[]>{
-    return of(STUDIEGEBIEDS);
-  }
+  // getData(): Observable<StudieGebied[]>{
+  //   return of(STUDIEGEBIEDS);
+  // }
   
 
-  getConfigResponse() : Observable<HttpResponse<StudieGebied>> {
-    return this.http.get<StudieGebied>(
-      this.configUrl, { observe: 'response'}
-    );
-  }
+  // getConfigResponse() : Observable<HttpResponse<StudieGebied>> {
+  //   return this.http.get<StudieGebied>(
+  //     this.configUrl, { observe: 'response'}
+  //   );
+  // }
 }

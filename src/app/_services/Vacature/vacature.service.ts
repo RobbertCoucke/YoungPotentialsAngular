@@ -18,7 +18,7 @@ export class VacatureService {
   }
 
   getAllVacaturesByCompany(companyId: number) {
-    return this.http.get<any>(`http://youngpotentials.azurewebsites.net/offer/${companyId}`);
+    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/getAllCompany/${companyId}`);
   }
 
   createVacature(vacature: Vacature) {
@@ -37,7 +37,7 @@ export class VacatureService {
   }
 
   deleteVacature(vacatureId: number){
-    return this.http.delete<any>(`http://youngpotentials.azurewebsites.net/offer/${vacatureId}`);
+    return this.http.delete<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/${vacatureId}`);
   }
 
   getVacatureById(vacatureId: number)

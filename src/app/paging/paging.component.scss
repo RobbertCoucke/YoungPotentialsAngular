@@ -1,0 +1,36 @@
+$red: #e31d1a;
+$white: #fff;
+
+.page-item.active .page-link{
+    background-color: $red;
+    border-color: $red;
+}
+.page-item.active .page-link:hover{
+    color:$white;
+    opacity: 0.80;
+}
+.page-item{
+    min-width:45px;
+}
+.arrow-icon-wrapper{
+    padding:0;
+    height: 100%;
+}
+.arrow-icon-wrapper .material-icons{
+    margin: calc((36px - 24px) / 2) 0;
+}
+
+/* Media queries*/
+@media only screen and (max-width:450px)
+{
+    .page-item{
+        min-width:30px;
+    }
+}
+@media only screen and (max-width:300px)
+{
+    .page-item{
+        min-width:initial;
+    }
+}
+

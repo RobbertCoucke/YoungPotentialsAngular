@@ -54,7 +54,6 @@ private commonvalidators = [
      }
 
   ngOnInit() {
-
     this.registerForm = this.formBuilder.group({
       myBedrijfCheckbox: [''],
       firstName: ['',this.nameValidators],
@@ -76,6 +75,10 @@ private commonvalidators = [
     }
      )
 
+     /*als gebruiker kiest om als bedrijf in te schrijven, voeg ik validatie aan companyname input, description input en url,
+     *anders voeg ik vanlidate aan firstname en lastname inputs.
+     */
+
      this.registerForm.get('myBedrijfCheckbox').valueChanges.subscribe(value => {
       if(value) {
         this.isStudent = false;
@@ -91,25 +94,24 @@ private commonvalidators = [
 
       }
     }) 
-
   }
 
+  //get all registerForm controls
   get registerformControls() { return this.registerForm.controls; }
 
   onSubmit() {
     this.submitted = true;
-    //const reg = this.getRegisterModel();
 
-    //stop here if form is invalid
-    // console.log(this.isStudent);
-    //   if (this.registerForm.invalid) {
-    //     console.log("invalid");
-    //     return;
-    // }
+     //stop here if form is invalid
+     console.log(this.isStudent);
+       //if (this.registerForm.invalid) {
+         //return;
+   // }
 
     console.log(this.registerForm.controls.value);
 
-    this.loading = true;     
+    this.loading = true;  
+    //de register model krijgen   
     var regModel = this.getRegisterModel();
 
     console.log(regModel);
@@ -117,6 +119,7 @@ private commonvalidators = [
 
 
 
+    //de gebruiker toevoegen aan de database
      this.authenticationService.register(regModel).subscribe(
             data => {
                 this.router.navigate([""]);
@@ -127,8 +130,10 @@ private commonvalidators = [
             });   
 }
 
+  //get de register model nadat de gebruiker zijn data ingevuld heb
   getRegisterModel(){
     var controls = this.registerformControls;
+    //elke gebruiker moet zin email, password invullen
     var model = new Register(controls.email.value, controls.password.value, this.isStudent);
     model.telephone = controls.telephone.value;
     //model.city = controls.city.value;
@@ -136,11 +141,15 @@ private commonvalidators = [
     model.address = controls.address.value;
     model.city = controls.city.value;
 
+    //de student moet zijn naam, voorname en CV geven.
     if(this.isStudent){
       model.name = controls.lastName.value;
       model.firstName = controls.firstName.value;
       model.cvUrl = controls.cvUrl.value;
-    }else{
+    }
+    //bedrijf moet een beschrijving, url en naam geven
+    else{
+
       model.description = controls.description.value;
       model.url = controls.url.value;
       model.companyName = controls.companyName.value;
@@ -150,14 +159,14 @@ private commonvalidators = [
 
   }
 
+  //register als student
   studentClicked(){
     this.isStudent = true;
-    this.title = "Make a student account"
+    
   }
-
+  //register als bedrijf
   bedrijfClicked() {
     this.isStudent = false;
-    this.title = "Make a Company account"
   }
 
 

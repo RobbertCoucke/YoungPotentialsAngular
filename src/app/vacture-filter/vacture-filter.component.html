@@ -1,13 +1,14 @@
-
-      <!-- Free Tier -->
-<div>
-  <div class="card mb-5 mb-lg-0 filterbody">
+<!-- Free Tier -->
+<div #spacer></div>   
+<div stickyThing [spacer]="spacer" marginTop="30"  >
+  <div class="card mb-5 mb-lg-0">
     <div class="card-body">
       <h5 class="card-title text-muted text-uppercase">Filter:</h5>
         <hr>
         <div id="list1" class="dropdown-check-list" tabindex="100"></div>
 
-      <ul class="row removeMarginbottom"><h6>STUDIEGEBIEDEN:</h6>  
+
+      <ul class="row"><h6>{{"filter.studiegebieden" | translate}}</h6>  
             <div *ngFor="let gebied of studiegebieds" class="l">
                 <li>
                     <input class="input" type="checkbox" value="{{gebied.id}}" (change)="check($event)" name="studieGebiedVives" [checked]="isSelected(gebied.id)" /> 
@@ -38,8 +39,10 @@
         </ul> 
                    
       </div>
+
     <div class="text-center filterverwijderenwrapper">
-          <button  class="btn btn-primary" (click)="removeSelected()">Filter verwijderen</button>
+          <button  class="btn btn-primary" (click)="removeSelected()">{{"filter.filterverwijderen" | translate}}</button>
+
     </div>
   </div>
 </div>

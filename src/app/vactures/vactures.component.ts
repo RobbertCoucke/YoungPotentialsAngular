@@ -44,8 +44,8 @@ export class VacturesComponent implements OnInit {
 
     this.vacatures= [];
     console.log("filling");
-    // tslint:disable-next-line: whitespace
-    if(this.currentUser != null && this.currentUser.role === Role.User){
+
+    if(this.currentUser != null && this.currentUser.role == Role.User){
       this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
         this.favorites = f;
         f.forEach(element => this.vacatures.push(new Favoriet(element.id, element.vacature)));

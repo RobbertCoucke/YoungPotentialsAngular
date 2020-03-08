@@ -33,12 +33,12 @@ export class AppComponent {
   }
 
   getData() : void{
-    this.studieService.getData().subscribe(studies => this.data = studies );
+    //this.studieService.getData().subscribe(studies => this.data = studies );
   }
 
   showConfig() {
-    this.studieService.getConfigResponse().subscribe(resp => {
-      const key = resp.headers.keys();
-    })
+    // this.studieService.getConfigResponse().subscribe(resp => {
+    //   const key = resp.headers.keys();
+    // })
   }
 }

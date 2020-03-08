@@ -15,8 +15,8 @@
                         <app-vacture-item  [showTrashcan]="false"  [showLike]="(currentUser && currentUser.role === 'User')"  [favorite]="vacature" (removeEvent)="removeEventAbstract($event)"   [currentUser]="currentUser" ></app-vacture-item>
                     </ng-container>
                 </ng-container>
-                <div>
-                    <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+                <div class="paging-center">
+                    <app-paging [items]="items" (changePage)="onChangePage($event)"></app-paging>
                 </div>
             </div>
             <div *ngIf="!loadingFilter && !loading" class="alert alert-danger" role="alert">

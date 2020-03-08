@@ -2,47 +2,88 @@
     <div class="container jumbotron ruimte">
       <h1 class="rood">Profiel</h1>
       <hr>
-
+    <form class="simple-form" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
       <div class="row ruimte">
-          <div class="col-md-6 mb-3">
-            <label for="inputNaam"><h5>Naam</h5></label>
-            <input type="text" id="inputUserame" class="form-control" placeholder="Naam" required autofocus>
+          <div *ngIf="isStudent" class="col-md-6 mb-3">
+            <label><h5>Naam</h5></label>
+            <input type="text" class="form-control" formControlName="firstName"
+                   placeholder="Voornaam"/>
           </div>
-          <div class="col-md-6 mb-3">
-            <label for="inputFamilienaam"><h5>Familienaam</h5></label>
-            <input type="text" id="inputFamilienaam" class="form-control" placeholder="Familienaam" required>
+          <div *ngIf="isStudent" class="col-md-6 mb-3">
+            <label><h5>Familienaam</h5></label>
+            <input type="text" class="form-control"
+                   formControlName="lastName"
+                   placeholder="Familienaam"/>
           </div>
       </div>
 
-      <div class="form-label-group ruimte">
-        <label for="inputBedrijfsnaam"><h5>Bedrijfsnaam</h5></label>
-        <input type="text" id="inputBedrijfsnaam" class="form-control" placeholder="Bedrijfsnaam" required>
+      <div *ngIf="!isStudent" class="form-label-group ruimte">
+        <label><h5>Bedrijfsnaam</h5></label>
+        <input type="text" class="form-control"
+                   formControlName="companyName"
+                
+                   placeholder="Bedrijfsnaam"/>
       </div>
 
       <div class="form-label-group ruimte">
-        <label for="inputEmail"><h5>E-mailadres</h5></label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="E-mailadress" required>
+        <label><h5>E-mailadres</h5></label>
+        <input type="text" class="form-control" formControlName="email"
+                   placeholder="Email Address" required/>
       </div>
+
+      <div *ngIf="!isStudent" class="form-label-group ruimte">
+        <label><h5>Description</h5></label>
+        <input type="email" class="form-control" formControlName="description"
+        placeholder="Bedrijf Beschrijving" >
+      </div>
+
+      <div *ngIf="!isStudent" class="form-label-group ruimte">
+        <label><h5>Url</h5></label>
+        <input type="text" class="form-control" formControlName="url"
+        placeholder="Url">
+      </div>
+
 
       <div class="row ruimte">
         <div class="col-md-6 mb-3">
-            <label for="inputStad"><h5>Stad</h5></label>
-            <input type="text" id="inputCity" class="form-control" placeholder="Stad" required>
+            <label><h5>Stad</h5></label>
+            <input type="text" class="form-control" formControlName="city"
+                   placeholder="City" required/> 
         </div>
         <div class="col-md-6 mb-3">
-            <label for="inputPostcode"><h5>Postcode</h5></label>
-            <input type="number" id="inputPostcode" class="form-control" placeholder="Postcode" required>
+            <label><h5>Postcode</h5></label>
+            <input type="text" class="form-control" formControlName="zipCode"
+                   placeholder="Zipcode" 
+            />
         </div>
       </div>  
+
+      <div *ngIf="isStudent" class="form-label-group ruimte">
+        <label><h5>CV</h5></label>
+        <input type="text" class="form-control" value="" formControlName="cvUrl"
+        placeholder="CvUrl" 
+        />
+      </div>
+
+      <div class="form-label-group ruimte">
+        <label><h5>Telefoonn nummer</h5></label>
+        <input type="text" class="form-control" value="" formControlName="telefoonn"
+        placeholder="Telefoonn" 
+        />
+      </div>
       
 
       <div class="form-label-group ruimte">
-        <label for="inputStraat"><h5>Straat + nr</h5></label>
-        <input type="text" id="inputStraat" class="form-control" placeholder="Straat en nummer" required>
+        <label><h5>Straat + nr</h5></label>
+        <input type="text" class="form-control" value="" formControlName="address"
+        placeholder="Address" 
+        />
       </div>
 
       <div class="ruimtebtn">
-        <a class="btn btn-primary" href="#" role="button">Opslaan</a>
+        <button class="btn btn-lg btn-primary" type="submit">Opslaan</button>
       </div>
+      </form>
+
     </div>
 </section>
