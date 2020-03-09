@@ -22,11 +22,11 @@ export class UserService {
 
   updateUser(id: number, user: UpdateUser)
   {
-    return this.http.put<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/users/${id}`, user);
+    return this.http.put<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/user/${id}`, user);
   }
 
   deleteUser(id: number)
   {
-    return this.http.delete<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/users/${id}`);
+    return this.http.delete<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/user/${id}`);
   }
 }
