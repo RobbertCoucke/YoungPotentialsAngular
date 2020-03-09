@@ -18,6 +18,12 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 // voor login / logout procedure
   currentUser: User;
+  navbarOpen = false;
+  taalMenuOpen = false;
+  //TODO: Frans verwijderen uit languages?
+  languages=["nl", "en"];
+  dropdownLanguages=["en"];
+  selectedLanguage= "nl";
 
   get isAdmin() {
       return this.currentUser && this.currentUser.role === Role.Admin;
@@ -28,18 +34,6 @@ export class NavbarComponent implements OnInit {
   logout() {
       this.authenticationService.logout();
       //this.router.navigate(['/login']);
-  }
-
-//
-  navbarOpen = false;
-  taalMenuOpen = false;
-  
-  languages=["nl","fr", "en"];
-  dropdownLanguages=["fr","en"];
-  selectedLanguage= "nl";
-
-  toggleNavbar() {
-    this.navbarOpen = !this.navbarOpen;
   }
 
   toggleTaalMenuOpen() {
@@ -58,7 +52,6 @@ export class NavbarComponent implements OnInit {
     */
     return false;
   }
-  
 
   useLanguage(language: string) {
     this.translate.use(language);
