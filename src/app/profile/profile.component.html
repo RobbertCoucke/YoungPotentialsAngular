@@ -1,9 +1,9 @@
 <section id="profiellabel">
-  <div class="container jumbotron ruimte">
+  <div class="container jumbotron ruimte" *ngIf="profiel != null">
     <h1 class="rood">Profiel</h1>
     <hr>
     <!-- Alle velden van student -->
-    <div class="row ruimte" *ngIf="isStudent">
+    <div class="row ruimte" *ngIf="isStudent | async">
         <div class="col-md-6 mb-3">
           <label><h5>Naam</h5></label>
           <div><label>{{profiel.name}}</label></div>
