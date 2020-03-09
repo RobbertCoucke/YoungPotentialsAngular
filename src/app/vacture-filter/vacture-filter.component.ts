@@ -102,6 +102,7 @@ export class VactureFilterComponent implements OnInit {
         }
       }
     }
+    console.log(this.selectedgebieds);
 
     if (this.selectedgebieds.length < 1) {
       this.filterEvent.emit(null);
@@ -209,7 +210,7 @@ export class VactureFilterComponent implements OnInit {
     res.forEach(element => {
       var opleiding: Opleiding[] = [];
       var opleidingArray = element.opleiding;
-      if (opleidingArray.length != 0) {
+      if (opleidingArray && opleidingArray.length != 0) {
         opleidingArray.forEach(o => {
           var afstudeerrichtingsArray = o.afstudeerrichting;
           var afstudeerrichtings: Afstudeerrichting[] = [];
