@@ -3,7 +3,9 @@
     <div class="col-md-8 mx-auto">
       <div class="card">
         <div class="card-header">
-          <h3>{{"react.titel" | translate}}</h3>
+          <h3>{{"react.titel" | translate}}
+            {{company.companyName}}
+          </h3>
         </div>
         <div class="card-body">
           <form
@@ -14,7 +16,8 @@
             <div class="form-group">
               <mat-form-field class="example-full-width">
                 <mat-label>{{"react.titelvac" | translate}}</mat-label>
-                <input matInput type="text" [formControl]="titel" />
+                <input matInput type="text"  [formControl]="titel"
+                [(ngModel)]="titleValue" />
                 <mat-error *ngIf="titel.invalid">{{
                   getErrorMessageTitel()
                 }}</mat-error>
@@ -28,6 +31,7 @@
                   matInput
                   placeholder="test@example.com"
                   [formControl]="email"
+                  [(ngModel)]="emailValue"
                 />
                 <mat-error *ngIf="email.invalid">{{
                   getErrorMessageEmail()
@@ -35,15 +39,16 @@
               </mat-form-field>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <mat-form-field class="example-full-width">
                 <mat-label>{{"react.bedrijf" | translate}}</mat-label>
-                <input matInput [formControl]="bedrijfsnaam" />
+                <input matInput [formControl]="bedrijfsnaam" 
+                [(ngModel)]="companyValue" />
                 <mat-error *ngIf="bedrijfsnaam.invalid">{{
                   getErrorMessageBedrijfsnaam()
                 }}</mat-error>
               </mat-form-field>
-            </div>
+            </div> -->
 
             <div class="form-group">
               <mat-form-field class="example-full-width">
@@ -85,6 +90,7 @@
                   [formControl]="beschrijving"
                   #input
                   maxlength="300"
+                  [(ngModel)]="descriptionValue"
                 />
                 <mat-hint align="end"
                   >{{ input.value?.length || 0 }}/300</mat-hint
@@ -96,6 +102,7 @@
               </mat-form-field>
             </div>
 
+            <div *ngIf="!uploadFile">
             <div class="form-group">
               <label>{{"react.upload" | translate}}</label>
             </div>
@@ -113,17 +120,22 @@
                 >
               </div> 
             </div>-->
-            <app-upload></app-upload>
+            <app-upload (uploadHandler)="handleUpload($event)" ></app-upload>
+          </div>
+          <div *ngIf="uploadFile">
+            <p>{{uploadFile.get('file')}}</p>
+            <button (click)="removeFile()" >X</button>
+          </div>
 
             <div class="form-group">
-              <app-select-studiegebieden></app-select-studiegebieden>
+              <app-select-studiegebieden  (handleStudiegebieden)="handleStudiegebieden($event)"></app-select-studiegebieden>
             </div>
             
             <div class="form-group">
               <label>{{"react.type" | translate}}</label>
               <mat-form-field class="example-full-width">
                 <mat-label>Selecteer het type vacature</mat-label>
-                <mat-select matNativeControl [formControl]="typeControl">
+                <mat-select [(ngModel)]="selectValue" matNativeControl [formControl]="typeControl">
                   <mat-option *ngFor="let type of types" [value]="type.name">
                     {{ type.name }}
                   </mat-option>
@@ -151,6 +163,7 @@
                   [minDate]="minDate"
                   [maxDate]="maxDate"
                   placement="top"
+                  [(ngModel)]="dateValue"
                 />
                 <mat-error *ngIf="einddatum.hasError('required')">{{
                   getErrorMessageEinddatumControl()

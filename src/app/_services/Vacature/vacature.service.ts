@@ -21,12 +21,12 @@ export class VacatureService {
     return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/getAllCompany/${companyId}`);
   }
 
-  createVacature(vacature: Vacature) {
-    return this.http.post<any>(`http://youngpotentials.azurewebsites.net/offer`, vacature);
+  createVacature(vacature: any) {
+    return this.http.post<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer`, vacature);
   }
 
   updateOffer(vacature: Vacature){
-    return this.http.put<any>(`http://youngpotentials.azurewebsites.net/offer/${vacature.id}`, vacature);
+    return this.http.put<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/${vacature.id}`, vacature);
   }
 
   filterVacatures(filters: Object){

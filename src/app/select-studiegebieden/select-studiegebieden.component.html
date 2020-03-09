@@ -10,6 +10,7 @@
   groupBy="studiegebied"
   [selectableGroup]="true"
   [closeOnSelect]="false"
+  (change)="handleSelected()"
   bindValue="opleidingsnaam"
   [(ngModel)]="selectedOpleiding">
 >

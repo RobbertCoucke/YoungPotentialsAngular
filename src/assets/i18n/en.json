@@ -107,7 +107,7 @@
     },
 
     "react":{
-        "titel": "Add a new vacancy",
+        "titel": "Add a new vacancy for",
         "titelvac": "Title vacancy",
         "mail": "Enter your email",
         "bedrijf": "Enter your company name",
