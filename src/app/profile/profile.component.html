@@ -2,47 +2,64 @@
   <div class="container jumbotron ruimte">
     <h1 class="rood">Profiel</h1>
     <hr>
-
-    <div class="row ruimte">
+    <!-- Alle velden van student -->
+    <div class="row ruimte" *ngIf="isStudent">
         <div class="col-md-6 mb-3">
-          <label for="inputNaam"><h5>Naam</h5></label>
-          <div><label>Wannes</label></div>
+          <label><h5>Naam</h5></label>
+          <div><label>{{profiel.name}}</label></div>
         </div>
         <div class="col-md-6 mb-3">
-          <label for="inputFamilienaam"><h5>Familienaam</h5></label>
-          <div><label>Vanneste</label></div>
+          <label><h5>Familienaam</h5></label>
+          <div><label>{{profiel.firstName}}</label></div>
         </div>
     </div>
-
-    <div class="form-label-group ruimte">
-      <label for="inputBedrijfsnaam"><h5>Bedrijfsnaam</h5></label>
-      <div><label>Wannelle inc.</label></div>
+    <!-- Alle velden van bedrijf -->
+    <div *ngIf="!isStudent">
+      <div class="form-label-group ruimte">
+        <label><h5>Bedrijfsnaam</h5></label>
+        <div><label>{{profiel.companyName}}</label></div>
+      </div>
+      <div class="form-label-group ruimte">
+        <label><h5>Beschrijving</h5></label>
+        <div><label>{{profiel.description}}</label></div>
+      </div>
+      <div class="form-label-group ruimte" *ngIf="profiel.url != ''">
+        <label><h5>Bedrijf url</h5></label>
+        <div><label>{{profiel.url}}</label></div>
+      </div>
     </div>
 
+    <!-- Alle gemeenschappelijke velden -->
+    <!-- Verplichte velden -->
     <div class="form-label-group ruimte">
-      <label for="inputEmail"><h5>E-mailadres</h5></label>
-      <div><label>wannes_vanneste@hotmail.com</label></div>
+      <label><h5>E-mailadres</h5></label>
+      <div><label>{{profiel.email}}</label></div>
     </div>
-
-    <div class="row ruimte">
-      <div class="col-md-6 mb-3">
-          <label for="inputStad"><h5>Stad</h5></label>
-          <div><label>Geluwe</label></div>
+    <!-- Niet verplichte velden -->
+    <div>
+      <div class="form-label-group ruimte" *ngIf="profiel.telephone !=null">
+        <label><h5>Telefoonnummer</h5></label>
+        <div><label>{{profiel.telephone}}</label></div>
       </div>
-      <div class="col-md-6 mb-3">
-          <label for="inputPostcode"><h5>Postcode</h5></label>
-          <div><label>8940</label></div>
+      <div class="row ruimte">
+        <div class="col-md-6 mb-3" *ngIf="profiel.city !=null">
+            <label><h5>Stad</h5></label>
+            <div><label>{{profiel.city}}</label></div>
+        </div>
+        <div class="col-md-6 mb-3" *ngIf="profiel.zipCode !=null">
+            <label><h5>Postcode</h5></label>
+            <div><label>{{profiel.zipCode}}</label></div>
+        </div>
+      </div>  
+      <div class="form-label-group ruimte" *ngIf="profiel.address !=null">
+        <label><h5>Straat en huisnummer</h5></label>
+        <div><label>{{profiel.address}}</label></div>
       </div>
-    </div>  
+    </div>
     
-
-    <div class="form-label-group ruimte">
-      <label for="inputStraat"><h5>Straat + nr</h5></label>
-      <div><label>Beselarestraat 68</label></div>
-    </div>
-
+    
     <div class="ruimtebtn">
-      <a class="btn btn-primary" href="#" role="button">Aanpassen</a>
+      <a class="btn btn-primary" routerLink="/profiel-bewerken" role="button">Aanpassen</a>
     </div>
   </div>
 </section>
