@@ -16,7 +16,7 @@ export class UploadComponent implements OnInit {
 
   public progress: number;
   public message: string;
-  @Output() public onUploadFinished = new EventEmitter();
+  @Output() public uploadHandler = new EventEmitter();
 
   constructor(private http: HttpClient) {
   }
@@ -36,20 +36,7 @@ export class UploadComponent implements OnInit {
       console.log("Max toegelaten file groote is 20 mb.");
       return;
     }
-    console.log("posting");
-    this.http.post("http://localhost:60213/upload", formData).subscribe(
-      //event => {
-      //   if (event.type === HttpEventType.UploadProgress)
-      //     this.progress = Math.round(100 * event.loaded / event.total);
-      //   else if (event.type === HttpEventType.Response) {
-      //     this.message = 'Upload success.';
-      //     this.onUploadFinished.emit(event.body);
-      //   }
-      // },
-      error => {
-        console.log(error);
-      }
-    );
+    this.uploadHandler.emit(formData);
   };
 
   @Output() messageEvent = new EventEmitter<boolean>();

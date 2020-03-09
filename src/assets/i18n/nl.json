@@ -108,7 +108,7 @@
     },
 
     "react":{
-        "titel": "Nieuwe vacature toevoegen",
+        "titel": "Nieuwe vacature toevoegen voor",
         "titelvac": "Titel vacature",
         "mail": "Geef je email op",
         "bedrijf": "Geef e bedrijfsnaam op",

@@ -1,3 +1,5 @@
+import { Studiegebied } from './studiegebied';
+
 
 
 export class Vacature
@@ -18,6 +20,7 @@ export class Vacature
     zipCode: number;
     city: string;
     country: string;
+    tags: Studiegebied[];
 
     constructor(object: any)
     {
@@ -28,7 +31,9 @@ export class Vacature
         this.name = object.name;
         this.companyName = object.companyName;
         this.address = object.address;
+        if(object.created){
         this.created = JSON.stringify(object.created).substring(0,6);
+        }
         this.updated = object.updated;
         this.expirationDate = object.expirationDate;
         this.code = object.code;

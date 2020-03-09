@@ -2,7 +2,7 @@ import { Opleiding } from "./../_models/opleiding";
 import { StudieGebied } from "./../Model/StudieGebied";
 import { StudiegebiedService } from "@/_services/studiegebied/studiegebied.service";
 import { Component, OnInit } from "@angular/core";
-import { Validators, FormGroup, FormBuilder, FormArray } from "@angular/forms";
+import { Validators, FormGroup, FormBuilder, FormArray, Form } from "@angular/forms";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
@@ -10,6 +10,13 @@ import { MatSelectChange } from "@angular/material";
 import cities from "../../assets/cities.json";
 import { Studiegebied } from "app/_models/studiegebied";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {AuthenticationService} from '../_services/Authentication/authentication.service'
+import { User, Company } from '@/_models';
+import { Router } from '@angular/router';
+import {UserService} from '../_services/User/user.service'
+import { UploadService } from '@/_services/upload/upload.service';
+import { VacatureService } from '@/_services/Vacature/vacature.service';
+import { Vacature } from '@/_models/vacature';
 
 /**
  * * Interfaces
@@ -60,6 +67,16 @@ export class ReactiveFormComponent implements OnInit {
   selectedSTG: string; // waarde van geselecteerde studiegebied
   selectedopleiding: string; // waarde geselecteerde opleiding
   locatieValue: any; //waarde van geselecteerde locatie
+  titleValue : string;
+  emailValue: string;
+  descriptionValue: string;
+  dateValue: any;
+  companyValue: any;
+  currentUser: User;
+  company: Company;
+  uploadFile: FormData;
+  selectValue: any;
+  tags: Studiegebied[];
 
   minDate: Date; // min datum datepicker
   maxDate: Date; // max datum datepicker
@@ -77,7 +94,12 @@ export class ReactiveFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private studiegebiedService: StudiegebiedService
+    private studiegebiedService: StudiegebiedService,
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private userService: UserService,
+    private uploadService: UploadService,
+    private vacatureService: VacatureService
   ) {
     this.steden = cities;
     this.minDate = new Date();
@@ -87,9 +109,29 @@ export class ReactiveFormComponent implements OnInit {
     this.studiegebiedService.getAllStudieGebieds().subscribe(data => {
       this.studiegebieden = data;
     }); // inladen alle studiegebieden uit db
+
+    
   }
 
   ngOnInit() {
+
+    console.log("subscribe to user");
+    this.authenticationService.currentUser.subscribe(u =>{
+      console.log("in user!!");
+      console.log(u);
+      if(u.role === 'Company'){
+          this.currentUser = u;
+          this.userService.getById(u.id).subscribe(c => {
+            this.company = c;
+            console.log(c);
+          });
+      }else{
+        this.router.navigate(['/']);
+      }
+      
+    });
+
+
     /**
      * @description filteren steden op naam
      */
@@ -103,13 +145,16 @@ export class ReactiveFormComponent implements OnInit {
      * @description formvalidatie in groep
      */
     this.uploadVacForm = this.fb.group({
-      titel: ["", Validators.required],
-      email: ["", [Validators.required, Validators.email]],
-      bedrijfsnaam: ["", Validators.required],
-      locatie: [this.locatieControl.value, Validators.required],
-      beschrijving: ["", Validators.required],
-      vacaturebestand: ["", Validators.required],
-      einddatum: ["", Validators.required]
+      locatieControl : new FormControl("", Validators.required),
+      studiegebiedControl : new FormControl("", Validators.required),
+      opleidingControl : new FormControl("", Validators.required),
+      titel : new FormControl("", [Validators.required]),
+      email : new FormControl("", [Validators.required, Validators.email]),
+      bedrijfsnaam : new FormControl("", [Validators.required]),
+      beschrijving : new FormControl("", [Validators.required]),
+      vacatureBestand : new FormControl("", [Validators.required]),
+      einddatum : new FormControl("", [Validators.required]),
+      typeControl : new FormControl("", Validators.required)
     });
   }
 
@@ -119,7 +164,7 @@ export class ReactiveFormComponent implements OnInit {
    * @return naam van geselecteerde stad
    */
   displayLocatie(stad: Stad): string {
-    return stad && stad.name ? stad.name : stad.name;
+    return (stad && stad.name) ? stad.name : stad.name;
   }
 
   /**
@@ -148,7 +193,49 @@ export class ReactiveFormComponent implements OnInit {
    * @param uploadVacForm form
    */
   onSubmit(uploadVacForm) {
+
+    console.log(this.selectedSTG);
+    console.log(this.selectedopleiding);
+    console.log(this.tags);
+
+    var vacature = new Vacature({title: this.titleValue,
+                                 description: this.descriptionValue,
+                                email: this.emailValue,
+                                city: this.locatieValue,
+                                typeId: 0,
+                                companyId: this.company.id});
+    vacature.tags = this.tags;
+
+    if(this.uploadFile){
+      this.uploadFile.append("isUser", "false");
+      this.uploadFile.append("id", this.company.id.toString());
+    }
+
+    console.log(vacature);
+    this.vacatureService.createVacature(vacature).subscribe(v => {
+      console.log("created vacature");
+      if(this.uploadFile){
+        console.log(this.uploadFile);
+      this.uploadService.upload(this.uploadFile).subscribe();
+      }
+      this.router.navigate(['/']);
+    });
+    
+    
   }
+
+  handleUpload(formData: FormData){
+    this.uploadFile = formData;
+  }
+
+  handleStudiegebieden(studiegebieden: Studiegebied[]){
+    this.tags = studiegebieden;
+  }
+
+  removeFile(){
+    this.uploadFile = null;
+  }
+
 
   /**
    * @description veranderen value huidige geselecteerde locatie

@@ -1,6 +1,8 @@
-import { Component, NgModule, ViewChild, OnInit } from "@angular/core";
+import { Component, NgModule, ViewChild, OnInit, Output } from "@angular/core";
 import { StudiegebiedService } from "@/_services/studiegebied/studiegebied.service";
 import { OpleidingStudiegebied } from "@/_models/opleidingStudiegebied";
+import { EventEmitter } from '@angular/core';
+import { Studiegebied } from '../_models/studiegebied';
 
 export interface Stgebied {
   name: string;
@@ -28,7 +30,11 @@ export class SelectStudiegebiedenComponent implements OnInit {
   studiegebiedName: string;
   studiegebiedID: string;
 
-  selectedOpleiding: string;
+  tags: any[];
+
+  @Output() handleStudiegebieden: EventEmitter<Studiegebied[]> = new EventEmitter<Studiegebied[]>();
+
+  selectedOpleiding: string[];
 
   constructor(private studiegebiedService: StudiegebiedService) {
     this.studiegebiedService.getAllStudieGebieds().subscribe(data => {
@@ -38,6 +44,38 @@ export class SelectStudiegebiedenComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+
+  handleSelected(){
+    this.tags = [];
+    this.selectedOpleiding.forEach(element => {
+      this.studiegebieden.forEach(s => {
+        if(s.studiegebied1 === element){
+          var obj = new Studiegebied(s.id, s.studiegebied1, s.kleur, []);
+          obj.opleiding = [];
+          this.tags.push(obj);
+        }else{
+          s.opleiding.forEach(o => {
+            if(o.naamOpleiding === element){
+              if(this.tags.filter(e => e.id === s.id).length > 0){
+                //add opleiding to already existing studiegebied object
+                var index = this.tags.indexOf(this.tags.find(e => e.id === s.id));
+                this.tags[index].opleiding.push(o);
+              }else{
+                //add studiegebied with opleiding to tags
+                var obj = new Studiegebied(s.id, s.studiegebied1, s.kleur, [o]);
+                
+              this.tags.push(obj);
+              }
+            }
+            
+          });
+        }
+      })
+    });
+    console.log("emitting");
+    this.handleStudiegebieden.emit(this.tags);
+  }
 
   /**
    * @description opvullen array
@@ -59,7 +97,6 @@ export class SelectStudiegebiedenComponent implements OnInit {
         var arrOpl: OPL[] = [{ name: this.opleidingName, stgID: this.IDSTG }];
         this.oplName = arrOpl;
         if (elementa.idStudiegebied === element.id) {
-          console.log("begin");
           var object = new OpleidingStudiegebied();
           object.opleidingsnaam = elementa.naamOpleiding;
           object.studiegebied = element.studiegebied1;

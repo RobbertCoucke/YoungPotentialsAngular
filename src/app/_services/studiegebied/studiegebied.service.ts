@@ -11,6 +11,7 @@ import { Studiegebied } from 'app/_models/studiegebied';
 })
 export class StudiegebiedService {
   apiUrl: string = 'https://cors-anywhere.herokuapp.com/https://youngpotentials.azurewebsites.net/'
+  localUrl: string = 'http://localhost:60213/'
 
   constructor(private http: HttpClient) { }
 
