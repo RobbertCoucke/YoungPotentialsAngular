@@ -98,6 +98,7 @@ import { CompanyItemComponent } from "./company-item/company-item.component";
 import { CookieComponent } from "./cookie/cookie.component";
 import { PagingComponent } from "./paging/paging.component";
 import { AngularStickyThingsModule } from "@w11k/angular-sticky-things";
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const appRoutes: Routes = [
   { path: "owned", component : CompanyVacaturesComponent},
@@ -132,6 +133,10 @@ const appRoutes: Routes = [
     path: "login",
     component: LoginComponent
   },
+  {
+    path: "wachtwoord-reseten",
+    component: ResetPasswordComponent
+  },
 
   // otherwise redirect to home
   { path: "**", redirectTo: "" }
@@ -164,7 +169,8 @@ const appRoutes: Routes = [
     PagingComponent,
     VerifyComponent,
     CompanyVacaturesComponent,
-    CompanyItemComponent
+    CompanyItemComponent,
+    ResetPasswordComponent
   ],
   imports: [
     ReactiveFormsModule,

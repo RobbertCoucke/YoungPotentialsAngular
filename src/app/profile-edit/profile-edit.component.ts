@@ -51,7 +51,7 @@ export class ProfileEditComponent implements OnInit {
         this.updateForm = this.formBuilder.group({
           firstName: [''],
           lastName: [''],
-          description: [''],
+          description: [''],  
           city: [''],
           url: [''],
           cvUrl: [''],
