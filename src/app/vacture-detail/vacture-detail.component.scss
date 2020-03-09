@@ -1,42 +1,36 @@
-.flex
-{
-    display: flex;
-    justify-content:space-between;
+.flex {
+  display: flex;
+  justify-content: space-between;
 }
 
-.rood
-{
-    color:#E50001;
+.rood {
+  color: #e50001;
 }
 
-#vacature .btn-primary
-{
-    box-shadow: none;
-    padding: 8px 25px;
-    border: none;
-    border-radius: 40px;
-    background: #E50001;
-    transition: transform .2s;
+#vacature .btn-primary {
+  box-shadow: none;
+  padding: 8px 25px;
+  border: none;
+  border-radius: 40px;
+  background: #e50001;
+  transition: transform 0.2s;
 }
 
-.btn-primary:hover
-{
-    transform: scale(1.1);
+.btn-primary:hover {
+  transform: scale(1.1);
 }
 
-#vacature
-{
-    padding-top: 50px;
+#vacature {
+  padding-top: 50px;
+}
+
+#vacature p {
+  padding-top: 30px;
+  padding-bottom: 35px;
+}
+
+#vacature .jumbotron {
+  background: rgba(245, 241, 241, 0.699);
 }
 
 
-#vacature p
-{
-    padding-top: 30px;
-    padding-bottom: 35px;
-}
-
-#vacature .jumbotron
-{
-    background: rgba(245, 241, 241, 0.699)
-}
