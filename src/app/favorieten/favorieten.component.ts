@@ -15,6 +15,8 @@ import { Favoriet } from '@/_models/favoriet';
 export class FavorietenComponent implements OnInit {
   currentUser : User;
   offerList: Favoriet[] = [];
+  loading: boolean = true;
+  error: boolean = false;
 
 
   constructor(private authenticationService: AuthenticationService,
@@ -27,7 +29,18 @@ export class FavorietenComponent implements OnInit {
     this.favorieteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe( (data) => {
 
       this.offerList = this.mapJSONToModel(data);
+      if(this.offerList.length != 0)
+    {
+      this.loading = false;
+      
+    }
+    else
+    {
+      this.loading=false;
+      this.error=true;
+    }
     });
+    
 
   } 
   

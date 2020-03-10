@@ -4,6 +4,12 @@
                 <app-vacture-item [showTrashcan]="true"  [showLike]="false" (removeFavoriteEvent)="removeEvent($event)"   [favorite]="vacature"  [currentUser]="currentUser" ></app-vacture-item>
         </ng-container>
     </div>
+    <div *ngIf="loading" class="loader">
+        <img src="../../assets/images/loading.gif" alt="loading ..." class="loadspinner"/>
+    </div>
+    <div *ngIf="error && !loading" class="alert alert-danger" role="alert">
+        <p class="removeMarginbottom">Er zijn geen vacatures aangemaakt. Om een vacature aan te maken ga naar <a routerLink="/vacture-toevoegen" routerLinkActive="active">vacature toevoegen</a></p>
+    </div>
 </div>
 
 
