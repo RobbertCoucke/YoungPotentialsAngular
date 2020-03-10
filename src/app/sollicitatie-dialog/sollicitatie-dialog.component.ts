@@ -28,6 +28,8 @@ export class SollicitatieDialogComponent implements OnInit {
 
   emailSender = this.data.UseremailValue; // email van de hudige gebruiker
   emailReciever = this.data.companyEmailValue; // email van het bedrijf die vacature plaatste
+  //userHasCV = this.data.userHasCV;
+  userHasCV = true;
 
   /**
    * * FormGroup per step in stepper

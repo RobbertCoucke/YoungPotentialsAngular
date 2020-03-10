@@ -63,7 +63,7 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="thirdFormGroup" [editable]="editable">
+  <mat-step [stepControl]="thirdFormGroup" [editable]="editable"  *ngIf="userHasCV === true">
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>Uploaden CV</ng-template>
       <div class="list">
@@ -97,7 +97,7 @@
     [optional]="true"
     [editable]="editable"
   >
-    <form [formGroup]="FourthFormGroup">
+    <form [formGroup]="FourthFormGroup" >
       <ng-template matStepLabel>Uploaden sollicitatiebrief</ng-template>
       <div class="list">
         <h3 class="semi-bold">Uploaden sollicitatiebrief</h3>
@@ -138,6 +138,7 @@
       <mat-checkbox
         (change)="changeCheck($event)"
         [(ngModel)]="checkboxValue"
+        [formControl]="checkbox"
         >Ik ga akkoord met de algemene voorwaarden</mat-checkbox
       >
       <div>
