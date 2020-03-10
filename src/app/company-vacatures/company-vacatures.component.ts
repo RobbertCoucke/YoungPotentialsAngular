@@ -45,4 +45,10 @@ export class CompanyVacaturesComponent implements OnInit {
     });
   }
 
+  
+  removeEvent(favorite: Favoriet){
+
+    setTimeout( () => this.vacatures = this.vacatures.filter(o => o !== favorite), 1000);
+  }
+
 }

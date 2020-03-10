@@ -46,6 +46,7 @@ export class VactureItemComponent implements OnInit {
 
   delete(){
     this.vacatureService.deleteVacature(this.vacature.id).subscribe();
+    this;this.removeFavoriteEvent.emit(this.favorite);
   }
 
   onLike(){
