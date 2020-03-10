@@ -4,7 +4,7 @@
 <div *ngFor="let vacature of vacatures">
 
     <ng-container *ngIf="vacature.vacature.description != null">
-    <app-vacture-item [showTrashcan]="true"  [showLike]="false"   [favorite]="vacature"  [currentUser]="currentUser" ></app-vacture-item>
+    <app-vacture-item [showTrashcan]="true"  [showLike]="false" (removeFavoriteEvent)="removeEvent($event)"   [favorite]="vacature"  [currentUser]="currentUser" ></app-vacture-item>
     </ng-container>
 </div>
 
