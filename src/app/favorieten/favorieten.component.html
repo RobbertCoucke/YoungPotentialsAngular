@@ -1,6 +1,6 @@
 <div class="container">
     <div *ngIf="offerList">
-      <app-vacture-item [showLike]="true" *ngFor="let vacature of offerList" [favorite]="vacature" (removeEvent)="removeEvent($event)"   [currentUser]="currentUser" ></app-vacture-item>
+      <app-vacture-item [showLike]="true" *ngFor="let vacature of offerList" [favorite]="vacature" (removeFavoriteEvent)="removeEvent($event)"   [currentUser]="currentUser" ></app-vacture-item>
 
         <!-- <div *ngFor="let offer of offerList" class="card item">
             <div class="card-body">

@@ -7,7 +7,7 @@
 
                 </div>
                 <div (click)="detailClick(vacature)" class="col-lg-9 textContainer">
-                  <a [routerLink]="['/vacature-details', vacature.id]"><h5  class="rood">{{vacature.title}}</h5></a>
+                  <a [routerLink]="['/vacature-details', vacature.id]" class="link-vacature-detail"><h5  class="rood">{{vacature.title}}</h5></a>
                   <h6 class="card-price"><span class="period">{{vacature.companyName}} | {{vacature.address}} | {{vacature.created}}</span></h6>
                 </div>
               </div>

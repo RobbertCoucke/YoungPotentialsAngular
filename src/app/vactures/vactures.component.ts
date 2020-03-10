@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AuthenticationService } from '@/_services';
 import { FavoritesService } from '@/_services/Favorites/favorites.service';
 import { User, Role } from '@/_models';
@@ -13,6 +13,10 @@ import { StudieGebied } from '@/Model/StudieGebied';
   styleUrls: ['./vactures.component.scss']
 })
 export class VacturesComponent implements OnInit {
+
+  // isShow: boolean;
+  // topPosToStartShowing = 100;
+
 
   currentUser: User;
   vacatures: Favoriet[] = [];
@@ -38,6 +42,28 @@ export class VacturesComponent implements OnInit {
 
   }
 
+//   @HostListener('window:scroll')
+//   checkScroll() {
+      
+//     // window의 scroll top
+//     // Both window.pageYOffset and document.documentElement.scrollTop returns the same result in all the cases. window.pageYOffset is not supported below IE 9.
+
+//     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+//     console.log('[scroll]', scrollPosition);
+    
+//     if (scrollPosition >= this.topPosToStartShowing) {
+//       this.isShow = true;
+//     } else {
+//       this.isShow = false;
+//     }
+//   }
+
+//   scrollTo(className: string):void {
+//     const elementList = document.querySelectorAll('.' + className);
+//     const element = elementList[0] as HTMLElement;
+//     element.scrollIntoView({ behavior: 'smooth' });
+//  }
   // tslint:disable-next-line: one-line
   fillVacatures(){
 
@@ -192,5 +218,8 @@ export class VacturesComponent implements OnInit {
     return false;
   }
   
+//   scroll(el: HTMLElement) {
+//     el.scrollIntoView();
+// }
 
 }

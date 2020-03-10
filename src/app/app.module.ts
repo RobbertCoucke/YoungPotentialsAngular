@@ -98,7 +98,11 @@ import { CompanyItemComponent } from "./company-item/company-item.component";
 import { CookieComponent } from "./cookie/cookie.component";
 import { PagingComponent } from "./paging/paging.component";
 import { AngularStickyThingsModule } from "@w11k/angular-sticky-things";
+
 import { PolicyComponent } from './policy/policy.component';
+
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
 
 const appRoutes: Routes = [
   { path: "owned", component : CompanyVacaturesComponent},
@@ -110,6 +114,8 @@ const appRoutes: Routes = [
   { path: "profiel", component:ProfileComponent},
   { path: "profiel-bewerken", component:ProfileEditComponent},
   { path: "faq", component:FaqComponent},
+  { path: "navorming", component:NavormingComponent},
+
 
 
   //{ path: "inloggen", component:LoginComponent},
@@ -132,6 +138,10 @@ const appRoutes: Routes = [
   {
     path: "login",
     component: LoginComponent
+  },
+  {
+    path: "wachtwoord-reseten",
+    component: ResetPasswordComponent
   },
 
   // otherwise redirect to home
@@ -166,7 +176,9 @@ const appRoutes: Routes = [
     VerifyComponent,
     CompanyVacaturesComponent,
     CompanyItemComponent,
-    PolicyComponent
+    PolicyComponent,
+    ResetPasswordComponent
+
   ],
   imports: [
     ReactiveFormsModule,
@@ -194,7 +206,9 @@ const appRoutes: Routes = [
     ButtonsModule.forRoot(),
     //ngx-translateandtheloadermodule\\r\\nHttpClientModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: true }),
+    RouterModule.forRoot(appRoutes, {
+      enableTracing: true
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

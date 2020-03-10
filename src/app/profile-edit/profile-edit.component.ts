@@ -51,7 +51,7 @@ export class ProfileEditComponent implements OnInit {
         this.updateForm = this.formBuilder.group({
           firstName: [''],
           lastName: [''],
-          description: [''],
+          description: [''],  
           city: [''],
           url: [''],
           cvUrl: [''],
@@ -62,20 +62,27 @@ export class ProfileEditComponent implements OnInit {
           zipCode: ['']
         })
         this.userservice.getById(this.currentUser.id).subscribe(data => {
-          //console.log(data);
+          console.log(data);
           this.id = data.userId;
           //console.log(this.id);
           this.handleData(data);
-          //console.log(this.user)
+          console.log(this.user);
+          console.log(this.isStudent);
           this.updateform();
           if(this.isStudent)
           {
+            this.updateForm.get('companyName').setValidators(this.nameValidators.concat(Validators.required));
+            this.updateForm.get('description').setValidators(this.commonvalidators);
+            this.updateForm.get('url').setValidators(this.commonvalidators);
             this.updateFormStudent();
           }else{
             this.updateFormCompany();
+            
+          this.updateForm.get('firstName').setValidators(this.nameValidators.concat(Validators.required));
+          this.updateForm.get('lastName').setValidators(this.nameValidators.concat(Validators.required));
           }
           });
-        console.log(this.currentUser);
+/*         console.log(this.currentUser);
 
         if(this.isStudent) {
           console.log(this.isStudent);
@@ -88,7 +95,7 @@ export class ProfileEditComponent implements OnInit {
           this.updateForm.get('lastName').setValidators(this.nameValidators.concat(Validators.required));
   
         }
-
+ */
 
       }
 
@@ -101,12 +108,10 @@ export class ProfileEditComponent implements OnInit {
       this.user.cvUrl = data.cvUrl;
       this.user.firstName = data.firstName;
       this.user.name = data.name;
-      this.user.isStudent = true;
     }else{
       this.user.companyName = data.companyName;
       this.user.description = data.description;
       this.user.url = data.url;
-      this.user.isStudent = false;
     }
 
     this.user.city = data.city;

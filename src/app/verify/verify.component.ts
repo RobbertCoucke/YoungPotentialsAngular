@@ -22,7 +22,7 @@ export class VerifyComponent implements OnInit {
 
     this.authenticationService.currentUser.subscribe(u => {
       this.currentUser = u;
-       if(this.currentUser.role !== Role.Admin){
+       if(this.currentUser && this.currentUser.role !== Role.Admin){
         this.router.navigate(['/']);
       }
     });
@@ -38,6 +38,11 @@ export class VerifyComponent implements OnInit {
    
 
   ngOnInit() {
+  }
+
+  removeEvent(company: Company){
+
+    setTimeout( () => this.companies = this.companies.filter(o => o !== company), 1000);
   }
 
 }

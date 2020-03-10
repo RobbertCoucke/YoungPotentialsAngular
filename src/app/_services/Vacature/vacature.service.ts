@@ -12,9 +12,9 @@ export class VacatureService {
   getAllVacatures() {
     //options corsheader  HttpClient CORS header
         //anders checken wadaze versturen in header met die rare link me breakpoint in backend en da nadoen
-    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/getAll`);
+    //return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/getAll`);
     
-    //return this.http.get<any>(`http://localhost:60213/offer/getAll`);
+    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/getAll`);
   }
 
   getAllVacaturesByCompany(companyId: number) {
@@ -22,7 +22,11 @@ export class VacatureService {
   }
 
   createVacature(vacature: any) {
-    return this.http.post<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer`, vacature);
+    return this.http.post<any>(`http://localhost:60213/offer/create`, vacature);
+  }
+
+  createTest(){
+    return this.http.get<any>( `https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/create/test`);
   }
 
   updateOffer(vacature: Vacature){
@@ -46,7 +50,7 @@ export class VacatureService {
   }
 
   getAllTypes(){
-    return this.http.get<any>(`http://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/types`);
+    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/types`);
   }
 
 }

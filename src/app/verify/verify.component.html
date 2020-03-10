@@ -1,6 +1,6 @@
 
 
-    <app-company-item *ngFor="let company of companies" [company]="company"></app-company-item>
+    <app-company-item *ngFor="let company of companies" [company]="company"  (removeEvent)="removeEvent($event)" ></app-company-item>
 
     
 
