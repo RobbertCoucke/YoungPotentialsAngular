@@ -18,7 +18,7 @@ export class StudiegebiedService {
   studiegebieds: Studiegebied[];
 
   public getAllStudieGebieds(): Observable<any[]>{
-    return this.http.get<Studiegebied[]>(`${this.apiUrl}studiegebied`).pipe(
+    return this.http.get<Studiegebied[]>(`${this.localUrl}studiegebied`).pipe(
       tap(result => this.studiegebieds = result)
     );
   }

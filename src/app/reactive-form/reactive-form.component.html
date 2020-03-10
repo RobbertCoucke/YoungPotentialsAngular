@@ -11,7 +11,6 @@
           <form
             class="form"
             [formGroup]="uploadVacForm"
-            (ngSubmit)="onSubmit(uploadVacForm)"
           >
             <div class="form-group">
               <mat-form-field class="example-full-width">
@@ -189,6 +188,7 @@
             <div class="form-group">
               <button
                 type="submit"
+                [disabled]='titleValue === "" || emailValue === "" || dateValue === null || addressValue === "" || locatieValue === ""'
                 class="btn btn-success"
                 (click)="onSubmit()"
               >

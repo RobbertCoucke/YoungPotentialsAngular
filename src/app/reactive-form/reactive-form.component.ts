@@ -117,11 +117,12 @@ export class ReactiveFormComponent implements OnInit {
 
 
     this.authenticationService.currentUser.subscribe(u =>{
-
+      console.log(u);
       if(u.role === 'Company'){
           this.currentUser = u;
           this.userService.getById(u.id).subscribe(c => {
             this.company = c;
+            console.log(this.company);
             this.emailValue = c.email;
           });
       }else{
@@ -194,7 +195,7 @@ export class ReactiveFormComponent implements OnInit {
    * @description post de values van formvelden in console
    * @param uploadVacForm form
    */
-  onSubmit(uploadVacForm) {
+  onSubmit() {
 
     console.log(this.selectValue);
     var typeObject = this.types.filter(t => t.name === this.selectValue)[0];
