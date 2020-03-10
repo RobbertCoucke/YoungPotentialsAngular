@@ -11,7 +11,7 @@ export class Vacature
     name: string;
     companyName: string;
     address: string;
-    created: string;
+    created: Date;
     updated: string;
     expirationDate: Date;
     code: string;
@@ -31,9 +31,10 @@ export class Vacature
         this.name = object.name;
         this.companyName = object.companyName;
         this.address = object.address;
-        if(object.created){
-        this.created = JSON.stringify(object.created).substring(0,6);
-        }
+        this.created = object.created;
+        // if(object.created){
+        // this.created = JSON.stringify(object.created).substring(0,6);
+        // }
         this.updated = object.updated;
         this.expirationDate = object.expirationDate;
         this.code = object.code;

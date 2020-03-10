@@ -36,7 +36,9 @@ export class VactureItemComponent implements OnInit {
     if(this.favorietId != null){
       this.liked = true;
     }
-
+    console.log("Test")
+    console.log(this.vacature.created)
+    console.log(this.vacature.created.getUTCDate)
   }
 
   detailClick(vacature){
