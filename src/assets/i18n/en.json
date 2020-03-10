@@ -55,7 +55,7 @@
         "famnaamreq": "Family name is required!",
         "famnaam": "Family name",
         "bedrijfsnaamreq": "Company name is required!",
-        "bedrijfsnaam": "Company name",
+        "companyName": "Company name",
         "emailreq": "Email is required!",
         "emailpatern": "Please fill in a valid email address!",
         "email": "Email address",

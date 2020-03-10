@@ -56,7 +56,7 @@
         "famnaamreq": "Familienaam invullen is verplicht!",
         "famnaam": "Familienaam",
         "bedrijfsnaamreq": "Bedrijfsnaam invullen is verplicht!",
-        "bedrijfsnaam": "Bedrijfsnaam",
+        "companyName": "Bedrijfsnaam",
         "emailreq": "Email invullen is verplicht!",
         "emailpatern": "Gelieve een geldig emailadres in te vullen!",
         "email": "Emailadres",
