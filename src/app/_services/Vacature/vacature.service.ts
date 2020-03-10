@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Vacature} from '../../_models/vacature';
+import {Type} from '../../_models/type'
 
 @Injectable({
   providedIn: 'root'
@@ -33,10 +34,10 @@ export class VacatureService {
     return this.http.put<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/${vacature.id}`, vacature);
   }
 
-  filterVacatures(filters: Object){
-    return this.http.post<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/filter`,{ids: filters});
+  filterVacatures(filters: Object, types: Type[]){
+    return this.http.post<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/filter`,{types: types, ids: filters});
     
-    //return this.http.post<any>(`http://localhost:60213/offer/filter`,{ids: filters});
+    //return this.http.post<any>(`http://localhost:60213/offer/filter`,{ids: filters,types: types});
 
   }
 
