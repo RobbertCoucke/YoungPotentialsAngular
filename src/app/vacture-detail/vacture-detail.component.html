@@ -10,11 +10,12 @@
       </p>
       <div class="flex">
         <a class="btn btn-primary" href="#" role="button">{{"detail.bijlage" | translate}}</a>
-        <button class="btn btn-primary"  (click)="openDialog()">{{"detail.solliciteer" | translate}}</button>
+        <button class="btn btn-primary" *ngIf="currentUser && currentUser.role == 'User'"  (click)="openDialog()">{{"detail.solliciteer" | translate}}</button>
       </div>
     </div>
 </section>
 
+<button (click)=" testgeg()">test</button>
 
 <!--<a href="../EmptyOffice.jpg">Open image</a>
 <div style="background-image:url('../EmptyOffice.jpg');"></div>-->
