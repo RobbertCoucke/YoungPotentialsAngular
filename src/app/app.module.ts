@@ -101,16 +101,15 @@ import { AngularStickyThingsModule } from "@w11k/angular-sticky-things";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const appRoutes: Routes = [
-  { path: "owned", component : CompanyVacaturesComponent},
-  { path: "verify", component: VerifyComponent},
-  { path: "", component: HomeComponent},
-  { path: "vactures", component: VacturesComponent},
-  { path: "vacture-toevoegen", component: ReactiveFormComponent},
-  { path: "vacature-details/:id", component: VactureDetailComponent},
-  { path: "profiel", component:ProfileComponent},
-  { path: "profiel-bewerken", component:ProfileEditComponent},
-  { path: "faq", component:FaqComponent},
-
+  { path: "owned", component: CompanyVacaturesComponent },
+  { path: "verify", component: VerifyComponent },
+  { path: "", component: HomeComponent },
+  { path: "vactures", component: VacturesComponent },
+  { path: "vacture-toevoegen", component: ReactiveFormComponent },
+  { path: "vacature-details/:id", component: VactureDetailComponent },
+  { path: "profiel", component: ProfileComponent },
+  { path: "profiel-bewerken", component: ProfileEditComponent },
+  { path: "faq", component: FaqComponent },
 
   //{ path: "inloggen", component:LoginComponent},
 
@@ -198,7 +197,9 @@ const appRoutes: Routes = [
     ButtonsModule.forRoot(),
     //ngx-translateandtheloadermodule\\r\\nHttpClientModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: true }),
+    RouterModule.forRoot(appRoutes, {
+      enableTracing: true
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
