@@ -117,12 +117,14 @@ export class ReactiveFormComponent implements OnInit {
 
 
     this.authenticationService.currentUser.subscribe(u =>{
-
+      console.log(u);
       if(u.role === 'Company'){
           this.currentUser = u;
           this.userService.getById(u.id).subscribe(c => {
             this.company = c;
+            console.log(this.company);
             this.emailValue = c.email;
+            this.addressValue = c.address;
           });
       }else{
         this.router.navigate(['/']);
@@ -130,7 +132,11 @@ export class ReactiveFormComponent implements OnInit {
       
     });
 
-    this.vacatureService.getAllTypes().subscribe(types => this.types=types);
+    console.log("getting types");
+    this.vacatureService.getAllTypes().subscribe(types => {
+      this.types = types;
+      console.log(types);
+    });
 
 
 
@@ -166,7 +172,10 @@ export class ReactiveFormComponent implements OnInit {
    * @return naam van geselecteerde stad
    */
   displayLocatie(stad: Stad): string {
-    return (stad && stad.name) ? stad.name : stad.name;
+    if(stad != undefined)
+      return (stad && stad.name) ? stad.name : stad.name;
+    else
+      return "";
   }
 
   /**
@@ -194,7 +203,7 @@ export class ReactiveFormComponent implements OnInit {
    * @description post de values van formvelden in console
    * @param uploadVacForm form
    */
-  onSubmit(uploadVacForm) {
+  onSubmit() {
 
     console.log(this.selectValue);
     var typeObject = this.types.filter(t => t.name === this.selectValue)[0];
@@ -212,15 +221,20 @@ export class ReactiveFormComponent implements OnInit {
     if(this.uploadFile){
       this.uploadFile.set("isUser", "false");
     }
-
+    console.log(vacature);
     this.vacatureService.createVacature(vacature).subscribe(v => {
       console.log("added vacature");
       if(this.uploadFile){
         
       this.uploadFile.set("id", v.id.toString());
-      this.uploadService.upload(this.uploadFile).subscribe(() => console.log("uploading file succesfull"));
+      this.uploadService.upload(this.uploadFile).subscribe(p => {
+        console.log(p);
+        this.router.navigate(['/']);
+      });
+      }else{
+        this.router.navigate(['/']);
       }
-      this.router.navigate(['/']);
+      
     });
     
     

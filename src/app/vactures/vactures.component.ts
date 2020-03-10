@@ -133,8 +133,8 @@ export class VacturesComponent implements OnInit {
     this.fillVacatures();
   }
 
-  filterVacatures(filterArr){
-    this.vacatureService.filterVacatures(filterArr).subscribe(vacatures => {
+  filterVacatures(filterArr, typeArr){
+    this.vacatureService.filterVacatures(filterArr, typeArr).subscribe(vacatures => {
       
       this.vacatures = [];
     for(let i=0; i<vacatures.length;i++){
@@ -178,22 +178,24 @@ export class VacturesComponent implements OnInit {
 
 
 
-  handleFilter(filterArr){
+  handleFilter(filters){
+    var filterArr = filters.filter;
+    var typeArr = filters.types;
     //Indien een filter wordt aangeklikt wordt de lijst met vacatures onzichtbaar gemaakt.
     this.loadingFilter = false;
     //De load image wordt getoond wanneer een filter wordt aangeklikt.
     this.loading = true;
 
-    if(filterArr === null){
+    if(filterArr === null && typeArr === null){
       this.fillVacatures();
     }else{
     if(this.currentUser != null){
       this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
         this.favorites = f;
-        this.filterVacatures(filterArr);
+        this.filterVacatures(filterArr, typeArr);
       });
     }else{
-      this.filterVacatures(filterArr);
+      this.filterVacatures(filterArr, typeArr);
     }
   }
     

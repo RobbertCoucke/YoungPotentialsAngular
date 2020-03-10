@@ -19,6 +19,10 @@ export class UploadService {
   }
 
   download(isUser: boolean, id: number){
-    return this.http.delete<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/upload/download/${isUser}/${id}`);
+    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/upload/download/${isUser}/${id}`);
+  }
+
+  delete(isUser: boolean, id: number){
+    return this.http.delete<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/upload/delete/${isUser}/${id}`);
   }
 }
