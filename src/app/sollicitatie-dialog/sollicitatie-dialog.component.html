@@ -1,4 +1,3 @@
-
 <mat-horizontal-stepper linear #stepper>
   <mat-step [stepControl]="firstFormGroup" [editable]="editable">
     <form [formGroup]="firstFormGroup">
@@ -70,15 +69,19 @@
       <div class="list">
         <h3 class="semi-bold">Uploaden CV</h3>
         <p>
-          U heeft nog geen CV toegevoegd aan uw account. Om te kunnen solliciteren is een CV verplicht.
+          U heeft nog geen CV toegevoegd aan uw account. Om te kunnen
+          solliciteren is een CV verplicht.
         </p>
       </div>
 
       <div class="list">
-        <app-upload></app-upload>
+        <app-upload (uploadHandler)="handleUpload($event)"></app-upload>
+      </div>
+      <div *ngIf="uploadFile">
+        <p>{{uploadFile.get('file').name}}</p>
+        <button (click)="removeFile()" >X</button>
       </div>
       <footer>
-
         <div class="list">
           <button mat-raised-button class="buttons" matStepperPrevious>
             Back
@@ -89,9 +92,11 @@
     </form>
   </mat-step>
 
-
-
-  <mat-step [stepControl]="FourthFormGroup" [optional]="true" [editable]="editable">
+  <mat-step
+    [stepControl]="FourthFormGroup"
+    [optional]="true"
+    [editable]="editable"
+  >
     <form [formGroup]="FourthFormGroup">
       <ng-template matStepLabel>Uploaden sollicitatiebrief</ng-template>
       <div class="list">
@@ -102,11 +107,14 @@
         </p>
       </div>
       <div class="list">
-        <app-upload></app-upload>
+        <app-upload (uploadHandler)="handleUpload($event)"></app-upload>
+      </div>
+      <div *ngIf="uploadFile">
+        <p>{{uploadFile.get('file').name}}</p>
+        <button (click)="removeFile()" >X</button>
       </div>
       <footer>
         <div class="list">
-
           <button mat-raised-button class="buttons" matStepperPrevious>
             Back
           </button>
@@ -122,15 +130,14 @@
       <div class="list">
         <h3 class="semi-bold">Algemene voorwaarden</h3>
       </div>
-
-
       <p>
         Door het versturen van jouw sollicitatie gaat u akkoord met de
         <a href="#">algemene voorwaarden</a> en
         <a href="#">privacy policy</a> van Youngpotentials.org.
       </p>
-
-      <mat-checkbox (change)="changeCheck($event)" [formControl]="checkbox" [(ngModel)]="checkboxValue"
+      <mat-checkbox
+        (change)="changeCheck($event)"
+        [(ngModel)]="checkboxValue"
         >Ik ga akkoord met de algemene voorwaarden</mat-checkbox
       >
       <div>
@@ -151,7 +158,6 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Verstuurd</ng-template>
-
     <div class="center">
       <mat-icon [ngStyle]="{ color: 'white' }"> email</mat-icon>
     </div>
