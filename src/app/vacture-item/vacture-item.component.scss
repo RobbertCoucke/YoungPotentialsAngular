@@ -41,3 +41,15 @@
 .vacatureItem{
     text-align: left;
 }
+
+.icon.delete-vacature{
+    font-size: 30px;
+}
+.delete-vacature-wrapper{
+    position: absolute;
+    top: 20px;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 25px;
+}
