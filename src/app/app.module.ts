@@ -113,6 +113,7 @@ const appRoutes: Routes = [
   { path: "navorming", component:NavormingComponent},
 
 
+
   //{ path: "inloggen", component:LoginComponent},
 
   { path: "registreren", component: RegisterComponent },
@@ -199,7 +200,9 @@ const appRoutes: Routes = [
     ButtonsModule.forRoot(),
     //ngx-translateandtheloadermodule\\r\\nHttpClientModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: true }),
+    RouterModule.forRoot(appRoutes, {
+      enableTracing: true
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

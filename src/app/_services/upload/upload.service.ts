@@ -11,7 +11,7 @@ export class UploadService {
   //TODO change any to model!!
 
   upload(formData: FormData) {
-    return this.http.post<any>(`http://localhost:60213/upload`, formData);
+    return this.http.post<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/upload`, formData);
   }
 
   getFilePath(isUser: boolean, id: number) {
