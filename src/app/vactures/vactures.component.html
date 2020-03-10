@@ -7,9 +7,10 @@
         <div class="text-center col-lg-7">
 
             <div *ngIf="loadingFilter">
-                <div *ngIf="!currentUser || currentUser.role != 'User'" class="alert alert-warning" role="alert">
+                <!-- Warning is niet nodig, favorieten is disabled. -->
+                <!-- <div *ngIf="!currentUser || currentUser.role != 'User'" class="alert alert-warning" role="alert">
                     <p class="removeMarginbottom">{{favoriteError}}</p>
-                </div>
+                </div> -->
                 <ng-container *ngFor="let vacature of pageOfItems" >
                     <ng-container *ngIf="vacature.vacature.description != null">
                         <app-vacture-item  [showTrashcan]="false"  [showLike]="(currentUser && currentUser.role === 'User')"  [favorite]="vacature" (removeEvent)="removeEventAbstract($event)"   [currentUser]="currentUser" ></app-vacture-item>
