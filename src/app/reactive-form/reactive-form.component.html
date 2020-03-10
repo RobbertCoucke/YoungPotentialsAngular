@@ -134,15 +134,14 @@
                 >
               </div> 
             </div>-->
-            <app-upload (uploadHandler)="handleUpload($event)" ></app-upload>
+            <app-upload (uploadHandler)="handleUpload($event)"></app-upload>
           </div>
           <div *ngIf="uploadFile">
             <p>{{uploadFile.get('file').name}}</p>
             <button (click)="removeFile()" >X</button>
           </div>
-
             <div class="form-group">
-              <app-select-studiegebieden  (handleStudiegebieden)="handleStudiegebieden($event)"></app-select-studiegebieden>
+              <app-select-studiegebieden (handleStudiegebieden)="handleStudiegebieden($event)"></app-select-studiegebieden>
             </div>
             
             <div class="form-group">
