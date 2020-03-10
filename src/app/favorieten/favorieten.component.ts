@@ -30,6 +30,7 @@ export class FavorietenComponent implements OnInit {
     });
 
   } 
+  
 
   removeEvent(favorite: Favoriet){
 
@@ -40,7 +41,7 @@ export class FavorietenComponent implements OnInit {
     var list: Favoriet[] = [];
     data.forEach(f => {
       var vacature = new Vacature(f.vacature);
-      var favoriet = new Favoriet(f.id, vacature);
+      var favoriet = new Favoriet(f.id, new Vacature(vacature));
       list.push(favoriet);
     });
 

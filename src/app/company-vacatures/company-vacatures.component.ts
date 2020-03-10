@@ -37,7 +37,7 @@ export class CompanyVacaturesComponent implements OnInit {
             console.log(vacatures);
               //transfer vacatureObject to FavoriteObject for vacature-listItem and add to vacaturesList
               vacatures.forEach(element => {
-                this.vacatures.push(new Favoriet(null, element));
+                this.vacatures.push(new Favoriet(null, new Vacature(element)));
               });
           });
         });

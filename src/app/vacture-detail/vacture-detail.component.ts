@@ -4,7 +4,8 @@ import {
 } from "@angular/material";
 import { SollicitatieDialogComponent } from "app/sollicitatie-dialog/sollicitatie-dialog.component";
 import { ActivatedRoute, Router } from '@angular/router';
-import { VacatureService } from '@/_services/Vacature/vacature.service';  
+import { VacatureService } from '@/_services/Vacature/vacature.service'; 
+import { Vacature } from '@/_models/vacature';
 
 @Component({
   selector: 'app-vacture-detail',
@@ -13,8 +14,8 @@ import { VacatureService } from '@/_services/Vacature/vacature.service';
 })
 export class VactureDetailComponent  {
   id: number;
-  private $vacature: any;
-  vacature : object;
+  //private $vacature: any;
+  vacature : Vacature;
   student : boolean;
 
   
@@ -24,7 +25,6 @@ export class VactureDetailComponent  {
                   this.id = parseInt(params.get('id'));
                   console.log(this.id);
                 });
-                this.vacatureService.getVacatureById(this.id).subscribe(data => this.vacature = data );
               }
 
   openDialog(): void {
@@ -32,10 +32,12 @@ export class VactureDetailComponent  {
       width: "1200px",
       height: "500px",
     });
-    console.log(this.$vacature);
+    //console.log(this.$vacature);
   }
 
  ngOnInit(): void {
+  this.vacatureService.getVacatureById(this.id).subscribe(data => this.vacature = new Vacature(data) );
+
    this.student == true;
  }
 
