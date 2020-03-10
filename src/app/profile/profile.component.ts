@@ -3,6 +3,7 @@ import { User } from '@/_models';
 import { UserService, AuthenticationService } from '@/_services';
 import { Router } from '@angular/router';
 import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
+import { UploadService } from '@/_services/upload/upload.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,9 +16,10 @@ export class ProfileComponent implements OnInit {
   currentUser : User;
   isStudent : boolean;
   profiel: any;
+  uploadFile : any;
 
   constructor(private userservice: UserService, private authenticatieService: AuthenticationService,
-    private router: Router){
+    private router: Router, private uploadService: UploadService){
   }
 
   ngOnInit() {
@@ -33,6 +35,30 @@ export class ProfileComponent implements OnInit {
           console.log(this.profiel);
           });
       });
+
+      this.uploadService.getFilePath(true,this.currentUser.id).subscribe(p => {
+        if(p != null){
+
+        this.uploadFile = p.path;
+        }
+      });
     } 
+  }
+
+  handleUpload(formData: FormData){
+    formData.set("isUser", 'true');
+    formData.set("id", this.currentUser.id.toString());
+    this.uploadService.upload(formData).subscribe(p => {
+    var file : any = formData.get('file');
+    this.uploadFile = file.name;
+    console.log(file.name);
+    });
+  }
+
+  removeFile(){
+    this.uploadService.delete(true, this.currentUser.id).subscribe(p => {
+      this.uploadFile = null;
+    })
+
   }
 }

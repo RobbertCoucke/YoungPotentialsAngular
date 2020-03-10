@@ -10,7 +10,7 @@ import { Studiegebied } from 'app/_models/studiegebied';
   providedIn: 'root'
 })
 export class StudiegebiedService {
-  apiUrl: string = 'https://cors-anywhere.herokuapp.com/https://youngpotentials.azurewebsites.net/'
+  apiUrl: string = 'https://youngpotentials.azurewebsites.net/'
   localUrl: string = 'http://localhost:60213/'
 
   constructor(private http: HttpClient) { }
@@ -18,7 +18,7 @@ export class StudiegebiedService {
   studiegebieds: Studiegebied[];
 
   public getAllStudieGebieds(): Observable<any[]>{
-    return this.http.get<Studiegebied[]>(`${this.localUrl}studiegebied`).pipe(
+    return this.http.get<Studiegebied[]>(`${this.apiUrl}studiegebied`).pipe(
       tap(result => this.studiegebieds = result)
     );
   }

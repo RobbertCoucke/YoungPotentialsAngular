@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {RequestOptions, Request, Headers } from '@angular/http';
 import {Vacature} from '../../_models/vacature';
 import {Type} from '../../_models/type'
 
@@ -7,8 +8,11 @@ import {Type} from '../../_models/type'
   providedIn: 'root'
 })
 export class VacatureService {
+  requestoptions: RequestOptions;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.requestoptions = new RequestOptions({headers: null, withCredentials: true});
+  }
 
   getAllVacatures() {
     //options corsheader  HttpClient CORS header
@@ -23,7 +27,7 @@ export class VacatureService {
   }
 
   createVacature(vacature: any) {
-    return this.http.post<any>(`http://localhost:60213/offer/create`, vacature);
+    return this.http.post<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/create`, vacature);
   }
 
   createTest(){
@@ -51,7 +55,8 @@ export class VacatureService {
   }
 
   getAllTypes(){
-    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/types`);
+    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/https://youngpotentials.azurewebsites.net/offer/types`);
+    //return this.http.get<any>(`http://localhost:60213/offer/types`);
   }
 
 }
