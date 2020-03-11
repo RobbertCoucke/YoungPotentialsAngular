@@ -52,14 +52,19 @@ export class VactureFilterComponent implements OnInit {
     var selected = event.target;
 
     if(selected.name === 'typeVives'){
-
-      console.log(selectedVal);
-      console.log(this.types);
-      var selectedType = this.types.filter(t => t.id === selectedVal)[0];
+      var selectedType;
+      this.types.forEach(t => {
+        if(t.id.toString() === selectedVal.toString()){
+          selectedType = t;
+        }
+          
+      });
+      
+     
       if(event.target.checked){
         this.selectedTypes.push(selectedType);
       }else{
-        this.selectedTypes = this.selectedTypes.filter(t => t.id !== selectedVal);
+        this.selectedTypes = this.selectedTypes.filter(t => t.id.toString() !== selectedVal.toString());
       }
 
     }else{

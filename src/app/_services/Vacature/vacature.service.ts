@@ -41,9 +41,9 @@ export class VacatureService {
   }
 
   filterVacatures(filters: Object, types: Type[]){
-    return this.http.post<any>(`http://localhost:60213/offer/filter`,{types: types, ids: filters});
+    //return this.http.post<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/filter`,{types: types, ids: filters});
     
-    //return this.http.post<any>(`http://localhost:60213/offer/filter`,{ids: filters,types: types});
+    return this.http.post<any>(`http://localhost:60213/offer/filter`,{ids: filters,types: types});
 
   }
 
@@ -57,8 +57,8 @@ export class VacatureService {
   }
 
   getAllTypes(){
-    //return this.http.get<any>(`https://cors-anywhere.herokuapp.com/https://youngpotentials.azurewebsites.net/offer/types`);
-    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/types`);
+    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/https://youngpotentials.azurewebsites.net/offer/types`);
+    //return this.http.get<any>(`http://youngpotentials.azurewebsites.net/offer/types`);
   }
 
 }
