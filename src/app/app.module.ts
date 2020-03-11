@@ -99,24 +99,22 @@ import { CookieComponent } from "./cookie/cookie.component";
 import { PagingComponent } from "./paging/paging.component";
 import { AngularStickyThingsModule } from "@w11k/angular-sticky-things";
 
-import { PolicyComponent } from './policy/policy.component';
+import { PolicyComponent } from "./policy/policy.component";
 
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 const appRoutes: Routes = [
-  { path: "owned", component : CompanyVacaturesComponent},
-  { path: "verify", component: VerifyComponent},
-  { path: "", component: HomeComponent},
-  { path: "vactures", component: VacturesComponent},
-  { path: "vacture-toevoegen", component: ReactiveFormComponent},
-  { path: "vacature-details/:id", component: VactureDetailComponent},
-  { path: "profiel", component:ProfileComponent},
-  { path: "profiel-bewerken", component:ProfileEditComponent},
-  { path: "faq", component:FaqComponent},
-  { path: "navorming", component:NavormingComponent},
-
-
+  { path: "owned", component: CompanyVacaturesComponent },
+  { path: "verify", component: VerifyComponent },
+  { path: "", component: HomeComponent },
+  { path: "vactures", component: VacturesComponent },
+  { path: "vacture-toevoegen", component: ReactiveFormComponent },
+  { path: "vacature-details/:id", component: VactureDetailComponent },
+  { path: "profiel", component: ProfileComponent },
+  { path: "profiel-bewerken", component: ProfileEditComponent },
+  { path: "faq", component: FaqComponent },
+  { path: "navorming", component: NavormingComponent },
 
   //{ path: "inloggen", component:LoginComponent},
 
@@ -178,7 +176,6 @@ const appRoutes: Routes = [
     CompanyItemComponent,
     PolicyComponent,
     ResetPasswordComponent
-
   ],
   imports: [
     ReactiveFormsModule,
@@ -202,6 +199,7 @@ const appRoutes: Routes = [
     MatPaginatorModule,
     FormsModule,
     AngularStickyThingsModule,
+    MatSnackBarModule,
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot(),
     //ngx-translateandtheloadermodule\\r\\nHttpClientModule,
