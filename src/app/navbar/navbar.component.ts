@@ -90,6 +90,7 @@ export class NavbarComponent implements OnInit {
       this.selectedLanguage= getCookie("language");
       this.changeLanguage(this.selectedLanguage);
     }
+    console.log(this.router)
   }
 }
 
