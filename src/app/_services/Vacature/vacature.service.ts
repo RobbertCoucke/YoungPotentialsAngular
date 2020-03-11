@@ -58,7 +58,7 @@ export class VacatureService {
 
   getAllTypes(){
     //return this.http.get<any>(`https://cors-anywhere.herokuapp.com/https://youngpotentials.azurewebsites.net/offer/types`);
-    return this.http.get<any>(`http://localhost:60213/offer/types`);
+    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/types`);
   }
 
 }

@@ -37,7 +37,7 @@ export class UserService {
 
   forgotPassword(object: EmailRequest)
   {
-    return this.http.post<any>('http://localhost:60213/user/password', object);
+    return this.http.post<any>('https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/user/password', object);
   }
 
   resetPassword(object: UpdatePasswordRequest)
