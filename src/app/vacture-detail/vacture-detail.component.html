@@ -1,5 +1,5 @@
 <section id="vacature" *ngIf="vacature != null">
-  <div (click)="clicked()" class="container jumbotron empty-office">
+  <div class="container jumbotron empty-office">
     <a
       ><h1 class="rood">{{ vacature.title }}</h1>
       <h4>{{ vacature.companyName }} | {{ vacature.address }}</h4>
@@ -28,8 +28,3 @@
     </div>
   </div>
 </section>
-
-<button (click)="testgeg()">test</button>
-
-<!--<a href="../EmptyOffice.jpg">Open image</a>
-<div style="background-image:url('../EmptyOffice.jpg');"></div>-->
