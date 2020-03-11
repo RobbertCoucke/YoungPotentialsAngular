@@ -115,14 +115,14 @@ const appRoutes: Routes = [
   { path: "profiel-bewerken", component:ProfileEditComponent},
   { path: "faq", component:FaqComponent},
   { path: "navorming", component:NavormingComponent},
-
+  { path: "policy", component:PolicyComponent},
 
 
   //{ path: "inloggen", component:LoginComponent},
 
   { path: "registreren", component: RegisterComponent },
   { path: "favorieten", component: FavorietenComponent },
-  { path: "navorming", component: NavormingComponent },
+
 
   {
     path: "",
