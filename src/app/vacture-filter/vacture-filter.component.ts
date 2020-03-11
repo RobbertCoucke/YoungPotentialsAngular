@@ -12,7 +12,8 @@ import { Opleiding } from "@/_models/Opleiding";
 import { Afstudeerrichting } from "@/_models/afstudeerrichting";
 import { Keuze } from "@/_models/Keuze";
 import { VacatureService } from '@/_services/Vacature/vacature.service';
-import {Type} from '../_models/type'
+import {Type} from '../_models/type';
+import { FilterService } from './../_services/filter/filter.service';
 
 @Component({
   selector: "app-vacture-filter",
@@ -38,14 +39,30 @@ export class VactureFilterComponent implements OnInit {
 
   //TODO add types
 
-  constructor(private studieService: StudiegebiedService, private vacatureService: VacatureService) {
+  constructor(private studieService: StudiegebiedService, private vacatureService: VacatureService, private filterService: FilterService) {
     this.showData();
   }
 
   ngOnInit() {
     this.contentHeight = 2500;
-
+    console.log('x');
+    
     this.checkLocalStorage(this.types, this.studiegebieds);
+
+    //Een service zodat de functie checkvacature kan doorgegeven worden naar de homecomponent bij de knoppen vacatures, stage en vakantiejob
+    if (this.filterService.subsVar==undefined) {    
+      this.filterService.subsVar = this.filterService.invokeFilterComponent.subscribe((name:string) => {
+        console.log(name)
+        this.checkVacature(name);    
+      });    
+    }
+  }
+
+
+
+  ngAfterViewInit()
+  {
+    
   }
 
   checkLocalStorage(types, studiegbieden)
@@ -299,6 +316,15 @@ export class VactureFilterComponent implements OnInit {
     });
 
     return list;
+  }
+
+  checkVacature(typeName: string)
+  {
+    let element = <HTMLInputElement> document.getElementById(typeName);
+    element.checked = true;
+    let event = new CustomEvent("build",{detail: 3});
+    element.dispatchEvent(event)
+    this.check(event)
   }
 
   // changeHeight() {
