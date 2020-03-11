@@ -1,21 +1,35 @@
-
-<section id="vacature" *ngIf="vacature !=null">
-    <div (click)="clicked()" class="container jumbotron empty-office">
-      <a><h1 class="rood">{{vacature.title}}</h1><h4>{{vacature.companyName}} | {{vacature.address}} </h4>
-        <h6>Datum geplaatst: {{vacature.calculateDate()}}</h6>
-      </a>
-      <hr>
-      <p class="lead">
-        {{ vacature.description }}
-      </p>
-      <div class="flex">
-        <a class="btn btn-primary" href="#" role="button">{{"detail.bijlage" | translate}}</a>
-        <button class="btn btn-primary" *ngIf="currentUser && currentUser.role == 'User'"  (click)="openDialog()">{{"detail.solliciteer" | translate}}</button>
-      </div>
+<section id="vacature" *ngIf="vacature != null">
+  <div (click)="clicked()" class="container jumbotron empty-office">
+    <a
+      ><h1 class="rood">{{ vacature.title }}</h1>
+      <h4>{{ vacature.companyName }} | {{ vacature.address }}</h4>
+      <h6>Datum geplaatst: {{ vacature.calculateDate() }}</h6>
+    </a>
+    <hr />
+    <p class="lead">
+      {{ vacature.description }}
+    </p>
+    <div class="flex">
+      <button
+        class="btn btn-primary"
+        role="button"
+        (click)="startDownload()"
+        (click)="openSnackBar()"
+      >
+        {{ "detail.bijlage" | translate }}
+      </button>
+      <button
+        class="btn btn-primary"
+        *ngIf="currentUser && currentUser.role == 'User'"
+        (click)="openDialog()"
+      >
+        {{ "detail.solliciteer" | translate }}
+      </button>
     </div>
+  </div>
 </section>
 
-<button (click)=" testgeg()">test</button>
+<button (click)="testgeg()">test</button>
 
 <!--<a href="../EmptyOffice.jpg">Open image</a>
 <div style="background-image:url('../EmptyOffice.jpg');"></div>-->
