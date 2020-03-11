@@ -14,7 +14,9 @@
       </div>
     </div>
 </section>
-
+<div *ngIf="loading" class="loader">
+  <img src="../../assets/images/loading.gif" alt="loading ..." class="loadspinner"/>
+</div>
 <button (click)=" testgeg()">test</button>
 
 <!--<a href="../EmptyOffice.jpg">Open image</a>

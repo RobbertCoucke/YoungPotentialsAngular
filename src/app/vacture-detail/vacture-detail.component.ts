@@ -39,6 +39,7 @@ export class VactureDetailComponent  {
   user: User;
   userHasCV: boolean;
   userCV: string;
+  loading: boolean = true;
 
   companyEmailValue: string;
   
@@ -57,7 +58,10 @@ export class VactureDetailComponent  {
 
  ngOnInit(): void {
    //TODO: DATUM GEPLAATST vacature.calculateDate() laten werken, momenteel is er error _co.vacature.calculateDate() is not a function.
-  this.vacatureService.getVacatureById(this.id).subscribe(data => this.vacature = new Vacature(data));
+  this.vacatureService.getVacatureById(this.id).subscribe(data => {this.vacature = new Vacature(data);
+  this.loader(this.vacature);
+  }
+  );
   this.vacatureService.getVacatureById(this.id).subscribe(data => this.companyEmailValue = data['email']);
   this.uploadService.getFilePath(true,this.userID).subscribe(data => this.userCV = data);
   //this.uploadService.getFilePath(this.student,this.userID).subscribe(data => this.userCV = data[''])
@@ -76,7 +80,10 @@ export class VactureDetailComponent  {
   });
  }
 
-
+ loader(x)
+ {
+   this.loading = false;
+ }
 
  
  openDialog(): void {

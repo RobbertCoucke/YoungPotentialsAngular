@@ -225,7 +225,7 @@ const appRoutes: Routes = [
     //ngx-translateandtheloadermodule\\r\\nHttpClientModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, {
-      enableTracing: true,
+      onSameUrlNavigation: "reload",
       anchorScrolling: 'enabled',
     }),
     TranslateModule.forRoot({

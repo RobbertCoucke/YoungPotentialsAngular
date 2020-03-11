@@ -29,21 +29,25 @@ export class FavorietenComponent implements OnInit {
     this.favorieteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe( (data) => {
 
       this.offerList = this.mapJSONToModel(data);
-      if(this.offerList.length != 0)
-    {
-      this.loading = false;
-      
-    }
-    else
-    {
-      this.loading=false;
-      this.error=true;
-    }
+      this.loader(this.offerList);
     });
     
 
-  } 
-  
+  }
+
+  loader(x)
+   {
+      //Loading
+      if(x.length !== 0)
+      {
+        this.loading = false;
+      }
+      else
+      {
+        this.loading = false;
+        this.error = true;
+      }
+   }
 
   removeEvent(favorite: Favoriet){
 
