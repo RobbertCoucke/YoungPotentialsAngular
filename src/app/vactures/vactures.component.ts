@@ -150,11 +150,11 @@ export class VacturesComponent implements OnInit {
         if(inFavorites){
           this.vacatures.push(inFavorites);
         }else{
-          this.vacatures.push(new Favoriet(null, vacatures[i]));
+          this.vacatures.push(new Favoriet(null, new Vacature(vacatures[i])));
         }
       
       }else{
-        this.vacatures.push(new Favoriet(null, vacatures[i]));
+        this.vacatures.push(new Favoriet(null, new Vacature(vacatures[i])));
       }
       
     }
