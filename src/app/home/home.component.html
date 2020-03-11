@@ -1,25 +1,27 @@
-
 <!-- Full Page Image Header with Vertically Centered Content -->
 <header class="masthead">
-    <div class="container h-100">
-      <div class="row h-100 align-items-center">
-        <div class="col-12 text-center">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-12 text-center">
+      <div>
+        <h1 class="font-weight-light">{{"home.titel" | translate}}</h1>
+        <p class="lead wit">{{"home.subtitel" | translate}}</p>
+      </div>
         <div>
-          <h1 class="font-weight-light">{{"home.titel" | translate}}</h1>
-          <p class="lead wit">{{"home.subtitel" | translate}}</p>
-        </div>
-          <div>
-            <!-- TODO: Link buttons to vacature filter -->
-            <a class="btn btn-primary" href="#" role="button">{{"home.vacatures" | translate}}</a>
-            <a class="btn btn-primary" href="#" role="button">{{"home.stages" | translate}}</a>
-            <a class="btn btn-primary" href="#" role="button">{{"home.jobstudent" | translate}}</a>
-            <a class="btn btn-primary" href="https://www.vives.be/nl/bijscholen/overzicht" target="_blank" role="button">{{"home.verderst" | translate}}</a>
-            <a class="btn btn-primary" routerLink="/navorming" routerLinkActive="active" role="button">{{"home.navorming" | translate}}</a>
-          </div>
+          <!-- TODO: Link buttons to vacature filter -->
+          <a class="btn btn-primary" href="" [routerLink]="['vacatures']" [fragment]="'filter'" role="button">{{"home.vacatures" | translate}}</a>
+          <a class="btn btn-primary" href="" [routerLink]="['vacatures']" [fragment]="'filter'" role="button">{{"home.stages" | translate}}</a>
+          <a class="btn btn-primary" href="" [routerLink]="['vacatures']" [fragment]="'filter'" role="button">{{"home.jobstudent" | translate}}</a>
+          <a class="btn btn-primary" href="https://www.vives.be/nl/bijscholen/overzicht" target="_blank" role="button">{{"home.verderst" | translate}}</a>
+          <a class="btn btn-primary" routerLink="/navorming" routerLinkActive="active" role="button">{{"home.navorming" | translate}}</a>
         </div>
       </div>
     </div>
-  </header>
-  
-  <!-- Page Content -->
-<app-vactures></app-vactures>
+  </div>
+</header>
+
+<!-- Page Content -->
+<section id="filter">
+  <app-vactures></app-vactures>
+</section>
+

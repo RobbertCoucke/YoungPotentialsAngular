@@ -119,6 +119,7 @@ const appRoutes: Routes = [
   { path: "faq", component:FaqComponent},
   { path: "navorming", component:NavormingComponent},
   { path: "policy", component:PolicyComponent},
+  { path: "vacatures", component:HomeComponent},
 
 
   //{ path: "inloggen", component:LoginComponent},
@@ -224,7 +225,8 @@ const appRoutes: Routes = [
     //ngx-translateandtheloadermodule\\r\\nHttpClientModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, {
-      enableTracing: true
+      enableTracing: true,
+      anchorScrolling: 'enabled',
     }),
     TranslateModule.forRoot({
       loader: {
