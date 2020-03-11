@@ -43,7 +43,7 @@ export class VacatureService {
   filterVacatures(filters: Object, types: Type[]){
     //return this.http.post<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/filter`,{types: types, ids: filters});
     
-    return this.http.post<any>(`http://localhost:60213/offer/filter`,{ids: filters,types: types});
+    return this.http.post<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/filter`,{ids: filters,types: types});
 
   }
 
