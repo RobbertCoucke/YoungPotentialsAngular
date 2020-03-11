@@ -1,6 +1,14 @@
 
 <div>
-    <p>{{company.companyName}}</p>
-    <p>{{company.description}}</p>
-    <button (click)="verifyCompany()"  > VERIFY </button>
+    <p><span>Bedrijfsnaam: </span>{{company.companyName}}</p>
+    <p><span>Beschrijving: </span>{{company.description}}</p>
+    <!-- <p>Email: {{company.email}}</p> -->
+    <p><span>Tel.: </span>{{company.telephone}}</p>
+    <p><span>Stad: </span>{{company.city}}</p>
+    <p><span>Email: </span>{{company.address}}</p>
+    <p><span>Website: </span>{{company.url}}</p>
+    <p><span>Vacature: </span>{{company.offers}}</p>
+    <button (click)="verifyCompany()" class="btn  btnverify" > VERIFY </button>
+    <button (click)="unverifyCompany()" class="btn btnunverify" > UNVERIFY </button>
+    <hr>
 </div>
