@@ -1,5 +1,5 @@
 
-<section id="vacature">
+<section id="vacature" *ngIf="vacature !=null">
     <div (click)="clicked()" class="container jumbotron empty-office">
       <a><h1 class="rood">{{vacature.title}}</h1><h4>{{vacature.companyName}} | {{vacature.address}} </h4>
         <h6>Datum geplaatst: {{vacature.created}}</h6>

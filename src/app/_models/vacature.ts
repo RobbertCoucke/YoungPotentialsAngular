@@ -45,4 +45,36 @@ export class Vacature
         this.country = object.country;
     }
 
+    calculateDate(){
+        //Aanmaken Date object
+        let datumCreated = new Date(this.created);
+        let datumCreatedString;
+
+        //jaar maand en dag opslaan in variabele
+        let year = datumCreated.getFullYear();
+        let month = datumCreated.getMonth()+1;
+        let day = datumCreated.getDate();
+    
+        if (day < 10) {
+          datumCreatedString = '0' + day + "-";
+        }
+        else
+        {
+          datumCreatedString = day + "-";
+        }
+    
+        if (month < 10) {
+          datumCreatedString += '0' + month+ "-";
+        }
+        else
+        {
+          datumCreatedString += month+ "-";
+        }
+    
+        datumCreatedString += year;
+        
+        console.log(datumCreatedString);
+        return datumCreatedString;
+      }
+
 }

@@ -27,7 +27,9 @@ export class VacatureService {
   }
 
   createVacature(vacature: any) {
+
     return this.http.post<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/create`, vacature);
+
   }
 
   createTest(){

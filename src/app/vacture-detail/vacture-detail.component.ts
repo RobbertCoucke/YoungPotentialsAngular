@@ -1,8 +1,10 @@
-import { Vacature } from './../_models/vacature';
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { SollicitatieDialogComponent } from "app/sollicitatie-dialog/sollicitatie-dialog.component";
 import { ActivatedRoute, Router } from '@angular/router';
-import { VacatureService } from '@/_services/Vacature/vacature.service';  
+import { VacatureService } from '@/_services/Vacature/vacature.service'; 
+import { Vacature } from '@/_models/vacature';
+
+
 import { AuthenticationService } from "@/_services/Authentication/authentication.service";
 import { User, Company } from '@/_models';
 import { UserService } from '@/_services/User/user.service';
@@ -18,6 +20,7 @@ export interface DialogData {
   userHasCV: boolean;
 }
 
+
 @Component({
   selector: 'app-vacture-detail',
   templateUrl: './vacture-detail.component.html',
@@ -25,12 +28,11 @@ export interface DialogData {
 })
 export class VactureDetailComponent  {
   id: number;
-  private $vacature: any;
-  vacature : object;
-  test: object;
-  student : boolean;
+  vacature: Vacature;
 
-  userID : any;
+  student: boolean;
+
+  userID: any;
   currentUser: User;
   UseremailValue: string;
   cvURL: string;
@@ -49,15 +51,17 @@ export class VactureDetailComponent  {
                   this.id = parseInt(params.get('id'));
                   console.log(this.id);
                 });
-                this.vacatureService.getVacatureById(this.id).subscribe(data => this.vacature = data);
-                this.vacatureService.getVacatureById(this.id).subscribe(data => this.companyEmailValue = data['email']);
-                this.uploadService.getFilePath(true,this.userID).subscribe(data => this.userCV = data);
-                //this.uploadService.getFilePath(this.student,this.userID).subscribe(data => this.userCV = data[''])
-                this.HasCV()
+                
               }
 
 
  ngOnInit(): void {
+   //TODO: DATUM GEPLAATST vacature.calculateDate() laten werken, momenteel is er error _co.vacature.calculateDate() is not a function.
+  this.vacatureService.getVacatureById(this.id).subscribe(data => this.vacature = new Vacature(data));
+  this.vacatureService.getVacatureById(this.id).subscribe(data => this.companyEmailValue = data['email']);
+  this.uploadService.getFilePath(true,this.userID).subscribe(data => this.userCV = data);
+  //this.uploadService.getFilePath(this.student,this.userID).subscribe(data => this.userCV = data[''])
+  this.HasCV()
    this.student == true;
 
    this.authenticationService.currentUser.subscribe(u =>{

@@ -22,8 +22,7 @@ export class VactureItemComponent implements OnInit {
   @Output() removeFavoriteEvent: EventEmitter<Favoriet> = new EventEmitter<Favoriet>();
   favorietId: number;
   vacature: Vacature;
-  
-  
+
 
   constructor(
     private router: Router,
@@ -36,10 +35,9 @@ export class VactureItemComponent implements OnInit {
     if(this.favorietId != null){
       this.liked = true;
     }
-    console.log("Test")
-    console.log(this.vacature.created)
-    console.log(this.vacature.created.getUTCDate)
   }
+
+  
 
   detailClick(vacature){
     this.router.navigate(['/vacature-details'], { queryParams: { id: vacature.id }});
@@ -48,7 +46,7 @@ export class VactureItemComponent implements OnInit {
 
   delete(){
     this.vacatureService.deleteVacature(this.vacature.id).subscribe();
-    this;this.removeFavoriteEvent.emit(this.favorite);
+    this.removeFavoriteEvent.emit(this.favorite);
   }
 
   onLike(){

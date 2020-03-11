@@ -74,11 +74,11 @@ export class VacturesComponent implements OnInit {
     if(this.currentUser != null && this.currentUser.role == Role.User){
       this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
         this.favorites = f;
-        f.forEach(element => this.vacatures.push(new Favoriet(element.id, element.vacature)));
+        f.forEach(element => this.vacatures.push(new Favoriet(element.id, new Vacature (element.vacature))));
         this.vacatureService.getAllVacatures().subscribe(v => {
           v.forEach(element => {
             if(!this.checkIfVacatureAlreadyExists(element)){
-              this.vacatures.push(new Favoriet(null, element));
+              this.vacatures.push(new Favoriet(null, new Vacature (element)));
             }
           });
 
@@ -92,7 +92,7 @@ export class VacturesComponent implements OnInit {
     else{
       this.vacatureService.getAllVacatures().subscribe(v => {
         v.forEach(element => {
-          this.vacatures.push(new Favoriet(null, element));
+          this.vacatures.push(new Favoriet(null, new Vacature (element)));
         });
       //Alle vacatures worden in de variabele items gekopieerd omdat deze wordt gebruikt bij het pagineren.
       this.items = this.vacatures;
