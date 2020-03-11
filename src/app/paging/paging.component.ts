@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChange
 import { __importDefault } from 'tslib';
 
 import paginate from 'jw-paginate';
+
 // Had een error, gefixt via onderstaande code (zie https://stackoverflow.com/questions/56238356/understanding-esmoduleinterop-in-tsconfig-file/56348146#56348146)
 // transpiled js with esModuleInterop (simplified):
 // const paginate = __importDefault(require('jw-paginate'));
@@ -47,4 +48,6 @@ export class PagingComponent implements OnInit, OnChanges {
     // call change page function in parent component
     this.changePage.emit(pageOfItems);
   }
+
+  
 }

@@ -15,6 +15,12 @@ export class CompanyVacaturesComponent implements OnInit {
   currentUser : User;
   company: Company;
   vacatures : Favoriet[] = [];
+  /*
+   * Veld die bijhoudt indien de loading image moet worden getoond, hij start op true zodat wanneer de pagina inlaadt
+   * de load image wordt getoond totdat alle vacatures zijn ingeladen.
+  */
+  loading: boolean = true;
+  error: boolean = false;
 
   constructor(private vacatureService: VacatureService, private authenticationService : AuthenticationService, private userService : UserService) {
     
@@ -34,15 +40,32 @@ export class CompanyVacaturesComponent implements OnInit {
           //get all vacatures by companyId
           console.log(this.company);
           this.vacatureService.getAllVacaturesByCompany(this.company.id).subscribe(vacatures => {
-            console.log(vacatures);
               //transfer vacatureObject to FavoriteObject for vacature-listItem and add to vacaturesList
               vacatures.forEach(element => {
-                this.vacatures.push(new Favoriet(null, element));
+                this.vacatures.push(new Favoriet(null, new Vacature(element)));
               });
+              if(this.vacatures.length != 0)
+              {
+                console.log('Loading off');
+                console.log(this.vacatures)
+                this.loading = false;
+              }
+              else
+              {
+                this.loading=false;
+                this.error=true;
+                console.log("ERROR")
+              }
           });
         });
       }
     });
+  }
+
+  
+  removeEvent(favorite: Favoriet){
+
+    setTimeout( () => this.vacatures = this.vacatures.filter(o => o !== favorite), 1000);
   }
 
 }

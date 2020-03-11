@@ -40,8 +40,8 @@
 
                 <div *ngIf="isStudent == false" class="form-label-group margin">
                   <input type="text" class="form-control"
-                   formControlName='{{"register.Bedrijfsnaam" | translate}}'
-                   placeholder="Bedrijfsnaam" required/>
+                   formControlName='companyName'
+                   placeholder='{{"register.companyName" | translate}}' required/>
                    <div *ngIf="registerForm.controls['companyName'].invalid && (registerForm.controls['companyName'].dirty || registerForm.controls['companyName'].touched)">
                   <div *ngIf="registerForm.controls['companyName'].errors.required">{{"register.bedrijfsnaamreq" | translate}}</div>
                 </div>

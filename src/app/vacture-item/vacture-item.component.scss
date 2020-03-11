@@ -13,8 +13,14 @@
 .rood
 {
     color:#E50001;
+    transition: transform 0.2s;
 }
-
+.rood:hover{
+    transform:scale(1.02);
+}
+.link-vacature-detail{
+    text-decoration:none;
+}
 
 .section{
     margin-left: 10px;
@@ -34,4 +40,16 @@
 
 .vacatureItem{
     text-align: left;
+}
+
+.icon.delete-vacature{
+    font-size: 30px;
+}
+.delete-vacature-wrapper{
+    position: absolute;
+    top: 20px;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 25px;
 }

@@ -6,17 +6,17 @@
                   <i (click)="onLike()" class="material-icons icon likeVacature">{{liked ? 'favorite' : 'favorite_border' }}</i>
 
                 </div>
-                <div (click)="detailClick(vacature)" class="col-lg-9 textContainer">
-                  <a [routerLink]="['/vacature-details', vacature.id]"><h5  class="rood">{{vacature.title}}</h5></a>
-                  <h6 class="card-price"><span class="period">{{vacature.companyName}} | {{vacature.address}} | {{vacature.created}}</span></h6>
+                <div class="col-lg-9 textContainer">
+                  <a [routerLink]="['/vacature-details', vacature.id]" class="link-vacature-detail"><h5  class="rood">{{vacature.title}}</h5></a>
+                  <h6 class="card-price"><span class="period">{{vacature.companyName}} | {{vacature.address}} | {{vacature.calculateDate()}}</span></h6>
                 </div>
               </div>
               <hr>
-              <div (click)="detailClick(vacature)" class="section">
+              <div class="section">
                 <p>{{vacature.description.substring(0,200)}} ... </p>
               </div>
-              <div *ngIf="showTrashcan" class="col-lg-1">
-                <i (click)="delete()" class="material-icons icon">delete</i>
+              <div *ngIf="showTrashcan" class="col-lg-1 delete-vacature-wrapper">
+                <i (click)="delete()" class="material-icons icon delete-vacature">delete</i>
               </div>
             </div>
 

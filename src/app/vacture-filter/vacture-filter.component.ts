@@ -11,6 +11,8 @@ import { Studiegebied } from "@/_models/studiegebied";
 import { Opleiding } from "@/_models/Opleiding";
 import { Afstudeerrichting } from "@/_models/afstudeerrichting";
 import { Keuze } from "@/_models/Keuze";
+import { VacatureService } from '@/_services/Vacature/vacature.service';
+import {Type} from '../_models/type'
 
 @Component({
   selector: "app-vacture-filter",
@@ -18,13 +20,13 @@ import { Keuze } from "@/_models/Keuze";
   styleUrls: ["./vacture-filter.component.scss"]
 })
 export class VactureFilterComponent implements OnInit {
-  @Output() filterEvent: EventEmitter<Studiegebied[]> = new EventEmitter<
-    Studiegebied[]
-  >();
+  @Output() filterEvent: EventEmitter<Object> = new EventEmitter<Object>();
 
   //selectedGebied: string;
   //array for all Studiegebied objects
   studiegebieds: Studiegebied[] = [];
+  types: Type[];
+  selectedTypes: Type[] = [];
   //array for all opleiding objects
   opleidingArray: Opleiding[] = [];
 
@@ -36,7 +38,7 @@ export class VactureFilterComponent implements OnInit {
 
   //TODO add types
 
-  constructor(private studieService: StudiegebiedService) {
+  constructor(private studieService: StudiegebiedService, private vacatureService: VacatureService) {
     this.showData();
   }
 
@@ -47,6 +49,18 @@ export class VactureFilterComponent implements OnInit {
   check(event) {
     //get the selected value
     var selectedVal = event.target.value;
+    var selected = event.target;
+
+    if(selected.name === 'typeVives'){
+
+      var selectedType = this.types.find(t => t.id === selectedVal);
+      if(event.target.checked){
+        this.selectedTypes.push(selectedType);
+      }else{
+        this.selectedTypes = this.selectedTypes.filter(t => t.id !== selectedVal);
+      }
+
+    }else{
     //console.log(selectedVal);
 
     //check if checkbox is checked to add or unchecked to delete
@@ -102,11 +116,13 @@ export class VactureFilterComponent implements OnInit {
         }
       }
     }
+  }
 
-    if (this.selectedgebieds.length < 1) {
-      this.filterEvent.emit(null);
+    if (this.selectedgebieds.length < 1 && this.selectedTypes.length < 1) {
+
+      this.filterEvent.emit( {filter: null, types: null});
     } else {
-      this.filterEvent.emit(this.selectedgebieds);
+      this.filterEvent.emit({filter: this.selectedgebieds, types: this.selectedTypes});
     }
   }
 
@@ -134,6 +150,7 @@ export class VactureFilterComponent implements OnInit {
    * @description verwijdert alle filters
    */
   removeSelected() {
+    this.selectedTypes = [];
     this.selectedgebieds = [];
 
     this.filterEvent.emit(null);
@@ -175,6 +192,16 @@ export class VactureFilterComponent implements OnInit {
     return null;
   }
 
+  isSelectedType(id){
+    
+    var object = this.selectedTypes.find(t => t.id === id);
+    if(object != undefined)
+      return true;
+    else  
+      return false;
+
+  }
+
   /**
    * @description kijkt het of id in de geselecteerde filters voorkomt
    * @param id
@@ -201,6 +228,11 @@ export class VactureFilterComponent implements OnInit {
     this.studieService.getAllStudieGebieds().subscribe(res => {
       this.studiegebieds = this.mapJSONToModel(res);
     });
+    this.vacatureService.getAllTypes().subscribe(types => {
+      
+      this.types = types;
+      console.log(this.types);
+    });
   }
 
   //data mapping
@@ -209,7 +241,7 @@ export class VactureFilterComponent implements OnInit {
     res.forEach(element => {
       var opleiding: Opleiding[] = [];
       var opleidingArray = element.opleiding;
-      if (opleidingArray.length != 0) {
+      if (opleidingArray && opleidingArray.length != 0) {
         opleidingArray.forEach(o => {
           var afstudeerrichtingsArray = o.afstudeerrichting;
           var afstudeerrichtings: Afstudeerrichting[] = [];

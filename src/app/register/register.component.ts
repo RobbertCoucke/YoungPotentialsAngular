@@ -59,6 +59,7 @@ private commonvalidators = [
       firstName: ['',this.nameValidators],
       lastName: ['', this.nameValidators],
       companyName: ['', this.nameValidators],
+      bedrijfsnaam: ['', this.nameValidators],
       email: ['', this.emailValidators],
       password: ['', this.passwordValidators],
       confirmPassword: ['', this.passwordValidators],

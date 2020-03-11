@@ -58,3 +58,15 @@ ul li {
     margin-left: 0;
     position: relative;
 }
+.content-height{
+    height: 2400px;
+}
+
+@media only screen and (max-width: 992px) {
+.content-height{
+    height:inherit;
+}
+.is-sticky.boundary-reached{
+    position: inherit !important;
+}
+}

@@ -5,7 +5,7 @@ import {
   AfterViewInit,
   ViewChild
 } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material";
 import {
   FormBuilder,
   FormGroup,
@@ -14,6 +14,7 @@ import {
 } from "@angular/forms";
 import { STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
 import { UploadComponent } from "@/upload/upload.component";
+import { DialogData } from "@/vacture-detail/vacture-detail.component";
 
 @Component({
   selector: "app-sollicitatie-dialog",
@@ -21,35 +22,54 @@ import { UploadComponent } from "@/upload/upload.component";
   styleUrls: ["./sollicitatie-dialog.component.scss"]
 })
 export class SollicitatieDialogComponent implements OnInit {
+  checkboxValue: boolean; // checkbox waarde voor algemene voorwaarden
 
-  checkboxValue: boolean;
+  uploadFile: FormData; // we stopen opgeladen bestand in formdata
 
-  emailSender = "sender@gmail.com";
-  emailReciever = "reciever@gmail.com";
+  emailSender = this.data.UseremailValue; // email van de hudige gebruiker
+  emailReciever = this.data.companyEmailValue; // email van het bedrijf die vacature plaatste
+  //userHasCV = this.data.userHasCV; // controle of ingelogde user CV heeft
+  userHasCV = true; //dummy om CV te simuleren
 
+  /**
+   * * FormGroup per step in stepper
+   */
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   FourthFormGroup: FormGroup;
   FifthFormGroup: FormGroup;
 
-  disabledAgreement: boolean = true;
-  disableFile: boolean = true;
-  editable: boolean = true;
 
+  disabledAgreement: boolean = true; // value checkbox bij algemene voorwaarden
+  editable: boolean = true; // value om navigeren naar step te disabelen
+
+
+  /**
+   * @description formcontrols voor validatie
+   */
   senderCtrl = new FormControl(this.emailSender, [
     Validators.required,
     Validators.email
   ]);
-  checkbox = new FormControl("", [Validators.required]);
+  checkboxControl = new FormControl("", [Validators.required]);
   onderwerpControl = new FormControl("", [Validators.required]);
   bodyControl = new FormControl("", [Validators.required]);
 
-  constructor(private formBuilder: FormBuilder) {}
-
-  
+  constructor(
+    private formBuilder: FormBuilder, 
+    /**
+     * * Hier laden we data in uit vacature-detail 
+     * * We kunnen deze data bereiken via het data veld
+     */
+    public dialogRef: MatDialogRef<SollicitatieDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
 
   ngOnInit() {
+    /**
+     * @description Formgroups aanmaken
+     */
     this.firstFormGroup = this.formBuilder.group({
       senderCtrl: this.senderCtrl
     });
@@ -61,24 +81,38 @@ export class SollicitatieDialogComponent implements OnInit {
     this.thirdFormGroup = this.formBuilder.group({});
     this.FourthFormGroup = this.formBuilder.group({});
     this.FifthFormGroup = this.formBuilder.group({
-    checkbox: this.checkbox
+      checkboxControl: this.checkboxControl
     });
   }
 
+  /**
+   * 
+   * @param event bij click op next
+   * @description maakt vorige velden ontoegankelijk
+   */
   changeCheck(event) {
     this.disabledAgreement = !event.checked;
   }
 
-  // checkFile(event) {
-  //   if (this.hasFile === true){
-  //     console.log("heeft file");
-  //   }
-  //   else {
-  //     console.log("Geen file");
-  //   }
-  //   //this.disableFile = !event.checked;
-  // }
+  /**
+   * 
+   * @param formData formdata met upgeloade file
+   * @description stopt file in formdata om naar backend te versturen
+   */
+  handleUpload(formData: FormData) {
+    this.uploadFile = formData;
+  }
 
+  /**
+   * @description verwijdert upgeloade file
+   */
+  removeFile(){
+    this.uploadFile = null;
+  }
+
+  /**
+   * @description error messages oproepen
+   */
   getErrorMessageEmail() {
     return this.senderCtrl.hasError("required")
       ? "U moet een email opgeven"
@@ -95,10 +129,5 @@ export class SollicitatieDialogComponent implements OnInit {
 
   getErrorMessageRequiredBody() {
     return this.bodyControl.hasError("required") ? "Veld is verplicht" : "";
-  }
-
-  str: string;
-  sendValues(): void {
-    console.log(this.str);
   }
 }

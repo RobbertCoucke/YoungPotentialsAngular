@@ -11,7 +11,7 @@ export class Vacature
     name: string;
     companyName: string;
     address: string;
-    created: string;
+    created: Date;
     updated: string;
     expirationDate: Date;
     code: string;
@@ -31,9 +31,10 @@ export class Vacature
         this.name = object.name;
         this.companyName = object.companyName;
         this.address = object.address;
-        if(object.created){
-        this.created = JSON.stringify(object.created).substring(0,6);
-        }
+        this.created = object.created;
+        // if(object.created){
+        // this.created = JSON.stringify(object.created).substring(0,6);
+        // }
         this.updated = object.updated;
         this.expirationDate = object.expirationDate;
         this.code = object.code;
@@ -43,5 +44,37 @@ export class Vacature
         this.city = object.city;
         this.country = object.country;
     }
+
+    calculateDate(){
+        //Aanmaken Date object
+        let datumCreated = new Date(this.created);
+        let datumCreatedString;
+
+        //jaar maand en dag opslaan in variabele
+        let year = datumCreated.getFullYear();
+        let month = datumCreated.getMonth()+1;
+        let day = datumCreated.getDate();
+    
+        if (day < 10) {
+          datumCreatedString = '0' + day + "-";
+        }
+        else
+        {
+          datumCreatedString = day + "-";
+        }
+    
+        if (month < 10) {
+          datumCreatedString += '0' + month+ "-";
+        }
+        else
+        {
+          datumCreatedString += month+ "-";
+        }
+    
+        datumCreatedString += year;
+        
+        console.log(datumCreatedString);
+        return datumCreatedString;
+      }
 
 }

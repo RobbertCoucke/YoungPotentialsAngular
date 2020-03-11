@@ -1,7 +1,7 @@
-<div #boundary [ngStyle]="{ 'height.px': contentHeight }">
+<div #boundary class="content-height">
   <div #spacer></div>
   <div
-    class="card"
+    class=""
     stickyThing=""
     [spacer]="spacer"
     [boundary]="boundary"
@@ -13,6 +13,30 @@
           <h5 class="card-title text-muted text-uppercase">Filter:</h5>
           <div id="list1" class="dropdown-check-list" tabindex="100"></div>
           <ul class="row">
+            <h6>type</h6>
+            <ul>
+              <div *ngFor="let type of types">
+                <li>
+                  <input
+                    class="input"
+                    type="checkbox"
+                    value="{{ type.id }}"
+                    (change)="check($event)"
+                    name="typeVives"
+                    [checked]="isSelectedType(type.id)"
+                  />
+                  <div
+                    class="filterContainer filterStudiegebied"
+                  >
+                    <p class="filterTekst">{{ type.name }}</p>
+                    </div>
+                    
+                    
+                </li>
+              </div>
+            </ul>
+
+
             <h6>{{ "filter.studiegebieden" | translate }}</h6>
             <ul class="row removeMarginbottom">
 

@@ -17,6 +17,7 @@ import {UserService} from '../_services/User/user.service'
 import { UploadService } from '@/_services/upload/upload.service';
 import { VacatureService } from '@/_services/Vacature/vacature.service';
 import { Vacature } from '@/_models/vacature';
+import {Type} from '../_models/type'
 
 /**
  * * Interfaces
@@ -61,6 +62,7 @@ export class ReactiveFormComponent implements OnInit {
   vacatureBestand = new FormControl("", [Validators.required]);
   einddatum = new FormControl("", [Validators.required]);
   typeControl = new FormControl("", Validators.required);
+  address = new FormControl("");
 
   submitted = false; // false: form niet submited | true: form submitted
 
@@ -72,11 +74,13 @@ export class ReactiveFormComponent implements OnInit {
   descriptionValue: string;
   dateValue: any;
   companyValue: any;
+  addressValue : string;
   currentUser: User;
   company: Company;
   uploadFile: FormData;
   selectValue: any;
   tags: Studiegebied[];
+  types: Type[];
 
   minDate: Date; // min datum datepicker
   maxDate: Date; // max datum datepicker
@@ -84,11 +88,7 @@ export class ReactiveFormComponent implements OnInit {
   /**
    * @description Array met types
    */
-  types: Array<any> = [
-    { name: "Vacature", value: "Vacature" },
-    { name: "Stage", value: "Stage" },
-    { name: "Vrijwilligerswerk", value: "Vrijwilligerswerk" }
-  ];
+
 
   studiegebieden: any[] = []; // declaratie array voor in te laden studiegebieden
 
@@ -99,7 +99,7 @@ export class ReactiveFormComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private uploadService: UploadService,
-    private vacatureService: VacatureService
+    private vacatureService: VacatureService,
   ) {
     this.steden = cities;
     this.minDate = new Date();
@@ -115,21 +115,29 @@ export class ReactiveFormComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log("subscribe to user");
+
     this.authenticationService.currentUser.subscribe(u =>{
-      console.log("in user!!");
       console.log(u);
       if(u.role === 'Company'){
           this.currentUser = u;
           this.userService.getById(u.id).subscribe(c => {
             this.company = c;
-            console.log(c);
+            console.log(this.company);
+            this.emailValue = c.email;
+            this.addressValue = c.address;
           });
       }else{
         this.router.navigate(['/']);
       }
       
     });
+
+    console.log("getting types");
+    this.vacatureService.getAllTypes().subscribe(types => {
+      this.types = types;
+      console.log(types);
+    });
+
 
 
     /**
@@ -164,7 +172,10 @@ export class ReactiveFormComponent implements OnInit {
    * @return naam van geselecteerde stad
    */
   displayLocatie(stad: Stad): string {
-    return (stad && stad.name) ? stad.name : stad.name;
+    if(stad != undefined)
+      return (stad && stad.name) ? stad.name : stad.name;
+    else
+      return "";
   }
 
   /**
@@ -192,33 +203,38 @@ export class ReactiveFormComponent implements OnInit {
    * @description post de values van formvelden in console
    * @param uploadVacForm form
    */
-  onSubmit(uploadVacForm) {
+  onSubmit() {
 
-    console.log(this.selectedSTG);
-    console.log(this.selectedopleiding);
-    console.log(this.tags);
+    console.log(this.selectValue);
+    var typeObject = this.types.filter(t => t.name === this.selectValue)[0];
 
-    var vacature = new Vacature({title: this.titleValue,
+    var vacature = {title: this.titleValue,
                                  description: this.descriptionValue,
                                 email: this.emailValue,
-                                city: this.locatieValue,
-                                typeId: 0,
-                                companyId: this.company.id});
-    vacature.tags = this.tags;
+                                city: this.locatieValue.name,
+                                expirationDate: this.dateValue,
+                                typeId: typeObject.id,
+                                companyId: this.company.id,
+                                address: this.addressValue,
+                                tags: this.tags};
 
     if(this.uploadFile){
-      this.uploadFile.append("isUser", "false");
-      this.uploadFile.append("id", this.company.id.toString());
+      this.uploadFile.set("isUser", "false");
     }
-
     console.log(vacature);
     this.vacatureService.createVacature(vacature).subscribe(v => {
-      console.log("created vacature");
+      console.log("added vacature");
       if(this.uploadFile){
-        console.log(this.uploadFile);
-      this.uploadService.upload(this.uploadFile).subscribe();
+        
+      this.uploadFile.set("id", v.id.toString());
+      this.uploadService.upload(this.uploadFile).subscribe(p => {
+        console.log(p);
+        this.router.navigate(['/']);
+      });
+      }else{
+        this.router.navigate(['/']);
       }
-      this.router.navigate(['/']);
+      
     });
     
     
@@ -273,6 +289,12 @@ export class ReactiveFormComponent implements OnInit {
       : "";
   }
 
+  getErrorMessageAddress() {
+    return this.titel.hasError("required")
+    ? "U moet een address opgeven"
+    : "";
+  }
+
   getErrorMessagelocatieControl() {
     return this.locatieControl.hasError("required")
       ? "U moet een locatie selecteren"
@@ -308,4 +330,6 @@ export class ReactiveFormComponent implements OnInit {
       ? "U moet minstens 1 type selecteren"
       : "";
   }
+
+  
 }
