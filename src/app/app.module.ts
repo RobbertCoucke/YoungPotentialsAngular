@@ -102,6 +102,9 @@ import { AngularStickyThingsModule } from "@w11k/angular-sticky-things";
 import { PolicyComponent } from './policy/policy.component';
 
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { EmailPasswordRequestComponent } from './email-password-request/email-password-request.component';
+import { MessageComponent } from './message/message.component';
+import { WachtwoordVeranderdComponent } from './wachtwoord-veranderd/wachtwoord-veranderd.component';
 
 
 const appRoutes: Routes = [
@@ -143,6 +146,18 @@ const appRoutes: Routes = [
     path: "wachtwoord-reseten",
     component: ResetPasswordComponent
   },
+  {
+    path: "wachtoord-veranderen-aanvraag",
+    component: EmailPasswordRequestComponent
+  },
+  {
+    path:"message",
+    component: MessageComponent
+  },
+  {
+    path:"succes-message",
+    component: WachtwoordVeranderdComponent
+  },
 
   // otherwise redirect to home
   { path: "**", redirectTo: "" }
@@ -176,10 +191,12 @@ const appRoutes: Routes = [
     VerifyComponent,
     CompanyVacaturesComponent,
     CompanyItemComponent,
-    PolicyComponent,
-    ResetPasswordComponent
-
-  ],
+    ResetPasswordComponent,
+    EmailPasswordRequestComponent,
+    MessageComponent,
+    WachtwoordVeranderdComponent,
+    PolicyComponent
+],
   imports: [
     ReactiveFormsModule,
     BrowserModule,

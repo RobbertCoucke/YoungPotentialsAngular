@@ -15,6 +15,7 @@ export class ResetPasswordComponent implements OnInit {
   submitted= false;
   token : string;
   email: string;
+  showError = false;
   updatePasswordModel: UpdatePasswordRequest;
   error: string;
 
@@ -26,6 +27,8 @@ export class ResetPasswordComponent implements OnInit {
     this.passwordForm = this.formBuilder.group({
       wachtwoord: [''],
       confirmWachtwoord:['']
+    }, {
+      validator: MustMatch('wachtwoord', 'confirmWachtwoord')
     })
 
      this.route.queryParams.subscribe(params => {
@@ -40,27 +43,30 @@ export class ResetPasswordComponent implements OnInit {
 
   }
 
-  setUpdatePasswordModel(){
-  }
+   get updateFormControls() { return this.passwordForm.controls; }
 
   onSubmit() {
-    this.submitted = true;
-    this.setUpdatePasswordModel;
-    console.log(this.passwordForm);
-    console.log(this.email);
-    console.log(this.token);
-    /* if(this.passwordForm.invalid)
+    //this.setUpdatePasswordModel;
+    //console.log(this.passwordForm);
+    //console.log(this.email);
+    //console.log(this.token);
+    
+     if(this.passwordForm.invalid)
     {
       console.log(this.passwordForm);
       return;
-    } */
+    } 
     
+    var controls = this.updateFormControls;
+    this.updatePasswordModel = new UpdatePasswordRequest(this.email,this.token, controls.wachtwoord.value);
+    console.log(this.updatePasswordModel);
 
-
-    /* this.userService.resetPassword(this.updatePasswordModel).subscribe(data =>{
-      this.router.navigate(['/']);
+      this.userService.resetPassword(this.updatePasswordModel).subscribe(data =>{
+      this.router.navigate(["/succes-message"]);
       },
       error => {
-        this.error = error;} )*/
+        console.log(error);
+        this.showError = true;
+        this.error = error;} )
   } 
 }
