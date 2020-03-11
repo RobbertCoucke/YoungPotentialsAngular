@@ -53,7 +53,9 @@ export class VactureFilterComponent implements OnInit {
 
     if(selected.name === 'typeVives'){
 
-      var selectedType = this.types.find(t => t.id === selectedVal);
+      console.log(selectedVal);
+      console.log(this.types);
+      var selectedType = this.types.filter(t => t.id === selectedVal)[0];
       if(event.target.checked){
         this.selectedTypes.push(selectedType);
       }else{
@@ -193,12 +195,16 @@ export class VactureFilterComponent implements OnInit {
   }
 
   isSelectedType(id){
-    
-    var object = this.selectedTypes.find(t => t.id === id);
+    if(this.selectedTypes.length >0){
+      var object = this.selectedTypes.find(t => t.id === id);
     if(object != undefined)
       return true;
     else  
       return false;
+    }else{
+      return false;
+    }
+    
 
   }
 
