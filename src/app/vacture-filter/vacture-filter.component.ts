@@ -25,7 +25,7 @@ export class VactureFilterComponent implements OnInit {
   //selectedGebied: string;
   //array for all Studiegebied objects
   studiegebieds: Studiegebied[] = [];
-  types: Type[];
+  types: Type[] = [];
   selectedTypes: Type[] = [];
   //array for all opleiding objects
   opleidingArray: Opleiding[] = [];
@@ -44,6 +44,27 @@ export class VactureFilterComponent implements OnInit {
 
   ngOnInit() {
     this.contentHeight = 2500;
+
+    this.checkLocalStorage(this.types, this.studiegebieds);
+  }
+
+  checkLocalStorage(types, studiegbieden)
+  {
+    const localTypes = JSON.parse(localStorage.getItem('types'));
+    const localStudiegebieden = JSON.parse(localStorage.getItem('studiegebied'));
+
+    if(localTypes != undefined)
+    {
+        localTypes.forEach(element => {
+          types.push(element)
+        });
+    }
+    if(localStudiegebieden != undefined)
+    {
+        localStudiegebieden.forEach(element => {
+          studiegbieden.push(element)
+        });
+    }
   }
 
   check(event) {
@@ -209,8 +230,6 @@ export class VactureFilterComponent implements OnInit {
     }else{
       return false;
     }
-    
-
   }
 
   /**
@@ -236,14 +255,23 @@ export class VactureFilterComponent implements OnInit {
 
   //get Observable data from server
   showData() {
+    if(localStorage.getItem('studiegebied') == undefined)
+      {
+        console.log('Get data from database studiegebied')
     this.studieService.getAllStudieGebieds().subscribe(res => {
       this.studiegebieds = this.mapJSONToModel(res);
-    });
-    this.vacatureService.getAllTypes().subscribe(types => {
-      
+      localStorage.setItem('studiegebied',JSON.stringify(this.studiegebieds));
+      });
+    }
+
+    if(localStorage.getItem('types') == undefined)
+    {
+      console.log('Get data from database types')
+      this.vacatureService.getAllTypes().subscribe(types => {
       this.types = types;
-      console.log(this.types);
+      localStorage.setItem('types',JSON.stringify(this.types));
     });
+    }
   }
 
   //data mapping

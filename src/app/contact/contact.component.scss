@@ -1,0 +1,19 @@
+.send-mail {
+    box-shadow: none;
+    padding: 8px 25px;
+    border: none;
+    border-radius: 40px;
+    background: #e50001;
+    color:white;
+    transition: transform 0.2s;
+}
+.send-mail:hover {
+transform: scale(1.1);
+}
+
+.margin-top{
+    margin-top: 15px;
+}
+.just-center{
+    justify-content: center;
+}
