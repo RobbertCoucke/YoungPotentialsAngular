@@ -1,0 +1,53 @@
+
+<form class="simple-form" [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+    <div class="form-label-group margin" >
+        <input type="text" formControlName="firstName" class="form-control"
+        placeholder='{{"register.voornaam" | translate}}' required
+        [ngClass]="{ 'is-invalid': submitted && studentForm.controls['firstName'].errors }"/>
+      <div *ngIf="submitted && studentForm.controls['firstName'].errors" class="invalid-feedback">
+        <div *ngIf="studentForm.controls['firstName'].errors.required">{{"register.voornaamreq" | translate}}</div>
+      </div>
+      </div>
+
+      <div class="form-label-group margin" >
+        <input type="text" formControlName="lastName" class="form-control"
+        placeholder='{{"register.famnaam" | translate}}' required
+        [ngClass]="{ 'is-invalid': submitted && studentForm.controls['lastName'].errors }"/>
+      <div *ngIf="submitted && studentForm.controls['lastName'].errors" class="invalid-feedback">
+        <div *ngIf="studentForm.controls['lastName'].errors.required">{{"register.famnaamreq" | translate}}</div>
+      </div>
+      </div>
+
+      <div class="form-label-group margin" >
+        <input type="text" formControlName="email" class="form-control"
+        placeholder='{{"register.email" | translate}}' required
+        [ngClass]="{ 'is-invalid': submitted && studentForm.controls['email'].errors }"/>
+      <div *ngIf="submitted && studentForm.controls['email'].errors" class="invalid-feedback">
+        <div *ngIf="studentForm.controls['email'].errors.required">{{"register.emailreq" | translate}}</div>
+        <div *ngIf="studentForm.controls['email'].errors.pattern">{{"register.emailpatern" | translate}}</div>
+      </div>
+    </div>
+
+      <div class="form-label-group margin" >
+        <input type="password" formControlName="password" class="form-control"
+        placeholder='{{"register.wachtwoord" | translate}}' required
+        [ngClass]="{ 'is-invalid': submitted && studentForm.controls['password'].errors }"/>
+      <div *ngIf="submitted && studentForm.controls['password'].errors" class="invalid-feedback">
+        <div *ngIf="studentForm.controls['password'].errors.required">{{"register.wachtwoordreq" | translate}}</div>
+        <div *ngIf="studentForm.controls['password'].errors.minLength">{{"register.wachtwoordpatern" | translate}}</div>
+      </div>
+      </div>
+  
+      <div class="form-label-group margin" >
+        <input type="password" formControlName="confirmPassword" class="form-control"
+        placeholder='{{"register.herhaalww" | translate}}' required
+        [ngClass]="{ 'is-invalid': submitted && studentForm.controls['confirmPassword'].errors }"/>
+      <div *ngIf="submitted && studentForm.controls['confirmPassword'].errors" class="invalid-feedback">
+        <div *ngIf="studentForm.controls['confirmPassword'].errors.required">{{"register.herhaalwwreq" | translate}}</div>
+        <div *ngIf="studentForm.controls['confirmPassword'].errors.minLength">{{"register.wachtwoordpatern" | translate}}</div>
+        <div *ngIf="studentForm.controls['confirmPassword'].errors.mustMatch">{{"register.herhaalwwpatern" | translate}}</div>
+      </div>
+      </div>
+
+      <button class="btn btn-primary btn-block text-uppercase font-weight-bold mb-2" type="submit">{{"register.registreer" | translate}}</button>
+</form>
