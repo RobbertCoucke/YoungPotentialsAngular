@@ -108,6 +108,8 @@ import { WachtwoordVeranderdComponent } from './wachtwoord-veranderd/wachtwoord-
 import { ContactComponent } from './contact/contact.component';
 
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { StudentformComponent } from './studentform/studentform.component';
+import { CompanyformComponent } from './companyform/companyform.component';
 
 const appRoutes: Routes = [
   { path: "owned", component : CompanyVacaturesComponent},
@@ -199,7 +201,9 @@ const appRoutes: Routes = [
       MessageComponent,
       WachtwoordVeranderdComponent,
       PolicyComponent,
-      ContactComponent
+      ContactComponent,
+      StudentformComponent,
+      CompanyformComponent
    ],
    imports: [
       ReactiveFormsModule,

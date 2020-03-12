@@ -9,6 +9,7 @@
               <img class="mb-4" src="../../assets/images/vives_logo.png">
               <h2 class="login-heading mb-4">{{"register.titel1" | translate}}</h2>
               <div class="btn-group btnContainer margin" role="group" aria-label="Basic example">
+<<<<<<< HEAD
                 <button (click)="studentClicked()" (click)="onSelect()" type="button"
                   class="btn btn-danger">{{"register.registerstud" | translate}}</button>
                 <button (click)="bedrijfClicked()" (click)="onSelect()" type="button"
@@ -140,8 +141,24 @@
                     </div>
                   </div>
 
+=======
+                <button (click)="studentClicked()" (click)="onSelect()" type="button" class="btn btn-danger">{{"register.registerstud" | translate}}</button>
+                <button  (click)="bedrijfClicked()" (click)="onSelect()" type="button" class="btn btn-danger">{{"register.registerbedr" | translate}}</button>
+                </div>
+                <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+                <div [hidden]="IsHidden">
 
+                <div *ngIf="isStudent; else showCompany">
+                  <app-studentform (register)="register($event)"></app-studentform>
+                </div>
+>>>>>>> 6ab6e42a6f93ceb4245f65491a80866725116d2e
 
+                <ng-template #showCompany>
+                  <app-companyform (register)="register($event)"></app-companyform>
+                </ng-template>
+                 </div>
+
+<<<<<<< HEAD
 
                   <button class="btn btn-primary btn-block text-uppercase font-weight-bold mb-2"
                     type="submit">{{"register.registreer" | translate}}</button>
@@ -155,6 +172,8 @@
                 <!--                   <div class="text-center">
                   <a class="small" href="#">Forgot password?</a></div> -->
               </form>
+=======
+>>>>>>> 6ab6e42a6f93ceb4245f65491a80866725116d2e
             </div>
           </div>
         </div>
