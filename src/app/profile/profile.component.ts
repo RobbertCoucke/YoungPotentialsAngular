@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   isStudent : boolean;
   profiel: any;
   uploadFile : any;
+  loading: boolean = true;
 
   constructor(private userservice: UserService, private authenticatieService: AuthenticationService,
     private router: Router, private uploadService: UploadService){
@@ -33,6 +34,7 @@ export class ProfileComponent implements OnInit {
           this.isStudent=data.isStudent;
           this.profiel = data;
           console.log(this.profiel);
+          this.loader(this.profiel);
           });
       });
 
@@ -45,6 +47,11 @@ export class ProfileComponent implements OnInit {
     } 
   }
 
+  loader(x)
+  {
+    this.loading = false;
+  }
+  
   handleUpload(formData: FormData){
     formData.set("isUser", 'true');
     formData.set("id", this.currentUser.id.toString());

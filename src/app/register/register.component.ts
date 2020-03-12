@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Register } from '@/_models/register';
 import { MustMatch } from 'app/_helpers/mustMatch';
+import { SectorService } from '@/_services/Sector/sector.service';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +15,7 @@ import { MustMatch } from 'app/_helpers/mustMatch';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
+  sectors : any[];
   loading = false;
   submitted = false;
   returnUrl: string;
@@ -46,11 +48,14 @@ private commonvalidators = [
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService,
+    private sectorService: SectorService) {
       // redirect to home if already logged in
       if (this.authenticationService.currentUserValue) { 
         this.router.navigate(['/']);
     }
+
+    this.sectorService.GetAll().subscribe(sectoren => this.sectors = sectoren);
      }
 
   ngOnInit() {
@@ -109,12 +114,10 @@ private commonvalidators = [
     console.log(regModel);
 
 
-
-
     //de gebruiker toevoegen aan de database
      this.authenticationService.register(regModel).subscribe(
             data => {
-                this.router.navigate([""]);
+                //this.router.navigate([""]);
             },
             error => {
                 this.error = error;
@@ -134,6 +137,7 @@ private commonvalidators = [
     model.city = controls.city.value;
 
     //de student moet zijn naam, voorname en CV geven.
+
     if(this.isStudent == false){
     //bedrijf moet een beschrijving, url en naam geven
 
