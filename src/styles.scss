@@ -3,7 +3,9 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import "~@ng-select/ng-select/themes/material.theme.css";
 
-
+html{
+    scroll-behavior: smooth;
+}
 
 .container{
     
@@ -31,4 +33,4 @@ h3{
 .material-icons {
     cursor: pointer;
 }
-
+  

@@ -99,30 +99,33 @@ import { CookieComponent } from "./cookie/cookie.component";
 import { PagingComponent } from "./paging/paging.component";
 import { AngularStickyThingsModule } from "@w11k/angular-sticky-things";
 
-import { PolicyComponent } from './policy/policy.component';
+import { PolicyComponent } from "./policy/policy.component";
 
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
+import { EmailPasswordRequestComponent } from "./email-password-request/email-password-request.component";
+import { MessageComponent } from "./message/message.component";
+import { WachtwoordVeranderdComponent } from "./wachtwoord-veranderd/wachtwoord-veranderd.component";
 
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 const appRoutes: Routes = [
-  { path: "owned", component : CompanyVacaturesComponent},
-  { path: "verify", component: VerifyComponent},
-  { path: "", component: HomeComponent},
-  { path: "vactures", component: VacturesComponent},
-  { path: "vacture-toevoegen", component: ReactiveFormComponent},
-  { path: "vacature-details/:id", component: VactureDetailComponent},
-  { path: "profiel", component:ProfileComponent},
-  { path: "profiel-bewerken", component:ProfileEditComponent},
-  { path: "faq", component:FaqComponent},
-  { path: "navorming", component:NavormingComponent},
-
-
+  { path: "owned", component: CompanyVacaturesComponent },
+  { path: "verify", component: VerifyComponent },
+  { path: "", component: HomeComponent },
+  { path: "vactures", component: VacturesComponent },
+  { path: "vacture-toevoegen", component: ReactiveFormComponent },
+  { path: "vacature-details/:id", component: VactureDetailComponent },
+  { path: "profiel", component: ProfileComponent },
+  { path: "profiel-bewerken", component: ProfileEditComponent },
+  { path: "faq", component: FaqComponent },
+  { path: "navorming", component: NavormingComponent },
+  { path: "policy", component: PolicyComponent },
+  { path: "vacatures", component: HomeComponent },
 
   //{ path: "inloggen", component:LoginComponent},
 
   { path: "registreren", component: RegisterComponent },
   { path: "favorieten", component: FavorietenComponent },
-  { path: "navorming", component: NavormingComponent },
 
   {
     path: "",
@@ -142,6 +145,18 @@ const appRoutes: Routes = [
   {
     path: "wachtwoord-reseten",
     component: ResetPasswordComponent
+  },
+  {
+    path: "wachtoord-veranderen-aanvraag",
+    component: EmailPasswordRequestComponent
+  },
+  {
+    path: "message",
+    component: MessageComponent
+  },
+  {
+    path: "succes-message",
+    component: WachtwoordVeranderdComponent
   },
 
   // otherwise redirect to home
@@ -176,10 +191,13 @@ const appRoutes: Routes = [
     VerifyComponent,
     CompanyVacaturesComponent,
     CompanyItemComponent,
-    PolicyComponent,
-    ResetPasswordComponent
-
+    ResetPasswordComponent,
+    EmailPasswordRequestComponent,
+    MessageComponent,
+    WachtwoordVeranderdComponent,
+    PolicyComponent
   ],
+
   imports: [
     ReactiveFormsModule,
     BrowserModule,
@@ -202,12 +220,14 @@ const appRoutes: Routes = [
     MatPaginatorModule,
     FormsModule,
     AngularStickyThingsModule,
+    MatSnackBarModule,
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot(),
     //ngx-translateandtheloadermodule\\r\\nHttpClientModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, {
-      enableTracing: true
+      enableTracing: true,
+      anchorScrolling: "enabled"
     }),
     TranslateModule.forRoot({
       loader: {

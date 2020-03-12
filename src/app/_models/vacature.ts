@@ -73,7 +73,6 @@ export class Vacature
     
         datumCreatedString += year;
         
-        console.log(datumCreatedString);
         return datumCreatedString;
       }
 

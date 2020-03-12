@@ -132,13 +132,12 @@
       </div>
       <p>
         Door het versturen van jouw sollicitatie gaat u akkoord met de
-        <a href="#">algemene voorwaarden</a> en
-        <a href="#">privacy policy</a> van Youngpotentials.org.
+        <a href="" [routerLink]="['policy']" target="_blank">privacy policy</a> van Youngpotentials.org.
       </p>
       <mat-checkbox
         (change)="changeCheck($event)"
         [(ngModel)]="checkboxValue"
-        [formControl]="checkbox"
+        [formControl]="checkboxControl"
         >Ik ga akkoord met de algemene voorwaarden</mat-checkbox
       >
       <div>
