@@ -61,6 +61,8 @@
         "email": "Email address",
         "nummer": "Phone number",
         "postcode": "Zip code",
+        "websitereq": "Website url is required!",
+        "website": "Website url",
         "stadreq": "City is required!",
         "stad": "City",
         "bedrijfsbeschrijvingreq": "Company description is required!",

@@ -1,0 +1,53 @@
+.btn-primary:active{
+    background-color: rgb(201, 5, 5);
+    border: none;
+    outline: none;
+  }
+
+  
+
+
+  .btnContainer{
+    display: block;
+  }
+
+.btn-danger{
+  margin-right: 3px;
+  border-radius: 20px;
+}
+
+  .simple-form input:invalid {
+    border-left: 2px solid red;
+  }
+
+  .simple-form input:dirty {
+    border-left: 2px solid red;
+  }
+
+
+  .margin {
+    margin-bottom: 10px;
+  }
+  
+
+  .btn-primary
+  {
+      box-shadow: none;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 40px;
+      background: #E50001;
+      transition: transform .2s;
+      color: white;
+  }
+  
+  .btn-primary:hover, .btn-primary:focus
+  {
+      transform: scale(1.05);
+  }
+
+  .btn-primary:active{
+    background-color: rgb(201, 5, 5);
+    border: none;
+    outline: none;
+  }
