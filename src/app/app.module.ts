@@ -99,7 +99,7 @@ import { CookieComponent } from "./cookie/cookie.component";
 import { PagingComponent } from "./paging/paging.component";
 import { AngularStickyThingsModule } from "@w11k/angular-sticky-things";
 
-import { PolicyComponent } from './policy/policy.component';
+import { PolicyComponent } from "./policy/policy.component";
 
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { EmailPasswordRequestComponent } from './email-password-request/email-password-request.component';
@@ -107,6 +107,7 @@ import { MessageComponent } from './message/message.component';
 import { WachtwoordVeranderdComponent } from './wachtwoord-veranderd/wachtwoord-veranderd.component';
 import { ContactComponent } from './contact/contact.component';
 
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 const appRoutes: Routes = [
   { path: "owned", component : CompanyVacaturesComponent},
@@ -128,7 +129,6 @@ const appRoutes: Routes = [
 
   { path: "registreren", component: RegisterComponent },
   { path: "favorieten", component: FavorietenComponent },
-
 
   {
     path: "",
@@ -154,11 +154,11 @@ const appRoutes: Routes = [
     component: EmailPasswordRequestComponent
   },
   {
-    path:"message",
+    path: "message",
     component: MessageComponent
   },
   {
-    path:"succes-message",
+    path: "succes-message",
     component: WachtwoordVeranderdComponent
   },
 
@@ -223,6 +223,7 @@ const appRoutes: Routes = [
       MatPaginatorModule,
       FormsModule,
       AngularStickyThingsModule,
+      MatSnackBarModule,
       BsDatepickerModule.forRoot(),
       ButtonsModule.forRoot(),
       //ngx-translateandtheloadermodule\\\\r\\\\nHttpClientModule,
