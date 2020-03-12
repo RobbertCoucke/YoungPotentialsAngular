@@ -172,5 +172,11 @@ private commonvalidators = [
     this.isStudent = false;
   }
 
+  //hidden maken van input velden vooraleer op buttons werd geklikt
 
+  IsHidden= true;
+
+  onSelect(){
+  this.IsHidden= false;
+}
 }

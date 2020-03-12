@@ -74,5 +74,8 @@
       <a class="btn btn-primary" routerLink="/profiel-bewerken" role="button">Aanpassen</a>
     </div>
   </div>
+  <div *ngIf="loading" class="loader">
+    <img src="../../assets/images/loading.gif" alt="loading ..." class="loadspinner"/>
+  </div>
 </section>
 

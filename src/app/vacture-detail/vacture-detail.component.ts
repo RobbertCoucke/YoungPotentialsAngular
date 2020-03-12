@@ -36,10 +36,12 @@ export class VactureDetailComponent {
   currentUser: User; // User object met alle velden van user
   UseremailValue: string; // Email van ingelogde user
   user: User; // User object van user algemeen
-  userHasCV: boolean; // True als user een cv heeft
+  userHasCV: boolean = false; // True als user een cv heeft
   userCV: string; // CV van ingelogde user
 
   companyEmailValue: string; // Email van ingelogde bedrijf
+
+  loading: boolean = true; // Loader
 
   constructor(
     private dialog: MatDialog,
@@ -60,8 +62,20 @@ export class VactureDetailComponent {
     //TODO: DATUM GEPLAATST vacature.calculateDate() laten werken, momenteel is er error _co.vacature.calculateDate() is not a function.
     this.vacatureService
       .getVacatureById(this.id)
-      .subscribe(data => (this.vacature = new Vacature(data)));
-    this.vacatureService
+      .subscribe(data => {(this.vacature = new Vacature(data));
+      this.loader(this.vacature);
+      });
+    
+
+    this.authenticationService.currentUser.subscribe(u => {
+      if (u && u.role === "User") {
+        this.currentUser = u;
+        this.UseremailValue = u.email;
+        this.userID = u.id;
+        this.userService.getById(u.id).subscribe(c => {
+          this.user = c;
+        });
+        this.vacatureService
       .getVacatureById(this.id)
       .subscribe(data => (this.companyEmailValue = data["email"]));
     this.uploadService
@@ -70,18 +84,14 @@ export class VactureDetailComponent {
     //this.uploadService.getFilePath(this.student,this.userID).subscribe(data => this.userCV = data[''])
     this.HasCV();
     this.student == true;
+    }
+  });
+ }
 
-    this.authenticationService.currentUser.subscribe(u => {
-      if (u.role === "User") {
-        this.currentUser = u;
-        this.UseremailValue = u.email;
-        this.userID = u.id;
-        this.userService.getById(u.id).subscribe(c => {
-          this.user = c;
-        });
-      }
-    });
-  }
+ loader(x)
+ {
+   this.loading = false;
+ }
 
   /**
    * @description opent sollicitatie dialoog

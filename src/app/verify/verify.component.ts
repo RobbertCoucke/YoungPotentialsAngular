@@ -14,6 +14,8 @@ export class VerifyComponent implements OnInit {
 
   currentUser : User;
   companies: Company[];
+  loading: boolean = true;
+  error: boolean = false;
 
 
   constructor(private authenticationService: AuthenticationService,
@@ -30,11 +32,23 @@ export class VerifyComponent implements OnInit {
     this.companyService.getAllUnverifiedCompanies().subscribe(c => {
       
       this.companies = c;
-      console.log(this.companies);
+      this.loader(this.companies);
     });
    }
 
-
+   loader(x)
+   {
+      //Loading
+      if(x.length !== 0)
+      {
+        this.loading = false;
+      }
+      else
+      {
+        this.loading = false;
+        this.error = true;
+      }
+   }
    
 
   ngOnInit() {
