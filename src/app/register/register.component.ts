@@ -126,7 +126,7 @@ private commonvalidators = [
     //de gebruiker toevoegen aan de database
      this.authenticationService.register(regModel).subscribe(
             data => {
-                //this.router.navigate([""]);
+                this.router.navigate([""]);
             },
             error => {
                 this.error = error;

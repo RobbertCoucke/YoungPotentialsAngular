@@ -1,76 +1,48 @@
-<!--Section: Contact v.2-->
-<section class="mb-4 container">
+<div class="wrapper">
+	<div class="content-wrap">
 
-  <!--Section heading-->
-  <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
-  <!--Section description-->
-  <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
-      a matter of hours to help you.</p>
+		<div class="map-wrap">
+            <iframe id="google-map" frameborder="0" height="550" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2521.3636181210945!2d3.2819580159210235!3d50.80590136956951!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c33b36bed42563%3A0x78da70272b9a1e28!2sKatholieke%20Hogeschool%20KATHO%2C%20Doorniksesteenweg%20145%2C%208500%20Kortrijk!5e0!3m2!1snl!2sbe!4v1584006866254!5m2!1snl!2sbe" style="border:0" width="100%"></iframe>
+        </div>
+		<div class="layout-center">
 
-  <div class="row just-center">
 
-      <!--Grid column-->
-      <div class="col-md-9 mb-md-0 mb-5">
-          <form id="contact-form" name="contact-form" action="mail.php" method="POST">
-
-              <!--Grid row-->
-              <div class="row">
-
-                  <!--Grid column-->
-                  <div class="col-md-6">
-                      <div class="md-form mb-0">
-                        <label for="name" class="">Your name</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Name">
-                      </div>
-                  </div>
-                  <!--Grid column-->
-
-                  <!--Grid column-->
-                  <div class="col-md-6">
-                      <div class="md-form mb-0">
-                        <label for="email" class="">Your e-mail</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="E-mail">
-                          
-                      </div>
-                  </div>
-                  <!--Grid column-->
-
-              </div>
-              <!--Grid row-->
-
-              <!--Grid row-->
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="md-form mb-0">
-                        <label for="subject" class="">Subject</label>
-                        <input type="text" id="subject" name="subject" class="form-control" placeholder="Typ your subject here">
-                      </div>
-                  </div>
-              </div>
-              <!--Grid row-->
-
-              <!--Grid row-->
-              <div class="row">
-                  <!--Grid column-->
-                  <div class="col-md-12">
-                      <div class="md-form">
-                        <label for="message">Your message</label>
-                        <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea" placeholder="Typ your message here"></textarea>
-                      </div>
-                  </div>
-              </div>
-              <!--Grid row-->
-
-          </form>
-
-          <div class="text-center margin-top">
-              <a class="btn btn-primary send-mail" routerLink="/" >Send</a>
+      <div class="form-wrap">
+        <div class="form-block col-md-12">
+          <h2 class="sub-title">Neem contact met ons op</h2>
+          <form action="" class="contact">
+            <div class="form-item">
+              <label for="">Volledige naam</label>
+              <input type="text">
+             </div>
+             <div class="form-item">
+              <label for="">Emailadres</label>
+              <input type="text">
+             </div>
+            <div class="form-item">
+              <label for="">Onderwerp</label>
+              <input type="text">
+             </div>
+            <div class="form-item">
+              <label for="">Bericht</label>
+              <textarea id="edit-message" name="message" rows="5" cols="60" class="form-textarea required resize-vertical"></textarea>
+             </div>
+            <div class="form-item">
+              <!-- <button class="btn-login"  type="submit" name="op" value="verzenden">Verzenden</button> -->
+              <button class="btn btn-verzenden" type="submit">Verzenden</button>
+            </div>
+            </form>
           </div>
-          <div class="status"></div>
+        <div class="address-block col-md-12">
+          <h2 class="sub-title">Contact Info</h2>
+          <ul>
+            <li>Doorniksesteenweg 145, 8500 Kortrijk</li>
+            <li>info@vives.be</li>
+          </ul>
+        </div>
       </div>
-      <!--Grid column-->
+		</div>
+		
+	</div>
+</div>
 
-  </div>
-
-</section>
-<!--Section: Contact v.2-->

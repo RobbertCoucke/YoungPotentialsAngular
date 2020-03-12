@@ -9,89 +9,99 @@
               <img class="mb-4" src="../../assets/images/vives_logo.png">
               <h2 class="login-heading mb-4">{{"register.titel1" | translate}}</h2>
               <div class="btn-group btnContainer margin" role="group" aria-label="Basic example">
-                <button (click)="studentClicked()" (click)="onSelect()" type="button" class="btn btn-danger">{{"register.registerstud" | translate}}</button>
-                <button  (click)="bedrijfClicked()" (click)="onSelect()" type="button" class="btn btn-danger">{{"register.registerbedr" | translate}}</button>
-                </div>
-              
+                <button (click)="studentClicked()" (click)="onSelect()" type="button"
+                  class="btn btn-danger">{{"register.registerstud" | translate}}</button>
+                <button (click)="bedrijfClicked()" (click)="onSelect()" type="button"
+                  class="btn btn-danger">{{"register.registerbedr" | translate}}</button>
+              </div>
+
               <form class="simple-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
-<!--                  <div class="form-check">
+                <!--                  <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="formCheckIsBedrijf" formControlName="myBedrijfCheckbox">
                   <label class="form-check-label" for="formCheckIsBedrijf">IsBedrijf</label>
                 </div> -->
                 <div [hidden]="IsHidden">
-                <div *ngIf="isStudent == true" class="form-label-group margin">
-                  <input type="text" class="form-control" formControlName="firstName"
-                   placeholder='{{"register.voornaam" | translate}}' required />
-                   <div *ngIf="registerForm.controls['firstName'].invalid && (registerForm.controls['firstName'].dirty || registerForm.controls['firstName'].touched)">
-                    <div *ngIf="registerForm.controls['firstName'].errors.required">{{"register.voornaamreq" | translate}}</div>
-                    <!-- <div *ngIf="registerForm.controls['firstName'].errors.minLength"></div> -->
-                </div>
-                </div>
+                  <div *ngIf="isStudent == true" class="form-label-group margin">
+                    <input type="text" class="form-control" formControlName="firstName"
+                      placeholder='{{"register.voornaam" | translate}}' required />
+                    <div
+                      *ngIf="registerForm.controls['firstName'].invalid && (registerForm.controls['firstName'].dirty || registerForm.controls['firstName'].touched)">
+                      <div *ngIf="registerForm.controls['firstName'].errors.required">
+                        {{"register.voornaamreq" | translate}}</div>
+                      <!-- <div *ngIf="registerForm.controls['firstName'].errors.minLength"></div> -->
+                    </div>
+                  </div>
 
-                <div *ngIf="isStudent == true" class="form-label-group margin">
-                  <input type="text" class="form-control"
-                   formControlName="lastName"
-                   placeholder='{{"register.famnaam" | translate}}' required/>
-                   <div *ngIf="registerForm.controls['lastName'].invalid && (registerForm.controls['lastName'].dirty || registerForm.controls['lastName'].touched)">
-                  <div *ngIf="registerForm.controls['lastName'].errors.required">{{"register.famnaamreq" | translate}}</div>
-                </div>
-                  
-                </div>
+                  <div *ngIf="isStudent == true" class="form-label-group margin">
+                    <input type="text" class="form-control" formControlName="lastName"
+                      placeholder='{{"register.famnaam" | translate}}' required />
+                    <div
+                      *ngIf="registerForm.controls['lastName'].invalid && (registerForm.controls['lastName'].dirty || registerForm.controls['lastName'].touched)">
+                      <div *ngIf="registerForm.controls['lastName'].errors.required">
+                        {{"register.famnaamreq" | translate}}</div>
+                    </div>
 
-                <div *ngIf="isStudent == false" class="form-label-group margin">
-                  <input type="text" class="form-control"
-                   formControlName='companyName'
-                   placeholder='{{"register.companyName" | translate}}' required/>
-                   <div *ngIf="registerForm.controls['companyName'].invalid && (registerForm.controls['companyName'].dirty || registerForm.controls['companyName'].touched)">
-                  <div *ngIf="registerForm.controls['companyName'].errors.required">{{"register.bedrijfsnaamreq" | translate}}</div>
-                </div>
-                </div>
+                  </div>
 
-                <div  class="form-label-group">
-                  <input type="text" class="form-control margin" formControlName="email"
-                   placeholder='{{"register.email" | translate}}' required/>
-                   <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
-                    <div *ngIf="registerForm.controls['email'].errors.required">{{"register.emailreq" | translate}}</div>
-                    <div *ngIf="registerForm.controls['email'].errors.pattern"> {{"register.emailpatern" | translate}} </div>
-                </div>
-                </div>
+                  <div *ngIf="isStudent == false" class="form-label-group margin">
+                    <input type="text" class="form-control" formControlName='companyName'
+                      placeholder='{{"register.companyName" | translate}}' required />
+                    <div
+                      *ngIf="registerForm.controls['companyName'].invalid && (registerForm.controls['companyName'].dirty || registerForm.controls['companyName'].touched)">
+                      <div *ngIf="registerForm.controls['companyName'].errors.required">
+                        {{"register.bedrijfsnaamreq" | translate}}</div>
+                    </div>
+                  </div>
 
-                <div class="form-label-group margin">
-                  <input type="text" class="form-control" formControlName="telephone"
-                   placeholder='{{"register.nummer" | translate}}'
-                   />
-                </div>
+                  <div class="form-label-group">
+                    <input type="text" class="form-control margin" formControlName="email"
+                      placeholder='{{"register.email" | translate}}' required />
+                    <div
+                      *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
+                      <div *ngIf="registerForm.controls['email'].errors.required">{{"register.emailreq" | translate}}
+                      </div>
+                      <div *ngIf="registerForm.controls['email'].errors.pattern"> {{"register.emailpatern" | translate}}
+                      </div>
+                    </div>
+                  </div>
 
-                <div class="form-label-group margin">
-                  <input type="text" class="form-control" formControlName="zipCode"
-                   placeholder='{{"register.postcode" | translate}}'
-                   />
-                </div>
+                  <div class="form-label-group margin">
+                    <input type="text" class="form-control" formControlName="telephone"
+                      placeholder='{{"register.nummer" | translate}}' />
+                  </div>
 
-                <div  class="form-label-group margin">
-                  <input type="text" class="form-control" formControlName="city"
-                   placeholder='{{"register.stad" | translate}}' required/>
-                   <div *ngIf="registerForm.controls['city'].invalid && (registerForm.controls['city'].dirty || registerForm.controls['city'].touched)">
-                   <div *ngIf="registerForm.controls['city'].errors.required">{{"register.stadreq" | translate}}</div>
-                </div>
-                </div>
+                  <div class="form-label-group margin">
+                    <input type="text" class="form-control" formControlName="zipCode"
+                      placeholder='{{"register.postcode" | translate}}' />
+                  </div>
 
-                <div *ngIf="isStudent == false" class="form-label-group margin">
-                  <input type="text" class="form-control" formControlName="description"
-                   placeholder='{{"register.bedrijfsbeschrijving" | translate}}'  required/>
-                   <div *ngIf="registerForm.controls['description'].invalid && (registerForm.controls['description'].dirty || registerForm.controls['description'].touched)">
-                    <div *ngIf="registerForm.controls['description'].errors.required">{{"register.bedrijfsbeschrijvingreq" | translate}}</div>
-                </div>
-                </div>
+                  <div class="form-label-group margin">
+                    <input type="text" class="form-control" formControlName="city"
+                      placeholder='{{"register.stad" | translate}}' required />
+                    <div
+                      *ngIf="registerForm.controls['city'].invalid && (registerForm.controls['city'].dirty || registerForm.controls['city'].touched)">
+                      <div *ngIf="registerForm.controls['city'].errors.required">{{"register.stadreq" | translate}}
+                      </div>
+                    </div>
+                  </div>
 
-                <div class="form-label-group margin">
-                  <input type="text" class="form-control" formControlName="address"
-                   placeholder='{{"register.adres" | translate}}'
-                   /> 
-                </div>
+                  <div *ngIf="isStudent == false" class="form-label-group margin">
+                    <input type="text" class="form-control" formControlName="description"
+                      placeholder='{{"register.bedrijfsbeschrijving" | translate}}' required />
+                    <div
+                      *ngIf="registerForm.controls['description'].invalid && (registerForm.controls['description'].dirty || registerForm.controls['description'].touched)">
+                      <div *ngIf="registerForm.controls['description'].errors.required">
+                        {{"register.bedrijfsbeschrijvingreq" | translate}}</div>
+                    </div>
+                  </div>
 
-                <!-- <div *ngIf="isStudent == false" class="form-label-group margin">
+                  <div class="form-label-group margin">
+                    <input type="text" class="form-control" formControlName="address"
+                      placeholder='{{"register.adres" | translate}}' />
+                  </div>
+
+                  <!-- <div *ngIf="isStudent == false" class="form-label-group margin">
                   <input type="text" class="form-control" formControlName="url"
                    placeholder="Url" required
                    />
@@ -106,36 +116,43 @@
                    />
                 </div> -->
 
-                <div  class="form-label-group margin">
-                  <input type="password" class="form-control" formControlName="password"
-                   placeholder='{{"register.wachtwoord" | translate}}' required />
-                   <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
-                    <div *ngIf="registerForm.controls['password'].errors.required">{{"register.wachtwoordreq" | translate}}</div>
-                    <div *ngIf="registerForm.controls['password'].errors.minLength">{{"register.bedrijfsbeschrijvingreq" | translate}}</div>
-                </div>
+                  <div class="form-label-group margin">
+                    <input type="password" class="form-control" formControlName="password"
+                      placeholder='{{"register.wachtwoord" | translate}}' required />
+                    <div
+                      *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
+                      <div *ngIf="registerForm.controls['password'].errors.required">
+                        {{"register.wachtwoordreq" | translate}}</div>
+                      <div *ngIf="registerForm.controls['password'].errors.minLength">
+                        {{"register.bedrijfsbeschrijvingreq" | translate}}</div>
+                    </div>
                   </div>
 
-                  <div  class="form-label-group margin">
+                  <div class="form-label-group margin">
                     <input type="password" class="form-control" formControlName="confirmPassword"
-                     placeholder='{{"register.herhaalww" | translate}}' required />
-                     <div *ngIf="registerForm.controls['confirmPassword'].invalid && (registerForm.controls['confirmPassword'].dirty || registerForm.controls['confirmPassword'].touched)">
-                      <div *ngIf="registerForm.controls['confirmPassword'].errors.required">{{"register.herhaalwwreq" | translate}}</div>
-                      <div *ngIf="registerForm.controls['confirmPassword'].errors.minLength">{{"register.herhaalwwpatern" | translate}}</div>
-                  </div>
+                      placeholder='{{"register.herhaalww" | translate}}' required />
+                    <div
+                      *ngIf="registerForm.controls['confirmPassword'].invalid && (registerForm.controls['confirmPassword'].dirty || registerForm.controls['confirmPassword'].touched)">
+                      <div *ngIf="registerForm.controls['confirmPassword'].errors.required">
+                        {{"register.herhaalwwreq" | translate}}</div>
+                      <div *ngIf="registerForm.controls['confirmPassword'].errors.minLength">
+                        {{"register.herhaalwwpatern" | translate}}</div>
+                    </div>
                   </div>
 
-                
 
 
-                  <button class="btn btn-primary btn-block text-uppercase font-weight-bold mb-2" type="submit">{{"register.registreer" | translate}}</button>
-                  </div>
-<!--               <div class="form-group">
+
+                  <button class="btn btn-primary btn-block text-uppercase font-weight-bold mb-2"
+                    type="submit">{{"register.registreer" | translate}}</button>
+                </div>
+                <!--               <div class="form-group">
                   <button [disabled]="loading" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2">
                       <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                       Register
                   </button>
                 </div> -->
-<!--                   <div class="text-center">
+                <!--                   <div class="text-center">
                   <a class="small" href="#">Forgot password?</a></div> -->
               </form>
             </div>
