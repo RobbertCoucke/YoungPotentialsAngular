@@ -57,6 +57,11 @@
     border-left: 2px solid red;
   }
 
+  .simple-form input:dirty {
+    border-left: 2px solid red;
+  }
+
+
   .margin {
     margin-bottom: 10px;
   }
