@@ -1,8 +1,25 @@
-
 <div class="container">
+    <div class="sorting-wrapper">
+        <mat-form-field>
+            <mat-select [(value)]="selectedSorting" (selectionChange)="sortingChange()">
+                <mat-option value="dateAscend">Datum oplopend</mat-option>
+                <mat-option value="dateDescend">Datum aflopend</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    
     <div class="row vacaturebody">
+        <!-- <div name="sorting" id="vacaturelist-sorting" class="">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Datum aflopend
+            </button>
+            <ul class="custom-select-list dropdown-menu">
+                <li class="custom-select-option" data-value="1" value="1" data-gtm-mod="sort" selected="true">Datum aflopend</li>
+                <li class="custom-select-option" data-value="2" value="2" data-gtm-mod="sort">Datum oplopend</li>
+            </ul>
+        </div> -->
         <div class="col-lg-5">
-            <app-vacture-filter  (filterEvent)="handleFilter($event)" ></app-vacture-filter>
+            <app-vacture-filter (filterEvent)="handleFilter($event)"></app-vacture-filter>
         </div>
         <div class="text-center col-lg-7">
 
@@ -11,9 +28,11 @@
                 <!-- <div *ngIf="!currentUser || currentUser.role != 'User'" class="alert alert-warning" role="alert">
                     <p class="removeMarginbottom">{{favoriteError}}</p>
                 </div> -->
-                <ng-container *ngFor="let vacature of pageOfItems" >
+                <ng-container *ngFor="let vacature of pageOfItems">
                     <ng-container *ngIf="vacature.vacature.description != null">
-                        <app-vacture-item  [showTrashcan]="false"  [showLike]="(currentUser && currentUser.role === 'User')"  [favorite]="vacature" (removeEvent)="removeEventAbstract($event)"   [currentUser]="currentUser" ></app-vacture-item>
+                        <app-vacture-item [showTrashcan]="false"
+                            [showLike]="(currentUser && currentUser.role === 'User')" [favorite]="vacature"
+                            (removeEvent)="removeEventAbstract($event)" [currentUser]="currentUser"></app-vacture-item>
                     </ng-container>
                 </ng-container>
                 <div class="paging-center">
@@ -23,11 +42,10 @@
             <div *ngIf="!loadingFilter && !loading" class="alert alert-danger" role="alert">
                 <p class="removeMarginbottom">Er zijn geen openstaande vacatures te vinden.</p>
             </div>
-            
+
             <div *ngIf="loading" class="loader">
-                <img src="../../assets/images/loading.gif" alt="loading ..." class="loadspinner"/>
+                <img src="../../assets/images/loading.gif" alt="loading ..." class="loadspinner" />
             </div>
         </div>
     </div>
 </div>
-
