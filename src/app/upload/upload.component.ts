@@ -9,13 +9,12 @@ import { FormControl, Validators } from "@angular/forms";
 })
 export class UploadComponent implements OnInit {
   hasFile: boolean;
-
-
-
   fileValue: string;
 
   public progress: number;
   public message: string;
+
+
   @Output() public uploadHandler = new EventEmitter();
 
   constructor(private http: HttpClient) {
@@ -32,7 +31,7 @@ export class UploadComponent implements OnInit {
     const formData = new FormData();
     formData.append("file", fileToUpload);
 
-    if (fileToUpload.size > 1024 * 1024 * 20) {
+    if (fileToUpload.size > 1024 * 1024 * 2) {
       console.log("Max toegelaten file groote is 20 mb.");
       return;
     }

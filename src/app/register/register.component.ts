@@ -76,23 +76,7 @@ private commonvalidators = [
 
      /*als gebruiker kiest om als bedrijf in te schrijven, voeg ik validatie aan companyname input, description input en url,
      *anders voeg ik vanlidate aan firstname en lastname inputs.
-     */
-/* 
-     this.registerForm.get('myBedrijfCheckbox').valueChanges.subscribe(value => {
-      if(value) {
-        this.isStudent = false;
-        console.log(this.isStudent);
-        this.registerForm.get('companyName').setValidators(this.nameValidators.concat(Validators.required));
-        this.registerForm.get('description').setValidators(this.commonvalidators);
-        this.registerForm.get('url').setValidators(this.commonvalidators);
-      }else{
-        this.isStudent = true;
-        console.log(this.isStudent);
-        this.registerForm.get('firstName').setValidators(this.nameValidators.concat(Validators.required));
-        this.registerForm.get('lastName').setValidators(this.nameValidators.concat(Validators.required));
-
-      }
-    }) */ 
+     */ 
 
     if (this.isStudent == false)
     {
@@ -175,5 +159,11 @@ private commonvalidators = [
     this.isStudent = false;
   }
 
+  //hidden maken van input velden vooraleer op buttons werd geklikt
 
+  IsHidden= true;
+
+  onSelect(){
+  this.IsHidden= false;
+}
 }

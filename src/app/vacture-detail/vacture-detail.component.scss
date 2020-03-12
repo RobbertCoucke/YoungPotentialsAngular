@@ -36,3 +36,13 @@
 .jumbotron {
   padding-top: 1rem;
 }
+
+ ::ng-deep .mat-snack-bar-container {
+  background: #e50001;
+  color: white;
+ }
+
+ ::ng-deep .mat-button-wrapper {
+  color: white;
+ }
+
