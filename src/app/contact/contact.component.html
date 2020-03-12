@@ -6,33 +6,37 @@
         </div>
 		<div class="layout-center">
 
-
       <div class="form-wrap">
         <div class="form-block col-md-12">
           <h2 class="sub-title">Neem contact met ons op</h2>
-          <form action="" class="contact">
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact" required>
+
             <div class="form-item">
               <label for="">Volledige naam</label>
-              <input type="text">
-             </div>
+              <input type="text" name="fullName" formControlName="fullName" required>
+            </div>
+
              <div class="form-item">
               <label for="">Emailadres</label>
-              <input type="text">
+              <input type="text" name="email" formControlName="email">
              </div>
+
             <div class="form-item">
               <label for="">Onderwerp</label>
-              <input type="text">
+              <input type="text" name="subject" formControlName="subject">
              </div>
+
             <div class="form-item">
               <label for="">Bericht</label>
-              <textarea id="edit-message" name="message" rows="5" cols="60" class="form-textarea required resize-vertical"></textarea>
+              <textarea id="edit-message" name="message" formControlName="message" rows="5" cols="60" class="form-textarea required resize-vertical"></textarea>
              </div>
+
             <div class="form-item">
-              <!-- <button class="btn-login"  type="submit" name="op" value="verzenden">Verzenden</button> -->
               <button class="btn btn-verzenden" type="submit">Verzenden</button>
             </div>
+
             </form>
-          </div>
+        </div>
         <div class="address-block col-md-12">
           <h2 class="sub-title">Contact Info</h2>
           <ul>
@@ -41,6 +45,7 @@
           </ul>
         </div>
       </div>
+
 		</div>
 		
 	</div>
