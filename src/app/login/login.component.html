@@ -1,64 +1,62 @@
-﻿
-<div class="container-fluid">
-    <div class="row no-gutter">
-      <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
-      <div class="col-md-8 col-lg-6">
-        <div class="login d-flex align-items-center py-5">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-9 col-lg-8 mx-auto">
-                <img class="mb-4" src="../../assets/images/vives_logo.png">
-                <h2 class="login-heading mb-4">{{"login.welkom" | translate}}</h2>
-                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                  <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+﻿<div class="container-fluid">
+  <div class="row no-gutter">
+    <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+    <div class="col-md-8 col-lg-6">
+      <div class="login d-flex align-items-center py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 col-lg-8 mx-auto">
+              <img class="mb-4" src="../../assets/images/vives_logo.png">
+              <h2 class="login-heading mb-4">{{"login.welkom" | translate}}</h2>
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div *ngIf="error" class="alert alert-danger">{{error}}</div>
 
-                  <div class="form-label-group">
+                <div class="form-label-group">
 
-                    <label for="username"></label>
-                    <input type="text" formControlName="username" class="form-control" placeholder='{{"login.email" | translate}}' [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-                     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                        <div *ngIf="f.username.errors.required">{{"login.emailreq" | translate}}</div>
-                     </div>
+                  <label for="username"></label>
+                  <input type="text" formControlName="username" class="form-control"
+                    placeholder='{{"login.email" | translate}}'
+                    [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                  <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">{{"login.emailreq" | translate}}</div>
                   </div>
-  
-                  <div class="form-label-group">
+                </div>
 
-                    <label for="password"></label>
-                    <input type="password" formControlName="password" class="form-control" placeholder='{{"login.wachtwoord" | translate}}' [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">{{"login.wachtwoordreq" | translate}}</div>
-                     </div>
+                <div class="form-label-group">
+
+                  <label for="password"></label>
+                  <input type="password" formControlName="password" class="form-control"
+                    placeholder='{{"login.wachtwoord" | translate}}'
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">{{"login.wachtwoordreq" | translate}}</div>
                   </div>
-  
-                  <!-- Nice to have wachtwoord onthouden -->
-                  <!-- <div class="custom-control custom-checkbox mb-3">
+                </div>
+
+                <!-- Nice to have wachtwoord onthouden -->
+                <!-- <div class="custom-control custom-checkbox mb-3">
                     <input type="checkbox" class="custom-control-input" id="customCheck1">
                     <label class="custom-control-label" for="customCheck1">{{"login.wwonthouden" | translate}}</label>
                   </div> -->
 
-                  <div class="form-group margin">
-                      <button [disabled]="loading" class="btn btn-login">{{"login.inloggen" | translate}}</button>
-                      <img *ngIf="loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                  </div>
-                 
+                <div class="form-group margin">
+                  <button [disabled]="loading" class="btn btn-login">{{"login.inloggen" | translate}}</button>
+                  <img *ngIf="loading" class="pl-2"
+                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                </div>
 
-                    <a routerLink="/wachtoord-veranderen-aanvraag">Forgot password?</a>
-                   
 
-                    <!-- <a class="small" href="#">Forgot password?</a>
-                    <br> -->
-                    <p class="small">Nog geen account? <a routerLink="/registreren" routerLinkActive="active">klik hier</a></p>
-                    
+                <a routerLink="/wachtoord-veranderen-aanvraag">Forgot password?</a>
 
-                </form>
-              </div>
+                <p class="small">Nog geen account? <a routerLink="/registreren" routerLinkActive="active">klik hier</a>
+                </p>
+
+
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-
-
-
+</div>

@@ -41,7 +41,6 @@ export class AuthenticationService {
     }
 
     register(reg: Register) {
-        console.log(reg);
         return this.http.post<any>('https://youngpotentials.azurewebsites.net/user/register', reg)
         .pipe(map(user => {
             //register succesful if there's a jwt token in the response

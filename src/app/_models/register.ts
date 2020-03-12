@@ -25,5 +25,6 @@ export class Register {
     description: string;
     url: string;
     companyName: string;
+    serctor: string;
 
 }
