@@ -69,7 +69,6 @@ export class VacturesComponent implements OnInit {
   // tslint:disable-next-line: one-line
   fillVacatures() {
     this.vacatures = [];
-    console.log("filling");
 
     if (this.currentUser != null && this.currentUser.role == Role.User) {
       this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
@@ -116,9 +115,6 @@ export class VacturesComponent implements OnInit {
     }
     //Alle vacatures worden in de variabele items gekopieerd omdat deze wordt gebruikt bij het pagineren.
     this.items = this.vacatures;
-    console.log("Hi")
-    console.log(this.items);
-    console.log(this.vacatures);
   }
   
   compareDesc(vac1, vac2) {

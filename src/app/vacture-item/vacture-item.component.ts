@@ -57,6 +57,8 @@ export class VactureItemComponent implements OnInit {
         this.favorietService.deleteFavorite(this.favorietId).subscribe(f => {
           this.favorite.id = null;
           this.favorietId = null;
+          console.log(this.favorite);
+          console.log(this.currentUser);
         });
         this.removeFavoriteEvent.emit(this.favorite);
       }
@@ -67,6 +69,7 @@ export class VactureItemComponent implements OnInit {
         this.favorietService.addFavorite(this.currentUser.id, this.vacature.id).subscribe(f => {
           this.favorietId = f.id;
           this.favorite.id = f.id;
+          console.log(this.favorite);
         });
         
       }

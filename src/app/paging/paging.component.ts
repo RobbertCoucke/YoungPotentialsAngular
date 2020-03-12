@@ -26,7 +26,6 @@ export class PagingComponent implements OnInit, OnChanges {
   ngOnInit() {
     // set page if items array isn't empty
     if (this.items && this.items.length) {
-      console.log("TEST PAGING")
       this.setPage(this.initialPage);
     }
   }
@@ -44,9 +43,6 @@ export class PagingComponent implements OnInit, OnChanges {
 
     // get new page of items from items array
     var pageOfItems = this.items.slice(this.pager.startIndex, this.pager.endIndex + 1);
-    console.log("setPage");
-    console.log(this.pager.startIndex);
-    console.log(this.pager.endIndex);
     // call change page function in parent component
     this.changePage.emit(pageOfItems);
   }
