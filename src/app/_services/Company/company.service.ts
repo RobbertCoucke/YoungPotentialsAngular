@@ -9,7 +9,11 @@ export class CompanyService {
   constructor(private http: HttpClient) { }
 
   getAllUnverifiedCompanies() {
-    return this.http.get<any[]>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/company/companies`);
+    return this.http.get<any[]>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/company/unverified`);
+  }
+
+  getAllVerifiedCompanies(){
+    return this.http.get<any[]>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/company/verified`);
   }
 
   verifyCompany(companyId: number) {

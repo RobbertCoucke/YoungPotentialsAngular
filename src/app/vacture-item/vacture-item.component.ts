@@ -54,14 +54,20 @@ export class VactureItemComponent implements OnInit {
     {
       this.liked = false;
       if(this.currentUser && this.currentUser.role == Role.User){
-        this.favorietService.deleteFavorite(this.favorietId).subscribe();
+        this.favorietService.deleteFavorite(this.favorietId).subscribe(f => {
+          this.favorite.id = null;
+          this.favorietId = null;
+        });
         this.removeFavoriteEvent.emit(this.favorite);
       }
       //deletefavorite(vacature.id, currentUser.id)
     }else{
       this.liked = true;
       if(this.currentUser && this.currentUser.role == Role.User){
-        this.favorietService.addFavorite(this.currentUser.id, this.vacature.id).subscribe();
+        this.favorietService.addFavorite(this.currentUser.id, this.vacature.id).subscribe(f => {
+          this.favorietId = f.id;
+          this.favorite.id = f.id;
+        });
         
       }
     }

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Register } from '@/_models/register';
 import { MustMatch } from 'app/_helpers/mustMatch';
+import { SectorService } from '@/_services/Sector/sector.service';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +15,7 @@ import { MustMatch } from 'app/_helpers/mustMatch';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
+  sectors : any[];
   loading = false;
   submitted = false;
   returnUrl: string;
@@ -46,20 +48,22 @@ private commonvalidators = [
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService,
+    private sectorService: SectorService) {
       // redirect to home if already logged in
       if (this.authenticationService.currentUserValue) { 
         this.router.navigate(['/']);
     }
+
+    this.sectorService.GetAll().subscribe(sectoren => this.sectors = sectoren);
      }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       myBedrijfCheckbox: [''],
-      firstName: ['',this.nameValidators],
+      firstName: ['', this.nameValidators],
       lastName: ['', this.nameValidators],
       companyName: ['', this.nameValidators],
-      bedrijfsnaam: ['', this.nameValidators],
       email: ['', this.emailValidators],
       password: ['', this.passwordValidators],
       confirmPassword: ['', this.passwordValidators],
@@ -67,8 +71,7 @@ private commonvalidators = [
       zipCode: [''],
       city: ['', this.commonvalidators],
       description: [''],
-      url: [''],
-      cvUrl: [''],
+      website: [''],
       address: ['']
 
     }, {
@@ -78,23 +81,16 @@ private commonvalidators = [
 
      /*als gebruiker kiest om als bedrijf in te schrijven, voeg ik validatie aan companyname input, description input en url,
      *anders voeg ik vanlidate aan firstname en lastname inputs.
-     */
+     */ 
 
-     this.registerForm.get('myBedrijfCheckbox').valueChanges.subscribe(value => {
-      if(value) {
-        this.isStudent = false;
-        console.log(this.isStudent);
-        this.registerForm.get('companyName').setValidators(this.nameValidators.concat(Validators.required));
-        this.registerForm.get('description').setValidators(this.commonvalidators);
-        this.registerForm.get('url').setValidators(this.commonvalidators);
-      }else{
-        this.isStudent = true;
-        console.log(this.isStudent);
+    if (this.isStudent == false)
+    {
+      this.registerForm.get('companyName').setValidators(this.nameValidators.concat(Validators.required));
+      this.registerForm.get('description').setValidators(this.commonvalidators);
+    }else{
         this.registerForm.get('firstName').setValidators(this.nameValidators.concat(Validators.required));
         this.registerForm.get('lastName').setValidators(this.nameValidators.concat(Validators.required));
-
-      }
-    }) 
+    }
   }
 
   //get all registerForm controls
@@ -118,12 +114,10 @@ private commonvalidators = [
     console.log(regModel);
 
 
-
-
     //de gebruiker toevoegen aan de database
      this.authenticationService.register(regModel).subscribe(
             data => {
-                this.router.navigate([""]);
+                //this.router.navigate([""]);
             },
             error => {
                 this.error = error;
@@ -143,17 +137,16 @@ private commonvalidators = [
     model.city = controls.city.value;
 
     //de student moet zijn naam, voorname en CV geven.
-    if(this.isStudent){
-      model.name = controls.lastName.value;
-      model.firstName = controls.firstName.value;
-      model.cvUrl = controls.cvUrl.value;
-    }
+
+    if(this.isStudent == false){
     //bedrijf moet een beschrijving, url en naam geven
-    else{
 
       model.description = controls.description.value;
-      model.url = controls.url.value;
+      model.url = controls.website.value;
       model.companyName = controls.companyName.value;
+    }else{
+      model.name = controls.lastName.value;
+      model.firstName = controls.firstName.value;
     }
 
     return model;

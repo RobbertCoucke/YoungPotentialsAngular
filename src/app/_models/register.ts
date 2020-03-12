@@ -7,9 +7,6 @@ export class Register {
         this.isStudent = isStudent;
     }
 
-
-
-
     //user
     email: string;
     password: string;
@@ -22,15 +19,12 @@ export class Register {
     //student
     name: string;
     firstName: string;
-    cvUrl: string;
-
 
     //company
-
+    sectorId: number;
     description: string;
     url: string;
     companyName: string;
-
-
+    serctor: string;
 
 }

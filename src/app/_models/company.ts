@@ -15,6 +15,7 @@ export class Company{
     companyName: string;
     verified: boolean;
     offers : Vacature[];
+    sector: any;
 
 
 }
