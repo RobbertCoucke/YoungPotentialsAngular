@@ -18,3 +18,25 @@ h1{
 .loadspinner{
     width: 100px;
 }
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.example-container {
+  height: 400px;
+  overflow: auto;
+}
+
+.mat-checkbox mat-accent mat-checkbox-checked {
+  background-color: red;
+}
