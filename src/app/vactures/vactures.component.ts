@@ -6,6 +6,7 @@ import { VacatureService } from '@/_services/Vacature/vacature.service';
 import { Favoriet } from '@/_models/favoriet';
 import { Vacature } from '@/_models/vacature';
 import { StudieGebied } from '@/Model/StudieGebied';
+import paginate from 'jw-paginate';
 
 @Component({
   selector: 'app-vactures',
@@ -178,7 +179,7 @@ filterVacatures(filterArr, typeArr){
         }
 
         if (inFavorites) {
-          this.vacatures.push(inFavorites);
+          this.vacatures.push(new Favoriet(inFavorites.id, new Vacature(inFavorites.vacature)));
         } else {
           this.vacatures.push(new Favoriet(null, new Vacature(vacatures[i])));
         }

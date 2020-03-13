@@ -17,7 +17,8 @@
 
               <div *ngFor="let type of types" class="l">
                 <li>
-                  <input
+                  <label class="container-checkbox">{{ type.name }}
+                    <input
                     class="input"
                     type="checkbox"
                     value="{{ type.id }}"
@@ -25,9 +26,12 @@
                     (change)="check($event)"
                     name="typeVives"
                     [checked]="isSelectedType(type.id)"/>
-                  <div class="filterContainer filterStudiegebied">
+                    <span class="checkmark"></span>
+                  </label>
+                  
+                  <!-- <div class="filterContainer filterStudiegebied">
                     <p class="filterTekst">{{ type.name }}</p>
-                    </div>
+                    </div> -->
 
                 </li>
               </div>
@@ -39,7 +43,8 @@
 
               <div *ngFor="let gebied of studiegebieds" class="l">
                 <li>
-                  <input
+                  <label class="container-checkbox container-checkbox-studiegebied">
+                    <input
                     class="input"
                     type="checkbox"
                     value="{{ gebied.id }}"
@@ -47,6 +52,9 @@
                     name="studieGebiedVives"
                     [checked]="isSelected(gebied.id)"
                   />
+                  <span class="checkmark checkmark-studiegebied"></span>
+                  </label>
+                  
                   <div
                     class="filterContainer filterStudiegebied"
                     (click)="onSelectStudie(gebied.id)"
@@ -64,17 +72,22 @@
                     </ng-template>
                   </div>
                   <div *ngIf="s[gebied.id]">
-                    <ul *ngFor="let op of s[gebied.id]">
-                      <li>
-                        <input
+                    <ul>
+                      <li *ngFor="let op of s[gebied.id]" class='wrapper-opleiding'>
+                        <label class="container-checkbox tekst-naam-opleiding">{{ op.naam }}
+                          <input
                           class="input"
                           type="checkbox"
                           (change)="check($event)"
                           value="{{ op.id }}"
                           [checked]="isSelected(op.id)"
                         />
+                        <span class="checkmark"></span>
+                        </label>
+                        
+                        
                         <div class="filterContainer">
-                          {{ op.naam }}
+                          
                           <!-- <i  class="material-icons icon">arrow_drop_down</i> -->
                         </div>
                       </li>

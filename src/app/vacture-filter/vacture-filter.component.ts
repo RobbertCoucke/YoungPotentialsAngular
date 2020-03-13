@@ -197,8 +197,7 @@ export class VactureFilterComponent implements OnInit {
   removeSelected() {
     this.selectedTypes = [];
     this.selectedgebieds = [];
-
-    this.filterEvent.emit(null);
+    this.filterEvent.emit({filter: null, types: null});
   }
 
   /**
