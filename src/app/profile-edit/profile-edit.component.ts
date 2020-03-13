@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '@/_models';
+import { User, Role } from '@/_models';
 import { AuthenticationService } from '@/_services';
 import { UserService } from '../_services/User/user.service'
 import { Router } from '@angular/router';
@@ -42,7 +42,7 @@ export class ProfileEditComponent implements OnInit {
    }
 
   ngOnInit() {
-    if (this.authenticatieService.currentUserValue == null) { 
+    if (this.authenticatieService.currentUserValue == null && this.currentUser.role == Role.Admin) { 
       alert("Invalid action.");
       this.router.navigate(['/']);
     }else{

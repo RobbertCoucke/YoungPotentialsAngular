@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from  '@angular/forms';
 import { Contact } from '@/_models/contact';
 import { Subject } from 'rxjs';
+import { ContactService } from '@/_services/contact/contact.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -13,9 +15,11 @@ export class ContactComponent implements OnInit {
   
   contactForm: FormGroup;
   submitted = false;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private contactService: ContactService, private router: Router) {
     this.createContactForm();
   }
+
+  ngOnInit() { }
 
 
   createContactForm(){
@@ -35,16 +39,17 @@ export class ContactComponent implements OnInit {
     this.submitted = true;
 
     //stop here if form is invalid
-           //if (this.contactForm.invalid) {
-         //return;
-   // }
+      if (this.contactForm.invalid) {
+         return;
+    }
 
-    console.log( this.contactForm.controls.value );
+    console.log( this.contactForm );
 
         //de contact model krijgen   
-        var contactModel = this.getContactModel();
+    var contactModel = this.getContactModel();
 
-        console.log(this.contactForm);
+    console.log(this.contactForm);
+    this.contactService.sendMail(contactModel).subscribe( data => this.router.navigate(['/']));
 
 }
 
@@ -58,7 +63,6 @@ export class ContactComponent implements OnInit {
     return model;
   }
 
-  ngOnInit() { }
 
   // dynamisch maken van google maps
   ngAfterViewInit(){

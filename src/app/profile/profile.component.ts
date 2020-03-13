@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '@/_models';
+import { User, Role } from '@/_models';
 import { UserService, AuthenticationService } from '@/_services';
 import { Router } from '@angular/router';
 import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
@@ -24,26 +24,37 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log(this.currentUser);
     if (this.authenticatieService.currentUserValue == null) { 
       alert("Nice try, hackerman. :)");
       this.router.navigate(['/']);
     }else{
       this.authenticatieService.currentUser.subscribe(x => {
-        this.currentUser=x;
-        this.userservice.getById(this.currentUser.id).subscribe(data => {
-          this.isStudent=data.isStudent;
-          this.profiel = data;
-          console.log(this.profiel);
-          this.loader(this.profiel);
+        if(x.role == Role.Admin)
+        {
+          alert("Nice try, hackerman. :)");
+          this.router.navigate(['/']);
+        }else{
+          console.log(x);
+          this.currentUser=x;
+          this.userservice.getById(this.currentUser.id).subscribe(data => {
+            console.log(data);
+            this.isStudent=data.isStudent;
+            this.profiel = data;
+            console.log(this.profiel);
+            this.loader(this.profiel);
+            });
+    
+          this.uploadService.getFilePath(true,this.currentUser.id).subscribe(p => {
+            if(p != null){
+    
+            this.uploadFile = p.path;
+            }
           });
-      });
-
-      this.uploadService.getFilePath(true,this.currentUser.id).subscribe(p => {
-        if(p != null){
-
-        this.uploadFile = p.path;
         }
       });
+
     } 
   }
 
