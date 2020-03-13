@@ -49,6 +49,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import {MatSortModule} from '@angular/material/sort'; 
 
 /**
  * * Anuglar Bootstrap imports
@@ -110,6 +111,10 @@ import { ContactComponent } from './contact/contact.component';
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { StudentformComponent } from './studentform/studentform.component';
 import { CompanyformComponent } from './companyform/companyform.component';
+
+import {MatTableModule} from '@angular/material/table';
+
+
 
 const appRoutes: Routes = [
   { path: "owned", component : CompanyVacaturesComponent},
@@ -228,6 +233,8 @@ const appRoutes: Routes = [
       FormsModule,
       AngularStickyThingsModule,
       MatSnackBarModule,
+      MatTableModule,
+      MatSortModule,
       BsDatepickerModule.forRoot(),
       ButtonsModule.forRoot(),
       //ngx-translateandtheloadermodule\\\\r\\\\nHttpClientModule,
