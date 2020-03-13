@@ -73,7 +73,6 @@ export class VacturesComponent implements OnInit {
 
     if(this.currentUser != null && this.currentUser.role == Role.User){
       this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
-        this.favorites = f;
         f.forEach(element => this.vacatures.push(new Favoriet(element.id, new Vacature (element.vacature))));
         this.vacatureService.getAllVacatures().subscribe(v => {
           v.forEach(element => {
@@ -148,7 +147,7 @@ export class VacturesComponent implements OnInit {
         }
 
         if(inFavorites){
-          this.vacatures.push(inFavorites);
+          this.vacatures.push(new Favoriet(inFavorites.id, new Vacature(inFavorites.vacature)));
         }else{
           this.vacatures.push(new Favoriet(null, new Vacature(vacatures[i])));
         }

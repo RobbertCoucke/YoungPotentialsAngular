@@ -61,4 +61,11 @@ export class VacatureService {
     //return this.http.get<any>(`http://youngpotentials.azurewebsites.net/offer/types`);
   }
 
+  apply(formData: FormData) {
+    return this.http.post<any>(
+      `https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/apply`,
+      formData
+    );
+  }
+
 }
