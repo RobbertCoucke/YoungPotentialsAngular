@@ -1,5 +1,6 @@
+import { UserService } from '@/_services';
 import { Component, OnInit } from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 import { TranslateCacheService } from 'ngx-translate-cache';
 
@@ -12,28 +13,79 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  host: { "class": "c"},
+  host: { "class": "c" },
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-// voor login / logout procedure
+  // voor login / logout procedure
   currentUser: User;
+  //StudentName
+  name: string;
+
+  //navbar mobile
   navbarOpen = false;
+  //Dropdown voor taalMenu
   taalMenuOpen = false;
-  //TODO: Frans verwijderen uit languages?
-  languages=["nl", "en"];
-  dropdownLanguages=["en"];
-  selectedLanguage= "nl";
+
+  languages = ["nl", "en"];
+  dropdownLanguages = ["en"];
+  selectedLanguage = "nl";
 
   get isAdmin() {
-      return this.currentUser && this.currentUser.role === Role.Admin;
+    return this.currentUser && this.currentUser.role === Role.Admin;
   }
 
-  
+  constructor(private translate: TranslateService,
+    translateCacheService: TranslateCacheService,
+    // login logout
+    private router: Router,
+    private authenticationService: AuthenticationService, private userService: UserService)
+  // 
+  {
+    translate.setDefaultLang('nl');
+    translateCacheService.init();
+
+    // login logout
+    this.authenticationService.currentUser.subscribe(x => {
+      
+        this.currentUser = x;
+        if (this.currentUser != null) {
+        //Een subscribe om de data binnen te halen van de gebruiker.
+        this.userService.getById(this.currentUser.id).subscribe(data => {
+          switch (this.currentUser.role) {
+            case "User": {
+              this.name = data.firstName + " " + data.name;
+              break;
+            }
+            case "Company": {
+              this.name = data.companyName;
+              break;
+            }
+            case "Admin": {
+              this.name = "Administrator";
+              break;
+            }
+          }
+
+        });
+      }
+
+
+    });
+  }
+
+
+
+  ngOnInit() {
+    if (getCookie("language") !== undefined) {
+      this.selectedLanguage = getCookie("language");
+      this.changeLanguage(this.selectedLanguage);
+    }
+  }
 
   logout() {
-      this.authenticationService.logout();
-      //this.router.navigate(['/login']);
+    this.authenticationService.logout();
+    //this.router.navigate(['/login']);
   }
 
   toggleTaalMenuOpen() {
@@ -58,49 +110,19 @@ export class NavbarComponent implements OnInit {
     this.changeLanguage(language);
   }
 
-  changeLanguage(language: string){
+  changeLanguage(language: string) {
     this.selectedLanguage = language;
     this.dropdownLanguages = this.languages.filter(e => e !== this.selectedLanguage);
   }
-
-  // constructor(private translate: TranslateService) {
-  //   translate.setDefaultLang('nl');
-
-  // }
-  constructor(private translate: TranslateService,
-      translateCacheService: TranslateCacheService,
-      // login logout
-      private router: Router,
-      private authenticationService: AuthenticationService) 
-      // 
-      {
-        translate.setDefaultLang('nl');
-        translateCacheService.init();
-        // login logout
-        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-        // 
-
-  }
- 
-
-  
-  ngOnInit() {
-    if(getCookie("language")!==undefined)
-    {
-      this.selectedLanguage= getCookie("language");
-      this.changeLanguage(this.selectedLanguage);
-    }
-    console.log(this.router)
-  }
 }
 
-
+//Functie om een cookie op te vragen.
 export function getCookie(name: string) {
   const value = "; " + document.cookie;
   const parts = value.split("; " + name + "=");
-  
+
   if (parts.length == 2) {
-      return parts.pop().split(";").shift();
+    return parts.pop().split(";").shift();
   }
 
 }

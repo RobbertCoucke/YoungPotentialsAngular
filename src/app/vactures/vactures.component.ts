@@ -6,7 +6,7 @@ import { VacatureService } from '@/_services/Vacature/vacature.service';
 import { Favoriet } from '@/_models/favoriet';
 import { Vacature } from '@/_models/vacature';
 import { StudieGebied } from '@/Model/StudieGebied';
-import paginate from 'jw-paginate';
+import { PagingService } from '@/_services/Paging/paging.service';
 
 @Component({
   selector: 'app-vactures',
@@ -40,7 +40,7 @@ export class VacturesComponent implements OnInit {
   // tslint:disable-next-line: no-trailing-whitespace
 
   constructor(private authenticationService: AuthenticationService,
-    private vacatureService: VacatureService, private favoriteService: FavoritesService) {
+    private vacatureService: VacatureService, private favoriteService: FavoritesService, private pagingService: PagingService) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
 
   }
@@ -82,7 +82,7 @@ export class VacturesComponent implements OnInit {
               this.vacatures.push(new Favoriet(null, new Vacature(element)));
             }
           });
-          
+
           this.sortFunction();
 
           //Indien alle vacatures geladen zijn word de div waarin de vacatures zitten zichtbaar gemaakt.
@@ -103,7 +103,7 @@ export class VacturesComponent implements OnInit {
       });
     }
   }
-  sortFunction(){
+  sortFunction() {
     switch (this.selectedSorting) {
       case 'dateDescend': {
         this.vacatures.sort(this.compareDesc);
@@ -117,7 +117,7 @@ export class VacturesComponent implements OnInit {
     //Alle vacatures worden in de variabele items gekopieerd omdat deze wordt gebruikt bij het pagineren.
     this.items = this.vacatures;
   }
-  
+
   compareDesc(vac1, vac2) {
     let date1 = new Date(vac1.vacature.created).getTime();
     let date2 = new Date(vac2.vacature.created).getTime();
@@ -129,128 +129,131 @@ export class VacturesComponent implements OnInit {
     return date1 - date2;
   }
 
-  sortingChange(){
+  sortingChange() {
     this.sortFunction();
-    this.onChangePage(this.items.slice(0, 10));
+    this.firstPage();
+    //this.onChangePage(this.items.slice(0, 10));
+  }
+  
+  firstPage() {
+    this.pagingService.setFirstPage(1);
   }
 
-/**
- * @description Deze functie zorgt voor de vacatures op te delen in pagina's.
- * @param pageOfItems De items de moeten gepagineerd worden.
- */
-onChangePage(pageOfItems: Array<any>){
-  //update current page of items
-  this.pageOfItems = pageOfItems;
+  /**
+   * @description Deze functie zorgt voor de vacatures op te delen in pagina's.
+   * @param pageOfItems De items die moeten gepagineerd worden.
+   */
+  onChangePage(pageOfItems: Array<any>) {
+    //update current page of items
+    this.pageOfItems = pageOfItems;
 
-  //Controle indien pageOfItems niet leeg is.
-  if(pageOfItems.length !== 0)
-{
-  //Indien niet leeg, afbeelden van de lijst met vacatures.
-  this.loadingFilter = true;
-  //Verbergen van de loader image.
-  this.loading = false;
-}
-    else
-{
-  //Indien leeg, controleren als er nog wordt geladen
-  if (this.loading !== true) {
-    //Indien het laden klaar is, wordt een foutmelding getoond dat er geen vacatures zijn.
-    this.loadingFilter = false;
-  }
-}
+    //Controle indien pageOfItems niet leeg is.
+    if (pageOfItems.length !== 0) {
+      //Indien niet leeg, afbeelden van de lijst met vacatures.
+      this.loadingFilter = true;
+      //Verbergen van de loader image.
+      this.loading = false;
+    }
+    else {
+      //Indien leeg, controleren als er nog wordt geladen
+      if (this.loading !== true) {
+        //Indien het laden klaar is, wordt een foutmelding getoond dat er geen vacatures zijn.
+        this.loadingFilter = false;
+      }
+    }
   }
 
-ngOnInit() {
-  this.fillVacatures();
-}
+  ngOnInit() {
+    this.fillVacatures();
+  }
 
-filterVacatures(filterArr, typeArr){
-  this.vacatureService.filterVacatures(filterArr, typeArr).subscribe(vacatures => {
+  filterVacatures(filterArr, typeArr) {
+    this.vacatureService.filterVacatures(filterArr, typeArr).subscribe(vacatures => {
 
-    this.vacatures = [];
-    for (let i = 0; i < vacatures.length; i++) {
-      if (this.favorites.length > 0) {
-        let inFavorites = null;
-        for (let j = 0; j < this.favorites.length; j++) {
-          if (vacatures[i].id === this.favorites[j].vacature.id) {
-            inFavorites = this.favorites[j];
+      this.vacatures = [];
+      for (let i = 0; i < vacatures.length; i++) {
+        if (this.favorites.length > 0) {
+          let inFavorites = null;
+          for (let j = 0; j < this.favorites.length; j++) {
+            if (vacatures[i].id === this.favorites[j].vacature.id) {
+              inFavorites = this.favorites[j];
+            }
+
           }
 
-        }
+          if (inFavorites) {
+            this.vacatures.push(new Favoriet(inFavorites.id, new Vacature(inFavorites.vacature)));
+          } else {
+            this.vacatures.push(new Favoriet(null, new Vacature(vacatures[i])));
+          }
 
-        if (inFavorites) {
-          this.vacatures.push(new Favoriet(inFavorites.id, new Vacature(inFavorites.vacature)));
         } else {
           this.vacatures.push(new Favoriet(null, new Vacature(vacatures[i])));
         }
 
-      } else {
-        this.vacatures.push(new Favoriet(null, new Vacature(vacatures[i])));
       }
 
-    }
+      this.sortFunction();
 
-    this.sortFunction();
-
-    //Controle om te checken als items leeg is.
-    if (this.items.length == 0) {
-      //Indien leeg, wordt loader image verborgen en wordt er een foutmelding getoond dat er geen vacatures zijn.
-      this.loading = false;
-      this.loadingFilter = false;
-    }
-    else {
-      //Indien niet leeg wordt de lijst van vacatures afgebeeld.
-      this.loadingFilter = true;
-    }
-  });
-}
+      //Controle om te checken als items leeg is.
+      if (this.items.length == 0) {
+        //Indien leeg, wordt loader image verborgen en wordt er een foutmelding getoond dat er geen vacatures zijn.
+        this.loading = false;
+        this.loadingFilter = false;
+      }
+      else {
+        //Indien niet leeg wordt de lijst van vacatures afgebeeld.
+        this.loadingFilter = true;
+      }
+    });
+  }
 
 
 
-handleFilter(filters){
-  var filterArr = filters.filter;
-  var typeArr = filters.types;
-  //Indien een filter wordt aangeklikt wordt de lijst met vacatures onzichtbaar gemaakt.
-  this.loadingFilter = false;
-  //De load image wordt getoond wanneer een filter wordt aangeklikt.
-  this.loading = true;
+  handleFilter(filters) {
+    var filterArr = filters.filter;
+    var typeArr = filters.types;
+    //Indien een filter wordt aangeklikt wordt de lijst met vacatures onzichtbaar gemaakt.
+    this.loadingFilter = false;
+    //De load image wordt getoond wanneer een filter wordt aangeklikt.
+    this.loading = true;
 
-  if (filterArr === null && typeArr === null) {
-    this.fillVacatures();
-  } else {
-    if (this.currentUser != null) {
-      this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
-        this.favorites = f;
-        this.filterVacatures(filterArr, typeArr);
-      });
+    if (filterArr === null && typeArr === null) {
+      this.fillVacatures();
     } else {
-      this.filterVacatures(filterArr, typeArr);
-    }
-  }
-
-}
-
-removeEventAbstract(favorite: Favoriet){
-  //moet hier niet uit lijst verwijderen, echte implementatie zit in favorietencompenent.
-  //moet deze methode wel meegeven anders gaat hij errors geven  --> opzoeken hoe je kan checken in het vacature-item of de parent-function (evenEmitter) meegegeven is of niet.
-}
-
-  private checkIfVacatureAlreadyExists(vacature: Vacature){
-  if (this.vacatures) {
-    for (var i = 0; i < this.favorites.length; i++) {
-      if (vacature.id === this.favorites[i].vacature.id) {
-
-        return true;
+      if (this.currentUser != null) {
+        this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
+          this.favorites = f;
+          this.filterVacatures(filterArr, typeArr);
+        });
+      } else {
+        this.filterVacatures(filterArr, typeArr);
       }
     }
 
   }
 
-  return false;
-}
+  removeEventAbstract(favorite: Favoriet) {
+    //moet hier niet uit lijst verwijderen, echte implementatie zit in favorietencompenent.
+    //moet deze methode wel meegeven anders gaat hij errors geven  --> opzoeken hoe je kan checken in het vacature-item of de parent-function (evenEmitter) meegegeven is of niet.
+  }
 
-//   scroll(el: HTMLElement) {
-//     el.scrollIntoView();
-// }
+  private checkIfVacatureAlreadyExists(vacature: Vacature) {
+    if (this.vacatures) {
+      for (var i = 0; i < this.favorites.length; i++) {
+        if (vacature.id === this.favorites[i].vacature.id) {
+
+          return true;
+        }
+      }
+
+    }
+
+    return false;
+  }
+
+  //   scroll(el: HTMLElement) {
+  //     el.scrollIntoView();
+  // }
 
 }

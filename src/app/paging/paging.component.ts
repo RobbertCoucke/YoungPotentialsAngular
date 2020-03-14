@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChange
 import { __importDefault } from 'tslib';
 
 import paginate from 'jw-paginate';
+import { PagingService } from '@/_services/Paging/paging.service';
 
 // Had een error, gefixt via onderstaande code (zie https://stackoverflow.com/questions/56238356/understanding-esmoduleinterop-in-tsconfig-file/56348146#56348146)
 // transpiled js with esModuleInterop (simplified):
@@ -23,11 +24,18 @@ export class PagingComponent implements OnInit, OnChanges {
 
   pager: any = {};
 
+  constructor(private pagingService: PagingService) { }
+
   ngOnInit() {
     // set page if items array isn't empty
     if (this.items && this.items.length) {
       this.setPage(this.initialPage);
     }
+    if (this.pagingService.subsVar === undefined) {    
+      this.pagingService.subsVar = this.pagingService.setFirstPageFunction.subscribe((number:number) => {    
+        this.setPage(number);
+      });    
+    }  
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -37,10 +45,11 @@ export class PagingComponent implements OnInit, OnChanges {
     }
   }
 
-  private setPage(page: number) {
+  setPage(page: number) {
+    console.log("hi")
     // get new pager object for specified page
     this.pager = paginate(this.items.length, page, this.pageSize, this.maxPages);
-
+    console.log(this.pager)
     // get new page of items from items array
     var pageOfItems = this.items.slice(this.pager.startIndex, this.pager.endIndex + 1);
     // call change page function in parent component
