@@ -24,10 +24,8 @@ $grijs: gray;
   border-color: transparent;
 }
 
-.registrerenbtnwrapper {
-  display: inline-block;
-  margin-right: 15px;
-}
+/* Registreren */
+
 .registreermenu {
   display: flex;
   align-items: center;
@@ -35,10 +33,23 @@ $grijs: gray;
   width: 100%;
   margin-right: 20px;
 }
+
+
+
 .registreerdiv {
   display: flex;
   width: 210px;
   justify-content: flex-end;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+
+.loggedin-wrapper{
+  text-align: end;
+}
+
+.registrerenbtnwrapper {
+  display: inline-block;
 }
 
 .registrerenbtn {
@@ -102,20 +113,30 @@ $grijs: gray;
 }
 
 @media only screen and (max-width: 992px) {
+  /* Registreren */
   .registreermenu {
     margin: 20px auto 10px;
   }
-  .taaldropdown {
-    margin-top: 10px;
-  }
+  
+  
   #navbarDropdownTaalMenuLink {
     margin: 0 auto;
   }
+  .loggedin-wrapper{
+    text-align: center;
+  }
   .registreerdiv{
     justify-content: center;
+    padding-right: initial;
   }
+
   .registrerenbtnwrapper{
     margin-right: initial;
+  }
+
+  /* Talen */
+  .taaldropdown {
+    margin-top: 10px;
   }
 }
 
