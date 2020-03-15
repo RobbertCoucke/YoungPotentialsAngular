@@ -66,6 +66,8 @@
         "postcode": "Postcode",
         "websitereq": "Website url is verplicht!",
         "website": "Website url",
+        "sector":"Kies sector",
+        "sectorreq":"Sector is verplicht!",
         "stadreq": "Stad invullen is verplicht!",
         "stad": "Stad",
         "bedrijfsbeschrijvingreq": "Bedrijfsbeschrijving invullen is verplicht!",
@@ -128,9 +130,18 @@
 
     "sollicitatie":{
         "email": "Email validatie",
-        "controle": "Controleer de gegevens",
+        "controle": "Controleer onderstaande gegevens",
+        "aanpassen": "Uw eigen email kan nog aangepast worden.",
         "controlemail": "Controleer uw email",
         "ontvanger": "Email ontvanger",
+
+        "inhoudm": "Email inhoud",
+        "typinhoud": "Typ hier de inhoud van de email.",
+        "onderwerp": "Onderwerp",
+        "inhoud": "Inhoud",
+        "uploadcv": "Uploaden CV",
+        "cv": "U heeft nog geen CV toegevoegd aan uw account. Om te kunnen solliciteren is een CV verplicht.",
+
         "opmerking": "Opmerking voor de ontvanger",
         "opmerkingachter": "Laat een opmerking achter",
         "hintlabel": "Maximum 300 karakters",
@@ -147,6 +158,7 @@
         "akkoord": "Ik ga akkoord met de algemene voorwaarden",
         "versturen": "Versturen",
         "verstuurd": "Verstuurd",
+        "email2": " email",
         "sollverstuurd": "Uw sollicitatie is verstuurd!"
     },
 
@@ -166,7 +178,41 @@
         "wachtwoord": "Wachtwoord",
         "wachtwoordreq": "Wachtwoord is verplicht",
         "wwonthouden": "Wachtwoord onthouden",
-        "inloggen": "Inloggen"
+        "inloggen": "Inloggen",
+        "wwvergeten": "Wachtwoord vergeten?",
+        "account": "Nog geen account? ",
+        "klik": "klik hier"
+    },
+
+    "contact":{
+        "titel": "Neem contact met ons op",
+        "naam": "Volledige naam",
+        "email": "Emailadres",
+        "onderwerp": "Onderwerp",
+        "bericht": "Bericht",
+        "verzenden": "Verzenden"
+        
+    },
+
+    "message":{
+        "mailinfo":"Een mail met een link om uw wachtwoord te resetten werd verzonden naar uw opgegeven emailadres. Het kan even duren vooraleer de mail in uw inbox te zien is.",
+        "aangepast":"Uw wachtwoord werd successvol aangepast"
+    },
+
+    "passwordrequest":{
+        "titel": "Reset wachtwoord",
+        "email": "Geef je email van je account op",
+        "emailreq":"Email invullen is verplicht!",
+        "verzenden": "Verzenden"
+    },
+
+    "resetww":{
+        "titel": "Stel een nieuw wachtwoord in",
+        "nieuwww": "Nieuw wachtwoord",
+        "bevestigww": "Bevestig wachtwoord",
+        "verzenden": "Verzenden"
     }
+
+    
 
 }

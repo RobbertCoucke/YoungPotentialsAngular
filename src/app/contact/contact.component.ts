@@ -35,9 +35,9 @@ export class ContactComponent implements OnInit {
     this.submitted = true;
 
     //stop here if form is invalid
-           //if (this.contactForm.invalid) {
-         //return;
-   // }
+           if (this.contactForm.invalid) {
+         return;
+   }
 
     console.log( this.contactForm.controls.value );
 
@@ -45,6 +45,8 @@ export class ContactComponent implements OnInit {
         var contactModel = this.getContactModel();
 
         console.log(this.contactForm);
+
+        
 
 }
 

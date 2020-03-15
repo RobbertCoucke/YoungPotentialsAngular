@@ -21,12 +21,12 @@
       <select class="custom-select" (change)="changSector($event)"
        formControlName="sector" required
        [ngClass]="{ 'is-invalid': submitted && companyForm.controls['sector'].errors }">
-        <option value="" disabled>Kies sector</option>
+        <option value="" disabled>{{"register.sector" | translate}}</option>
         <option *ngFor="let sector of sectors" value="{{sector.id}}">{{sector.name}}</option>
      </select>
      <div *ngIf=" submitted && companyForm.controls['sector'].invalid && (companyForm.controls['sector'].dirty
      || companyForm.controls['sector'].touched)" class="invalid-feedback">
-     <div *ngIf="companyForm.controls['sector'].errors.required">Sector is required</div>
+     <div *ngIf="companyForm.controls['sector'].errors.required">{{"register.sectorreq" | translate}}</div>
     </div> 
       </div>
 
