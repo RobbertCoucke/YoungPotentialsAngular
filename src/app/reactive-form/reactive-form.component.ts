@@ -104,7 +104,7 @@ export class ReactiveFormComponent implements OnInit {
   ngOnInit() {
     this.authenticationService.currentUser.subscribe(u => {
       console.log(u);
-      if (u.role === "Company") {
+      if (u && u.role === "Company") {
         this.currentUser = u;
         this.userService.getById(u.id).subscribe(c => {
           this.company = c;
