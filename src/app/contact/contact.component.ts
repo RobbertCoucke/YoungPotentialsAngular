@@ -39,9 +39,11 @@ export class ContactComponent implements OnInit {
     this.submitted = true;
 
     //stop here if form is invalid
-      if (this.contactForm.invalid) {
+
+           if (this.contactForm.invalid) {
          return;
-    }
+   }
+
 
     console.log( this.contactForm );
 
@@ -50,6 +52,8 @@ export class ContactComponent implements OnInit {
 
     console.log(this.contactForm);
     this.contactService.sendMail(contactModel).subscribe( data => this.router.navigate(['/']));
+
+        
 
 }
 
