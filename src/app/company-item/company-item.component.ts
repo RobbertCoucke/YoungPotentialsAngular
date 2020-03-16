@@ -20,7 +20,7 @@ export class CompanyItemComponent implements OnInit {
 
 
   verifyCompany(){
-    this.companyService.verifyCompany(this.company.id).subscribe();
+    this.companyService.deleteFavorite(this.company.id).subscribe();
     this.removeEvent.emit(this.company);
  }
 
