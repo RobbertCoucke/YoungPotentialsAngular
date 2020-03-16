@@ -86,31 +86,6 @@ export class UnverifiedTableComponent implements OnInit {
   ngOnInit() {}
   ngAfterViewInit() {}
 
-  // removeEvent(company: Company) {
-  //   setTimeout(
-  //     () => (this.companies = this.companies.filter(o => o !== company)),
-  //     1000
-  //   );
-  // }
-
-  testConsole() {
-    console.log(this.companies);
-
-    console.log("datasource:");
-    console.log(this.dataSource);
-    console.log("datasource geverifieerd:");
-    console.log("lijst selcted items:");
-
-    console.log(this.selection.selected);
-
-    this.Selectedcompanies = this.selection.selected;
-    this.Selectedcompanies.forEach(element => {
-      var t = element.id;
-
-      console.log("test");
-      console.log(t);
-    });
-  }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -147,7 +122,7 @@ export class UnverifiedTableComponent implements OnInit {
   unverifyCompanyEnkel(objectID) {
     console.log("verwijdern:");
     console.log(objectID);
-    this.companyService.deleteCompany(objectID).subscribe();
+    this.companyService.verifyCompany(objectID).subscribe();
   }
 
   verifyCompanyEnkel(objectID) {
