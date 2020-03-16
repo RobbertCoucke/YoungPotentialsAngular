@@ -61,4 +61,11 @@ export class VacatureService {
     //return this.http.get<any>(`http://youngpotentials.azurewebsites.net/offer/types`);
   }
 
+  soliciteer(formData: FormData){
+    return this.http.post<any>(
+      `http://localhost:60213/offer/apply`,
+      formData
+    );
+  }
+
 }

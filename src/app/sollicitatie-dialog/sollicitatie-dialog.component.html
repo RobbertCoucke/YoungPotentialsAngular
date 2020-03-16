@@ -63,22 +63,15 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="thirdFormGroup" [editable]="editable"  *ngIf="userHasCV === true">
+  <mat-step [stepControl]="thirdFormGroup" [editable]="editable" >
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>Uploaden CV</ng-template>
-      <div class="list">
-        <h3 class="semi-bold">Uploaden CV</h3>
-        <p>
-          U heeft nog geen CV toegevoegd aan uw account. Om te kunnen
-          solliciteren is een CV verplicht.
-        </p>
-      </div>
 
-      <div class="list">
+      <div *ngIf="path === null" class="list">
         <app-upload (uploadHandler)="handleUpload($event)"></app-upload>
       </div>
-      <div *ngIf="uploadFile">
-        <p>{{uploadFile.get('file').name}}</p>
+      <div *ngIf="path">
+        <p>{{path}}</p>
         <button (click)="removeFile()" >X</button>
       </div>
       <footer>
@@ -106,12 +99,12 @@
           aan de mail toegevoegd worden.
         </p>
       </div>
-      <div class="list">
-        <app-upload (uploadHandler)="handleUpload($event)"></app-upload>
+      <div *ngIf="pathBijlage === null" class="list">
+        <app-upload (uploadHandler)="handleUploadBijlage($event)"></app-upload>
       </div>
-      <div *ngIf="uploadFile">
-        <p>{{uploadFile.get('file').name}}</p>
-        <button (click)="removeFile()" >X</button>
+      <div *ngIf="pathBijlage">
+        <p>{{pathBijlage}}</p>
+        <button (click)="removeBijlage()" >X</button>
       </div>
       <footer>
         <div class="list">
@@ -150,6 +143,7 @@
           matStepperNext
           [disabled]="disabledAgreement"
           (click)="editable = !editable"
+          (click)="sendMail()"
         >
           Versturen
         </button>
