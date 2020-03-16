@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { AuthenticationService } from '@/_services';
 import { FavoritesService } from '@/_services/Favorites/favorites.service';
 import { User, Role } from '@/_models';
@@ -14,10 +14,11 @@ import { PagingService } from '@/_services/Paging/paging.service';
   styleUrls: ['./vactures.component.scss']
 })
 export class VacturesComponent implements OnInit {
+  @ViewChild('vacaturewrapper', {read: ElementRef, static: false}) elementView: ElementRef;
 
+  viewHeight: number;
   // isShow: boolean;
   // topPosToStartShowing = 100;
-
 
   currentUser: User;
   vacatures: Favoriet[] = [];
@@ -84,7 +85,7 @@ export class VacturesComponent implements OnInit {
           });
 
           this.sortFunction();
-
+          
           //Indien alle vacatures geladen zijn word de div waarin de vacatures zitten zichtbaar gemaakt.
           this.loadingFilter = true;
         });
@@ -97,11 +98,16 @@ export class VacturesComponent implements OnInit {
         });
 
         this.sortFunction();
-
+       
         //Indien alle vacatures geladen zijn word de div waarin de vacatures zitten zichtbaar gemaakt.
         this.loadingFilter = true;
       });
     }
+  }
+  setHeight(){
+    this.viewHeight = this.elementView.nativeElement.offsetHeight;
+    console.log("viewHeight")
+    console.log(this.viewHeight);
   }
   sortFunction() {
     switch (this.selectedSorting) {
@@ -147,6 +153,10 @@ export class VacturesComponent implements OnInit {
     //update current page of items
     this.pageOfItems = pageOfItems;
 
+    console.log("Change Page")
+    this.setHeight();
+    console.log("Change Page Done")
+
     //Controle indien pageOfItems niet leeg is.
     if (pageOfItems.length !== 0) {
       //Indien niet leeg, afbeelden van de lijst met vacatures.
@@ -165,6 +175,11 @@ export class VacturesComponent implements OnInit {
 
   ngOnInit() {
     this.fillVacatures();
+  }
+  ngAfterViewInit(){
+    console.log("After view init")
+    console.log(this.viewHeight)
+    
   }
 
   filterVacatures(filterArr, typeArr) {
@@ -194,7 +209,6 @@ export class VacturesComponent implements OnInit {
       }
 
       this.sortFunction();
-
       //Controle om te checken als items leeg is.
       if (this.items.length == 0) {
         //Indien leeg, wordt loader image verborgen en wordt er een foutmelding getoond dat er geen vacatures zijn.

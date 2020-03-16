@@ -61,7 +61,7 @@ ul li {
   position: relative;
 }
 .content-height {
-  height: 2400px;
+  // height: 2400px;
 }
 .tekst-naam-opleiding{
   font-size: 12px;
@@ -141,7 +141,7 @@ ul li {
 /* Mobile fix */
 @media only screen and (max-width: 992px) {
   .content-height {
-    height: inherit;
+    //height: inherit;
   }
   .is-sticky.boundary-reached {
     position: inherit !important;

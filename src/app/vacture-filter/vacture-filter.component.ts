@@ -1,10 +1,12 @@
 import {
   Component,
   OnInit,
+  Input,
   Output,
   EventEmitter,
   ElementRef,
-  ViewChild
+  ViewChild,
+  SimpleChanges
 } from "@angular/core";
 import { StudiegebiedService } from "../_services/studiegebied/studiegebied.service";
 import { Studiegebied } from "@/_models/studiegebied";
@@ -12,7 +14,7 @@ import { Opleiding } from "@/_models/Opleiding";
 import { Afstudeerrichting } from "@/_models/afstudeerrichting";
 import { Keuze } from "@/_models/Keuze";
 import { VacatureService } from '@/_services/Vacature/vacature.service';
-import {Type} from '../_models/type';
+import { Type } from '../_models/type';
 import { FilterService } from './../_services/filter/filter.service';
 
 @Component({
@@ -22,19 +24,22 @@ import { FilterService } from './../_services/filter/filter.service';
 })
 export class VactureFilterComponent implements OnInit {
   @Output() filterEvent: EventEmitter<Object> = new EventEmitter<Object>();
+  @Input() height: number;
 
   //selectedGebied: string;
   //array for all Studiegebied objects
   studiegebieds: Studiegebied[] = [];
-  types: Type[] = [];
-  selectedTypes: Type[] = [];
+
   //array for all opleiding objects
   opleidingArray: Opleiding[] = [];
 
+  //array for all types
+  types: Type[] = [];
+  selectedTypes: Type[] = [];
+
+
   selectedgebieds = [];
 
-  @ViewChild("mainScreen", { read: ElementRef, static: false })
-  elementView: ElementRef;
   contentHeight: number;
 
   //TODO add types
@@ -44,43 +49,55 @@ export class VactureFilterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contentHeight = 2500;
-    console.log('x');
-    
+
     this.checkLocalStorage(this.types, this.studiegebieds);
 
     //Een service zodat de functie checkvacature kan doorgegeven worden naar de homecomponent bij de knoppen vacatures, stage en vakantiejob
-    if (this.filterService.subsVar==undefined) {    
-      this.filterService.subsVar = this.filterService.invokeFilterComponent.subscribe((name:string) => {
+    if (this.filterService.subsVar == undefined) {
+      this.filterService.subsVar = this.filterService.invokeFilterComponent.subscribe((name: string) => {
         console.log(name)
-        this.checkVacature(name);    
-      });    
+        this.checkVacature(name);
+      });
     }
   }
 
-
-
-  ngAfterViewInit()
-  {
-    
+  checkHeight(height: number) {
+    let minHeight: number = 715;
+    if (height < minHeight) {
+      this.contentHeight = minHeight;
+    }
+    else
+    {
+      this.contentHeight = height;
+    }
+    console.log("Content height")
+    console.log(this.contentHeight);
   }
 
-  checkLocalStorage(types, studiegbieden)
-  {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['height']) {
+      // Do your logic here
+      this.checkHeight(this.height);
+    }
+  }
+
+  ngAfterViewInit() {
+
+  }
+
+  checkLocalStorage(types, studiegbieden) {
     const localTypes = JSON.parse(localStorage.getItem('types'));
     const localStudiegebieden = JSON.parse(localStorage.getItem('studiegebied'));
 
-    if(localTypes != undefined)
-    {
-        localTypes.forEach(element => {
-          types.push(element)
-        });
+    if (localTypes != undefined) {
+      localTypes.forEach(element => {
+        types.push(element)
+      });
     }
-    if(localStudiegebieden != undefined)
-    {
-        localStudiegebieden.forEach(element => {
-          studiegbieden.push(element)
-        });
+    if (localStudiegebieden != undefined) {
+      localStudiegebieden.forEach(element => {
+        studiegbieden.push(element)
+      });
     }
   }
 
@@ -89,85 +106,85 @@ export class VactureFilterComponent implements OnInit {
     var selectedVal = event.target.value;
     var selected = event.target;
 
-    if(selected.name === 'typeVives'){
+    if (selected.name === 'typeVives') {
       var selectedType;
       this.types.forEach(t => {
-        if(t.id.toString() === selectedVal.toString()){
+        if (t.id.toString() === selectedVal.toString()) {
           selectedType = t;
         }
-          
+
       });
-      
-     
-      if(event.target.checked){
+
+
+      if (event.target.checked) {
         this.selectedTypes.push(selectedType);
-      }else{
+      } else {
         this.selectedTypes = this.selectedTypes.filter(t => t.id.toString() !== selectedVal.toString());
       }
 
-    }else{
-    //console.log(selectedVal);
+    } else {
+      //console.log(selectedVal);
 
-    //check if checkbox is checked to add or unchecked to delete
-    if (event.target.checked) {
-      var selectedObject = this.findStudiegebied(selectedVal);
-      if (selectedObject === undefined) {
-        selectedObject = this.findOpleiding(selectedVal);
+      //check if checkbox is checked to add or unchecked to delete
+      if (event.target.checked) {
+        var selectedObject = this.findStudiegebied(selectedVal);
+        if (selectedObject === undefined) {
+          selectedObject = this.findOpleiding(selectedVal);
 
-        //check if studiegebied is already in selected
-        let updateObject = this.selectedgebieds.find(
-          s => s.id === selectedObject.id
-        );
+          //check if studiegebied is already in selected
+          let updateObject = this.selectedgebieds.find(
+            s => s.id === selectedObject.id
+          );
 
-        if (updateObject != undefined) {
-          let index = this.selectedgebieds.indexOf(updateObject);
+          if (updateObject != undefined) {
+            let index = this.selectedgebieds.indexOf(updateObject);
 
-          updateObject.opleiding.push(selectedObject.opleiding[0]);
-          this.selectedgebieds[index] = updateObject;
+            updateObject.opleiding.push(selectedObject.opleiding[0]);
+            this.selectedgebieds[index] = updateObject;
+          } else {
+            this.selectedgebieds.push(selectedObject);
+            //console.log(this.studiegebieds);
+          }
         } else {
           this.selectedgebieds.push(selectedObject);
-          //console.log(this.studiegebieds);
         }
       } else {
-        this.selectedgebieds.push(selectedObject);
-      }
-    } else {
-      var length = this.selectedgebieds.length;
-      this.selectedgebieds = this.selectedgebieds.filter(
-        s => s.id != selectedVal
-      );
-      if (length === this.selectedgebieds.length) {
-        var studiegebied = this.findOpleiding(selectedVal);
-        let updateObject = this.selectedgebieds.find(
-          s => s.id === studiegebied.id
+        var length = this.selectedgebieds.length;
+        this.selectedgebieds = this.selectedgebieds.filter(
+          s => s.id != selectedVal
         );
+        if (length === this.selectedgebieds.length) {
+          var studiegebied = this.findOpleiding(selectedVal);
+          let updateObject = this.selectedgebieds.find(
+            s => s.id === studiegebied.id
+          );
 
-        let index = this.selectedgebieds.indexOf(updateObject);
-        if (this.selectedgebieds[index].opleiding.length === 1) {
-          this.selectedgebieds = this.selectedgebieds.filter(
-            s => s.id != studiegebied.id
-          );
-        } else {
-          var gebied = this.selectedgebieds[index];
-          var newStudiegebied = new Studiegebied(
-            gebied.id,
-            gebied.naam,
-            gebied.kleur,
-            this.selectedgebieds[index].opleiding.filter(
-              o => o.id != selectedVal
-            )
-          );
-          this.selectedgebieds[index] = newStudiegebied;
+          let index = this.selectedgebieds.indexOf(updateObject);
+          if (this.selectedgebieds[index].opleiding.length === 1) {
+            this.selectedgebieds = this.selectedgebieds.filter(
+              s => s.id != studiegebied.id
+            );
+          } else {
+            var gebied = this.selectedgebieds[index];
+            var newStudiegebied = new Studiegebied(
+              gebied.id,
+              gebied.naam,
+              gebied.kleur,
+              this.selectedgebieds[index].opleiding.filter(
+                o => o.id != selectedVal
+              )
+            );
+            this.selectedgebieds[index] = newStudiegebied;
+          }
         }
       }
     }
-  }
 
     if (this.selectedgebieds.length < 1 && this.selectedTypes.length < 1) {
 
-      this.filterEvent.emit( {filter: null, types: null});
+      this.filterEvent.emit({ filter: null, types: null });
     } else {
-      this.filterEvent.emit({filter: this.selectedgebieds, types: this.selectedTypes});
+      this.filterEvent.emit({ filter: this.selectedgebieds, types: this.selectedTypes });
     }
   }
 
@@ -197,7 +214,7 @@ export class VactureFilterComponent implements OnInit {
   removeSelected() {
     this.selectedTypes = [];
     this.selectedgebieds = [];
-    this.filterEvent.emit({filter: null, types: null});
+    this.filterEvent.emit({ filter: null, types: null });
   }
 
   /**
@@ -236,14 +253,14 @@ export class VactureFilterComponent implements OnInit {
     return null;
   }
 
-  isSelectedType(id){
-    if(this.selectedTypes.length >0){
+  isSelectedType(id) {
+    if (this.selectedTypes.length > 0) {
       var object = this.selectedTypes.find(t => t.id === id);
-    if(object != undefined)
-      return true;
-    else  
-      return false;
-    }else{
+      if (object != undefined)
+        return true;
+      else
+        return false;
+    } else {
       return false;
     }
   }
@@ -271,22 +288,20 @@ export class VactureFilterComponent implements OnInit {
 
   //get Observable data from server
   showData() {
-    if(localStorage.getItem('studiegebied') == undefined)
-      {
-        console.log('Get data from database studiegebied')
-    this.studieService.getAllStudieGebieds().subscribe(res => {
-      this.studiegebieds = this.mapJSONToModel(res);
-      localStorage.setItem('studiegebied',JSON.stringify(this.studiegebieds));
+    if (localStorage.getItem('studiegebied') == undefined) {
+      console.log('Get data from database studiegebied')
+      this.studieService.getAllStudieGebieds().subscribe(res => {
+        this.studiegebieds = this.mapJSONToModel(res);
+        localStorage.setItem('studiegebied', JSON.stringify(this.studiegebieds));
       });
     }
 
-    if(localStorage.getItem('types') == undefined)
-    {
+    if (localStorage.getItem('types') == undefined) {
       console.log('Get data from database types')
       this.vacatureService.getAllTypes().subscribe(types => {
-      this.types = types;
-      localStorage.setItem('types',JSON.stringify(this.types));
-    });
+        this.types = types;
+        localStorage.setItem('types', JSON.stringify(this.types));
+      });
     }
   }
 
@@ -317,11 +332,10 @@ export class VactureFilterComponent implements OnInit {
     return list;
   }
 
-  checkVacature(typeName: string)
-  {
-    let element = <HTMLInputElement> document.getElementById(typeName);
+  checkVacature(typeName: string) {
+    let element = <HTMLInputElement>document.getElementById(typeName);
     element.checked = true;
-    let event = new CustomEvent("build",{detail: 3});
+    let event = new CustomEvent("build", { detail: 3 });
     element.dispatchEvent(event)
     this.check(event)
   }
