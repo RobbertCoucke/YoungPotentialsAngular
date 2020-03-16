@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '@/_models';
+import { User, Role } from '@/_models';
 import { AuthenticationService } from '@/_services';
 import { UserService } from '../_services/User/user.service'
 import { Router } from '@angular/router';
@@ -42,7 +42,7 @@ export class ProfileEditComponent implements OnInit {
    }
 
   ngOnInit() {
-    if (this.authenticatieService.currentUserValue == null) { 
+    if (this.authenticatieService.currentUserValue == null && this.currentUser.role == Role.Admin) { 
       alert("Invalid action.");
       this.router.navigate(['/']);
     }else{
@@ -62,12 +62,8 @@ export class ProfileEditComponent implements OnInit {
           zipCode: ['']
         })
         this.userservice.getById(this.currentUser.id).subscribe(data => {
-          console.log(data);
           this.id = data.userId;
-          //console.log(this.id);
           this.handleData(data);
-          console.log(this.user);
-          console.log(this.isStudent);
           this.updateform();
           if(this.isStudent)
           {
@@ -82,20 +78,6 @@ export class ProfileEditComponent implements OnInit {
           this.updateForm.get('lastName').setValidators(this.nameValidators.concat(Validators.required));
           }
           });
-/*         console.log(this.currentUser);
-
-        if(this.isStudent) {
-          console.log(this.isStudent);
-          this.updateForm.get('companyName').setValidators(this.nameValidators.concat(Validators.required));
-          this.updateForm.get('description').setValidators(this.commonvalidators);
-          this.updateForm.get('url').setValidators(this.commonvalidators);
-        }else{
-
-          this.updateForm.get('firstName').setValidators(this.nameValidators.concat(Validators.required));
-          this.updateForm.get('lastName').setValidators(this.nameValidators.concat(Validators.required));
-  
-        }
- */
 
       }
 

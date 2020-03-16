@@ -1,5 +1,4 @@
-
-<div class="margin container">
+<!-- <div class="margin container">
     <h1>Verifiëer nieuwe bedrijfsaccounts</h1>
     <app-company-item *ngFor="let company of companies" [company]="company"  (removeEvent)="removeEvent($event)" ></app-company-item>
     <div *ngIf="loading" class="loader">
@@ -8,12 +7,11 @@
     <div *ngIf="error && !loading" class="alert alert-danger" role="alert">
         <p class="removeMarginbottom">Er zijn geen bedrijven om te verifieëren.</p>
     </div>
-</div>
+</div>   -->
 
 <!-- <app-paging></app-paging> -->
-    
 
-    
+<app-unverified-table></app-unverified-table> 
 
+ <!-- <app-verified-table></app-verified-table>  -->
 
-    
