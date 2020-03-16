@@ -26,7 +26,7 @@ export class CompanyService {
     return this.http.get<any>(`${this.apiUrl}company/unverify/${companyId}`);
   }
 
-  unverifyCompany(companyId: number) {
-    return this.http.get<any>(`${this.apiUrl}company/unverify/${companyId}`);
+  deleteCompany(companyId: number) {
+    return this.http.delete<any>(`${this.apiUrl}company/delete/${companyId}`);
   }
 }

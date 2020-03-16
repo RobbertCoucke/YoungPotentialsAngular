@@ -140,20 +140,20 @@ export class UnverifiedTableComponent implements OnInit {
     this.Selectedcompanies.forEach(element => {
       console.log(element.id);
       console.log("verwijderen");
-      this.companyService.unverifyCompany(element.id).subscribe();
+      this.companyService.deleteCompany(element.id).subscribe();
     });
   }
 
   unverifyCompanyEnkel(objectID) {
     console.log("verwijdern:");
     console.log(objectID);
-    this.companyService.unverifyCompany(objectID).subscribe();
+    this.companyService.deleteCompany(objectID).subscribe();
   }
 
   verifyCompanyEnkel(objectID) {
     console.log("verifiëren:");
     console.log(objectID);
-    this.companyService.verifyCompany(objectID).subscribe();
+    this.companyService.deleteCompany(objectID).subscribe();
   }
 
 
