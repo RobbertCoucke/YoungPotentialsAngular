@@ -15,6 +15,10 @@ import {
 import { STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
 import { UploadComponent } from "@/upload/upload.component";
 import { DialogData } from "@/vacture-detail/vacture-detail.component";
+import { UploadService} from "../_services/upload/upload.service";
+import { User } from '@/_models';
+import { AuthenticationService } from '@/_services';
+import { VacatureService } from '@/_services/Vacature/vacature.service';
 
 @Component({
   selector: "app-sollicitatie-dialog",
@@ -23,13 +27,15 @@ import { DialogData } from "@/vacture-detail/vacture-detail.component";
 })
 export class SollicitatieDialogComponent implements OnInit {
   checkboxValue: boolean; // checkbox waarde voor algemene voorwaarden
-
+  path: string = null;
+  pathBijlage : string = null
   uploadFile: FormData; // we stopen opgeladen bestand in formdata
+  uploadBijlage : FormData;
 
   emailSender = this.data.UseremailValue; // email van de hudige gebruiker
   emailReciever = this.data.companyEmailValue; // email van het bedrijf die vacature plaatste
-  //userHasCV = this.data.userHasCV; // controle of ingelogde user CV heeft
-  userHasCV = true; //dummy om CV te simuleren
+  currentUser : User;
+
 
   /**
    * * FormGroup per step in stepper
@@ -58,6 +64,9 @@ export class SollicitatieDialogComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder, 
+    private uploadService: UploadService,
+    private authenticationService : AuthenticationService,
+    private vacatureService: VacatureService,
     /**
      * * Hier laden we data in uit vacature-detail 
      * * We kunnen deze data bereiken via het data veld
@@ -83,6 +92,18 @@ export class SollicitatieDialogComponent implements OnInit {
     this.FifthFormGroup = this.formBuilder.group({
       checkboxControl: this.checkboxControl
     });
+
+    this.getUserCV();
+
+
+  }
+
+
+  getUserCV(){
+    this.authenticationService.currentUser.subscribe(u => {
+      this.currentUser = u;
+      this.uploadService.getFilePath(true, this.currentUser.id).subscribe(path => this.path = path.path);
+    })
   }
 
   /**
@@ -101,6 +122,10 @@ export class SollicitatieDialogComponent implements OnInit {
    */
   handleUpload(formData: FormData) {
     this.uploadFile = formData;
+
+    //override om name uit file te krijgen, anders zegt hij name property not known
+    var file : any = formData.get('file');
+    this.path = file.name;
   }
 
   /**
@@ -108,6 +133,41 @@ export class SollicitatieDialogComponent implements OnInit {
    */
   removeFile(){
     this.uploadFile = null;
+    this.path = null;
+  }
+
+  removeBijlage(){
+    this.uploadBijlage = null;
+    this.pathBijlage = null
+  }
+
+  handleUploadBijlage(formData: FormData){
+    this.uploadBijlage = formData;
+    //override om name uit file te krijgen, anders zegt hij name property not known
+    var file : any = formData.get('file');
+    this.pathBijlage = file.name;
+  }
+
+  sendMail(){
+
+    var formData = new FormData(); 
+    if(!this.uploadFile){
+      formData.append('userId', this.currentUser.id.toString());
+    }else{
+      formData = this.uploadFile;
+    }
+
+    if(this.pathBijlage){
+      formData.append('file2', this.uploadBijlage.get('file'));
+    }
+    formData.append('emailFrom', this.firstFormGroup.controls['senderCtrl'].value);
+    formData.append('emailTo', this.emailReciever);
+    formData.append('subject', this.secondFormGroup.controls['onderwerpControl'].value);
+    formData.append('message',this.secondFormGroup.controls['bodyControl'].value);
+
+    this.vacatureService.soliciteer(formData).subscribe();
+    
+
   }
 
   /**

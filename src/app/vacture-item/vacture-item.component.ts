@@ -15,7 +15,7 @@ import { VacatureService } from '@/_services/Vacature/vacature.service';
 export class VactureItemComponent implements OnInit {
   liked = false;
 
-  @Input() showTrashcan : boolean
+  @Input() showTrashcan : boolean;
   @Input() showLike : boolean;
   @Input() favorite: Favoriet;
   @Input() currentUser: User;

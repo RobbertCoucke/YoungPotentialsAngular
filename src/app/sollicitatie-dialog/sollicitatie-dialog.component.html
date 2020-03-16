@@ -62,7 +62,7 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="thirdFormGroup" [editable]="editable"  *ngIf="userHasCV === true">
+  <mat-step [stepControl]="thirdFormGroup" [editable]="editable" >
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>{{"sollicitatie.uploadcv" | translate}}</ng-template>
       <div class="list">
@@ -72,12 +72,12 @@
         </p>
       </div>
 
-      <div class="list">
+      <div *ngIf="path === null" class="list">
         <app-upload (uploadHandler)="handleUpload($event)"></app-upload>
       </div>
-      <div *ngIf="uploadFile">
-        <p>{{uploadFile.get('file').name}}</p>
-        <button (click)="removeFile()" >x</button>
+      <div *ngIf="path">
+        <p>{{path}}</p>
+        <button (click)="removeFile()" >X</button>
       </div>
       <footer>
         <div class="list">
@@ -103,12 +103,12 @@
           {{"sollicitatie.sollinfo" | translate}}
         </p>
       </div>
-      <div class="list">
-        <app-upload (uploadHandler)="handleUpload($event)"></app-upload>
+      <div *ngIf="pathBijlage === null" class="list">
+        <app-upload (uploadHandler)="handleUploadBijlage($event)"></app-upload>
       </div>
-      <div *ngIf="uploadFile">
-        <p>{{uploadFile.get('file').name}}</p>
-        <button (click)="removeFile()" >x</button>
+      <div *ngIf="pathBijlage">
+        <p>{{pathBijlage}}</p>
+        <button (click)="removeBijlage()" >X</button>
       </div>
       <footer>
         <div class="list">
@@ -147,6 +147,7 @@
           matStepperNext
           [disabled]="disabledAgreement"
           (click)="editable = !editable"
+          (click)="sendMail()"
         >
         {{"sollicitatie.versturen" | translate}}
         </button>
