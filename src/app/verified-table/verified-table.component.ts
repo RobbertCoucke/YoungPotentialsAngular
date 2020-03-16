@@ -30,6 +30,8 @@ export class VerifiedTableComponent implements OnInit {
   error: boolean = false;
   dataSource: any;
 
+  Selectedcompanies: any[] = [];
+
   displayedColumns: string[] = [
     "select",
     "position",
@@ -130,5 +132,19 @@ export class VerifiedTableComponent implements OnInit {
     } row ${row.position + 1}`;
   }
 
+  unverifyCompany() {
+    this.Selectedcompanies = this.selection.selected;
+    this.Selectedcompanies.forEach(element => {
+      console.log(element.id);
+      console.log("verwijderen");
+      this.companyService.deleteCompany(element.id).subscribe();
+    });
+  }
+
+  unverifyCompanyEnkel(objectID) {
+    console.log("verwijderen:");
+    console.log(objectID);
+    this.companyService.deleteCompany(objectID).subscribe();
+  }
 
 }
