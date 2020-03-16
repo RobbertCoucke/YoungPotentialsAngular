@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '@/_models';
+import { User, Role } from '@/_models';
 import { UserService, AuthenticationService } from '@/_services';
 import { Router } from '@angular/router';
 import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
@@ -24,30 +24,38 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    //profile component mag niet opgeladen worden als er geen ingelogde user is
-    if (this.authenticatieService.currentUserValue == null) { 
-      alert("Nice try, hackerman. :)");
-      this.router.navigate(['/']);
-    }else{
-      this.authenticatieService.currentUser.subscribe(x => {
-        this.currentUser=x;
-        //get de ingelogde gebruiker van de database
-        this.userservice.getById(this.currentUser.id).subscribe(data => {
-          //is de gebruiker student of company?
-          this.isStudent = data.isStudent;
-          this.profiel = data;
-          this.loader(this.profiel);
+     //profile component mag niet opgeladen worden als er geen ingelogde user is
+        if (this.authenticatieService.currentUserValue == null) { 
+          alert("Nice try, hackerman. :)");
+          this.router.navigate(['/']);
+        }else{
+          this.authenticatieService.currentUser.subscribe(x => {
+            if(x.role == Role.Admin)
+            {
+              this.router.navigate(['/']);
+            }
+            else{
+              this.currentUser=x;
+              //get de ingelogde gebruiker van de database
+              this.userservice.getById(this.currentUser.id).subscribe(data => {
+                //is de gebruiker student of company?
+                this.isStudent = data.isStudent;
+                this.profiel = data;
+                this.loader(this.profiel);
+                });
+            }
           });
-      });
-
-      this.uploadService.getFilePath(true,this.currentUser.id).subscribe(p => {
-        if(p != null){
-
-        this.uploadFile = p.path;
-        }
-      });
-    } 
+    
+          this.uploadService.getFilePath(true,this.currentUser.id).subscribe(p => {
+            if(p != null){
+    
+            this.uploadFile = p.path;
+            }
+          });
+        } 
   }
+
+
 
   loader(x)
   {
