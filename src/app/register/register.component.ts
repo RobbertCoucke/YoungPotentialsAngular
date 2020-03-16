@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
   isStudent : boolean;
 
   constructor(
+    //router gebruiken om naar andere component te navigeren
     private router: Router,
     private authenticationService: AuthenticationService,) {
       // redirect to home if already logged in
@@ -30,15 +31,16 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() { }
 
+  //de gebruiker wilt als student registreren
   studentClicked(){
+    //het is student, daardoor wordt studentForm geladen
     this.isStudent = true;
-    console.log(this.isStudent);
     
   }
-  //register als bedrijf
+  //de gebruiker wilt als bedrijf registreren
   bedrijfClicked() {
+    //het is geen student, daardoor wordt companyForm geladen
     this.isStudent = false;
-    console.log(this.isStudent);
   }
 
   //hidden maken van input velden vooraleer op buttons werd geklikt
@@ -49,8 +51,12 @@ export class RegisterComponent implements OnInit {
   this.IsHidden= false;
 }
 
+//het gekregen model van de child componenten Studentform of companyForm wordt naar de backend server gestuurd
+//daarna wordt daar gecontroleerd of de email bestaal wel of nee, als wel wordt de gebruiker met zijn/haar gegevens in de database toegevoed
+//anders tonen wij de error.
 register(model){
   console.log(model);
+  this.loading = true;
       //de gebruiker toevoegen aan de database
       this.authenticationService.register(model).subscribe(
         data => {

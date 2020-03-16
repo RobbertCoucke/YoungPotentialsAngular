@@ -14,7 +14,7 @@
                 </div>
                 <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                 <div [hidden]="IsHidden">
-
+                
                 <div *ngIf="isStudent; else showCompany">
                   <app-studentform (register)="register($event)"></app-studentform>
                 </div>

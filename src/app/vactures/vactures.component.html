@@ -19,11 +19,11 @@
             </ul>
         </div> -->
         <div class="col-lg-5">
-            <app-vacture-filter (filterEvent)="handleFilter($event)"></app-vacture-filter>
+            <app-vacture-filter (filterEvent)="handleFilter($event)" [height]='viewHeight'></app-vacture-filter>
         </div>
         <div class="text-center col-lg-7">
 
-            <div *ngIf="loadingFilter">
+            <div *ngIf="loadingFilter" #vacaturewrapper>
                 <!-- Warning is niet nodig, favorieten is disabled. -->
                 <!-- <div *ngIf="!currentUser || currentUser.role != 'User'" class="alert alert-warning" role="alert">
                     <p class="removeMarginbottom">{{favoriteError}}</p>

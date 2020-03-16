@@ -63,6 +63,8 @@
         "postcode": "Zip code",
         "websitereq": "Website url is required!",
         "website": "Website url",
+        "sector":"Choose sector",
+        "sectorreq":"Sector is required!",
         "stadreq": "City is required!",
         "stad": "City",
         "bedrijfsbeschrijvingreq": "Company description is required!",
@@ -105,7 +107,7 @@
         "antwoordopwebsite": "A: If you upload for the first time we have to verify your account and job offer first. Once everything is fine you will find your job offer on the offer webpage. When your account has been verified you will be able to upload job offers right away.",
 
         "vraagww": "Q: What to do when I forgot my password?",
-        "antwoordww": "A: Still in development so complete this sentence when that part is done..."
+        "antwoordww": "A: Go to the login page. Under the input fields you can click on the link 'forgot password'. Then follow the steps."
     },
 
     "react":{
@@ -125,9 +127,18 @@
 
     "sollicitatie":{
         "email": "Email validation",
-        "controle": "Check the data",
+        "controle": "Check the information below.",
+        "aanpassen": "Your own email is can still be adjusted.",
         "controlemail": "Check your email",
         "ontvanger": "Email receiver",
+
+        "inhoudm": "Email content",
+        "typinhoud": "Type here the content of the email.",
+        "onderwerp": "Subject",
+        "inhoud": "Content",
+        "uploadcv": "Upload CV",
+        "cv": "You have not yet added your CV to your account. In order to apply, a CV is required.",
+
         "opmerking": "Note for the receiver",
         "opmerkingachter": "Leave a comment",
         "hintlabel": "Max 300 characters",
@@ -144,6 +155,7 @@
         "akkoord": "I agree to the terms and conditions",
         "versturen": "Send",
         "verstuurd": "Sent",
+        "email2": " email",
         "sollverstuurd": "Your application has been sent!"
     },
 
@@ -163,7 +175,38 @@
         "wachtwoord": "Password",
         "wachtwoordreq": "Password is required",
         "wwonthouden": "Remember password",
-        "inloggen": "Log in"
-    }
+        "inloggen": "Log in",
+        "wwvergeten": "Forgot password?",
+        "account": "No account yet? ",
+        "klik": "click here"
+    },
 
+    "contact":{
+        "titel": "Contact us",
+        "naam": "Full name",
+        "email": "Email address",
+        "onderwerp": "Subject",
+        "bericht": "Message",
+        "verzenden": "send"
+        
+    },
+
+    "message":{
+        "mailinfo":"An email with a link to reset your password has been sent to your specified email address. It may take some time before the mail is visible in your inbox.",
+        "aangepast":"Your password has been successfully changed"
+    },
+
+    "passwordrequest":{
+        "titel": "Reset password",
+        "email": "Enter your email from your account",
+        "emailreq":"Filling out an email is required!",
+        "verzenden": "Submit"
+    },
+
+    "resetww":{
+        "titel": "Set a new password",
+        "nieuwww": "New password",
+        "bevestigww": "Confirm password",
+        "verzenden": "Submit"
+    }
 }
