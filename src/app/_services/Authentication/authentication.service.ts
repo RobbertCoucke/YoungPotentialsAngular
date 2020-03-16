@@ -45,6 +45,7 @@ export class AuthenticationService {
 
     register(reg: Register) {
         return this.http.post<any>(`${this.apiUrl}user/register`, reg)
+
         .pipe(map(user => {
             //register succesful if there's a jwt token in the response
             if(user && user.token){
