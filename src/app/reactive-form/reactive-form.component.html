@@ -37,18 +37,6 @@
                 }}</mat-error>
               </mat-form-field>
             </div>
-
-            <!-- <div class="form-group">
-              <mat-form-field class="example-full-width">
-                <mat-label>{{"react.bedrijf" | translate}}</mat-label>
-                <input matInput [formControl]="bedrijfsnaam" 
-                [(ngModel)]="companyValue" />
-                <mat-error *ngIf="bedrijfsnaam.invalid">{{
-                  getErrorMessageBedrijfsnaam()
-                }}</mat-error>
-              </mat-form-field>
-            </div> -->
-
             <div class="form-group">
               <mat-form-field class="example-full-width">
                 <mat-label>address</mat-label>
@@ -120,20 +108,6 @@
             <div class="form-group">
               <label>{{"react.upload" | translate}}</label>
             </div>
-            <!-- <div class="input-group mb-3">
-              <div class="custom-file" id="inputlabel">
-                <input
-                  type="file"
-                  class="custom-file-input"
-                  id="file"
-                  [formControl]="vacatureBestand"
-                  accept=".pdf"
-                />
-                <label class="custom-file-label" for="inputGroupFile01"
-                  >{{"react.bestand" | translate}}</label
-                >
-              </div> 
-            </div>-->
             <app-upload (uploadHandler)="handleUpload($event)"></app-upload>
           </div>
           <div *ngIf="uploadFile">
