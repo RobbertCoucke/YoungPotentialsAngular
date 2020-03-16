@@ -29,10 +29,10 @@ export class UploadComponent implements OnInit {
 
     let fileToUpload = <File>files[0];
     const formData = new FormData();
-    formData.append("file", fileToUpload);
+    formData.append("file", fileToUpload);  
 
     if (fileToUpload.size > 1024 * 1024 * 2) {
-      console.log("Max toegelaten file groote is 20 mb.");
+      console.log("Max toegelaten file groote is 2 mb.");
       return;
     }
     this.uploadHandler.emit(formData);
