@@ -58,6 +58,8 @@ export class ProfileComponent implements OnInit {
     } 
   }
 
+
+
   loader(x)
   {
     this.loading = false;
