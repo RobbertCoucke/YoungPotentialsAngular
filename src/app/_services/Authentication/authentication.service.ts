@@ -44,12 +44,7 @@ export class AuthenticationService {
     }
 
     register(reg: Register) {
-<<<<<<< HEAD
-        return this.http.post<any>('https://cors-anywhere.herokuapp.com/https://youngpotentials.azurewebsites.net/user/register', reg)
-=======
         return this.http.post<any>(`${this.apiUrl}user/register`, reg)
-
->>>>>>> db9a8e3ffa1201eb95165655cd61ea84a6c10458
         .pipe(map(user => {
             //register succesful if there's a jwt token in the response
             if(user && user.token){
