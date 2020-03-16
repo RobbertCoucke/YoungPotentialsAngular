@@ -17,6 +17,9 @@
       <li *ngIf="currentUser && currentUser.role === 'Admin'" class="nav-item">
         <a class="nav-link" routerLink="/verify" routerLinkActive="active">Bedrijf verifiëren</a>
       </li>
+      <li *ngIf="currentUser && currentUser.role === 'Admin'" class="nav-item">
+        <a class="nav-link" routerLink="/bedrijven" routerLinkActive="active">Overzicht bedrijven</a>
+      </li>
       <li *ngIf="currentUser && currentUser.role === 'Company'" class="nav-item">
         <a class="nav-link" routerLink="/vacture-toevoegen" routerLinkActive="active">Vacature toevoegen</a>
       </li>

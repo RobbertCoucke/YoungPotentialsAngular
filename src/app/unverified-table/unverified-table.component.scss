@@ -1,0 +1,102 @@
+.container {
+  display: table;
+  align-self: start;
+  overflow: auto;
+}
+
+.margin {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+h1 {
+  margin-bottom: 50px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+.example-container {
+  height:460px;
+  overflow: auto;
+}
+
+.mat-checkbox mat-accent mat-checkbox-checked {
+  background-color: red;
+}
+
+button {
+  margin: 16px 8px;
+}
+
+.buttons {
+  display: inline-block;
+  padding-top: 20px;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #e50001;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 300;
+  color: #ffffff;
+  text-align: center;
+  transition: all 0.2s;
+  background-color: #e50001;
+}
+
+.buttons:hover {
+  color: #ffffff;
+  background-color: #ff1f1f;
+}
+
+.buttonsVerify {
+  display: inline-block;
+  padding-top: 20px;
+  padding: 0.35em 1.2em;
+  background:#64991e;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 300;
+  color: #ffffff;
+  text-align: center;
+  transition: all 0.2s;
+  background:#64991e;
+}
+
+.buttonsVerify:hover {
+  color: #ffffff;
+  background-color:#507a18;
+}
+
+.mat-row {
+  height: auto;
+}
+
+th, td {
+  overflow: hidden;
+  width: 100px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mat-icon {
+  padding-right: 5px;
+}
+
+.uploader-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #ff1f1f;
+}

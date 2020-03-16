@@ -23,4 +23,8 @@ export class CompanyService {
   deleteFavorite(companyId: number){
     return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/company/unverify/${companyId}`);
   }
+
+  unverifyCompany(companyId: number) {
+    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/company/unverify/${companyId}`);
+  }
 }
