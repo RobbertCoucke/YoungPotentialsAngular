@@ -24,16 +24,18 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    //profile component mag niet opgeladen worden als er geen ingelogde user is
     if (this.authenticatieService.currentUserValue == null) { 
       alert("Nice try, hackerman. :)");
       this.router.navigate(['/']);
     }else{
       this.authenticatieService.currentUser.subscribe(x => {
         this.currentUser=x;
+        //get de ingelogde gebruiker van de database
         this.userservice.getById(this.currentUser.id).subscribe(data => {
-          this.isStudent=data.isStudent;
+          //is de gebruiker student of company?
+          this.isStudent = data.isStudent;
           this.profiel = data;
-          console.log(this.profiel);
           this.loader(this.profiel);
           });
       });
