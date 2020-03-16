@@ -10,7 +10,7 @@
       {{ vacature.description }}
     </p>
     <div class="flex">
-      <button
+      <button *ngIf="hasBijlage"
         class="btn btn-primary"
         role="button"
         (click)="startDownload()"

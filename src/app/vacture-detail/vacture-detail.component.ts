@@ -18,7 +18,6 @@ import { MatSnackBar } from "@angular/material";
 export interface DialogData {
   UseremailValue: string;
   companyEmailValue: string;
-  userHasCV: boolean;
 }
 
 @Component({
@@ -30,14 +29,14 @@ export class VactureDetailComponent {
   id: number; // id van vacature
   vacature: Vacature; // Vacature object met alle velden van vacature
 
+  hasBijlage: boolean //tells if vacature has bijlage attached to it
+
   student: boolean; // true = student | false = bedrijf
 
-  userID: any; // Id van ingelogde user
   currentUser: User; // User object met alle velden van user
   UseremailValue: string; // Email van ingelogde user
   user: User; // User object van user algemeen
-  userHasCV: boolean = false; // True als user een cv heeft
-  userCV: string; // CV van ingelogde user
+
 
   companyEmailValue: string; // Email van ingelogde bedrijf
 
@@ -54,7 +53,6 @@ export class VactureDetailComponent {
   ) {
     this.route.paramMap.subscribe(params => {
       this.id = parseInt(params.get("id"));
-      console.log(this.id);
     });
   }
 
@@ -62,8 +60,18 @@ export class VactureDetailComponent {
     //TODO: DATUM GEPLAATST vacature.calculateDate() laten werken, momenteel is er error _co.vacature.calculateDate() is not a function.
     this.vacatureService
       .getVacatureById(this.id)
-      .subscribe(data => {(this.vacature = new Vacature(data));
+      .subscribe(data => {
+        (this.vacature = new Vacature(data));
+        this.companyEmailValue = data["email"];
       this.loader(this.vacature);
+
+      this.uploadService.getFilePath(false,this.vacature.id).subscribe(data => {
+
+        if(data != null)
+          this.hasBijlage = true;
+        else
+          this.hasBijlage = false;
+      });
       });
     
 
@@ -71,21 +79,14 @@ export class VactureDetailComponent {
       if (u && u.role === "User") {
         this.currentUser = u;
         this.UseremailValue = u.email;
-        this.userID = u.id;
         this.userService.getById(u.id).subscribe(c => {
           this.user = c;
         });
-        this.vacatureService
-      .getVacatureById(this.id)
-      .subscribe(data => (this.companyEmailValue = data["email"]));
-    this.uploadService
-      .getFilePath(true, this.userID)
-      .subscribe(data => (this.userCV = data));
-    //this.uploadService.getFilePath(this.student,this.userID).subscribe(data => this.userCV = data[''])
-    this.HasCV();
     this.student == true;
     }
   });
+
+  
  }
 
  loader(x)
@@ -103,8 +104,7 @@ export class VactureDetailComponent {
       height: "560px",
       data: {
         UseremailValue: this.UseremailValue,
-        companyEmailValue: this.companyEmailValue,
-        userHasCV: this.userHasCV
+        companyEmailValue: this.companyEmailValue
       }
     });
     // console.log(this.$vacature);
@@ -134,14 +134,4 @@ export class VactureDetailComponent {
     let snackBarRef = this._snackBar.open("Uw download wordt gestart", "Ok");
   }
 
-  /**
-   * @description update userHasCV
-   */
-  HasCV() {
-    if (this.userCV == null) {
-      this.userHasCV = false;
-    } else {
-      this.userHasCV = true;
-    }
-  }
 }
