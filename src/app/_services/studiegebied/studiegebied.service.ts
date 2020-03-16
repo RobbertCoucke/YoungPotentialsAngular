@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError, from, Observable } from 'rxjs';
 import { catchError, retry, map, tap } from 'rxjs/operators';
 import { Studiegebied } from 'app/_models/studiegebied';
+import {environment} from '../../../environments/environment';
 
 
 
@@ -10,8 +11,7 @@ import { Studiegebied } from 'app/_models/studiegebied';
   providedIn: 'root'
 })
 export class StudiegebiedService {
-  apiUrl: string = 'https://youngpotentials.azurewebsites.net/'
-  localUrl: string = 'http://localhost:60213/'
+  apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 

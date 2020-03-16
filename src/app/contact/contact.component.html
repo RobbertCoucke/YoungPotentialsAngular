@@ -8,31 +8,31 @@
 
       <div class="form-wrap">
         <div class="form-block col-md-12">
-          <h2 class="sub-title">Neem contact met ons op</h2>
+          <h2 class="sub-title">{{"contact.titel" | translate}}</h2>
           <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact" required>
 
             <div class="form-item">
-              <label for="">Volledige naam</label>
+              <label for="">{{"contact.naam" | translate}}</label>
               <input type="text" name="fullName" formControlName="fullName" required>
             </div>
 
              <div class="form-item">
-              <label for="">Emailadres</label>
+              <label for="">{{"contact.email" | translate}}</label>
               <input type="text" name="email" formControlName="email">
              </div>
 
             <div class="form-item">
-              <label for="">Onderwerp</label>
+              <label for="">{{"contact.onderwerp" | translate}}</label>
               <input type="text" name="subject" formControlName="subject">
              </div>
 
             <div class="form-item">
-              <label for="">Bericht</label>
+              <label for="">{{"contact.bericht" | translate}}</label>
               <textarea id="edit-message" name="message" formControlName="message" rows="5" cols="60" class="form-textarea required resize-vertical"></textarea>
              </div>
 
             <div class="form-item">
-              <button class="btn btn-verzenden" type="submit">Verzenden</button>
+              <button class="btn btn-verzenden" type="submit">{{"contact.verzenden" | translate}}</button>
             </div>
 
             </form>

@@ -1,73 +1,149 @@
+$rood:#e50001;
+
+
 ul li {
-    list-style: none;
+  list-style: none;
 }
 
-.input{
-    margin-right: 5px;
+.input {
+  margin-right: 5px;
 }
 
-.btn-primary
-{
-    box-shadow: none;
-    padding: 5px 50px;
-    border: none;
-    border-radius: 40px;
-    background: #E50001;
-    transition: transform .2s;
+.btn-primary {
+  box-shadow: none;
+  padding: 5px 50px;
+  border: none;
+  border-radius: 40px;
+  background: $rood;
+  transition: transform 0.2s;
 }
 
-.btn-primary:hover, .btn-primary:focus
-{
-    transform: scale(1.1);
+.btn-primary:hover,
+.btn-primary:focus {
+  transform: scale(1.1);
 }
 
-.filterContainer{
-    display: initial;
+.filterContainer {
+  display: initial;
 }
 
-.icon{
-    position: absolute;
-    margin-left: 10px;
+.icon {
+  position: absolute;
+  margin-left: 10px;
 }
 
-.l{
-    display: block;
-    width: 100%;
+.l {
+  display: block;
+  width: 100%;
 }
 
-.filterContainer{
-    display: inline-flex;
+.filterContainer {
+  display: inline-flex;
 }
 
-.filterContainer.filterStudiegebied{
-    cursor: pointer;
+.filterContainer.filterStudiegebied {
+  cursor: pointer;
 }
-.filterbody{
-    min-height: 450px;
+.filterbody {
+  min-height: 450px;
 }
-.filterTekst{
-    margin:0;
-    display: inline-flex;
-    font-size: small;
+.filterTekst {
+  margin: 0;
+  display: inline-flex;
+  font-size: 14px;
 }
-.filterverwijderenwrapper{
+.filterverwijderenwrapper {
+  margin-bottom: 15px;
+}
+.filterIcon {
+  width: 25px;
+  margin-left: 0;
+  position: relative;
+}
+.content-height {
+  // height: 2400px;
+}
+.tekst-naam-opleiding{
+  font-size: 12px;
+}
+.container-checkbox {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Fix height */
+.wrapper-opleiding{
+    height: 27px;
+}
+
+/* Hide the browser's default checkbox */
+.container-checkbox input {
+  display: none;
+}
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  height: 17px;
+  width: 17px;
+  background-color: #eee;
+}
+
+/* Change display property */
+.container-checkbox-studiegebied{
+    display: inline-block;
     margin-bottom: 15px;
 }
-.filterIcon{
-    width:25px;
-    margin-left: 0;
-    position: relative;
-}
-.content-height{
-    height: 2400px;
+/* On mouse-over, add a grey background color */
+.container-checkbox:hover input ~ .checkmark {
+  background-color: #ccc;
 }
 
+/* When the checkbox is checked, add a blue background */
+.container-checkbox input:checked ~ .checkmark {
+  background-color: $rood;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-checkbox .checkmark:after {
+  left: 5px;
+  top: 2px;
+  width: 7px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* Mobile fix */
 @media only screen and (max-width: 992px) {
-.content-height{
-    height:inherit;
-}
-.is-sticky.boundary-reached{
+  .content-height {
+    //height: inherit;
+  }
+  .is-sticky.boundary-reached {
     position: inherit !important;
+  }
 }
-}
-

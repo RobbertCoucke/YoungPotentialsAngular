@@ -6,38 +6,41 @@ import { UpdatePasswordRequest } from '@/_models/updatePasswordRequest';
 import { EmailRequest } from '@/_models/emailRequest';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  apiUrl = environment.apiUrl;
+
 
   constructor(private http: HttpClient) { }
 
   getAll()
   {
-    return this.http.get<any>("https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/user");
+    return this.http.get<any>(`${this.apiUrl}user`);
   }
 
   getById(id: number)
   {
-    return this.http.get<any>(`https://cors-anywhere.herokuapp.com/https://youngpotentials.azurewebsites.net/user/${id}`);
+    return this.http.get<any>(`${this.apiUrl}user/${id}`);
   }
 
   updateUser(id: number, user: UpdateUser)
   {
-    return this.http.put<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/user/${id}`, user);
+    return this.http.put<any>(`${this.apiUrl}user/${id}`, user);
   }
 
   deleteUser(id: number)
   {
-    return this.http.delete<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/user/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}user/${id}`);
   }
 
   forgotPassword(object: EmailRequest)
   {
-    return this.http.post<any>('https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/user/password', object);
+    return this.http.post<any>(`${this.apiUrl}user/password`, object);
   }
 
   resetPassword(object: UpdatePasswordRequest)
@@ -48,7 +51,7 @@ export class UserService {
           'Authorization': object.token
         })
       };
-      return this.http.put<any>('https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/user/password/reset', object,  httpOptions)
+      return this.http.put<any>(`${this.apiUrl}user/password/reset`, object,  httpOptions)
       
     
 

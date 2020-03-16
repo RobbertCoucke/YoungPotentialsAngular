@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '@/_services';
-import { SectorService } from '@/_services/Sector/sector.service';
-import { MustMatch } from '@/_helpers/mustMatch';
-import { Register } from '@/_models/register';
+import { AuthenticationService } from '../_services';
+import { SectorService } from '../_services/Sector/sector.service';
+import { MustMatch } from '../_helpers/mustMatch';
+import { Register } from '../_models/register';
 
 @Component({
   selector: 'app-companyform',

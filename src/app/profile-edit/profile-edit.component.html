@@ -21,7 +21,6 @@
         <label><h5>Bedrijfsnaam</h5></label>
         <input type="text" class="form-control"
                    formControlName="companyName"
-                
                    placeholder="Bedrijfsnaam"/>
       </div>
 
@@ -32,31 +31,18 @@
       </div>
 
       <div *ngIf="!isStudent" class="form-label-group ruimte">
-        <label><h5>Description</h5></label>
-        <input type="email" class="form-control" formControlName="description"
-        placeholder="Bedrijf Beschrijving" >
-      </div>
-
-      <div *ngIf="!isStudent" class="form-label-group ruimte">
         <label><h5>Url</h5></label>
         <input type="text" class="form-control" formControlName="url"
         placeholder="Url">
       </div>
 
 
-      <div class="row ruimte">
-        <div class="col-md-6 mb-3">
+        <div class="form-label-group ruimte">
             <label><h5>Stad</h5></label>
             <input type="text" class="form-control" formControlName="city"
                    placeholder="City" required/> 
         </div>
-        <div class="col-md-6 mb-3">
-            <label><h5>Postcode</h5></label>
-            <input type="text" class="form-control" formControlName="zipCode"
-                   placeholder="Zipcode" 
-            />
-        </div>
-      </div>  
+
 
       <div *ngIf="isStudent" class="form-label-group ruimte">
         <label><h5>CV</h5></label>
@@ -64,16 +50,9 @@
         placeholder="CvUrl" 
         />
       </div>
-
-      <div class="form-label-group ruimte">
-        <label><h5>Telefoonn nummer</h5></label>
-        <input type="text" class="form-control" value="" formControlName="telefoonn"
-        placeholder="Telefoonn" 
-        />
-      </div>
       
 
-      <div class="form-label-group ruimte">
+      <div *ngIf="!isStudent" class="form-label-group ruimte">
         <label><h5>Straat + nr</h5></label>
         <input type="text" class="form-control" value="" formControlName="address"
         placeholder="Address" 

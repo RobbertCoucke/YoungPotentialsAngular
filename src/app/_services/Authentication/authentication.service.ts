@@ -5,12 +5,14 @@ import { map } from 'rxjs/operators';
 
 import { User } from '@/_models';
 import { Register } from '@/_models/register';
+import {environment} from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     //het ingelogde gebruiker
     public currentUser: Observable<User>;
+    apiUrl = environment.apiUrl;
 
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
@@ -22,7 +24,7 @@ export class AuthenticationService {
     }
 
     login(email: string, password: string) {
-        return this.http.post<any>(`https://youngpotentials.azurewebsites.net/user/authenticate`, { email, password })
+        return this.http.post<any>(`${this.apiUrl}user/authenticate`, { email, password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {
@@ -42,7 +44,7 @@ export class AuthenticationService {
     }
 
     register(reg: Register) {
-        return this.http.post<any>('http://localhost:60213/user/register', reg)
+        return this.http.post<any>(`${this.apiUrl}user/register`, reg)
         .pipe(map(user => {
             //register succesful if there's a jwt token in the response
             if(user && user.token){

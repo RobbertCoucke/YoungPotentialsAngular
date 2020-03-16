@@ -49,7 +49,8 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatPaginatorModule } from "@angular/material/paginator";
-import {MatSortModule} from '@angular/material/sort'; 
+import { MatSortModule } from "@angular/material/sort";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 /**
  * * Anuglar Bootstrap imports
@@ -102,35 +103,35 @@ import { AngularStickyThingsModule } from "@w11k/angular-sticky-things";
 
 import { PolicyComponent } from "./policy/policy.component";
 
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { EmailPasswordRequestComponent } from './email-password-request/email-password-request.component';
-import { MessageComponent } from './message/message.component';
-import { WachtwoordVeranderdComponent } from './wachtwoord-veranderd/wachtwoord-veranderd.component';
-import { ContactComponent } from './contact/contact.component';
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
+import { EmailPasswordRequestComponent } from "./email-password-request/email-password-request.component";
+import { MessageComponent } from "./message/message.component";
+import { WachtwoordVeranderdComponent } from "./wachtwoord-veranderd/wachtwoord-veranderd.component";
+import { ContactComponent } from "./contact/contact.component";
 
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { StudentformComponent } from './studentform/studentform.component';
 import { CompanyformComponent } from './companyform/companyform.component';
 
+import { UnverifiedTableComponent } from "./unverified-table/unverified-table.component";
+import { VerifiedTableComponent } from "./verified-table/verified-table.component";
 import {MatTableModule} from '@angular/material/table';
 
 
-
 const appRoutes: Routes = [
-  { path: "owned", component : CompanyVacaturesComponent},
-  { path: "verify", component: VerifyComponent},
-  { path: "", component: HomeComponent},
-  { path: "vactures", component: VacturesComponent},
-  { path: "vacture-toevoegen", component: ReactiveFormComponent},
-  { path: "vacature-details/:id", component: VactureDetailComponent},
-  { path: "profiel", component:ProfileComponent},
-  { path: "profiel-bewerken", component:ProfileEditComponent},
-  { path: "faq", component:FaqComponent},
-  { path: "navorming", component:NavormingComponent},
-  { path: "policy", component:PolicyComponent},
-  { path: "vacatures", component:HomeComponent},
-  { path: "contact", component:ContactComponent},
-
+  { path: "owned", component: CompanyVacaturesComponent },
+  { path: "verify", component: VerifyComponent },
+  { path: "", component: HomeComponent },
+  { path: "vactures", component: VacturesComponent },
+  { path: "vacture-toevoegen", component: ReactiveFormComponent },
+  { path: "vacature-details/:id", component: VactureDetailComponent },
+  { path: "profiel", component: ProfileComponent },
+  { path: "profiel-bewerken", component: ProfileEditComponent },
+  { path: "faq", component: FaqComponent },
+  { path: "navorming", component: NavormingComponent },
+  { path: "policy", component: PolicyComponent },
+  { path: "vacatures", component: HomeComponent },
+  { path: "contact", component: ContactComponent },
 
   //{ path: "inloggen", component:LoginComponent},
 
@@ -168,6 +169,7 @@ const appRoutes: Routes = [
     path: "succes-message",
     component: WachtwoordVeranderdComponent
   },
+  { path: "bedrijven", component: VerifiedTableComponent },
 
   // otherwise redirect to home
   { path: "**", redirectTo: "" }
@@ -208,7 +210,9 @@ const appRoutes: Routes = [
       PolicyComponent,
       ContactComponent,
       StudentformComponent,
-      CompanyformComponent
+      CompanyformComponent,
+      UnverifiedTableComponent,
+      VerifiedTableComponent
    ],
    imports: [
       ReactiveFormsModule,
@@ -234,6 +238,7 @@ const appRoutes: Routes = [
       AngularStickyThingsModule,
       MatSnackBarModule,
       MatTableModule,
+      MatProgressSpinnerModule,
       MatSortModule,
       BsDatepickerModule.forRoot(),
       ButtonsModule.forRoot(),
