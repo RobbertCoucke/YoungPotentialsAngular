@@ -49,7 +49,8 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatPaginatorModule } from "@angular/material/paginator";
-import {MatSortModule} from '@angular/material/sort'; 
+import { MatSortModule } from "@angular/material/sort";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 /**
  * * Anuglar Bootstrap imports
@@ -102,32 +103,31 @@ import { AngularStickyThingsModule } from "@w11k/angular-sticky-things";
 
 import { PolicyComponent } from "./policy/policy.component";
 
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { EmailPasswordRequestComponent } from './email-password-request/email-password-request.component';
-import { MessageComponent } from './message/message.component';
-import { WachtwoordVeranderdComponent } from './wachtwoord-veranderd/wachtwoord-veranderd.component';
-import { ContactComponent } from './contact/contact.component';
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
+import { EmailPasswordRequestComponent } from "./email-password-request/email-password-request.component";
+import { MessageComponent } from "./message/message.component";
+import { WachtwoordVeranderdComponent } from "./wachtwoord-veranderd/wachtwoord-veranderd.component";
+import { ContactComponent } from "./contact/contact.component";
 
 import { MatSnackBarModule } from "@angular/material/snack-bar";
-import {MatTableModule} from '@angular/material/table';
-
-
+import { MatTableModule } from "@angular/material/table";
+import { UnverifiedTableComponent } from "./unverified-table/unverified-table.component";
+import { VerifiedTableComponent } from "./verified-table/verified-table.component";
 
 const appRoutes: Routes = [
-  { path: "owned", component : CompanyVacaturesComponent},
-  { path: "verify", component: VerifyComponent},
-  { path: "", component: HomeComponent},
-  { path: "vactures", component: VacturesComponent},
-  { path: "vacture-toevoegen", component: ReactiveFormComponent},
-  { path: "vacature-details/:id", component: VactureDetailComponent},
-  { path: "profiel", component:ProfileComponent},
-  { path: "profiel-bewerken", component:ProfileEditComponent},
-  { path: "faq", component:FaqComponent},
-  { path: "navorming", component:NavormingComponent},
-  { path: "policy", component:PolicyComponent},
-  { path: "vacatures", component:HomeComponent},
-  { path: "contact", component:ContactComponent},
-
+  { path: "owned", component: CompanyVacaturesComponent },
+  { path: "verify", component: VerifyComponent },
+  { path: "", component: HomeComponent },
+  { path: "vactures", component: VacturesComponent },
+  { path: "vacture-toevoegen", component: ReactiveFormComponent },
+  { path: "vacature-details/:id", component: VactureDetailComponent },
+  { path: "profiel", component: ProfileComponent },
+  { path: "profiel-bewerken", component: ProfileEditComponent },
+  { path: "faq", component: FaqComponent },
+  { path: "navorming", component: NavormingComponent },
+  { path: "policy", component: PolicyComponent },
+  { path: "vacatures", component: HomeComponent },
+  { path: "contact", component: ContactComponent },
 
   //{ path: "inloggen", component:LoginComponent},
 
@@ -165,79 +165,83 @@ const appRoutes: Routes = [
     path: "succes-message",
     component: WachtwoordVeranderdComponent
   },
+  { path: "bedrijven", component: VerifiedTableComponent },
 
   // otherwise redirect to home
   { path: "**", redirectTo: "" }
 ];
 
 @NgModule({
-   declarations: [
-      AppComponent,
-      VactureItemComponent,
-      VacturesComponent,
-      ProfileComponent,
-      ProfileEditComponent,
-      VactureDetailComponent,
-      VactureFilterComponent,
-      NavbarComponent,
-      HomeComponent,
-      FooterComponent,
-      ReactiveFormComponent,
-      AdminComponent,
-      LoginComponent,
-      FavorietenComponent,
-      RegisterComponent,
-      SollicitatieDialogComponent,
-      UploadComponent,
-      FaqComponent,
-      SelectStudiegebiedenComponent,
-      NavormingComponent,
-      JwPaginationComponent,
-      CookieComponent,
-      PagingComponent,
-      VerifyComponent,
-      CompanyVacaturesComponent,
-      CompanyItemComponent,
-      ResetPasswordComponent,
-      EmailPasswordRequestComponent,
-      MessageComponent,
-      WachtwoordVeranderdComponent,
-      PolicyComponent,
-      ContactComponent,
-   ],
-   imports: [
-      ReactiveFormsModule,
-      BrowserModule,
-      AppRoutingModule,
-      MatAutocompleteModule,
-      MatFormFieldModule,
-      MatSelectModule,
-      MatInputModule,
-      HttpClientModule,
-      BrowserAnimationsModule,
-      MatMenuModule,
-      MatCardModule,
-      MatExpansionModule,
-      NgMultiSelectDropDownModule,
-      MatStepperModule,
-      MatCheckboxModule,
-      MatDialogModule,
-      MatIconModule,
-      NgSelectModule,
-      MatPaginatorModule,
-      FormsModule,
-      AngularStickyThingsModule,
-      MatSnackBarModule,
-      MatTableModule,
-      MatSortModule,
-      BsDatepickerModule.forRoot(),
-      ButtonsModule.forRoot(),
-      //ngx-translateandtheloadermodule\\\\r\\\\nHttpClientModule,
-      HttpClientModule,
-      RouterModule.forRoot(appRoutes, {
-        onSameUrlNavigation: "reload",
-        anchorScrolling: 'enabled',
-      }),
+  declarations: [
+    AppComponent,
+    VactureItemComponent,
+    VacturesComponent,
+    ProfileComponent,
+    ProfileEditComponent,
+    VactureDetailComponent,
+    VactureFilterComponent,
+    NavbarComponent,
+    HomeComponent,
+    FooterComponent,
+    ReactiveFormComponent,
+    AdminComponent,
+    LoginComponent,
+    FavorietenComponent,
+    RegisterComponent,
+    SollicitatieDialogComponent,
+    UploadComponent,
+    FaqComponent,
+    SelectStudiegebiedenComponent,
+    NavormingComponent,
+    JwPaginationComponent,
+    CookieComponent,
+    PagingComponent,
+    VerifyComponent,
+    CompanyVacaturesComponent,
+    CompanyItemComponent,
+    ResetPasswordComponent,
+    EmailPasswordRequestComponent,
+    MessageComponent,
+    WachtwoordVeranderdComponent,
+    PolicyComponent,
+    ContactComponent,
+    UnverifiedTableComponent,
+    VerifiedTableComponent
+  ],
+  imports: [
+    ReactiveFormsModule,
+    BrowserModule,
+    AppRoutingModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatMenuModule,
+    MatCardModule,
+    MatExpansionModule,
+    NgMultiSelectDropDownModule,
+    MatStepperModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
+    NgSelectModule,
+    MatPaginatorModule,
+    FormsModule,
+    AngularStickyThingsModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    BsDatepickerModule.forRoot(),
+    ButtonsModule.forRoot(),
+    //ngx-translateandtheloadermodule\\\\r\\\\nHttpClientModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes, {
+      onSameUrlNavigation: "reload",
+      anchorScrolling: "enabled"
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -1,5 +1,4 @@
-<!-- 
- <div class="margin container">
+<!-- <div class="margin container">
     <h1>Verifiëer nieuwe bedrijfsaccounts</h1>
     <app-company-item *ngFor="let company of companies" [company]="company"  (removeEvent)="removeEvent($event)" ></app-company-item>
     <div *ngIf="loading" class="loader">
@@ -8,74 +7,11 @@
     <div *ngIf="error && !loading" class="alert alert-danger" role="alert">
         <p class="removeMarginbottom">Er zijn geen bedrijven om te verifieëren.</p>
     </div>
-</div>  -->
+</div>   -->
 
 <!-- <app-paging></app-paging> -->
-<div>
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" />
-</mat-form-field>
 
-<div class="example-container mat-elevation-z8">
+<app-unverified-table></app-unverified-table> 
 
-
-
-<table mat-table [dataSource]="dataSource" matSort>
-
-  <!-- Checkbox Column -->
-<ng-container matColumnDef="select">
-  <th mat-header-cell *matHeaderCellDef>
-    <mat-checkbox (change)="$event ? masterToggle() : null"
-                  [checked]="selection.hasValue() && isAllSelected()"
-                  [indeterminate]="selection.hasValue() && !isAllSelected()"
-                  [aria-label]="checkboxLabel()">
-    </mat-checkbox>
-  </th>
-  <td mat-cell *matCellDef="let row">
-    <mat-checkbox (click)="$event.stopPropagation()"
-                  (change)="$event ? selection.toggle(row) : null"
-                  [checked]="selection.isSelected(row)"
-                  [aria-label]="checkboxLabel(row)">
-    </mat-checkbox>
-  </td>
-</ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
-      <td mat-cell *matCellDef="let element">{{ element.position }}</td>
-    </ng-container>
-
-  <!-- Company name Column -->
-  <ng-container matColumnDef="companyName">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>companyName</th>
-    <td mat-cell *matCellDef="let element">{{ element.companyName }}</td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="address">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>email</th>
-    <td mat-cell *matCellDef="let element">{{ element.address }}</td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="url">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>url</th>
-    <td mat-cell *matCellDef="let element">{{ element.url }}</td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-  (click)="selection.toggle(row)"></tr>
-</table>
-</div>
-
-<mat-paginator
-  [pageSizeOptions]="[10, 20, 50]"
-  showFirstLastButtons
-></mat-paginator>
-</div>
-
-<button (click)="testConsole()">Console Log</button>
+ <!-- <app-verified-table></app-verified-table>  -->
 
