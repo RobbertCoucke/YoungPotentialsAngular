@@ -34,7 +34,8 @@
         [ngClass]="{ 'is-invalid': submitted && studentForm.controls['password'].errors }"/>
       <div *ngIf="submitted && studentForm.controls['password'].errors" class="invalid-feedback">
         <div *ngIf="studentForm.controls['password'].errors.required">{{"register.wachtwoordreq" | translate}}</div>
-        <div *ngIf="studentForm.controls['password'].errors.minLength">{{"register.wachtwoordpatern" | translate}}</div>
+        <div *ngIf="studentForm.controls['password'].errors.minlength">{{"register.wachtwoordpatern" | translate}}</div>
+        <div *ngIf="studentForm.controls['password'].errors.minength">{{"register.wachtwoordpatern" | translate}}</div>
       </div>
       </div>
   
@@ -44,7 +45,7 @@
         [ngClass]="{ 'is-invalid': submitted && studentForm.controls['confirmPassword'].errors }"/>
       <div *ngIf="submitted && studentForm.controls['confirmPassword'].errors" class="invalid-feedback">
         <div *ngIf="studentForm.controls['confirmPassword'].errors.required">{{"register.herhaalwwreq" | translate}}</div>
-        <div *ngIf="studentForm.controls['confirmPassword'].errors.minLength">{{"register.wachtwoordpatern" | translate}}</div>
+        <div *ngIf="studentForm.controls['confirmPassword'].errors.minlength">{{"register.wachtwoordpatern" | translate}}</div>
         <div *ngIf="studentForm.controls['confirmPassword'].errors.mustMatch">{{"register.herhaalwwpatern" | translate}}</div>
       </div>
       </div>
