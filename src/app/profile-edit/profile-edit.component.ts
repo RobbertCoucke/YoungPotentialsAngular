@@ -68,8 +68,7 @@ export class ProfileEditComponent implements OnInit {
           {
             this.updateForm.get('companyName').setValidators(this.nameValidators.concat(Validators.required));
             this.updateForm.get('website').setValidators(this.commonvalidators);
-            this.updateForm.get('city').setValidators(this.commonvalidators);
-            this.updateForm.get('adress').setValidators(this.commonvalidators);
+            this.updateForm.get('address').setValidators(this.commonvalidators);
             this.updateFormCompany();
           }else{
             this.updateFormStudent();
@@ -100,7 +99,7 @@ export class ProfileEditComponent implements OnInit {
     this.isStudent = this.user.isStudent;
   }
 
-  get updateFormControls() { return this.updateForm.controls; }
+  get uf() { return this.updateForm.controls; }
 
   onSubmit() {
     this.submitted = true;
@@ -123,7 +122,7 @@ export class ProfileEditComponent implements OnInit {
 
     //get de register model nadat de gebruiker zijn data ingevuld heb
     getModel(){
-      var controls = this.updateFormControls;
+      var controls = this.uf;
       //elke gebruiker moet zin email, password invullen
       var model = new UpdateUser(controls.email.value, this.isStudent);
   
@@ -147,7 +146,7 @@ export class ProfileEditComponent implements OnInit {
   updateform()
   {
     this.updateForm.patchValue({
-      city: this.user.city,
+      //city: this.user.city,
       email: this.user.email,
 
     })
