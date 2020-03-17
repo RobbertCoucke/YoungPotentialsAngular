@@ -134,7 +134,6 @@ export class ProfileEditComponent implements OnInit {
       //bedrijf moet een beschrijving, url en naam geven
       else{
         model.address = controls.address.value;
-        model.city = controls.city.value;
         model.url = controls.website.value;
         model.companyName = controls.companyName.value;
       }
@@ -146,7 +145,6 @@ export class ProfileEditComponent implements OnInit {
   updateform()
   {
     this.updateForm.patchValue({
-      //city: this.user.city,
       email: this.user.email,
 
     })
