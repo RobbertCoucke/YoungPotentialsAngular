@@ -9,7 +9,7 @@ module.exports = {
             {
                 test: /\.ts$/,
                 use: ['ts-loader', 'angular2-template-loader'],
-                exclude: /node_modules/
+                exclude: path.join(process.cwd(), 'node_modules')
             },
             {
                 test: /\.(html|css)$/,
