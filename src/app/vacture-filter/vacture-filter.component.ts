@@ -28,7 +28,7 @@ export class VactureFilterComponent implements OnInit {
   studiegebieds: Studiegebied[] = [];
 
   //array for all opleiding objects
-  opleidingArray: Opleiding[] = [];
+  opleidingArray: any[] = [];
 
   //array for all types
   types: Type[] = [];
