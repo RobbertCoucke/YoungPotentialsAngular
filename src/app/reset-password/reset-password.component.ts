@@ -32,25 +32,21 @@ export class ResetPasswordComponent implements OnInit {
     })
 
      this.route.queryParams.subscribe(params => {
+      //de gestuurde token die in de backend gemaakt werd, en in de url geplaats is
       const token = params["token"];
+      //gebruiker email
       const email = params["email"];
       this.token = token;
       this.email = email;
+      //het gaat niet luken om een wachtwoord te veranderen als er geen valid token is
     });
-
-    console.log(this.token);
-    console.log(this.email);
 
   }
 
    get updateFormControls() { return this.passwordForm.controls; }
 
   onSubmit() {
-    //this.setUpdatePasswordModel;
-    //console.log(this.passwordForm);
-    //console.log(this.email);
-    //console.log(this.token);
-    
+    //als er geen password ingevuld is, mag niet een request naar api sturen
      if(this.passwordForm.invalid)
     {
       console.log(this.passwordForm);
@@ -58,9 +54,10 @@ export class ResetPasswordComponent implements OnInit {
     } 
     
     var controls = this.updateFormControls;
+    //een object maken met de nieuwe password
     this.updatePasswordModel = new UpdatePasswordRequest(this.email,this.token, controls.wachtwoord.value);
-    console.log(this.updatePasswordModel);
 
+    //de nieuwe object de backend sturen en vandaar wordt in de database aangepast 
       this.userService.resetPassword(this.updatePasswordModel).subscribe(data =>{
       this.router.navigate(["/succes-message"]);
       },
