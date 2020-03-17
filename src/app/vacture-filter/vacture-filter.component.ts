@@ -11,8 +11,6 @@ import {
 import { StudiegebiedService } from "../_services/studiegebied/studiegebied.service";
 import { Studiegebied } from "@/_models/studiegebied";
 import { Opleiding } from "@/_models/Opleiding";
-import { Afstudeerrichting } from "@/_models/afstudeerrichting";
-import { Keuze } from "@/_models/Keuze";
 import { VacatureService } from '@/_services/Vacature/vacature.service';
 import { Type } from '../_models/type';
 import { FilterService } from './../_services/filter/filter.service';
@@ -316,7 +314,7 @@ export class VactureFilterComponent implements OnInit {
       if (opleidingArray && opleidingArray.length != 0) {
         opleidingArray.forEach(o => {
           var afstudeerrichtingsArray = o.afstudeerrichting;
-          var afstudeerrichtings: Afstudeerrichting[] = [];
+          var afstudeerrichtings: any[] = [];
           var op = new Opleiding(o.id, o.naamOpleiding, afstudeerrichtings);
           opleiding.push(op);
           this.opleidingArray.push(op);
