@@ -15,16 +15,16 @@
 
       </li>
       <li *ngIf="currentUser && currentUser.role === 'Admin'" class="nav-item">
-        <a class="nav-link" routerLink="/verify" routerLinkActive="active">Bedrijf verifiëren</a>
+        <a class="nav-link" routerLink="/verify" routerLinkActive="active">{{"navbar.verify" | translate}}</a>
       </li>
       <li *ngIf="currentUser && currentUser.role === 'Admin'" class="nav-item">
-        <a class="nav-link" routerLink="/bedrijven" routerLinkActive="active">Overzicht bedrijven</a>
+        <a class="nav-link" routerLink="/bedrijven" routerLinkActive="active">{{"navbar.overzicht" | translate}}</a>
       </li>
       <li *ngIf="currentUser && currentUser.role === 'Company'" class="nav-item">
-        <a class="nav-link" routerLink="/vacture-toevoegen" routerLinkActive="active">Vacature toevoegen</a>
+        <a class="nav-link" routerLink="/vacture-toevoegen" routerLinkActive="active">{{"navbar.vactoevoegen" | translate}}</a>
       </li>
       <li *ngIf="currentUser && currentUser.role === 'Company'" class="nav-item">
-        <a class="nav-link" routerLink="/owned" routerLinkActive="active">Eigen vacatures</a>
+        <a class="nav-link" routerLink="/owned" routerLinkActive="active">{{"navbar.eigenvac" | translate}}</a>
       </li>
 
       <!-- Over Ons pagina eventueel nog aanmaken -->
@@ -64,7 +64,7 @@
           </div>
           <div *ngIf="currentUser" class="loggedin-wrapper">
             <li  class="nav-item registrerenbtnwrapper">
-              <a class="registrerenbtn" routerLink="" (click)="logout()" href>Logout</a>
+              <a class="registrerenbtn" routerLink="" (click)="logout()" href>{{"navbar.logout" | translate}}</a>
             </li>
             <li class="">
               <a routerLink="/profiel" routerLinkActive="active" class="profiel-bewerken">{{name}}</a>

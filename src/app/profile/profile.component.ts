@@ -41,6 +41,7 @@ export class ProfileComponent implements OnInit {
                 //is de gebruiker student of company?
                 this.isStudent = data.isStudent;
                 this.profiel = data;
+                console.log(this.profiel);
                 this.loader(this.profiel);
                 });
             }

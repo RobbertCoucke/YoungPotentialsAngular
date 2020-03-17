@@ -16,12 +16,6 @@
         </label>
         <div><label>{{profiel.name}}</label></div>
       </div>
-        <div class="col-md-12 mb-3" *ngIf="profiel.city !=null">
-          <label>
-            <h5>{{"register.stad" | translate}}</h5>
-          </label>
-          <div><label>{{profiel.city}}</label></div>
-        </div>
     </div>
     <!-- Alle velden van bedrijf -->
     <div *ngIf="!isStudent">
@@ -31,36 +25,19 @@
         </label>
         <div><label>{{profiel.companyName}}</label></div>
       </div>
-      <div class="form-label-group ruimte">
-        <label>
-          <h5>{{"register.voornaam" | translate}}</h5>
-        </label>
-        <div><label>{{profiel.description}}</label></div>
-      </div>
       <div class="form-label-group ruimte" *ngIf="profiel.url != ''">
         <label>
           <h5>{{"register.website" | translate}}</h5>
         </label>
         <div><label>{{profiel.url}}</label></div>
       </div>
-      <div class="form-label-group ruimte" *ngIf="profiel.telephone !=null">
-        <label>
-          <h5>{{"register.nummer" | translate}}</h5>
-        </label>
-        <div><label>{{profiel.telephone}}</label></div>
-      </div>
       <div class="row ruimte">
+
         <div class="col-md-6 mb-3" *ngIf="profiel.city !=null">
           <label>
             <h5>{{"register.stad" | translate}}</h5>
           </label>
           <div><label>{{profiel.city}}</label></div>
-        </div>
-        <div class="col-md-6 mb-3" *ngIf="profiel.zipCode !=null">
-          <label>
-            <h5>{{"register.postcode" | translate}}</h5>
-          </label>
-          <div><label>{{profiel.zipCode}}</label></div>
         </div>
       </div>
       <div class="form-label-group ruimte" *ngIf="profiel.address !=null">
