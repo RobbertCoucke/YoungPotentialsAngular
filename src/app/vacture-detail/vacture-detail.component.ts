@@ -131,7 +131,7 @@ export class VactureDetailComponent {
    * @description opent een snackbar popup wanneer op open bijlage wordt geklikt
    */
   openSnackBar() {
-    let snackBarRef = this._snackBar.open("Uw download wordt gestart", "Ok");
+    let snackBarRef = this._snackBar.open("Downloading", "Ok");
   }
 
 }

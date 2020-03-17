@@ -12,7 +12,13 @@
         "research": "Navorming",
         "contact": "Contact",
         "signup": "Registreren",
-        "login": "Inloggen"
+        "login": "Inloggen",
+
+        "logout": "Uitloggen",
+        "vactoevoegen" : "Vacature toevoegen",
+        "eigenvac": "Eigen vacatures",
+        "overzicht": "Overzicht bedrijven",
+        "verify": "Bedrijf verifiëren"
     },
 
     "home": {
@@ -167,6 +173,7 @@
     },
 
     "detail":{
+        "datum": "Datum geplaatst:",
         "bijlage": "Open bijlage",
         "solliciteer": "Solliciteer nu!"
     },
@@ -216,6 +223,32 @@
 
     "profiel":{
         "profiel":"Profiel"
+    },
+
+    "policy":{
+        "titel": "Privacyverklaring",
+        "inleiding": "Hogeschool VIVES respecteert de privacy van bezoekers, studenten, medewerkers en relaties, die betrokkenen zijn bij het onderwijs en onderzoek van VIVES en de diensten die VIVES levert. VIVES verwerkt uitsluitend persoonsgegevens voor zover die noodzakelijk zijn voor de goede vervulling van de taken als Vlaamse instelling voor hoger onderwijs.",
+        "inleidingsub":"VIVES verstrekt geen persoonsgegevens aan derden, tenzij de wetgever dit vereist of tenzij de persoon van wie de gegevens verwerkt worden hier zelf toestemming voor verleent. Als VIVES bij de uitvoering van taken gebruik maakt van externe dienstverleners, verlangt VIVES van deze externe dienstverleners c.q. verwerkers dat deze zich in gelijke mate houden aan het wettelijk kader inzake de bescherming van persoonsgegevens.",
+        "inleidingsub2":"VIVES draagt zorg voor een goede beveiliging van alle persoonsgegevens door het treffen van geschikte technische en organisatorische maatregelen.",
+
+        "titel2":"Ons gebruik van verzamelde gegevens",
+        "diensten": "Gebruik van onze diensten",
+        "dienstensub": " Wanneer je je aanmeldt voor een activiteit (vorming, lezing, infosessie, netwerkevent, etc.) vragen we je om persoonsgegevens te verstrekken. Deze gegevens worden gebruikt om de activiteit uit te kunnen voeren. De gegevens worden opgeslagen op eigen beveiligde servers van VIVES of die van een derde partij.",
+        "cookies": "Cookies",
+        "cookiessub": "Deze website maakt gebruik van “cookies” (kleine bestanden die op jouw computer worden geplaatst) om de website te helpen analyseren hoe gebruikers de site gebruiken. De door het cookie gegenereerde informatie over jouw gebruik van de website kan worden overgebracht naar eigen beveiligde servers van VIVES of die van een derde partij. Wij gebruiken deze informatie om bij te houden hoe je de website gebruikt, om rapporten over de website-activiteit op te stellen en andere diensten aan te bieden met betrekking tot website-activiteit en internetgebruik.",
+        "derden": "Derden",
+        "derdensub": "Persoonsgegevens worden niet met derden gedeeld. Onze medewerkers zijn verplicht om de vertrouwelijkheid van jouw gegevens te respecteren.",
+        "aanpassen": "Aanpassen/uitschrijven communicatie",
+        "aanpassensub": "Als je jouw gegevens aan wilt passen of jezelf uit onze bestanden wilt laten halen, kun je contact met ons op nemen. Dat kan via onderstaande contactgegevens.",
+        "cookiesuit": "Cookies uitzetten",
+        "cookiesuitsub": "De meeste browsers zijn standaard ingesteld om cookies te accepteren, maar je kunt jouw browser opnieuw instellen om alle cookies te weigeren of om aan te geven wanneer een cookie wordt verzonden. Het is echter mogelijk dat sommige functies en diensten, op onze en andere websites, niet correct functioneren als cookies zijn uitgeschakeld in je browser.",
+        "rechten": "Wijze waarop je je rechten kunt uitoefenen",
+        "rechtensub": "Voor de uitoefening van één van je rechten kun je een verzoek indienen via het",
+        "rechtensub2":"aanvraagformulier uitoefening rechten in verband met persoonsgegevens",
+        "rechtensub3":". Identificeer je hierbij voldoende duidelijk en preciseer zoveel als mogelijk op welke gegevens of welke specifieke verwerkingsactiviteiten jouw verzoek betrekking heeft.",
+        "vragen": "Vragen en feedback",
+        "vragensub": "informatieveiligheid@vives.be"
+    
     }
 
 }

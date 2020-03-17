@@ -128,7 +128,7 @@ export class VactureFilterComponent implements OnInit {
 
       //check if checkbox is checked to add or unchecked to delete
       if (event.target.checked) {
-        var selectedObject = this.findStudiegebied(selectedVal);
+        let selectedObject = this.findStudiegebied(selectedVal);
         if (selectedObject === undefined) {
           selectedObject = this.findOpleiding(selectedVal);
 
@@ -147,7 +147,8 @@ export class VactureFilterComponent implements OnInit {
             //console.log(this.studiegebieds);
           }
         } else {
-          this.selectedgebieds.push(selectedObject);
+          let gebied = new Studiegebied(selectedObject.id,selectedObject.naam,selectedObject.kleur,[]);  //nodig want anders zet hij de opleidingen in studiegebied op lege array (onbekende reden) en kan er dus ook niet meer op gefilterd worden
+          this.selectedgebieds.push(gebied);
         }
       } else {
         var length = this.selectedgebieds.length;
