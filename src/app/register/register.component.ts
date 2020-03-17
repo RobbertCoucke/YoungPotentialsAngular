@@ -55,7 +55,6 @@ export class RegisterComponent implements OnInit {
 //daarna wordt daar gecontroleerd of de email bestaal wel of nee, als wel wordt de gebruiker met zijn/haar gegevens in de database toegevoed
 //anders tonen wij de error.
 register(model){
-  console.log(model);
   this.loading = true;
       //de gebruiker toevoegen aan de database
       this.authenticationService.register(model).subscribe(
@@ -63,6 +62,7 @@ register(model){
             this.router.navigate(["/"]);
         },
         error => {
+          console.log(error);
             this.error = error;
             this.loading = false;
         });

@@ -40,7 +40,7 @@
 
       <div class="form-label-group ruimte">
         <label><h5>{{"register.email" | translate}}</h5></label>
-        <input type="text" class="form-control" formControlName="email" readonly  required/>
+        <input type="text" class="form-control" formControlName="email"  required/>
       </div>
 
       <div *ngIf="!isStudent" class="form-label-group ruimte">
@@ -51,15 +51,6 @@
         || uf.website.touched)" class="invalid-feedback">
            <div *ngIf="uf.website.errors.required">{{"register.websitereq" | translate}}</div>
        </div> 
-      </div>
-
-
-
-      <div *ngIf="!isStudent" class="form-label-group ruimte">
-        <label><h5>{{"register.adres" | translate}}</h5></label>
-        <input type="text" class="form-control" value="" formControlName="address"
-        placeholder="Address" 
-        />
       </div>
 
       <div *ngIf="!isStudent" class="form-label-group ruimte">
