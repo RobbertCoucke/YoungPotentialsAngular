@@ -94,9 +94,9 @@ export class ReactiveFormComponent implements OnInit {
     this.maxDate = new Date();
     this.minDate.setDate(this.minDate.getDate()); // min datum is de dag zelf
     this.maxDate.setDate(this.maxDate.getDate() + 182); // we stellen de maxium datum in op 6 maanden = 182 dagen
-    this.studiegebiedService.getAllStudieGebieds().subscribe(data => {
-      this.studiegebieden = data;
-    }); // inladen alle studiegebieden uit db
+    // this.studiegebiedService.getAllStudieGebieds().subscribe(data => {
+    //   this.studiegebieden = data;
+    // }); // inladen alle studiegebieden uit db
   }
 
   ngOnInit() {
