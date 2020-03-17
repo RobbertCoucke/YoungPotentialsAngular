@@ -237,7 +237,7 @@ export class VacturesComponent implements OnInit {
     if (filterArr === null && typeArr === null) {
       this.fillVacatures();
     } else {
-      if (this.currentUser != null) {
+      if (this.currentUser != null && this.currentUser.role === 'User') {
         this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
           this.favorites = f;
           this.filterVacatures(filterArr, typeArr);
