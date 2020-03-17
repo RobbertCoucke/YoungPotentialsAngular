@@ -122,7 +122,7 @@ export class VerifiedTableComponent implements OnInit {
   unverifyCompanyEnkel(objectID) {
     console.log("verwijdern:");
     console.log(objectID);
-    this.companyService.verifyCompany(objectID).subscribe();
+    this.companyService.deleteCompany(objectID).subscribe();
   }
 
   showElement(element){

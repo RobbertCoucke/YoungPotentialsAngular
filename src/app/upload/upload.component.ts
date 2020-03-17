@@ -5,20 +5,22 @@ import { FormControl, Validators } from "@angular/forms";
 @Component({
   selector: "app-upload",
   templateUrl: "./upload.component.html",
-  styleUrls: ["./upload.component.scss"],
+  styleUrls: ["./upload.component.scss"]
 })
 export class UploadComponent implements OnInit {
+
+  ifFileSize: boolean = false;
+  ifNotPDF: boolean = false;
+
   hasFile: boolean;
   fileValue: string;
 
   public progress: number;
   public message: string;
 
-
   @Output() public uploadHandler = new EventEmitter();
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {}
 
@@ -29,19 +31,29 @@ export class UploadComponent implements OnInit {
 
     let fileToUpload = <File>files[0];
     const formData = new FormData();
-    formData.append("file", fileToUpload);  
+    formData.append("file", fileToUpload);
 
     if (fileToUpload.size > 1024 * 1024 * 2) {
-      console.log("Max toegelaten file groote is 2 mb.");
-      return;
+      this.ifFileSize = true;
+       return;
     }
+
+    var allowedFile = [".pdf"];
+    var regex = new RegExp(
+      "([a-zA-Z0-9s_\\.-:])+(" + allowedFile.join("|") + ")$"
+    );
+    console.log("name:" + fileToUpload.type);
+    if (!regex.test(fileToUpload.type.toLowerCase())) {
+      this.ifNotPDF = true;
+      return;
+    } 
+
     this.uploadHandler.emit(formData);
   };
 
   @Output() messageEvent = new EventEmitter<boolean>();
 
   public checkIfHasFile() {
-
     if (this.fileValue === "") {
       this.hasFile = false;
       return false;
@@ -50,6 +62,6 @@ export class UploadComponent implements OnInit {
       return true;
     }
 
-    this.messageEvent.emit(this.hasFile)
+    this.messageEvent.emit(this.hasFile);
   }
 }
