@@ -5,7 +5,7 @@ import {
   AfterViewInit,
   ViewChild
 } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material";
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatStepper } from "@angular/material";
 import {
   FormBuilder,
   FormGroup,
@@ -36,6 +36,7 @@ export class SollicitatieDialogComponent implements OnInit {
   emailReciever = this.data.companyEmailValue; // email van het bedrijf die vacature plaatste
   currentUser : User;
 
+  test: boolean = false;
 
   /**
    * * FormGroup per step in stepper
@@ -147,9 +148,8 @@ export class SollicitatieDialogComponent implements OnInit {
     var file : any = formData.get('file');
     this.pathBijlage = file.name;
   }
-
+  @ViewChild('stepper', {static: false}) stepper: MatStepper;
   sendMail(){
-
     var formData = new FormData(); 
     if(!this.uploadFile){
       formData.append('userId', this.currentUser.id.toString());
@@ -168,6 +168,13 @@ export class SollicitatieDialogComponent implements OnInit {
     this.vacatureService.soliciteer(formData).subscribe();
     
 
+  }
+
+  stepClick($event) {
+    this.stepper.selectionChange.subscribe(selection => {
+      console.log(selection.selectedStep)
+      console.log(selection.previouslySelectedStep)
+   })
   }
 
   /**
