@@ -63,13 +63,14 @@ export class VactureFilterComponent implements OnInit {
 
   checkHeight(height: number) {
     let minHeight: number = 715;
-    if (height < minHeight) {
-      this.contentHeight = minHeight;
-    }
-    else
-    {
-      this.contentHeight = height;
-    }
+    // if (height < minHeight) {
+    //   this.contentHeight = minHeight;
+    // }
+    // else
+    // {
+    //   this.contentHeight = height;
+    // }
+    this.contentHeight= 2500;
     console.log("Content height")
     console.log(this.contentHeight);
   }

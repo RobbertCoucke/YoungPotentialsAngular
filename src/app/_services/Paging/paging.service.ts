@@ -11,7 +11,6 @@ export class PagingService {
   constructor() { }
 
   setFirstPage(number:number) {
-    console.log("First page")
     this.setFirstPageFunction.emit(number);
   }
 }
