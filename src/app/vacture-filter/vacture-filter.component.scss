@@ -141,7 +141,7 @@ ul li {
 /* Mobile fix */
 @media only screen and (max-width: 992px) {
   .content-height {
-    //height: inherit;
+    height: inherit !important;
   }
   .is-sticky.boundary-reached {
     position: inherit !important;

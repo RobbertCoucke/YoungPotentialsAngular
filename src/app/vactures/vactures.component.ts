@@ -177,8 +177,6 @@ export class VacturesComponent implements OnInit {
     this.fillVacatures();
   }
   ngAfterViewInit(){
-    console.log("After view init")
-    console.log(this.viewHeight)
     
   }
 
