@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'youngpotentialsfront'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_bbb729baa35149d8a634e917bb909c65 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_08827ce5c1204d55b745960f7103bd43 }}
         package: .
