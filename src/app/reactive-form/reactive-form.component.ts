@@ -206,7 +206,7 @@ export class ReactiveFormComponent implements OnInit {
         this.uploadFile.set("id", v.id.toString());
         this.uploadService.upload(this.uploadFile).subscribe(p => {
           console.log(p);
-          this.openSnackBar();
+          // this.openSnackBar();
           this.router.navigate(["/"]);
         });
       } else {
