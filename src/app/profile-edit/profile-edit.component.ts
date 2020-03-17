@@ -114,7 +114,7 @@ export class ProfileEditComponent implements OnInit {
     }
       var updateModel = this.getModel();
       this.userservice.updateUser(this.id ,updateModel).subscribe( data => {
-        this.router.navigate([""]);
+        this.router.navigate(["/profiel"]);
       }, 
       error => {
         this.error = error;

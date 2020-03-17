@@ -36,7 +36,7 @@
         <a class="nav-link" href="https://www.vives.be/nl/bijscholen/overzicht" target="_blank">{{"navbar.studying" | translate}}</a>
       </li>
       
-      <li class="nav-item">
+      <li class="nav-item" *ngIf='this.getCookie("language") != "en"'>
         <a class="nav-link" routerLink="/navorming" routerLinkActive="active">
           {{"navbar.research" | translate}}
         </a>

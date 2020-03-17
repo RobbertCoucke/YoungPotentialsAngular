@@ -16,17 +16,24 @@ export class HomeComponent implements OnInit {
   currentUser: User;
 
   constructor(private userService: UserService,
-    private authenticationService: AuthenticationService, private filterService: FilterService)
-     {this.currentUser = this.authenticationService.currentUserValue;}
+    private authenticationService: AuthenticationService, private filterService: FilterService) { this.currentUser = this.authenticationService.currentUserValue; }
 
-     ngOnInit() {
-      // this.userService.getById(this.currentUser.id).pipe(first()).subscribe(user => {
-      //     this.userFromApi = user;
-      // });
-    }
-    setCheckbox(name:string){
-      console.log("home setCheckbox")
-      this.filterService.setCheckbox(name);    
-    }
+  ngOnInit() {
+    // this.userService.getById(this.currentUser.id).pipe(first()).subscribe(user => {
+    //     this.userFromApi = user;
+    // });
+  }
+  setCheckbox(name: string) {
+    console.log("home setCheckbox")
+    this.filterService.setCheckbox(name);
+  }
+  //Functie om een cookie op te vragen.
+  getCookie(name: string) {
+    const value = "; " + document.cookie;
+    const parts = value.split("; " + name + "=");
 
+    if (parts.length == 2) {
+      return parts.pop().split(";").shift();
+    }
+  }
 }

@@ -208,5 +208,9 @@
         "nieuwww": "New password",
         "bevestigww": "Confirm password",
         "verzenden": "Submit"
+    },
+
+    "profiel":{
+        "profiel":"Profile"
     }
 }

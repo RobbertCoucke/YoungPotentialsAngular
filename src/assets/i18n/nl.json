@@ -211,8 +211,10 @@
         "nieuwww": "Nieuw wachtwoord",
         "bevestigww": "Bevestig wachtwoord",
         "verzenden": "Verzenden"
-    }
+    },
 
-    
+    "profiel":{
+        "profiel":"Profiel"
+    }
 
 }

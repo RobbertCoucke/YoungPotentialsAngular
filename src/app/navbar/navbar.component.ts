@@ -77,8 +77,8 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit() {
-    if (getCookie("language") !== undefined) {
-      this.selectedLanguage = getCookie("language");
+    if (this.getCookie("language") !== undefined) {
+      this.selectedLanguage = this.getCookie("language");
       this.changeLanguage(this.selectedLanguage);
     }
   }
@@ -114,16 +114,15 @@ export class NavbarComponent implements OnInit {
     this.selectedLanguage = language;
     this.dropdownLanguages = this.languages.filter(e => e !== this.selectedLanguage);
   }
+  //Functie om een cookie op te vragen.
+  getCookie(name: string) {
+    const value = "; " + document.cookie;
+    const parts = value.split("; " + name + "=");
+  
+    if (parts.length == 2) {
+      return parts.pop().split(";").shift();
+    }
 }
-
-//Functie om een cookie op te vragen.
-export function getCookie(name: string) {
-  const value = "; " + document.cookie;
-  const parts = value.split("; " + name + "=");
-
-  if (parts.length == 2) {
-    return parts.pop().split(";").shift();
-  }
 
 }
 
