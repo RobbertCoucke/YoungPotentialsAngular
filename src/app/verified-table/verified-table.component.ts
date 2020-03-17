@@ -1,7 +1,14 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { url } from "inspector";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  EventEmitter,
+  Input
+} from "@angular/core";
 import { User, Role, Type, Company } from "@/_models";
 import { AuthenticationService } from "@/_services";
-import { Router } from "@angular/router";
+import { Router, UrlSerializer } from "@angular/router";
 import { VacatureService } from "@/_services/Vacature/vacature.service";
 import { CompanyService } from "@/_services/Company/company.service";
 import { ItemsList } from "@ng-select/ng-select/lib/items-list";
@@ -14,21 +21,23 @@ export interface BedrijfList {
   address: string;
   url: string;
   position: any;
-};
-
+}
 
 @Component({
-  selector: 'app-verified-table',
-  templateUrl: './verified-table.component.html',
-  styleUrls: ['./verified-table.component.scss']
+  selector: "app-verified-table",
+  templateUrl: "./verified-table.component.html",
+  styleUrls: ["./verified-table.component.scss"]
 })
 export class VerifiedTableComponent implements OnInit {
-
   currentUser: User;
   companies: any[] = [];
   loading: boolean = true;
   error: boolean = false;
   dataSource: any;
+
+  isLoading = true;
+
+  Selectedcompanies: any[] = [];
 
   displayedColumns: string[] = [
     "select",
@@ -36,10 +45,8 @@ export class VerifiedTableComponent implements OnInit {
     "companyName",
     "address",
     "url",
-    "action",
+    "action"
   ];
-
-  isLoading = true;
 
   selection = new SelectionModel<BedrijfList>(true, []);
 
@@ -58,19 +65,7 @@ export class VerifiedTableComponent implements OnInit {
       }
     });
 
-    this.companyService.getAllVerifiedCompanies().subscribe(c => {
-      for (let index = 0; index < c.length; index++) {
-        const positie = c[index];
-        c[index].position = index + 1;
-        this.companies.push(c[index]);
-      }
-      // this.companies = c;
-      this.loader(this.companies);
-      this.dataSource = new MatTableDataSource<BedrijfList>(this.companies);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.isLoading = false;
-    });
+    this.fetchData();
   }
 
   applyFilter(event: Event) {
@@ -90,21 +85,6 @@ export class VerifiedTableComponent implements OnInit {
 
   ngOnInit() {}
   ngAfterViewInit() {}
-
-  removeEvent(company: Company) {
-    setTimeout(
-      () => (this.companies = this.companies.filter(o => o !== company)),
-      1000
-    );
-  }
-
-  testConsole() {
-    console.log(this.companies);
-
-    console.log("datasource:");
-    console.log(this.dataSource);
-    console.log("datasource geverifieerd:");
-  }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -130,5 +110,39 @@ export class VerifiedTableComponent implements OnInit {
     } row ${row.position + 1}`;
   }
 
+  unverifyCompany() {
+    this.Selectedcompanies = this.selection.selected;
+    this.Selectedcompanies.forEach(element => {
+      console.log(element.id);
+      console.log("verwijderen");
+      this.companyService.deleteCompany(element.id).subscribe();
+    });
+  }
 
+  unverifyCompanyEnkel(objectID) {
+    console.log("verwijdern:");
+    console.log(objectID);
+    this.companyService.verifyCompany(objectID).subscribe();
+  }
+
+  showElement(element){
+    console.log("test element:")
+    console.log(element);
+  }
+
+  fetchData() {
+    this.companyService.getAllVerifiedCompanies().subscribe(c => {
+      for (let index = 0; index < c.length; index++) {
+        const positie = c[index];
+        c[index].position = index + 1;
+        this.companies.push(c[index]);
+      }
+      this.loader(this.companies);
+      this.dataSource = new MatTableDataSource<BedrijfList>(this.companies);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.isLoading = false;
+    });
+    error => (this.isLoading = false);
+  }
 }

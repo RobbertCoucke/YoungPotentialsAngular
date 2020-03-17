@@ -1,47 +1,46 @@
 <mat-horizontal-stepper linear #stepper>
   <mat-step [stepControl]="firstFormGroup" [editable]="editable">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Email validatie</ng-template>
+      <ng-template matStepLabel>{{"sollicitatie.email" | translate}}</ng-template>
       <div class="list">
-        <h3 class="semi-bold">Email validatie</h3>
+        <h3 class="semi-bold">{{"sollicitatie.email" | translate}}</h3>
         <p>
-          Controleer onderstaande gegevens.<br />Uw eigen email kan nog
-          aangepast worden.<br />
+          {{"sollicitatie.controle" | translate}}<br />{{"sollicitatie.aanpassen" | translate}}<br />
         </p>
       </div>
       <mat-form-field class="description-full-width">
-        <mat-label>Controleer uw email</mat-label>
+        <mat-label>{{"sollicitatie.controlemail" | translate}}</mat-label>
         <input matInput [formControl]="senderCtrl" class="form-control" />
         <mat-error *ngIf="senderCtrl.invalid">{{
           getErrorMessageEmail()
         }}</mat-error>
       </mat-form-field>
       <mat-form-field class="description-full-width">
-        <mat-label>Email ontvanger</mat-label>
+        <mat-label>{{"sollicitatie.ontvanger" | translate}}</mat-label>
         <input matInput [value]="emailReciever" readonly />
       </mat-form-field>
       <div>
-        <button mat-raised-button matStepperNext class="buttons">Next</button>
+        <button mat-raised-button matStepperNext class="buttons">{{"sollicitatie.volgende" | translate}}</button>
       </div>
     </form>
   </mat-step>
 
   <mat-step [stepControl]="secondFormGroup" [editable]="editable">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Email inhoud</ng-template>
+      <ng-template matStepLabel>{{"sollicitatie.inhoudm" | translate}}</ng-template>
       <div class="list">
-        <h3 class="semi-bold">Email validatie</h3>
-        <p>Typ hier de inhoud van de email.</p>
+        <h3 class="semi-bold">{{"sollicitatie.email" | translate}}</h3>
+        <p>{{"sollicitatie.typinhoud" | translate}}</p>
       </div>
       <mat-form-field class="description-full-width" appearance="outline">
-        <mat-label>onderwerp</mat-label>
+        <mat-label>{{"sollicitatie.onderwerp" | translate}}</mat-label>
         <input matInput [formControl]="onderwerpControl" class="form-control" />
         <mat-error *ngIf="onderwerpControl.invalid">
           {{ getErrorMessageRequiredOnderwerp() }}
         </mat-error>
       </mat-form-field>
       <mat-form-field class="description-full-width" appearance="outline">
-        <mat-label>Inhoud</mat-label>
+        <mat-label>{{"sollicitatie.inhoud" | translate}}</mat-label>
         <textarea
           matInput
           cdkTextareaAutosize
@@ -56,37 +55,36 @@
       </mat-form-field>
       <div>
         <button mat-raised-button matStepperPrevious class="buttons">
-          Back
+          {{"sollicitatie.terug" | translate}}
         </button>
-        <button mat-raised-button matStepperNext class="buttons">Next</button>
+        <button mat-raised-button matStepperNext class="buttons">{{"sollicitatie.volgende" | translate}}</button>
       </div>
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="thirdFormGroup" [editable]="editable"  *ngIf="userHasCV === true">
+  <mat-step [stepControl]="thirdFormGroup" [editable]="editable" >
     <form [formGroup]="thirdFormGroup">
-      <ng-template matStepLabel>Uploaden CV</ng-template>
+      <ng-template matStepLabel>{{"sollicitatie.uploadcv" | translate}}</ng-template>
       <div class="list">
-        <h3 class="semi-bold">Uploaden CV</h3>
+        <h3 class="semi-bold">{{"sollicitatie.uploadcv" | translate}}</h3>
         <p>
-          U heeft nog geen CV toegevoegd aan uw account. Om te kunnen
-          solliciteren is een CV verplicht.
+          {{"sollicitatie.cv" | translate}}
         </p>
       </div>
 
-      <div class="list">
+      <div *ngIf="path === null" class="list">
         <app-upload (uploadHandler)="handleUpload($event)"></app-upload>
       </div>
-      <div *ngIf="uploadFile">
-        <p>{{uploadFile.get('file').name}}</p>
+      <div *ngIf="path">
+        <p>{{path}}</p>
         <button (click)="removeFile()" >X</button>
       </div>
       <footer>
         <div class="list">
           <button mat-raised-button class="buttons" matStepperPrevious>
-            Back
+            {{"sollicitatie.terug" | translate}}
           </button>
-          <button mat-raised-button class="buttons" matStepperNext>Next</button>
+          <button mat-raised-button class="buttons" matStepperNext>{{"sollicitatie.volgende" | translate}}</button>
         </div>
       </footer>
     </form>
@@ -98,27 +96,26 @@
     [editable]="editable"
   >
     <form [formGroup]="FourthFormGroup" >
-      <ng-template matStepLabel>Uploaden sollicitatiebrief</ng-template>
+      <ng-template matStepLabel>{{"sollicitatie.upload" | translate}}</ng-template>
       <div class="list">
-        <h3 class="semi-bold">Uploaden sollicitatiebrief</h3>
+        <h3 class="semi-bold">{{"sollicitatie.upload" | translate}}</h3>
         <p>
-          Hieronder kunt u uw sollicitatiebrief uploaden. Deze zal als bijlage
-          aan de mail toegevoegd worden.
+          {{"sollicitatie.sollinfo" | translate}}
         </p>
       </div>
-      <div class="list">
-        <app-upload (uploadHandler)="handleUpload($event)"></app-upload>
+      <div *ngIf="pathBijlage === null" class="list">
+        <app-upload (uploadHandler)="handleUploadBijlage($event)"></app-upload>
       </div>
-      <div *ngIf="uploadFile">
-        <p>{{uploadFile.get('file').name}}</p>
-        <button (click)="removeFile()" >X</button>
+      <div *ngIf="pathBijlage">
+        <p>{{pathBijlage}}</p>
+        <button (click)="removeBijlage()" >X</button>
       </div>
       <footer>
         <div class="list">
           <button mat-raised-button class="buttons" matStepperPrevious>
-            Back
+            {{"sollicitatie.terug" | translate}}
           </button>
-          <button mat-raised-button class="buttons" matStepperNext>Next</button>
+          <button mat-raised-button class="buttons" matStepperNext>{{"sollicitatie.volgende" | translate}}</button>
         </div>
       </footer>
     </form>
@@ -126,23 +123,23 @@
 
   <mat-step [stepControl]="FifthFormGroup" [editable]="editable">
     <form [formGroup]="FifthFormGroup">
-      <ng-template matStepLabel>Algemene voorwaarden</ng-template>
+      <ng-template matStepLabel>{{"sollicitatie.voorwaarden" | translate}}</ng-template>
       <div class="list">
-        <h3 class="semi-bold">Algemene voorwaarden</h3>
+        <h3 class="semi-bold">{{"sollicitatie.voorwaarden" | translate}}</h3>
       </div>
       <p>
-        Door het versturen van jouw sollicitatie gaat u akkoord met de
-        <a href="" [routerLink]="['policy']" target="_blank">privacy policy</a> van Youngpotentials.org.
+        {{"sollicitatie.voorwtekst" | translate}}
+        <a href="" [routerLink]="['policy']" target="_blank">{{"sollicitatie.voorwtekst4" | translate}}</a> {{"sollicitatie.voorwtekst5" | translate}}
       </p>
       <mat-checkbox
         (change)="changeCheck($event)"
         [(ngModel)]="checkboxValue"
         [formControl]="checkboxControl"
-        >Ik ga akkoord met de algemene voorwaarden</mat-checkbox
+        >{{"sollicitatie.akkoord" | translate}}</mat-checkbox
       >
       <div>
         <button mat-raised-button class="buttons" matStepperPrevious>
-          Back
+          {{"sollicitatie.terug" | translate}}
         </button>
         <button
           mat-raised-button
@@ -150,17 +147,18 @@
           matStepperNext
           [disabled]="disabledAgreement"
           (click)="editable = !editable"
+          (click)="sendMail()"
         >
-          Versturen
+        {{"sollicitatie.versturen" | translate}}
         </button>
       </div>
     </form>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Verstuurd</ng-template>
+    <ng-template matStepLabel>{{"sollicitatie.verstuurd" | translate}}</ng-template>
     <div class="center">
-      <mat-icon [ngStyle]="{ color: 'white' }"> email</mat-icon>
+      <mat-icon [ngStyle]="{ color: 'white' }"> {{"sollicitatie.email2" | translate}}</mat-icon>
     </div>
-    <div class="center-text"><h3>Uw sollicitatie is verstuurd!</h3></div>
+    <div class="center-text"><h3>{{"sollicitatie.sollverstuurd" | translate}}</h3></div>
   </mat-step>
 </mat-horizontal-stepper>

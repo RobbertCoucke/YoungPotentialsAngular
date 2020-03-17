@@ -191,9 +191,7 @@ export class VacturesComponent implements OnInit {
             if (vacatures[i].id === this.favorites[j].vacature.id) {
               inFavorites = this.favorites[j];
             }
-
           }
-
           if (inFavorites) {
             this.vacatures.push(new Favoriet(inFavorites.id, new Vacature(inFavorites.vacature)));
           } else {

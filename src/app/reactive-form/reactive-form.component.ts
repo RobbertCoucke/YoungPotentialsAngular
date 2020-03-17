@@ -1,39 +1,26 @@
-import { Opleiding } from "./../_models/opleiding";
-import { StudieGebied } from "./../Model/StudieGebied";
 import { StudiegebiedService } from "@/_services/studiegebied/studiegebied.service";
 import { Component, OnInit } from "@angular/core";
-import { Validators, FormGroup, FormBuilder, FormArray, Form } from "@angular/forms";
+import {
+  Validators,
+  FormGroup,
+  FormBuilder
+} from "@angular/forms";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
-import { MatSelectChange } from "@angular/material";
 import cities from "../../assets/cities.json";
 import { Studiegebied } from "app/_models/studiegebied";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import {AuthenticationService} from '../_services/Authentication/authentication.service'
-import { User, Company } from '@/_models';
-import { Router } from '@angular/router';
-import {UserService} from '../_services/User/user.service'
-import { UploadService } from '@/_services/upload/upload.service';
-import { VacatureService } from '@/_services/Vacature/vacature.service';
-import { Vacature } from '@/_models/vacature';
-import {Type} from '../_models/type'
+import { AuthenticationService } from "../_services/Authentication/authentication.service";
+import { User, Company } from "@/_models";
+import { Router } from "@angular/router";
+import { UserService } from "../_services/User/user.service";
+import { UploadService } from "@/_services/upload/upload.service";
+import { VacatureService } from "@/_services/Vacature/vacature.service";
+import { Type } from "../_models/type";
 
 /**
- * * Interfaces
+ * * Interface voor stad
  */
-
-export interface Afstudeerrichting {
-  name: string;
-  viewValue: string;
-}
-
-export interface Keuze {
-  value: number;
-  name: string;
-  viewValue: string;
-}
-
 export interface Stad {
   name: string;
 }
@@ -50,7 +37,7 @@ export class ReactiveFormComponent implements OnInit {
   filteredSteden: Observable<Stad[]>; // Array met alle steden in België gefilterd
 
   /**
-   * Formcontrols
+   * *Formcontrols
    */
   locatieControl = new FormControl("", Validators.required);
   studiegebiedControl = new FormControl("", Validators.required);
@@ -69,12 +56,16 @@ export class ReactiveFormComponent implements OnInit {
   selectedSTG: string; // waarde van geselecteerde studiegebied
   selectedopleiding: string; // waarde geselecteerde opleiding
   locatieValue: any; //waarde van geselecteerde locatie
-  titleValue : string;
+
+  /**
+   * * Velden die ingevulde waarde in form bij houden
+   */
+  titleValue: string;
   emailValue: string;
   descriptionValue: string;
   dateValue: any;
   companyValue: any;
-  addressValue : string;
+  addressValue: string;
   currentUser: User;
   company: Company;
   uploadFile: FormData;
@@ -89,7 +80,6 @@ export class ReactiveFormComponent implements OnInit {
    * @description Array met types
    */
 
-
   studiegebieden: any[] = []; // declaratie array voor in te laden studiegebieden
 
   constructor(
@@ -99,7 +89,7 @@ export class ReactiveFormComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private uploadService: UploadService,
-    private vacatureService: VacatureService,
+    private vacatureService: VacatureService
   ) {
     this.steden = cities;
     this.minDate = new Date();
@@ -109,27 +99,22 @@ export class ReactiveFormComponent implements OnInit {
     this.studiegebiedService.getAllStudieGebieds().subscribe(data => {
       this.studiegebieden = data;
     }); // inladen alle studiegebieden uit db
-
-    
   }
 
   ngOnInit() {
-
-
-    this.authenticationService.currentUser.subscribe(u =>{
+    this.authenticationService.currentUser.subscribe(u => {
       console.log(u);
-      if(u.role === 'Company'){
-          this.currentUser = u;
-          this.userService.getById(u.id).subscribe(c => {
-            this.company = c;
-            console.log(this.company);
-            this.emailValue = c.email;
-            this.addressValue = c.address;
-          });
-      }else{
-        this.router.navigate(['/']);
+      if (u && u.role === "Company") {
+        this.currentUser = u;
+        this.userService.getById(u.id).subscribe(c => {
+          this.company = c;
+          console.log(this.company);
+          this.emailValue = c.email;
+          this.addressValue = c.address;
+        });
+      } else {
+        this.router.navigate(["/"]);
       }
-      
     });
 
     console.log("getting types");
@@ -137,8 +122,6 @@ export class ReactiveFormComponent implements OnInit {
       this.types = types;
       console.log(types);
     });
-
-
 
     /**
      * @description filteren steden op naam
@@ -153,17 +136,25 @@ export class ReactiveFormComponent implements OnInit {
      * @description formvalidatie in groep
      */
     this.uploadVacForm = this.fb.group({
-      locatieControl : new FormControl("", Validators.required),
-      studiegebiedControl : new FormControl("", Validators.required),
-      opleidingControl : new FormControl("", Validators.required),
-      titel : new FormControl("", [Validators.required]),
-      email : new FormControl("", [Validators.required, Validators.email]),
-      bedrijfsnaam : new FormControl("", [Validators.required]),
-      beschrijving : new FormControl("", [Validators.required]),
-      vacatureBestand : new FormControl("", [Validators.required]),
-      einddatum : new FormControl("", [Validators.required]),
-      typeControl : new FormControl("", Validators.required)
+      locatieControl: new FormControl("", Validators.required),
+      studiegebiedControl: new FormControl("", Validators.required),
+      opleidingControl: new FormControl("", Validators.required),
+      titel: new FormControl("", [Validators.required]),
+      email: new FormControl("", [Validators.required, Validators.email]),
+      bedrijfsnaam: new FormControl("", [Validators.required]),
+      beschrijving: new FormControl("", [Validators.required]),
+      vacatureBestand: new FormControl("", [Validators.required]),
+      einddatum: new FormControl("", [Validators.required]),
+      typeControl: new FormControl("", Validators.required)
     });
+  }
+
+   /**
+   * @description veranderen value huidige geselecteerde locatie
+   * @param event$
+   */
+  onSelectionChangedLocatie(event$) {
+    this.locatieValue = event$.option.value.name;
   }
 
   /**
@@ -172,10 +163,8 @@ export class ReactiveFormComponent implements OnInit {
    * @return naam van geselecteerde stad
    */
   displayLocatie(stad: Stad): string {
-    if(stad != undefined)
-      return (stad && stad.name) ? stad.name : stad.name;
-    else
-      return "";
+    if (stad != undefined) return stad && stad.name ? stad.name : stad.name;
+    else return "";
   }
 
   /**
@@ -185,18 +174,9 @@ export class ReactiveFormComponent implements OnInit {
    */
   private _filter(name: string): Stad[] {
     const filterValue = name.toLowerCase();
-
     return this.steden.filter(
       option => option.name.toLowerCase().indexOf(filterValue) === 0
     );
-  }
-
-  /**
-   * @description retourneert value van formvelden
-   * @return object met values form
-   */
-  get uploadVacFormControl() {
-    return this.uploadVacForm.controls;
   }
 
   /**
@@ -204,61 +184,48 @@ export class ReactiveFormComponent implements OnInit {
    * @param uploadVacForm form
    */
   onSubmit() {
-
     console.log(this.selectValue);
     var typeObject = this.types.filter(t => t.name === this.selectValue)[0];
+    var vacature = {
+      title: this.titleValue,
+      description: this.descriptionValue,
+      email: this.emailValue,
+      city: this.locatieValue.name,
+      expirationDate: this.dateValue,
+      typeId: typeObject.id,
+      companyId: this.company.id,
+      address: this.addressValue,
+      tags: this.tags
+    };
 
-    var vacature = {title: this.titleValue,
-                                 description: this.descriptionValue,
-                                email: this.emailValue,
-                                city: this.locatieValue.name,
-                                expirationDate: this.dateValue,
-                                typeId: typeObject.id,
-                                companyId: this.company.id,
-                                address: this.addressValue,
-                                tags: this.tags};
-
-    if(this.uploadFile){
+    if (this.uploadFile) {
       this.uploadFile.set("isUser", "false");
     }
     console.log(vacature);
     this.vacatureService.createVacature(vacature).subscribe(v => {
       console.log("added vacature");
-      if(this.uploadFile){
-        
-      this.uploadFile.set("id", v.id.toString());
-      this.uploadService.upload(this.uploadFile).subscribe(p => {
-        console.log(p);
-        this.router.navigate(['/']);
-      });
-      }else{
-        this.router.navigate(['/']);
+      if (this.uploadFile) {
+        this.uploadFile.set("id", v.id.toString());
+        this.uploadService.upload(this.uploadFile).subscribe(p => {
+          console.log(p);
+          this.router.navigate(["/"]);
+        });
+      } else {
+        this.router.navigate(["/"]);
       }
-      
     });
-    
-    
   }
 
-  handleUpload(formData: FormData){
+  handleUpload(formData: FormData) {
     this.uploadFile = formData;
   }
 
-  handleStudiegebieden(studiegebieden: Studiegebied[]){
+  handleStudiegebieden(studiegebieden: Studiegebied[]) {
     this.tags = studiegebieden;
   }
 
-  removeFile(){
+  removeFile() {
     this.uploadFile = null;
-  }
-
-
-  /**
-   * @description veranderen value huidige geselecteerde locatie
-   * @param event$
-   */
-  onSelectionChangedLocatie(event$) {
-    this.locatieValue = event$.option.value.name;
   }
 
   /**
@@ -290,9 +257,7 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   getErrorMessageAddress() {
-    return this.titel.hasError("required")
-    ? "U moet een address opgeven"
-    : "";
+    return this.titel.hasError("required") ? "U moet een address opgeven" : "";
   }
 
   getErrorMessagelocatieControl() {
@@ -330,6 +295,4 @@ export class ReactiveFormComponent implements OnInit {
       ? "U moet minstens 1 type selecteren"
       : "";
   }
-
-  
 }
