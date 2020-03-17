@@ -85,6 +85,8 @@ export class VacturesComponent implements OnInit {
           });
 
           this.sortFunction();
+          //Alle vacatures worden in de variabele items gekopieerd omdat deze wordt gebruikt bij het pagineren.
+          this.items = this.vacatures;
           
           //Indien alle vacatures geladen zijn word de div waarin de vacatures zitten zichtbaar gemaakt.
           this.loadingFilter = true;
@@ -98,7 +100,8 @@ export class VacturesComponent implements OnInit {
         });
 
         this.sortFunction();
-       
+        //Alle vacatures worden in de variabele items gekopieerd omdat deze wordt gebruikt bij het pagineren.
+        this.items = this.vacatures;
         //Indien alle vacatures geladen zijn word de div waarin de vacatures zitten zichtbaar gemaakt.
         this.loadingFilter = true;
       });
@@ -106,7 +109,7 @@ export class VacturesComponent implements OnInit {
   }
   setHeight(){
     this.viewHeight = this.elementView.nativeElement.offsetHeight;
-    console.log("viewHeight")
+    console.log("viewHeight:")
     console.log(this.viewHeight);
   }
   sortFunction() {
@@ -136,9 +139,12 @@ export class VacturesComponent implements OnInit {
   }
 
   sortingChange() {
+    //
+  
     this.sortFunction();
-    this.firstPage();
-    //this.onChangePage(this.items.slice(0, 10));
+    //this.firstPage();
+    //Niet de mooiste oplossing, want werkt niet als je op een andere pagina bevindt
+    this.onChangePage(this.items.slice(0, 10));
   }
   
   firstPage() {
@@ -152,11 +158,7 @@ export class VacturesComponent implements OnInit {
   onChangePage(pageOfItems: Array<any>) {
     //update current page of items
     this.pageOfItems = pageOfItems;
-
-    console.log("Change Page")
     this.setHeight();
-    console.log("Change Page Done")
-
     //Controle indien pageOfItems niet leeg is.
     if (pageOfItems.length !== 0) {
       //Indien niet leeg, afbeelden van de lijst met vacatures.
@@ -201,10 +203,12 @@ export class VacturesComponent implements OnInit {
         } else {
           this.vacatures.push(new Favoriet(null, new Vacature(vacatures[i])));
         }
-
       }
-
-      this.sortFunction();
+        
+        this.sortFunction();
+        //Alle vacatures worden in de variabele items gekopieerd omdat deze wordt gebruikt bij het pagineren.
+        this.items = this.vacatures;
+      
       //Controle om te checken als items leeg is.
       if (this.items.length == 0) {
         //Indien leeg, wordt loader image verborgen en wordt er een foutmelding getoond dat er geen vacatures zijn.
@@ -214,6 +218,8 @@ export class VacturesComponent implements OnInit {
       else {
         //Indien niet leeg wordt de lijst van vacatures afgebeeld.
         this.loadingFilter = true;
+        
+        console.log(this.vacatures);
       }
     });
   }
@@ -231,7 +237,7 @@ export class VacturesComponent implements OnInit {
     if (filterArr === null && typeArr === null) {
       this.fillVacatures();
     } else {
-      if (this.currentUser != null) {
+      if (this.currentUser != null && this.currentUser.role === 'User') {
         this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
           this.favorites = f;
           this.filterVacatures(filterArr, typeArr);

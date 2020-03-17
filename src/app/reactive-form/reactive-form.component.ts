@@ -1,10 +1,6 @@
 import { StudiegebiedService } from "@/_services/studiegebied/studiegebied.service";
 import { Component, OnInit } from "@angular/core";
-import {
-  Validators,
-  FormGroup,
-  FormBuilder
-} from "@angular/forms";
+import { Validators, FormGroup, FormBuilder } from "@angular/forms";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
@@ -17,6 +13,7 @@ import { UserService } from "../_services/User/user.service";
 import { UploadService } from "@/_services/upload/upload.service";
 import { VacatureService } from "@/_services/Vacature/vacature.service";
 import { Type } from "../_models/type";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 /**
  * * Interface voor stad
@@ -89,16 +86,17 @@ export class ReactiveFormComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private uploadService: UploadService,
-    private vacatureService: VacatureService
+    private vacatureService: VacatureService,
+    private snackBar: MatSnackBar
   ) {
     this.steden = cities;
     this.minDate = new Date();
     this.maxDate = new Date();
     this.minDate.setDate(this.minDate.getDate()); // min datum is de dag zelf
     this.maxDate.setDate(this.maxDate.getDate() + 182); // we stellen de maxium datum in op 6 maanden = 182 dagen
-    this.studiegebiedService.getAllStudieGebieds().subscribe(data => {
-      this.studiegebieden = data;
-    }); // inladen alle studiegebieden uit db
+    // this.studiegebiedService.getAllStudieGebieds().subscribe(data => {
+    //   this.studiegebieden = data;
+    // }); // inladen alle studiegebieden uit db
   }
 
   ngOnInit() {
@@ -149,7 +147,7 @@ export class ReactiveFormComponent implements OnInit {
     });
   }
 
-   /**
+  /**
    * @description veranderen value huidige geselecteerde locatie
    * @param event$
    */
@@ -208,12 +206,20 @@ export class ReactiveFormComponent implements OnInit {
         this.uploadFile.set("id", v.id.toString());
         this.uploadService.upload(this.uploadFile).subscribe(p => {
           console.log(p);
+          this.openSnackBar();
           this.router.navigate(["/"]);
         });
       } else {
         this.router.navigate(["/"]);
       }
     });
+  }
+
+  /**
+   * @description opent een snackbar popup wanneer de form word verstuurd
+   */
+  openSnackBar() {
+    let snackBarRef = this.snackBar.open("Vacature verzonden", "Ok");
   }
 
   handleUpload(formData: FormData) {
