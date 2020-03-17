@@ -10,10 +10,10 @@ import {
 } from "@angular/core";
 import { StudiegebiedService } from "../_services/studiegebied/studiegebied.service";
 import { Studiegebied } from "@/_models/studiegebied";
-import { Opleiding } from "@/_models/Opleiding";
 import { VacatureService } from '@/_services/Vacature/vacature.service';
 import { Type } from '../_models/type';
 import { FilterService } from './../_services/filter/filter.service';
+import { Opleiding } from '@/_models/Opleiding';
 
 @Component({
   selector: "app-vacture-filter",
@@ -309,7 +309,7 @@ export class VactureFilterComponent implements OnInit {
   mapJSONToModel(res): any[] {
     var list: Studiegebied[] = [];
     res.forEach(element => {
-      var opleiding: Opleiding[] = [];
+      var opleiding: any[] = [];
       var opleidingArray = element.opleiding;
       if (opleidingArray && opleidingArray.length != 0) {
         opleidingArray.forEach(o => {
