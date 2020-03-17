@@ -37,3 +37,11 @@
 {
     transform: scale(1.1);
 }
+
+.simple-form input:invalid {
+    border-left: 2px solid red;
+  }
+
+  .simple-form input:dirty {
+    border-left: 2px solid red;
+  }
