@@ -64,9 +64,11 @@ export class StudentformComponent implements OnInit {
   onSubmit()
   {
     this.submitted = true;
-
+    Object.keys(this.studentForm.controls).forEach((key) => this.studentForm.get(key).setValue(this.studentForm.get(key).value.trim()));
+    console.log(this.studentForm);
+    
     if (this.studentForm.invalid) {
-      console.log(this.studentForm)
+      console.log(this.studentForm);
       this.error = "invalid form";
       return;
     } 

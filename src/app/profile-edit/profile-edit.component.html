@@ -7,13 +7,23 @@
           <div *ngIf="isStudent" class="col-md-6 mb-3">
             <label><h5>{{"register.voornaam" | translate}}</h5></label>
             <input type="text" class="form-control" formControlName="firstName"
-                   placeholder="Voornaam"/>
+                   placeholder="Voornaam" 
+                   [ngClass]="{ 'is-invalid': submitted && uf.firstName.errors }"/>
+                   <div *ngIf=" submitted && uf.firstName.invalid && (uf.firstName.dirty
+                   || uf.firstName.touched)" class="invalid-feedback">
+                      <div *ngIf="uf.firstName.errors.required">{{"register.voornaamreq" | translate}}</div>
+                  </div> 
           </div>
           <div *ngIf="isStudent" class="col-md-6 mb-3">
             <label><h5>{{"register.famnaam" | translate}}</h5></label>
             <input type="text" class="form-control"
                    formControlName="lastName"
-                   placeholder="Familienaam"/>
+                   placeholder="Familienaam"
+                   [ngClass]="{ 'is-invalid': submitted && uf.lastName.errors }"/>
+                   <div *ngIf=" submitted && uf.lastName.invalid && (uf.lastName.dirty
+                   || uf.lastName.touched)" class="invalid-feedback">
+                      <div *ngIf="uf.firstName.errors.required">{{"register.famnaamreq" | translate}}</div>
+                  </div> 
           </div>
       </div>
 
@@ -21,36 +31,29 @@
         <label><h5>{{"register.companyName" | translate}}</h5></label>
         <input type="text" class="form-control"
                    formControlName="companyName"
-                   placeholder="Bedrijfsnaam"/>
+                   [ngClass]="{ 'is-invalid': submitted && uf.companyName.errors }"/>
+                   <div *ngIf=" submitted && uf.companyName.invalid && (uf.companyName.dirty
+                   || uf.companyName.touched)" class="invalid-feedback">
+                      <div *ngIf="uf.companyName.errors.required">{{"register.bedrijfsnaamreq" | translate}}</div>
+                  </div> 
       </div>
 
       <div class="form-label-group ruimte">
         <label><h5>{{"register.email" | translate}}</h5></label>
-        <input type="text" class="form-control" formControlName="email"
-                   placeholder="Email Address" required readonly="true"/>
+        <input type="text" class="form-control" formControlName="email" readonly  required/>
       </div>
 
       <div *ngIf="!isStudent" class="form-label-group ruimte">
         <label><h5>{{"register.website" | translate}}</h5></label>
-        <input type="text" class="form-control" formControlName="url"
-        placeholder="Url">
+        <input type="text" class="form-control" formControlName="website"
+        [ngClass]="{ 'is-invalid': submitted && uf.website.errors }"/>
+        <div *ngIf=" submitted && uf.website.invalid && (uf.website.dirty
+        || uf.website.touched)" class="invalid-feedback">
+           <div *ngIf="uf.website.errors.required">{{"register.websitereq" | translate}}</div>
+       </div> 
       </div>
 
 
-        <div class="form-label-group ruimte">
-            <label><h5>{{"register.stad" | translate}}</h5></label>
-            <input type="text" class="form-control" formControlName="city"
-                   placeholder="City" required/> 
-        </div>
-
-
-      <div *ngIf="isStudent" class="form-label-group ruimte">
-        <label><h5>{{"react.upload" | translate}}</h5></label>
-        <input type="text" class="form-control" value="" formControlName="cvUrl"
-        placeholder="CvUrl" readonly="true"
-        />
-      </div>
-      
 
       <div *ngIf="!isStudent" class="form-label-group ruimte">
         <label><h5>{{"register.adres" | translate}}</h5></label>
@@ -59,6 +62,16 @@
         />
       </div>
 
+      <div *ngIf="!isStudent" class="form-label-group ruimte">
+        <label><h5>{{"register.adres" | translate}}</h5></label>
+        <input type="text" class="form-control" formControlName="address"
+        [ngClass]="{ 'is-invalid': submitted && uf.address.errors }"/>
+        <div *ngIf=" submitted && uf.address.invalid && (uf.address.dirty
+        || uf.address.touched)" class="invalid-feedback">
+           <div *ngIf="uf.address.errors.required">{{"register.adresreq" | translate}}</div>
+       </div> 
+      </div>
+      
       <div class="ruimtebtn">
         <button class="btn btn-lg btn-primary" type="submit">Opslaan</button>
       </div>

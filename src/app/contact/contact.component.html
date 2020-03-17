@@ -9,26 +9,50 @@
       <div class="form-wrap">
         <div class="form-block col-md-12">
           <h2 class="sub-title">{{"contact.titel" | translate}}</h2>
-          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact" required>
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact">
 
             <div class="form-item">
               <label for="">{{"contact.naam" | translate}}</label>
-              <input type="text" name="fullName" formControlName="fullName" required>
+              <input type="text" name="fullName" formControlName="fullName"
+              [ngClass]="{ 'is-invalid': submitted && cf.fullName.errors }"
+              required>
+              <div *ngIf=" submitted && cf.fullName.invalid && (cf.fullName.dirty
+                    || cf.fullName.touched)" class="invalid-feedback">
+                  <div *ngIf="cf.fullName.errors.required">{{ "contact.error" | translate}}</div>
+               </div> 
             </div>
 
              <div class="form-item">
               <label for="">{{"contact.email" | translate}}</label>
-              <input type="text" name="email" formControlName="email">
+              <input type="text" name="email" formControlName="email"
+              [ngClass]="{ 'is-invalid': submitted && cf.email.errors }"
+              required>
+              <div *ngIf=" submitted && cf.email.invalid && (cf.email.dirty
+                    || cf.email.touched)" class="invalid-feedback">
+                  <div *ngIf="cf.email.errors.required">{{ "contact.error" | translate}}</div>
+               </div>
              </div>
 
             <div class="form-item">
               <label for="">{{"contact.onderwerp" | translate}}</label>
-              <input type="text" name="subject" formControlName="subject">
+              <input type="text" name="subject" formControlName="subject"
+              [ngClass]="{ 'is-invalid': submitted && cf.subject.errors }"
+              required>
+              <div *ngIf=" submitted && cf.subject.invalid && (cf.email.dirty
+                    || cf.subject.touched)" class="invalid-feedback">
+                  <div *ngIf="cf.subject.errors.required">{{ "contact.error" | translate}}</div>
+               </div>
              </div>
 
             <div class="form-item">
               <label for="">{{"contact.bericht" | translate}}</label>
-              <textarea id="edit-message" name="message" formControlName="message" rows="5" cols="60" class="form-textarea required resize-vertical"></textarea>
+              <textarea id="edit-message" name="message" formControlName="message"
+               rows="5" cols="60" class="form-textarea required resize-vertical" required 
+               [ngClass]="{ 'is-invalid': submitted && cf.message.errors }"></textarea>
+                <div *ngIf=" submitted && cf.message.invalid && (cf.message.dirty
+                  || cf.message.touched)" class="invalid-feedback">
+                <div *ngIf="cf.message.errors.required">{{ "contact.error" | translate}}</div>
+                </div>
              </div>
 
             <div class="form-item">
