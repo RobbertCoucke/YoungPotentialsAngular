@@ -24,27 +24,27 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    console.log(this.currentUser);
-    if (this.authenticatieService.currentUserValue == null) { 
-      alert("Nice try, hackerman. :)");
-      this.router.navigate(['/']);
-    }else{
-      this.authenticatieService.currentUser.subscribe(x => {
-        if(x.role == Role.Admin)
-        {
+     //profile component mag niet opgeladen worden als er geen ingelogde user is
+        if (this.authenticatieService.currentUserValue == null) { 
           alert("Nice try, hackerman. :)");
           this.router.navigate(['/']);
         }else{
-          console.log(x);
-          this.currentUser=x;
-          this.userservice.getById(this.currentUser.id).subscribe(data => {
-            console.log(data);
-            this.isStudent=data.isStudent;
-            this.profiel = data;
-            console.log(this.profiel);
-            this.loader(this.profiel);
-            });
+          this.authenticatieService.currentUser.subscribe(x => {
+            if(x.role == Role.Admin)
+            {
+              this.router.navigate(['/']);
+            }
+            else{
+              this.currentUser=x;
+              //get de ingelogde gebruiker van de database
+              this.userservice.getById(this.currentUser.id).subscribe(data => {
+                //is de gebruiker student of company?
+                this.isStudent = data.isStudent;
+                this.profiel = data;
+                this.loader(this.profiel);
+                });
+            }
+          });
     
           this.uploadService.getFilePath(true,this.currentUser.id).subscribe(p => {
             if(p != null){
@@ -52,12 +52,8 @@ export class ProfileComponent implements OnInit {
             this.uploadFile = p.path;
             }
           });
-        }
-      });
-
-    } 
+        } 
   }
-
 
 
   loader(x)

@@ -74,6 +74,8 @@ export class CompanyformComponent implements OnInit {
   onSubmit()
   {
     this.submitted = true;
+    Object.keys(this.companyForm.controls).forEach((key) => this.companyForm.get(key).setValue(this.companyForm.get(key).value.trim()));
+    console.log(this.companyForm);
 
     if (this.companyForm.invalid) {
       this.error = "invalid form";
