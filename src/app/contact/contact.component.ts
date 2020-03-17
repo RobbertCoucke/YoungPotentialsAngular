@@ -33,14 +33,13 @@ export class ContactComponent implements OnInit {
   }
 
   //get all contactForm controls
-  get contactformControls() { return this.contactForm.controls; }
+  get cf() { return this.contactForm.controls; }
 
   onSubmit() {
     this.submitted = true;
-
+    Object.keys(this.contactForm.controls).forEach((key) => this.contactForm.get(key).setValue(this.contactForm.get(key).value.trim()));
     //stop here if form is invalid
-
-           if (this.contactForm.invalid) {
+    if (this.contactForm.invalid) {
          return;
    }
 
@@ -59,7 +58,7 @@ export class ContactComponent implements OnInit {
 
   //get de contact model nadat de gebruiker zijn data ingevuld heeft
   getContactModel(){
-    var controls = this.contactformControls;
+    var controls = this.cf;
     //elke user moet zin email, naam, onderwerp en bericht invullen
     var model = new Contact(controls.email.value, controls.fullName.value,
        controls.subject.value, controls.message.value);

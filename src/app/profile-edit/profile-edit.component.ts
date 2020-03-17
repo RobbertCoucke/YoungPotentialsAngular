@@ -42,43 +42,44 @@ export class ProfileEditComponent implements OnInit {
    }
 
   ngOnInit() {
-    if (this.authenticatieService.currentUserValue == null && this.currentUser.role == Role.Admin) { 
+    if (this.authenticatieService.currentUserValue == null) { 
       alert("Invalid action.");
       this.router.navigate(['/']);
     }else{
       this.authenticatieService.currentUser.subscribe(x => this.currentUser = x);
-    }  
+      if(this.currentUser.role == Role.Admin)
+      {
+        this.router.navigate(['/']);
+      }else{
         this.updateForm = this.formBuilder.group({
           firstName: [''],
-          lastName: [''],
-          description: [''],  
-          city: [''],
-          url: [''],
-          cvUrl: [''],
+          lastName: [''], 
+          website: [''],
           email: [''],
-          telefoonn: [''],
           address: [''],
-          companyName: [''],
-          zipCode: ['']
+          companyName: ['']
         })
         this.userservice.getById(this.currentUser.id).subscribe(data => {
           this.id = data.userId;
           this.handleData(data);
+          console.log(data);
           this.updateform();
-          if(this.isStudent)
+          if(!this.isStudent)
           {
             this.updateForm.get('companyName').setValidators(this.nameValidators.concat(Validators.required));
-            this.updateForm.get('description').setValidators(this.commonvalidators);
-            this.updateForm.get('url').setValidators(this.commonvalidators);
-            this.updateFormStudent();
-          }else{
+            this.updateForm.get('website').setValidators(this.commonvalidators);
+            this.updateForm.get('city').setValidators(this.commonvalidators);
+            this.updateForm.get('adress').setValidators(this.commonvalidators);
             this.updateFormCompany();
+          }else{
+            this.updateFormStudent();
             
-          this.updateForm.get('firstName').setValidators(this.nameValidators.concat(Validators.required));
-          this.updateForm.get('lastName').setValidators(this.nameValidators.concat(Validators.required));
+            this.updateForm.get('firstName').setValidators(this.nameValidators.concat(Validators.required));
+            this.updateForm.get('lastName').setValidators(this.nameValidators.concat(Validators.required));
           }
           });
-
+      }
+        }
       }
 
   handleData(data)
@@ -87,19 +88,15 @@ export class ProfileEditComponent implements OnInit {
 
     if(data.isStudent)
     {
-      this.user.cvUrl = data.cvUrl;
       this.user.firstName = data.firstName;
       this.user.name = data.name;
     }else{
       this.user.companyName = data.companyName;
-      this.user.description = data.description;
       this.user.url = data.url;
     }
 
     this.user.city = data.city;
-    this.user.telephone = data.telephone;
     this.user.address = data.address;
-    this.user.zipCode = data.zipCode;
     this.isStudent = this.user.isStudent;
   }
 
@@ -107,18 +104,18 @@ export class ProfileEditComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.updateForm);
+    Object.keys(this.updateForm.controls).forEach((key) => this.updateForm.get(key).setValue(this.updateForm.get(key).value.trim()));
     if(this.updateForm.invalid)
     {
       return;
     }
-      var updateModel = this.getModel();
+       var updateModel = this.getModel();
       this.userservice.updateUser(this.id ,updateModel).subscribe( data => {
         this.router.navigate([""]);
       }, 
       error => {
         this.error = error;
-      })
+      }) 
     
 
 
@@ -129,23 +126,17 @@ export class ProfileEditComponent implements OnInit {
       var controls = this.updateFormControls;
       //elke gebruiker moet zin email, password invullen
       var model = new UpdateUser(controls.email.value, this.isStudent);
-      model.telephone = controls.telefoonn.value;
-      //model.city = controls.city.value;
-      model.zipCode = controls.zipCode.value;
-      model.address = controls.address.value;
-      model.city = controls.city.value;
   
       //de student moet zijn naam, voorname en CV geven.
       if(this.isStudent){
         model.name = controls.lastName.value;
         model.firstName = controls.firstName.value;
-        model.cvUrl = controls.cvUrl.value;
       }
       //bedrijf moet een beschrijving, url en naam geven
       else{
-  
-        model.description = controls.description.value;
-        model.url = controls.url.value;
+        model.address = controls.address.value;
+        model.city = controls.city.value;
+        model.url = controls.website.value;
         model.companyName = controls.companyName.value;
       }
   
@@ -157,10 +148,7 @@ export class ProfileEditComponent implements OnInit {
   {
     this.updateForm.patchValue({
       city: this.user.city,
-      zipCode: this.user.zipCode,
       email: this.user.email,
-      telefoonn: this.user.telephone,
-      address: this.user.address
 
     })
   }
@@ -169,16 +157,15 @@ export class ProfileEditComponent implements OnInit {
   {
     this.updateForm.patchValue({
       firstName: this.user.firstName,
-      lastName: this.user.name,
-      cvUrl: this.user.cvUrl
+      lastName: this.user.name
     })
   }
 
   updateFormCompany(){
     this.updateForm.patchValue({
       companyName: this.user.companyName,
-      url: this.user.companyName,
-      description: this.user.description
+      website: this.user.url,
+      address: this.user.address
     })
   }
 

@@ -187,7 +187,8 @@
         "email": "Email address",
         "onderwerp": "Subject",
         "bericht": "Message",
-        "verzenden": "send"
+        "verzenden": "send",
+        "error": "Required field"
         
     },
 

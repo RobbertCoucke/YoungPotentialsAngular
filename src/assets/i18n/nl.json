@@ -190,7 +190,8 @@
         "email": "Emailadres",
         "onderwerp": "Onderwerp",
         "bericht": "Bericht",
-        "verzenden": "Verzenden"
+        "verzenden": "Verzenden",
+        "error": "Verplicht veld"
         
     },
 

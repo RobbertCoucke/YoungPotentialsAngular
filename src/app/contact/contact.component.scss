@@ -142,4 +142,20 @@
 }
 }
 
+.contact input:invalid {
+  border-left: 2px solid red;
+}
+
+.contact input:dirty {
+  border-left: 2px solid red;
+}
+
+
+.contact textarea:invalid{
+  border-left: 2px solid red;
+}
+
+
+
+
 

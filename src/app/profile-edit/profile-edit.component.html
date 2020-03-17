@@ -5,12 +5,12 @@
     <form class="simple-form" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
       <div class="row ruimte">
           <div *ngIf="isStudent" class="col-md-6 mb-3">
-            <label><h5>Naam</h5></label>
+            <label><h5>{{"register.voornaam" | translate}}</h5></label>
             <input type="text" class="form-control" formControlName="firstName"
                    placeholder="Voornaam"/>
           </div>
           <div *ngIf="isStudent" class="col-md-6 mb-3">
-            <label><h5>Familienaam</h5></label>
+            <label><h5>{{"register.famnaam" | translate}}</h5></label>
             <input type="text" class="form-control"
                    formControlName="lastName"
                    placeholder="Familienaam"/>
@@ -18,47 +18,26 @@
       </div>
 
       <div *ngIf="!isStudent" class="form-label-group ruimte">
-        <label><h5>Bedrijfsnaam</h5></label>
+        <label><h5>{{"register.companyName" | translate}}</h5></label>
         <input type="text" class="form-control"
-                   formControlName="companyName"
-                   placeholder="Bedrijfsnaam"/>
+                   formControlName="companyName"/>
       </div>
 
       <div class="form-label-group ruimte">
-        <label><h5>E-mailadres</h5></label>
-        <input type="text" class="form-control" formControlName="email"
-                   placeholder="Email Address" required/>
+        <label><h5>{{"register.email" | translate}}</h5></label>
+        <input type="text" class="form-control" formControlName="email"  required/>
       </div>
 
       <div *ngIf="!isStudent" class="form-label-group ruimte">
-        <label><h5>Url</h5></label>
-        <input type="text" class="form-control" formControlName="url"
-        placeholder="Url">
+        <label><h5>{{"register.website" | translate}}</h5></label>
+        <input type="text" class="form-control" formControlName="website">
       </div>
 
-
-        <div class="form-label-group ruimte">
-            <label><h5>Stad</h5></label>
-            <input type="text" class="form-control" formControlName="city"
-                   placeholder="City" required/> 
-        </div>
-
-
-      <div *ngIf="isStudent" class="form-label-group ruimte">
-        <label><h5>CV</h5></label>
-        <input type="text" class="form-control" value="" formControlName="cvUrl"
-        placeholder="CvUrl" 
-        />
+      <div *ngIf="!isStudent" class="form-label-group ruimte">
+        <label><h5>{{"register.adres" | translate}}</h5></label>
+        <input type="text" class="form-control" formControlName="address">
       </div>
       
-
-      <div *ngIf="!isStudent" class="form-label-group ruimte">
-        <label><h5>Straat + nr</h5></label>
-        <input type="text" class="form-control" value="" formControlName="address"
-        placeholder="Address" 
-        />
-      </div>
-
       <div class="ruimtebtn">
         <button class="btn btn-lg btn-primary" type="submit">Opslaan</button>
       </div>
