@@ -16,6 +16,9 @@ import { MatTableDataSource, MatPaginator } from "@angular/material";
 import { MatSort } from "@angular/material/sort";
 import { SelectionModel } from "@angular/cdk/collections";
 
+/**
+ * * Interface voor de velden die we willen weergeven in tabel
+ */
 export interface BedrijfList {
   companyName: string;
   address: string;
@@ -29,16 +32,17 @@ export interface BedrijfList {
   styleUrls: ["./unverified-table.component.scss"]
 })
 export class UnverifiedTableComponent implements OnInit {
-  currentUser: User;
-  companies: any[] = [];
-  loading: boolean = true;
-  error: boolean = false;
-  dataSource: any;
 
-  isLoading = true;
+  currentUser: User; //veld voor huidig ingelogde gebruiker
+  companies: any[] = []; //array om bedrijven uit database in op te slaan
+  error: boolean = false; // true als er een error optreedt
+  dataSource: any; // data die in tabel wordt geladen
 
-  Selectedcompanies: any[] = [];
+  isLoading: boolean = true; //true zo lang data wordt geladen uit db (voor matspinner)
 
+  Selectedcompanies: any[] = []; // lijst met geselecteerde bedrijven
+
+  //kolommen die in tabel worden weergegeven
   displayedColumns: string[] = [
     "select",
     "position",
@@ -48,7 +52,7 @@ export class UnverifiedTableComponent implements OnInit {
     "action",
   ];
 
-  selection = new SelectionModel<BedrijfList>(true, []);
+  selection = new SelectionModel<BedrijfList>(true, []); // houdt de aangevinkte checkboxes bij
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -69,16 +73,6 @@ export class UnverifiedTableComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  loader(x) {
-    //Loading
-    if (x.length !== 0) {
-      this.loading = false;
-    } else {
-      this.loading = false;
-      this.error = true;
-    }
   }
 
   ngOnInit() {}
@@ -129,7 +123,6 @@ export class UnverifiedTableComponent implements OnInit {
     this.companyService.verifyCompany(objectID).subscribe();
   }
 
-
   verifyCompany() {
     this.Selectedcompanies = this.selection.selected;
     console.log("test");
@@ -155,7 +148,6 @@ export class UnverifiedTableComponent implements OnInit {
         c[index].position = index + 1;
         this.companies.push(c[index]);
       }
-      this.loader(this.companies);
       this.dataSource = new MatTableDataSource<BedrijfList>(this.companies);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

@@ -27,16 +27,14 @@ import { VacatureService } from '@/_services/Vacature/vacature.service';
 })
 export class SollicitatieDialogComponent implements OnInit {
   checkboxValue: boolean; // checkbox waarde voor algemene voorwaarden
-  path: string = null;
-  pathBijlage : string = null
-  uploadFile: FormData; // we stopen opgeladen bestand in formdata
-  uploadBijlage : FormData;
+  path: string = null; // veld om pad van cv in op te slaan
+  pathBijlage : string = null //veld om pad bijlage in op te slaan
+  uploadFile: FormData; // we stopen opgeladen bestand in formdata - formdata(key&value pairs) wordt doorgestuurd naar backend
+  uploadBijlage : FormData; //we stoppen opgeladen bijlage in formdata
 
   emailSender = this.data.UseremailValue; // email van de hudige gebruiker
   emailReciever = this.data.companyEmailValue; // email van het bedrijf die vacature plaatste
-  currentUser : User;
-
-  test: boolean = false;
+  currentUser : User; // huidig ingelogde gebruiker
 
   /**
    * * FormGroup per step in stepper
@@ -47,10 +45,8 @@ export class SollicitatieDialogComponent implements OnInit {
   FourthFormGroup: FormGroup;
   FifthFormGroup: FormGroup;
 
-
   disabledAgreement: boolean = true; // value checkbox bij algemene voorwaarden
   editable: boolean = true; // value om navigeren naar step te disabelen
-
 
   /**
    * @description formcontrols voor validatie
@@ -93,19 +89,9 @@ export class SollicitatieDialogComponent implements OnInit {
     this.FifthFormGroup = this.formBuilder.group({
       checkboxControl: this.checkboxControl
     });
-
-    this.getUserCV();
-
-
   }
 
 
-  getUserCV(){
-    this.authenticationService.currentUser.subscribe(u => {
-      this.currentUser = u;
-      this.uploadService.getFilePath(true, this.currentUser.id).subscribe(path => this.path = path.path);
-    })
-  }
 
   /**
    * 
@@ -137,18 +123,27 @@ export class SollicitatieDialogComponent implements OnInit {
     this.path = null;
   }
 
+  /**
+   * @description verwijdert upgeloade bijlage
+   */
   removeBijlage(){
     this.uploadBijlage = null;
     this.pathBijlage = null
   }
 
+/**
+ * 
+ * @param formData om upgeloade file in op te slaan
+ * @description we stopopen file in formdata om naar backend te sturen
+ */
   handleUploadBijlage(formData: FormData){
     this.uploadBijlage = formData;
     //override om name uit file te krijgen, anders zegt hij name property not known
     var file : any = formData.get('file');
     this.pathBijlage = file.name;
   }
-  @ViewChild('stepper', {static: false}) stepper: MatStepper;
+
+
   sendMail(){
     var formData = new FormData(); 
     if(!this.uploadFile){
@@ -168,13 +163,6 @@ export class SollicitatieDialogComponent implements OnInit {
     this.vacatureService.soliciteer(formData).subscribe();
     
 
-  }
-
-  stepClick($event) {
-    this.stepper.selectionChange.subscribe(selection => {
-      console.log(selection.selectedStep)
-      console.log(selection.previouslySelectedStep)
-   })
   }
 
   /**
