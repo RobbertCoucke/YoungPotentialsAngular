@@ -4,6 +4,10 @@ import { OpleidingStudiegebied } from "@/_models/opleidingStudiegebied";
 import { EventEmitter } from '@angular/core';
 import { Studiegebied } from '../_models/studiegebied';
 
+/** 
+ * *Interfaces
+ * 
+ */
 export interface Stgebied {
   name: string;
   ID: string;
@@ -19,22 +23,29 @@ export interface OPL {
   templateUrl: "./select-studiegebieden.component.html",
   styleUrls: ["./select-studiegebieden.component.scss"]
 })
-export class SelectStudiegebiedenComponent implements OnInit {
+export class SelectStudiegebiedenComponent {
   studiegebieden: any[] = []; // Array met studiegebied objecten
-  stgName: Stgebied[];
-  oplName: OPL[];
-  totaal: OpleidingStudiegebied[] = [];
+  studiegebied: Stgebied[]; //veld om een studiegebied in op te slaan
+  opleiding: OPL[]; //veld om een opleiding in op te slaan
 
-  opleidingName: string;
-  IDSTG: string;
-  studiegebiedName: string;
-  studiegebiedID: string;
+  /** 
+   * Array waarin we opleiding en verwant studiegebied in op slaan
+   * nodig om data weer te kunnen geven in Ngselect module die gebruikt wordt om studiegebieden weer te geven
+   * Zie html bindlabel en groupBy
+   */
+  totaal: OpleidingStudiegebied[] = []; 
 
-  tags: any[];
 
+  opleidingName: string; //veld om tijdelijk de opleidingsnaam in op te slaan
+  studiegebiedName: string; //veld om tijdelijk studiegebiednaam in op te slaan
+  studiegebiedID: string; //veld om tijdelijk studiegebied id in op te slaan
+  IDSTG: string; //veld om tijdelijk studiegebied id van opleidingsobject in array op te slaan
+  tags: any[]; // houdt de geselecteerde studiegebieden/opleidingen bij
+
+  //eventemiter om actie van parent uit te voeren in child
   @Output() handleStudiegebieden: EventEmitter<Studiegebied[]> = new EventEmitter<Studiegebied[]>();
 
-  selectedOpleiding: string[];
+  selectedOpleiding: string[]; // array met geselecteerde opleidingen
 
   constructor(private studiegebiedService: StudiegebiedService) {
     this.studiegebiedService.getAllStudieGebieds().subscribe(data => {
@@ -42,9 +53,6 @@ export class SelectStudiegebiedenComponent implements OnInit {
       this.opvullenArray();
     }); // inladen alle studiegebieden uit db
   }
-
-  ngOnInit() {}
-
 
   handleSelected(){
     this.tags = [];
@@ -78,7 +86,8 @@ export class SelectStudiegebiedenComponent implements OnInit {
   }
 
   /**
-   * @description opvullen array
+   * @description opvullen array met opleidingnaam en de verwante studiegebiednaam
+   * Wordt gebruikt om de ngSelect op te vullen
    */
   opvullenArray() {
     this.studiegebieden.forEach(element => {
@@ -88,14 +97,14 @@ export class SelectStudiegebiedenComponent implements OnInit {
       var arr: Stgebied[] = [
         { name: this.studiegebiedName, ID: this.studiegebiedID }
       ];
-      this.stgName = arr;
+      this.studiegebied = arr;
 
       element.opleiding.forEach(elementa => {
         this.opleidingName = elementa.naamOpleiding;
         this.IDSTG = elementa.idStudiegebied;
 
         var arrOpl: OPL[] = [{ name: this.opleidingName, stgID: this.IDSTG }];
-        this.oplName = arrOpl;
+        this.opleiding = arrOpl;
         if (elementa.idStudiegebied === element.id) {
           var object = new OpleidingStudiegebied();
           object.opleidingsnaam = elementa.naamOpleiding;
