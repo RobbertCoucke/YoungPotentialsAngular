@@ -110,31 +110,30 @@ export class VactureFilterComponent implements OnInit {
       });
     }
   }
-  // TODO: Code becommentarieren + eventueel overbodige code wegwerken
+
+  //handles a check event of the filter
   check(event) {
     // get the selected value
     var selectedVal = event.target.value;
     var selected = event.target;
 
+    //checks to see if value is a type or a tag
     if (selected.name === 'typeVives') {
       var selectedType;
+      //gets object of selected type
       this.types.forEach(t => {
         if (t.id.toString() === selectedVal.toString()) {
           selectedType = t;
         }
-
       });
 
-
+      //if checkbox checked -> add type to selected types, else remove type from selected types 
       if (event.target.checked) {
         this.selectedTypes.push(selectedType);
       } else {
         this.selectedTypes = this.selectedTypes.filter(t => t.id.toString() !== selectedVal.toString());
       }
-
     } else {
-      // console.log(selectedVal);
-
       // check if checkbox is checked to add or unchecked to delete
       if (event.target.checked) {
         let selectedObject = this.findStudiegebied(selectedVal);
@@ -191,6 +190,7 @@ export class VactureFilterComponent implements OnInit {
       }
     }
 
+    //callback to vacaturesComponent with selected filters and types
     if (this.selectedgebieds.length < 1 && this.selectedTypes.length < 1) {
 
       this.filterEvent.emit({ filter: null, types: null });

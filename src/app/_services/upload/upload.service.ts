@@ -10,9 +10,10 @@ import {environment} from '../../../environments/environment'
 export class UploadService {
   constructor(private http: HttpClient) {}
 
-  //TODO change any to model!!
-
+ 
   apiUrl = environment.apiUrl;
+
+  //* stores file under users or offers 
   upload(formData: FormData) {
     return this.http.post<any>(
       this.apiUrl + `upload`,
@@ -20,17 +21,20 @@ export class UploadService {
     );
   }
 
+  //* returns the online path of the requested file
   getFilePath(isUser: boolean, id: number) {
     return this.http.get<any>(
       this.apiUrl + `upload/file/${isUser}/${id}`
     );
   }
 
+  //* returns the requested file
   download(isUser: boolean, id: number) {
     return this.http.get<any>(
       this.apiUrl+`upload/download/${isUser}/${id}`
     );
   }
+
 
   downloadLink(isUser: boolean, id: number): Observable<HttpResponse<Blob>> {
     return this.http.get<Blob>(this.apiUrl + isUser + "/" + id, {
@@ -39,6 +43,7 @@ export class UploadService {
     });
   }
 
+  //* deletes a file
   delete(isUser: boolean, id: number) {
     return this.http.delete<any>(
       this.apiUrl+`upload/delete/${isUser}/${id}`

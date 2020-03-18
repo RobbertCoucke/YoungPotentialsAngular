@@ -75,6 +75,7 @@ export class ReactiveFormComponent implements OnInit {
   selectValue: any;
   tags: Studiegebied[];
   types: Type[];
+  fileName : string;
 
   minDate: Date; // min datum datepicker
   maxDate: Date; // max datum datepicker
@@ -115,6 +116,7 @@ export class ReactiveFormComponent implements OnInit {
         this.router.navigate(["/"]);
       }
     });
+
     this.vacatureService.getAllTypes().subscribe(types => {
       this.types = types;
     });
@@ -222,6 +224,8 @@ export class ReactiveFormComponent implements OnInit {
    */
   handleUpload(formData: FormData) {
     this.uploadFile = formData;
+    var file: any = formData.get('file');
+    this.fileName = file.name;
   }
 
   /**
@@ -237,6 +241,7 @@ export class ReactiveFormComponent implements OnInit {
    */
   removeFile() {
     this.uploadFile = null;
+    this.fileName =null
   }
 
   /**

@@ -18,31 +18,37 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  //* returns all users
   getAll()
   {
     return this.http.get<any>(`${this.apiUrl}user`);
   }
 
+  //* returns student or company by id
   getById(id: number)
   {
     return this.http.get<any>(`${this.apiUrl}user/${id}`);
   }
 
+  //* updates a student or company
   updateUser(id: number, user: UpdateUser)
   {
     return this.http.put<any>(`${this.apiUrl}user/${id}`, user);
   }
 
+  //* removes a user (user only, not student or company)
   deleteUser(id: number)
   {
     return this.http.delete<any>(`${this.apiUrl}user/${id}`);
   }
 
+  //* sends a mail with a link to reset password
   forgotPassword(object: EmailRequest)
   {
     return this.http.post<any>(`${this.apiUrl}user/password`, object);
   }
 
+  //* resets password to new
   resetPassword(object: UpdatePasswordRequest)
   {
         const httpOptions = {

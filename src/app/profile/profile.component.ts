@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(['/']);
     } else {
       this.authenticatieService.currentUser.subscribe(x => {
-        if (x.role == Role.Admin) {
+        if (!x || x.role == Role.Admin) {
           this.router.navigate(['/']);
         }
         else {
@@ -41,16 +41,23 @@ export class ProfileComponent implements OnInit {
             this.isStudent = data.isStudent;
             this.profiel = data;
             this.loader();
+
+
+            //checks if user already uploaded cv
+            if(this.currentUser.role === 'User'){
+              this.uploadService.getFilePath(true, this.currentUser.id).subscribe(p => {
+              if (p != null) {
+                this.uploadFile = p.path;
+              }
+            });
+            }
+            
+          
           });
         }
       });
 
-      this.uploadService.getFilePath(true, this.currentUser.id).subscribe(p => {
-        if (p != null) {
-
-          this.uploadFile = p.path;
-        }
-      });
+      
     }
   }
 

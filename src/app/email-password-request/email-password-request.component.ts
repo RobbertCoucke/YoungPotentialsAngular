@@ -25,6 +25,7 @@ export class EmailPasswordRequestComponent implements OnInit {
     })
   }
 
+  
   onSubmit()
   {
     //als de email niet ingevuld is, dan wordt geen request gestuurd om password te veranderen 

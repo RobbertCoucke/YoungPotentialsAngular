@@ -23,6 +23,7 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
+    //
     login(email: string, password: string) {
         return this.http.post<any>(`${this.apiUrl}user/authenticate`, { email, password })
             .pipe(map(user => {

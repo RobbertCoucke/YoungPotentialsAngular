@@ -111,7 +111,7 @@
             <app-upload (uploadHandler)="handleUpload($event)"></app-upload>
           </div>
           <div *ngIf="uploadFile">
-            <p>{{uploadFile.get('file').name}}</p>
+            <p>{{fileName}}</p>
             <button (click)="removeFile()" >X</button>
           </div>
             <div class="form-group">
