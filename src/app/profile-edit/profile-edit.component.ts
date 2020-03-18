@@ -42,15 +42,20 @@ export class ProfileEditComponent implements OnInit {
    }
 
   ngOnInit() {
+    //profile component mag niet opgeladen worden als er geen ingelogde user is
     if (this.authenticatieService.currentUserValue == null) { 
       alert("Invalid action.");
+      //terug naar homepagina
       this.router.navigate(['/']);
     }else{
+      //als er wel een ingeloge gebruiker
       this.authenticatieService.currentUser.subscribe(x => this.currentUser = x);
+      //profile component mag niet opgeladen worden als er de ingelogde user is admin
       if(this.currentUser.role == Role.Admin)
       {
         this.router.navigate(['/']);
       }else{
+        //een update form maken
         this.updateForm = this.formBuilder.group({
           firstName: [''],
           lastName: [''], 
@@ -59,6 +64,7 @@ export class ProfileEditComponent implements OnInit {
           address: [''],
           companyName: ['']
         })
+        //get user uit de database  
         this.userservice.getById(this.currentUser.id).subscribe(data => {
           this.id = data.userId;
           this.handleData(data);
@@ -81,28 +87,37 @@ export class ProfileEditComponent implements OnInit {
         }
       }
 
+  /**
+  *  @description User model maken aan de hand van de object uit de database, de object kan een bedrijf of student
+  */    
   handleData(data)
   {
     this.user = new UpdateUser(data.email, data.isStudent);
 
+    //als het student is
     if(data.isStudent)
     {
       this.user.firstName = data.firstName;
       this.user.name = data.name;
-    }else{
+    }
+    //als het bedrijf is
+    else{
       this.user.companyName = data.companyName;
       this.user.url = data.url;
+      this.user.city = data.city;
+      this.user.address = data.address;
     }
 
-    this.user.city = data.city;
-    this.user.address = data.address;
+
     this.isStudent = this.user.isStudent;
   }
 
+  //get alle controls van update form 
   get uf() { return this.updateForm.controls; }
 
   onSubmit() {
     this.submitted = true;
+    //zorg dat de gebruiker geen spaties mag invullen => als gebruiker de naam invult like "test    " dan wordt "test" gerouterneerd
     Object.keys(this.updateForm.controls).forEach((key) => this.updateForm.get(key).setValue(this.updateForm.get(key).value.trim()));
     if(this.updateForm.invalid)
     {
@@ -126,12 +141,12 @@ export class ProfileEditComponent implements OnInit {
       //elke gebruiker moet zin email, password invullen
       var model = new UpdateUser(controls.email.value, this.isStudent);
   
-      //de student moet zijn naam, voorname en CV geven.
+      //de student moet zijn naam, voorname geven.
       if(this.isStudent){
         model.name = controls.lastName.value;
         model.firstName = controls.firstName.value;
       }
-      //bedrijf moet een beschrijving, url en naam geven
+      //bedrijf moet een stad, url, adres en naam geven
       else{
         model.address = controls.address.value;
         model.city = controls.city.value;
@@ -146,12 +161,12 @@ export class ProfileEditComponent implements OnInit {
   updateform()
   {
     this.updateForm.patchValue({
-      //city: this.user.city,
       email: this.user.email,
 
     })
   }
 
+  //student inputs value invullen
   updateFormStudent()
   {
     this.updateForm.patchValue({
@@ -160,6 +175,7 @@ export class ProfileEditComponent implements OnInit {
     })
   }
 
+  //company inputs value invullen
   updateFormCompany(){
     this.updateForm.patchValue({
       companyName: this.user.companyName,
