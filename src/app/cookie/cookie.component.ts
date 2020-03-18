@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CookieComponent implements OnInit {
   // Show zorgt ervoor dat cookie popup wordt getoond.
-  show:boolean = false;
+  show: boolean = false;
 
   constructor() { }
 
@@ -18,10 +18,8 @@ export class CookieComponent implements OnInit {
   /**
    * @description Controleert indien er al een cookie bestaat genaamd "Cookie", indien hij onbestaand is dan wordt de cookie popup getoond.
    */
-  checkIfCookieExists()
-  {
-    if(getCookie("cookie") == undefined)
-    {
+  checkIfCookieExists() {
+    if (getCookie("cookie") == undefined) {
       this.show = true;
     }
   }
@@ -31,28 +29,37 @@ export class CookieComponent implements OnInit {
    * @param accept  Indien true dan heeft men de cookie voorwaarden geaccepteerd,
    *                indien false dan heeft de gebruiker de negeer button aangeklikt.
    */
-  btnClick(accept:boolean){
+  btnClick(accept: boolean) {
     console.log("accepteer:" + accept);
     this.show = false;
     setCookie("cookie", accept, 365);
   }
 }
 
-// Functie om een cookie op te vragen.
+/**
+* @description Cookie opvragen
+* @param name naam van de cookie
+*/
 export function getCookie(name: string) {
   const value = "; " + document.cookie;
   const parts = value.split("; " + name + "=");
 
   if (parts.length == 2) {
-      return parts.pop().split(";").shift();
+    return parts.pop().split(";").shift();
   }
 }
 
-// Functie om een cookie aan te maken.
+/**
+ * @description Cookie aanmaken
+ * @param name Naam van de nieuwe cookie
+ * @param value De waarde van de cookie
+ * @param expireDays Wanneer de cookie vervalt
+ * @param path De plaats waar de cookie staat
+ */
 export function setCookie(name: string, value: boolean, expireDays: number, path: string = '') {
-  let d:Date = new Date();
+  let d: Date = new Date();
   d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
-  let expires:string = `expires=${d.toUTCString()}`;
-  let cpath:string = path ? `; path=${path}` : '';
+  let expires: string = `expires=${d.toUTCString()}`;
+  let cpath: string = path ? `; path=${path}` : '';
   document.cookie = `${name}=${value}; ${expires}${cpath}`;
 }
