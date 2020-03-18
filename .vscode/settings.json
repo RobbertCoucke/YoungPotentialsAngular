@@ -1,0 +1,8 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/0415f629-66f2-4f4e-8ac8-1beefef87da5/resourceGroups/Youngpotentials/providers/Microsoft.Web/sites/Youngpotentials",
+    "appService.deploySubpath": "",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ]
+}
