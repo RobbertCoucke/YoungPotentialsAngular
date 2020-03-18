@@ -1,24 +1,22 @@
-import {
-  Component,
-  OnInit,
-  Inject,
-  AfterViewInit,
-  ViewChild
-} from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatStepper } from "@angular/material";
+/**
+ * ! Gebruikte documentatie:
+ * ! Dialoogbox --> Material Angular Dialog: https://material.angular.io/components/dialog/overview
+ * ! Stepper --> Material Angular Stepper: https://material.angular.io/components/stepper/overview
+ */
+
+import { Component, OnInit, Inject } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import {
   FormBuilder,
   FormGroup,
   Validators,
   FormControl
 } from "@angular/forms";
-import { STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
-import { UploadComponent } from "@/upload/upload.component";
 import { DialogData } from "@/vacture-detail/vacture-detail.component";
-import { UploadService} from "../_services/upload/upload.service";
-import { User } from '@/_models';
-import { AuthenticationService } from '@/_services';
-import { VacatureService } from '@/_services/Vacature/vacature.service';
+import { UploadService } from "../_services/upload/upload.service";
+import { User } from "@/_models";
+import { AuthenticationService } from "@/_services";
+import { VacatureService } from "@/_services/Vacature/vacature.service";
 
 @Component({
   selector: "app-sollicitatie-dialog",
@@ -28,13 +26,13 @@ import { VacatureService } from '@/_services/Vacature/vacature.service';
 export class SollicitatieDialogComponent implements OnInit {
   checkboxValue: boolean; // checkbox waarde voor algemene voorwaarden
   path: string = null; // veld om pad van cv in op te slaan
-  pathBijlage : string = null //veld om pad bijlage in op te slaan
+  pathBijlage: string = null; //veld om pad bijlage in op te slaan
   uploadFile: FormData; // we stopen opgeladen bestand in formdata - formdata(key&value pairs) wordt doorgestuurd naar backend
-  uploadBijlage : FormData; //we stoppen opgeladen bijlage in formdata
+  uploadBijlage: FormData; //we stoppen opgeladen bijlage in formdata
 
   emailSender = this.data.UseremailValue; // email van de hudige gebruiker
   emailReciever = this.data.companyEmailValue; // email van het bedrijf die vacature plaatste
-  currentUser : User; // huidig ingelogde gebruiker
+  currentUser: User; // huidig ingelogde gebruiker
 
   /**
    * * FormGroup per step in stepper
@@ -60,12 +58,10 @@ export class SollicitatieDialogComponent implements OnInit {
   bodyControl = new FormControl("", [Validators.required]);
 
   constructor(
-    private formBuilder: FormBuilder, 
-    private uploadService: UploadService,
-    private authenticationService : AuthenticationService,
+    private formBuilder: FormBuilder,
     private vacatureService: VacatureService,
     /**
-     * * Hier laden we data in uit vacature-detail 
+     * * Hier laden we data in uit vacature-detail
      * * We kunnen deze data bereiken via het data veld
      */
     public dialogRef: MatDialogRef<SollicitatieDialogComponent>,
@@ -91,10 +87,7 @@ export class SollicitatieDialogComponent implements OnInit {
     });
   }
 
-
-
   /**
-   * 
    * @param event bij click op next
    * @description maakt vorige velden ontoegankelijk
    */
@@ -103,7 +96,6 @@ export class SollicitatieDialogComponent implements OnInit {
   }
 
   /**
-   * 
    * @param formData formdata met upgeloade file
    * @description stopt file in formdata om naar backend te versturen
    */
@@ -111,14 +103,14 @@ export class SollicitatieDialogComponent implements OnInit {
     this.uploadFile = formData;
 
     //override om name uit file te krijgen, anders zegt hij name property not known
-    var file : any = formData.get('file');
+    var file: any = formData.get("file");
     this.path = file.name;
   }
 
   /**
    * @description verwijdert upgeloade file
    */
-  removeFile(){
+  removeFile() {
     this.uploadFile = null;
     this.path = null;
   }
@@ -126,43 +118,51 @@ export class SollicitatieDialogComponent implements OnInit {
   /**
    * @description verwijdert upgeloade bijlage
    */
-  removeBijlage(){
+  removeBijlage() {
     this.uploadBijlage = null;
-    this.pathBijlage = null
+    this.pathBijlage = null;
   }
 
-/**
- * 
- * @param formData om upgeloade file in op te slaan
- * @description we stopopen file in formdata om naar backend te sturen
- */
-  handleUploadBijlage(formData: FormData){
+  /**
+   * @param formData om upgeloade file in op te slaan
+   * @description we stopopen file in formdata om naar backend te sturen
+   */
+  handleUploadBijlage(formData: FormData) {
     this.uploadBijlage = formData;
     //override om name uit file te krijgen, anders zegt hij name property not known
-    var file : any = formData.get('file');
+    var file: any = formData.get("file");
     this.pathBijlage = file.name;
   }
 
-
-  sendMail(){
-    var formData = new FormData(); 
-    if(!this.uploadFile){
-      formData.append('userId', this.currentUser.id.toString());
-    }else{
+  /**
+   * @description versturen mailgegevens naar backend
+   *  Upgeloade file, onderwerp en body worden in een FormData object gestopt
+   */
+  sendMail() {
+    var formData = new FormData();
+    if (!this.uploadFile) {
+      formData.append("userId", this.currentUser.id.toString());
+    } else {
       formData = this.uploadFile;
     }
 
-    if(this.pathBijlage){
-      formData.append('file2', this.uploadBijlage.get('file'));
+    if (this.pathBijlage) {
+      formData.append("file2", this.uploadBijlage.get("file"));
     }
-    formData.append('emailFrom', this.firstFormGroup.controls['senderCtrl'].value);
-    formData.append('emailTo', this.emailReciever);
-    formData.append('subject', this.secondFormGroup.controls['onderwerpControl'].value);
-    formData.append('message',this.secondFormGroup.controls['bodyControl'].value);
-
+    formData.append(
+      "emailFrom",
+      this.firstFormGroup.controls["senderCtrl"].value
+    );
+    formData.append("emailTo", this.emailReciever);
+    formData.append(
+      "subject",
+      this.secondFormGroup.controls["onderwerpControl"].value
+    );
+    formData.append(
+      "message",
+      this.secondFormGroup.controls["bodyControl"].value
+    );
     this.vacatureService.soliciteer(formData).subscribe();
-    
-
   }
 
   /**
