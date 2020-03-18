@@ -62,7 +62,8 @@ export class ProfileEditComponent implements OnInit {
           website: [''],
           email: [''],
           address: [''],
-          companyName: ['']
+          companyName: [''],
+          city: ['']
         })
         //get user uit de database  
         this.userservice.getById(this.currentUser.id).subscribe(data => {
@@ -75,6 +76,7 @@ export class ProfileEditComponent implements OnInit {
             this.updateForm.get('companyName').setValidators(this.nameValidators.concat(Validators.required));
             this.updateForm.get('website').setValidators(this.commonvalidators);
             this.updateForm.get('address').setValidators(this.commonvalidators);
+            this.updateForm.get('city').setValidators(this.commonvalidators);
             this.updateFormCompany();
           }else{
             this.updateFormStudent();
@@ -179,7 +181,8 @@ export class ProfileEditComponent implements OnInit {
     this.updateForm.patchValue({
       companyName: this.user.companyName,
       website: this.user.url,
-      address: this.user.address
+      address: this.user.address,
+      city: this.user.city
     })
   }
 
