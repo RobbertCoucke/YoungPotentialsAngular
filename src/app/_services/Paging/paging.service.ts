@@ -10,6 +10,10 @@ export class PagingService {
 
   constructor() { }
 
+  /**
+   * @description Wanneer er gesorteerd wordt moet de pagina terug op pagina 1 gezet worden
+   * @param number De pagina waar naar moet genavigeerd worden
+   */
   setFirstPage(number:number) {
     this.setFirstPageFunction.emit(number);
   }

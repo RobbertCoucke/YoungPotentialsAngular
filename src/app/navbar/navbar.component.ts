@@ -8,7 +8,8 @@ import { TranslateCacheService } from 'ngx-translate-cache';
 import { AuthenticationService } from './../_services/Authentication/authentication.service';
 import { User, Role } from './../_models';
 import { Router } from '@angular/router';
-//
+//Import function getCookie
+import { getCookie } from '../cookie/cookie.component';
 
 @Component({
   selector: 'app-navbar',
@@ -19,18 +20,26 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   // voor login / logout procedure
   currentUser: User;
-  //StudentName
+  // StudentName
   name: string;
 
-  //navbar mobile
+  // Dropdown
+  // navbar mobile
   navbarOpen = false;
-  //Dropdown voor taalMenu
+  // Dropdown voor taalMenu
   taalMenuOpen = false;
 
+  // Talen arrays
+  // Array met alle beschikbare talen
   languages = ["nl", "en"];
+  // Array met de talen die zich in de dropdown bevinden en dus niet geselecteerd zijn.
   dropdownLanguages = ["en"];
+  // De geselecteerde taal
   selectedLanguage = "nl";
 
+  /**
+   * @description ...
+   */
   get isAdmin() {
     return this.currentUser && this.currentUser.role === Role.Admin;
   }
@@ -39,18 +48,18 @@ export class NavbarComponent implements OnInit {
     translateCacheService: TranslateCacheService,
     // login logout
     private router: Router,
-    private authenticationService: AuthenticationService, private userService: UserService)
-  // 
-  {
+    private authenticationService: AuthenticationService, private userService: UserService) {
+
+    // Zet de standaard taal op Nederlands
     translate.setDefaultLang('nl');
     translateCacheService.init();
 
     // login logout
     this.authenticationService.currentUser.subscribe(x => {
-      
-        this.currentUser = x;
-        if (this.currentUser != null) {
-        //Een subscribe om de data binnen te halen van de gebruiker.
+
+      this.currentUser = x;
+      if (this.currentUser != null) {
+        // Een subscribe om de data binnen te halen van de gebruiker.
         this.userService.getById(this.currentUser.id).subscribe(data => {
           switch (this.currentUser.role) {
             case "User": {
@@ -74,55 +83,84 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-
-
   ngOnInit() {
-    if (this.getCookie("language") !== undefined) {
-      this.selectedLanguage = this.getCookie("language");
+    this.getCookieIfItExists();
+  }
+
+  /**
+   * @description Controleert indien language cookie bestaat,
+   *              daarna zet hij de huidige taal op de taal die zich
+   *              in de cookie bevindt en roept hij de methode changeLanguage aan.
+   */
+  getCookieIfItExists() {
+    if (getCookie("language") !== undefined) {
+      this.selectedLanguage = getCookie("language");
       this.changeLanguage(this.selectedLanguage);
     }
   }
 
+  /**
+   * @description Uitloggen van een user
+   */
   logout() {
     this.authenticationService.logout();
+    // TODO: Overbodig commentaar?
     //this.router.navigate(['/login']);
   }
 
+  /**
+   * @description Openen van het taalmenu
+   */
   toggleTaalMenuOpen() {
     this.taalMenuOpen = true;
-    return false;
-  }
-  toggleTaalMenuClose() {
-    this.taalMenuOpen = false;
-    return false;
-  }
-  toggleTaalMenuOpenClose($e) {
-    this.taalMenuOpen = !this.taalMenuOpen;
-    /* 
+    /*
       Returning false from an event handler will automatically call event.stopPropagation() and event.preventDefault()
       Het voordeel hiervan is dat de hyperlink niet opnieuw naar boven scrollt van de pagina
     */
     return false;
   }
 
+  /**
+   * @description Sluiten van het taalmenu
+   */
+  toggleTaalMenuClose() {
+    this.taalMenuOpen = false;
+    /*
+      Returning false from an event handler will automatically call event.stopPropagation() and event.preventDefault()
+      Het voordeel hiervan is dat de hyperlink niet opnieuw naar boven scrollt van de pagina
+    */
+    return false;
+  }
+
+  /**
+   * @description Openen en sluiten van het taalmenu (toggle)
+   */
+  toggleTaalMenuOpenClose($e) {
+    this.taalMenuOpen = !this.taalMenuOpen;
+    /*
+      Returning false from an event handler will automatically call event.stopPropagation() and event.preventDefault()
+      Het voordeel hiervan is dat de hyperlink niet opnieuw naar boven scrollt van de pagina
+    */
+    return false;
+  }
+
+  /**
+   * @description Verandert alle tekst naar de gekozen taal en roept de methode changeLanguage op
+   * @param language De taal waar naar vertaalt wordt
+   */
   useLanguage(language: string) {
     this.translate.use(language);
     this.changeLanguage(language);
   }
 
+  /**
+   * @description Verandert de taal die in de @param selectedLanguage zit en
+   *              verandert de talen die zich in de dropdown bevinden van de talen.
+   * @param language De taal die moet veranderd worden
+   */
   changeLanguage(language: string) {
     this.selectedLanguage = language;
     this.dropdownLanguages = this.languages.filter(e => e !== this.selectedLanguage);
   }
-  //Functie om een cookie op te vragen.
-  getCookie(name: string) {
-    const value = "; " + document.cookie;
-    const parts = value.split("; " + name + "=");
-  
-    if (parts.length == 2) {
-      return parts.pop().split(";").shift();
-    }
-}
-
 }
 
