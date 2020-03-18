@@ -13,7 +13,7 @@
           <a class="btn btn-primary" [routerLink]="['/vacatures']" [fragment]="'filter'" role="button" (click)='setCheckbox("Stage")'>{{"home.stages" | translate}}</a>
           <a class="btn btn-primary" [routerLink]="['/vacatures']" [fragment]="'filter'" role="button" (click)='setCheckbox("Vakantiejob")'>{{"home.jobstudent" | translate}}</a>
           <a class="btn btn-primary" href="https://www.vives.be/nl/bijscholen/overzicht" target="_blank" role="button">{{"home.verderst" | translate}}</a>
-          <a class="btn btn-primary" routerLink="/navorming" routerLinkActive="active" role="button" *ngIf='getCookie("language")!="en"'>{{"home.navorming" | translate}}</a>
+          <a class="btn btn-primary" routerLink="/navorming" routerLinkActive="active" role="button" *ngIf='checkIfLanguageIsEnglish()'>{{"home.navorming" | translate}}</a>
         </div>
       </div>
     </div>
