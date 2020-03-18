@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError, from, Observable } from 'rxjs';
 import { catchError, retry, map, tap } from 'rxjs/operators';
-import { Opleiding } from '@/_models/Opleiding';
 
 
 @Injectable({
@@ -11,7 +10,6 @@ import { Opleiding } from '@/_models/Opleiding';
 export class OpleidingService {
 
   apiUrl: string = 'https://youngpotentials.azurewebsites.net/'
-  opleidings : Opleiding[];
 
   constructor(private http: HttpClient) { }
 

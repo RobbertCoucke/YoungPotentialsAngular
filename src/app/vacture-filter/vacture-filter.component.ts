@@ -10,9 +10,6 @@ import {
 } from "@angular/core";
 import { StudiegebiedService } from "../_services/studiegebied/studiegebied.service";
 import { Studiegebied } from "@/_models/studiegebied";
-import { Opleiding } from "@/_models/Opleiding";
-import { Afstudeerrichting } from "@/_models/afstudeerrichting";
-import { Keuze } from "@/_models/Keuze";
 import { VacatureService } from '@/_services/Vacature/vacature.service';
 import { Type } from '../_models/type';
 import { FilterService } from './../_services/filter/filter.service';
@@ -31,7 +28,7 @@ export class VactureFilterComponent implements OnInit {
   studiegebieds: Studiegebied[] = [];
 
   //array for all opleiding objects
-  opleidingArray: Opleiding[] = [];
+  opleidingArray: any[] = [];
 
   //array for all types
   types: Type[] = [];
@@ -311,13 +308,13 @@ export class VactureFilterComponent implements OnInit {
   mapJSONToModel(res): any[] {
     var list: Studiegebied[] = [];
     res.forEach(element => {
-      var opleiding: Opleiding[] = [];
+      var opleiding: any[] = [];
       var opleidingArray = element.opleiding;
       if (opleidingArray && opleidingArray.length != 0) {
         opleidingArray.forEach(o => {
           var afstudeerrichtingsArray = o.afstudeerrichting;
-          var afstudeerrichtings: Afstudeerrichting[] = [];
-          var op = new Opleiding(o.id, o.naamOpleiding, afstudeerrichtings);
+          var afstudeerrichtings: any[] = [];
+          var op = { id : o.id, naam: o.naamOpleiding, afstudeerrichtings: afstudeerrichtings};
           opleiding.push(op);
           this.opleidingArray.push(op);
         });

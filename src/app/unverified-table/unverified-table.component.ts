@@ -60,9 +60,7 @@ export class UnverifiedTableComponent implements OnInit {
   ) {
     this.authenticationService.currentUser.subscribe(u => {
       this.currentUser = u;
-      if (this.currentUser && this.currentUser.role !== Role.Admin) {
-        this.router.navigate(["/"]);
-      }
+      
     });
 
     this.fetchData();
