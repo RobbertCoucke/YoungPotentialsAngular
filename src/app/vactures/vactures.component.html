@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div *ngIf="!loadingFilter && !loading" class="alert alert-danger" role="alert">
-                <p class="removeMarginbottom">Er zijn geen openstaande vacatures te vinden.</p>
+                <p class="removeMarginbottom">{{"vacatures.error" | translate}}</p>
             </div>
 
             <div *ngIf="loading" class="loader">
