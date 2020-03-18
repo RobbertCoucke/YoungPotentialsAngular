@@ -60,7 +60,7 @@ export class VerifiedTableComponent {
     this.authenticationService.currentUser.subscribe(u => {
       this.currentUser = u; //ophalen huidig ingelogde gebruiker
       //als ingelogde gebruiker geen admin is worden ze geredirect naar de homepage
-      if (this.currentUser && this.currentUser.role !== Role.Admin) {
+      if ( !this.currentUser || this.currentUser.role !== Role.Admin) {
         this.router.navigate(["/"]);
       }
     });
