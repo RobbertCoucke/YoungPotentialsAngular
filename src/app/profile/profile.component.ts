@@ -26,7 +26,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     //profile component mag niet opgeladen worden als er geen ingelogde user is
     if (this.authenticatieService.currentUserValue == null) {
-      alert("Nice try, hackerman. :)");
       this.router.navigate(['/']);
     } else {
       this.authenticatieService.currentUser.subscribe(x => {

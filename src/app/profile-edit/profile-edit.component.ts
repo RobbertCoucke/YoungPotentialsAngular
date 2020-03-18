@@ -44,7 +44,6 @@ export class ProfileEditComponent implements OnInit {
   ngOnInit() {
     //profile component mag niet opgeladen worden als er geen ingelogde user is
     if (this.authenticatieService.currentUserValue == null) { 
-      alert("Invalid action.");
       //terug naar homepagina
       this.router.navigate(['/']);
     }else{
