@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Register } from '@/_models/register';
 import { AuthenticationService } from '@/_services';
-import { User } from '@/_models';
+import { User, Role } from '@/_models';
 import { FavoritesService } from '@/_services/Favorites/favorites.service';
 import { Vacature } from '@/_models/vacature';
 import { $ } from 'protractor';
 import { Favoriet } from '@/_models/favoriet';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-favorieten',
@@ -20,8 +21,13 @@ export class FavorietenComponent implements OnInit {
 
 
   constructor(private authenticationService: AuthenticationService,
-              private favorieteService: FavoritesService) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+              private favorieteService: FavoritesService, private router: Router) {
+    this.authenticationService.currentUser.subscribe(u => {
+      this.currentUser = u;
+      if(!u || u.role !== Role.User){
+        this.router.navigate(["/"]);
+      }
+    });
    }
 
 

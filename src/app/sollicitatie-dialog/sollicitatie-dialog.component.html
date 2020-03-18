@@ -1,46 +1,54 @@
 <mat-horizontal-stepper linear #stepper>
   <mat-step [stepControl]="firstFormGroup" [editable]="editable">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>{{"sollicitatie.email" | translate}}</ng-template>
+      <ng-template matStepLabel>{{
+        "sollicitatie.email" | translate
+      }}</ng-template>
       <div class="list">
-        <h3 class="semi-bold">{{"sollicitatie.email" | translate}}</h3>
+        <h3 class="semi-bold">{{ "sollicitatie.email" | translate }}</h3>
         <p>
-          {{"sollicitatie.controle" | translate}}<br />{{"sollicitatie.aanpassen" | translate}}<br />
+          {{ "sollicitatie.controle" | translate }}<br />{{
+            "sollicitatie.aanpassen" | translate
+          }}<br />
         </p>
       </div>
       <mat-form-field class="description-full-width">
-        <mat-label>{{"sollicitatie.controlemail" | translate}}</mat-label>
+        <mat-label>{{ "sollicitatie.controlemail" | translate }}</mat-label>
         <input matInput [formControl]="senderCtrl" class="form-control" />
         <mat-error *ngIf="senderCtrl.invalid">{{
           getErrorMessageEmail()
         }}</mat-error>
       </mat-form-field>
       <mat-form-field class="description-full-width">
-        <mat-label>{{"sollicitatie.ontvanger" | translate}}</mat-label>
+        <mat-label>{{ "sollicitatie.ontvanger" | translate }}</mat-label>
         <input matInput [value]="emailReciever" readonly />
       </mat-form-field>
       <div>
-        <button mat-raised-button matStepperNext class="buttons">{{"sollicitatie.volgende" | translate}}</button>
+        <button mat-raised-button matStepperNext class="buttons">
+          {{ "sollicitatie.volgende" | translate }}
+        </button>
       </div>
     </form>
   </mat-step>
 
   <mat-step [stepControl]="secondFormGroup" [editable]="editable">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>{{"sollicitatie.inhoudm" | translate}}</ng-template>
+      <ng-template matStepLabel>{{
+        "sollicitatie.inhoudm" | translate
+      }}</ng-template>
       <div class="list">
-        <h3 class="semi-bold">{{"sollicitatie.email" | translate}}</h3>
-        <p>{{"sollicitatie.typinhoud" | translate}}</p>
+        <h3 class="semi-bold">{{ "sollicitatie.inhoudm" | translate }}</h3>
+        <p>{{ "sollicitatie.typinhoud" | translate }}</p>
       </div>
       <mat-form-field class="description-full-width" appearance="outline">
-        <mat-label>{{"sollicitatie.onderwerp" | translate}}</mat-label>
+        <mat-label>{{ "sollicitatie.onderwerp" | translate }}</mat-label>
         <input matInput [formControl]="onderwerpControl" class="form-control" />
         <mat-error *ngIf="onderwerpControl.invalid">
           {{ getErrorMessageRequiredOnderwerp() }}
         </mat-error>
       </mat-form-field>
       <mat-form-field class="description-full-width" appearance="outline">
-        <mat-label>{{"sollicitatie.inhoud" | translate}}</mat-label>
+        <mat-label>{{ "sollicitatie.inhoud" | translate }}</mat-label>
         <textarea
           matInput
           cdkTextareaAutosize
@@ -55,20 +63,24 @@
       </mat-form-field>
       <div>
         <button mat-raised-button matStepperPrevious class="buttons">
-          {{"sollicitatie.terug" | translate}}
+          {{ "sollicitatie.terug" | translate }}
         </button>
-        <button mat-raised-button matStepperNext class="buttons">{{"sollicitatie.volgende" | translate}}</button>
+        <button mat-raised-button matStepperNext class="buttons">
+          {{ "sollicitatie.volgende" | translate }}
+        </button>
       </div>
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="thirdFormGroup" [editable]="editable" >
+  <mat-step [stepControl]="thirdFormGroup" [editable]="editable">
     <form [formGroup]="thirdFormGroup">
-      <ng-template matStepLabel>{{"sollicitatie.uploadcv" | translate}}</ng-template>
+      <ng-template matStepLabel>{{
+        "sollicitatie.uploadcv" | translate
+      }}</ng-template>
       <div class="list">
-        <h3 class="semi-bold">{{"sollicitatie.uploadcv" | translate}}</h3>
+        <h3 class="semi-bold">{{ "sollicitatie.uploadcv" | translate }}</h3>
         <p>
-          {{"sollicitatie.cv" | translate}}
+          {{ "sollicitatie.cv" | translate }}
         </p>
       </div>
 
@@ -76,15 +88,17 @@
         <app-upload (uploadHandler)="handleUpload($event)"></app-upload>
       </div>
       <div *ngIf="path">
-        <p>{{path}}</p>
-        <button (click)="removeFile()" >X</button>
+        <p>{{ path }}</p>
+        <button (click)="removeFile()">X</button>
       </div>
       <footer>
         <div class="list">
           <button mat-raised-button class="buttons" matStepperPrevious>
-            {{"sollicitatie.terug" | translate}}
+            {{ "sollicitatie.terug" | translate }}
           </button>
-          <button mat-raised-button class="buttons" matStepperNext>{{"sollicitatie.volgende" | translate}}</button>
+          <button mat-raised-button class="buttons" matStepperNext>
+            {{ "sollicitatie.volgende" | translate }}
+          </button>
         </div>
       </footer>
     </form>
@@ -95,27 +109,31 @@
     [optional]="true"
     [editable]="editable"
   >
-    <form [formGroup]="FourthFormGroup" >
-      <ng-template matStepLabel>{{"sollicitatie.upload" | translate}}</ng-template>
+    <form [formGroup]="FourthFormGroup">
+      <ng-template matStepLabel>{{
+        "sollicitatie.upload" | translate
+      }}</ng-template>
       <div class="list">
-        <h3 class="semi-bold">{{"sollicitatie.upload" | translate}}</h3>
+        <h3 class="semi-bold">{{ "sollicitatie.upload" | translate }}</h3>
         <p>
-          {{"sollicitatie.sollinfo" | translate}}
+          {{ "sollicitatie.sollinfo" | translate }}
         </p>
       </div>
       <div *ngIf="pathBijlage === null" class="list">
         <app-upload (uploadHandler)="handleUploadBijlage($event)"></app-upload>
       </div>
       <div *ngIf="pathBijlage">
-        <p>{{pathBijlage}}</p>
-        <button (click)="removeBijlage()" >X</button>
+        <p>{{ pathBijlage }}</p>
+        <button (click)="removeBijlage()">X</button>
       </div>
       <footer>
         <div class="list">
           <button mat-raised-button class="buttons" matStepperPrevious>
-            {{"sollicitatie.terug" | translate}}
+            {{ "sollicitatie.terug" | translate }}
           </button>
-          <button mat-raised-button class="buttons" matStepperNext>{{"sollicitatie.volgende" | translate}}</button>
+          <button mat-raised-button class="buttons" matStepperNext>
+            {{ "sollicitatie.volgende" | translate }}
+          </button>
         </div>
       </footer>
     </form>
@@ -123,23 +141,28 @@
 
   <mat-step [stepControl]="FifthFormGroup" [editable]="editable">
     <form [formGroup]="FifthFormGroup">
-      <ng-template matStepLabel>{{"sollicitatie.voorwaarden" | translate}}</ng-template>
+      <ng-template matStepLabel>{{
+        "sollicitatie.voorwaarden" | translate
+      }}</ng-template>
       <div class="list">
-        <h3 class="semi-bold">{{"sollicitatie.voorwaarden" | translate}}</h3>
+        <h3 class="semi-bold">{{ "sollicitatie.voorwaarden" | translate }}</h3>
       </div>
       <p>
-        {{"sollicitatie.voorwtekst" | translate}}
-        <a href="" [routerLink]="['policy']" target="_blank">{{"sollicitatie.voorwtekst4" | translate}}</a> {{"sollicitatie.voorwtekst5" | translate}}
+        {{ "sollicitatie.voorwtekst" | translate }}
+        <a href="" [routerLink]="['policy']" target="_blank">{{
+          "sollicitatie.voorwtekst4" | translate
+        }}</a>
+        {{ "sollicitatie.voorwtekst5" | translate }}
       </p>
       <mat-checkbox
         (change)="changeCheck($event)"
         [(ngModel)]="checkboxValue"
         [formControl]="checkboxControl"
-        >{{"sollicitatie.akkoord" | translate}}</mat-checkbox
+        >{{ "sollicitatie.akkoord" | translate }}</mat-checkbox
       >
       <div>
         <button mat-raised-button class="buttons" matStepperPrevious>
-          {{"sollicitatie.terug" | translate}}
+          {{ "sollicitatie.terug" | translate }}
         </button>
         <button
           mat-raised-button
@@ -149,16 +172,23 @@
           (click)="editable = !editable"
           (click)="sendMail()"
         >
-        {{"sollicitatie.versturen" | translate}}
+          {{ "sollicitatie.versturen" | translate }}
         </button>
       </div>
     </form>
   </mat-step>
+
   <mat-step>
-    <ng-template matStepLabel>{{"sollicitatie.verstuurd" | translate}}</ng-template>
+    <ng-template matStepLabel  >{{
+      "sollicitatie.verstuurd" | translate
+    }}</ng-template>
     <div class="center">
-      <mat-icon [ngStyle]="{ color: 'white' }"> {{"sollicitatie.email2" | translate}}</mat-icon>
+      <mat-icon [ngStyle]="{ color: 'white' }">
+        {{ "sollicitatie.email2" | translate }}</mat-icon
+      >
     </div>
-    <div class="center-text"><h3>{{"sollicitatie.sollverstuurd" | translate}}</h3></div>
+    <div class="center-text">
+      <h3>{{ "sollicitatie.sollverstuurd" | translate }}</h3>
+    </div>
   </mat-step>
 </mat-horizontal-stepper>

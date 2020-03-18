@@ -4,6 +4,7 @@ import { User, Company, Role } from '@/_models';
 import { Vacature } from '@/_models/vacature';
 import { AuthenticationService, UserService } from '@/_services';
 import { Favoriet } from '@/_models/favoriet';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-company-vacatures',
@@ -22,7 +23,7 @@ export class CompanyVacaturesComponent implements OnInit {
   loading: boolean = true;
   error: boolean = false;
 
-  constructor(private vacatureService: VacatureService, private authenticationService : AuthenticationService, private userService : UserService) {
+  constructor(private vacatureService: VacatureService, private authenticationService : AuthenticationService, private userService : UserService, private router: Router) {
     
    }
 
@@ -58,6 +59,8 @@ export class CompanyVacaturesComponent implements OnInit {
               }
           });
         });
+      }else{
+        this.router.navigate(["/"]);
       }
     });
   }
