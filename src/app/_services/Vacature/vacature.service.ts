@@ -38,9 +38,9 @@ export class VacatureService {
     return this.http.get<any>( `${this.apiUrl}offer/create/test`);
   }
 
-  updateOffer(vacature: Vacature){
-    return this.http.put<any>(`${this.apiUrl}offer/${vacature.id}`, vacature);
-  }
+  // updateOffer(vacature: Vacature){s
+  //   return this.http.put<any>(`${this.apiUrl}offer/${vacature.id}`, vacature);
+  // }
 
   filterVacatures(filters: Object, types: Type[]){
     //return this.http.post<any>(`https://cors-anywhere.herokuapp.com/http://youngpotentials.azurewebsites.net/offer/filter`,{types: types, ids: filters});

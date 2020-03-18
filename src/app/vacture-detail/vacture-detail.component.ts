@@ -30,7 +30,7 @@ export class VactureDetailComponent {
   id: number; // id van vacature
   vacature: Vacature; // Vacature object met alle velden van vacature
 
-  hasBijlage: str; //tells if vacature has bijlage attached to it
+  hasBijlage: boolean; //tells if vacature has bijlage attached to it
 
   student: boolean; // true = student | false = bedrijf
 
