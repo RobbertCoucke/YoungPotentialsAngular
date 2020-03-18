@@ -101,7 +101,6 @@ export class ReactiveFormComponent implements OnInit {
 
   ngOnInit() {
     this.authenticationService.currentUser.subscribe(u => {
-      console.log(u);
       if (u && u.role === "Company") {
         this.currentUser = u;
         this.userService.getById(u.id).subscribe(c => {
@@ -114,11 +113,8 @@ export class ReactiveFormComponent implements OnInit {
         this.router.navigate(["/"]);
       }
     });
-
-    console.log("getting types");
     this.vacatureService.getAllTypes().subscribe(types => {
       this.types = types;
-      console.log(types);
     });
 
     /**

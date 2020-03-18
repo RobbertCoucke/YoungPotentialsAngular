@@ -13,69 +13,67 @@ import { UploadService } from '@/_services/upload/upload.service';
 export class ProfileComponent implements OnInit {
   submitted = false;
   error = '';
-  currentUser : User;
-  isStudent : boolean;
+  currentUser: User;
+  isStudent: boolean;
   profiel: any;
-  uploadFile : any;
+  uploadFile: any;
   loading: boolean = true;
 
   constructor(private userservice: UserService, private authenticatieService: AuthenticationService,
-    private router: Router, private uploadService: UploadService){
+    private router: Router, private uploadService: UploadService) {
   }
 
   ngOnInit() {
-     //profile component mag niet opgeladen worden als er geen ingelogde user is
-        if (this.authenticatieService.currentUserValue == null) { 
-          alert("Nice try, hackerman. :)");
+    //profile component mag niet opgeladen worden als er geen ingelogde user is
+    if (this.authenticatieService.currentUserValue == null) {
+      alert("Nice try, hackerman. :)");
+      this.router.navigate(['/']);
+    } else {
+      this.authenticatieService.currentUser.subscribe(x => {
+        if (x.role == Role.Admin) {
           this.router.navigate(['/']);
-        }else{
-          this.authenticatieService.currentUser.subscribe(x => {
-            if(x.role == Role.Admin)
-            {
-              this.router.navigate(['/']);
-            }
-            else{
-              this.currentUser=x;
-              //get de ingelogde gebruiker van de database
-              this.userservice.getById(this.currentUser.id).subscribe(data => {
-                //is de gebruiker student of company?
-                this.isStudent = data.isStudent;
-                this.profiel = data;
-                console.log(this.profiel);
-                this.loader(this.profiel);
-                });
-            }
+        }
+        else {
+          this.currentUser = x;
+          //get de ingelogde gebruiker van de database
+          this.userservice.getById(this.currentUser.id).subscribe(data => {
+            //is de gebruiker student of company?
+            this.isStudent = data.isStudent;
+            this.profiel = data;
+            this.loader();
           });
-    
-          this.uploadService.getFilePath(true,this.currentUser.id).subscribe(p => {
-            if(p != null){
-    
-            this.uploadFile = p.path;
-            }
-          });
-        } 
+        }
+      });
+
+      this.uploadService.getFilePath(true, this.currentUser.id).subscribe(p => {
+        if (p != null) {
+
+          this.uploadFile = p.path;
+        }
+      });
+    }
   }
 
-
-  loader(x)
-  {
+  /**
+   * @description Disable de loader wanneer de data is geladen
+   */
+  loader() {
     this.loading = false;
   }
-  
-  handleUpload(formData: FormData){
+
+  handleUpload(formData: FormData) {
     formData.set("isUser", 'true');
     formData.set("id", this.currentUser.id.toString());
     this.uploadService.upload(formData).subscribe(p => {
-    var file : any = formData.get('file');
-    this.uploadFile = file.name;
-    console.log(file.name);
+      var file: any = formData.get('file');
+      this.uploadFile = file.name;
+      console.log(file.name);
     });
   }
 
-  removeFile(){
+  removeFile() {
     this.uploadService.delete(true, this.currentUser.id).subscribe(p => {
       this.uploadFile = null;
-    })
-
+    });
   }
 }

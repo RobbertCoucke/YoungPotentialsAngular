@@ -31,30 +31,33 @@ export class PagingComponent implements OnInit, OnChanges {
     if (this.items && this.items.length) {
       this.setPage(this.initialPage);
     }
-    if (this.pagingService.subsVar === undefined) {    
-      this.pagingService.subsVar = this.pagingService.setFirstPageFunction.subscribe((number:number) => {    
+    if (this.pagingService.subsVar === undefined) {
+      this.pagingService.subsVar = this.pagingService.setFirstPageFunction.subscribe((number: number) => {
         this.setPage(number);
-      });    
-    }  
+      });
+    }
   }
 
+  /**
+   * @description Reset page if items array has changed
+   * @param changes Wijziging
+   */
   ngOnChanges(changes: SimpleChanges) {
-    // reset page if items array has changed
     if (changes.items.currentValue !== changes.items.previousValue) {
       this.setPage(this.initialPage);
     }
   }
 
+  /**
+   * @description De pagina naar waar er moet genavigeerd worden
+   * @param page Het paginanummer naar waar moet genavigeerd worden
+   */
   setPage(page: number) {
-    // get new pager object for specified page
+    // get new pager object for specified page (paginate is een functie uit de library jw-paginate)
     this.pager = paginate(this.items.length, page, this.pageSize, this.maxPages);
-    
     // get new page of items from items array
     var pageOfItems = this.items.slice(this.pager.startIndex, this.pager.endIndex + 1);
-    console.log(pageOfItems);
     // call change page function in parent component
     this.changePage.emit(pageOfItems);
   }
-
-  
 }

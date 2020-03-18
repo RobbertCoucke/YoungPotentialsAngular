@@ -17,15 +17,20 @@ export class CompanyItemComponent implements OnInit {
 
   ngOnInit() {
   }
-
-
-  verifyCompany(){
+  
+  // TODO: Check indien beschrijving correct is.
+  /**
+   * @description Deze methode zorgt voor het verifiëren van een bedrijf
+   */
+  verifyCompany() {
     this.companyService.deleteFavorite(this.company.id).subscribe();
     this.removeEvent.emit(this.company);
- }
+  }
 
- unverifyCompany(){
+  /**
+   * @description Deze methode zorgt voor het verwijderen van een bedrijf
+   */
+  unverifyCompany() {
     this.companyService.verifyCompany(this.company.id).subscribe();
- }
-
+  }
 }
