@@ -50,7 +50,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSortModule } from "@angular/material/sort";
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 /**
  * * Anuglar Bootstrap imports
@@ -93,7 +93,6 @@ import { FormsModule } from "@angular/forms";
 import { SelectStudiegebiedenComponent } from "./select-studiegebieden/select-studiegebieden.component";
 import { NavormingComponent } from "./navorming/navorming.component";
 
-import { VerifyComponent } from "./verify/verify.component";
 import { CompanyVacaturesComponent } from "./company-vacatures/company-vacatures.component";
 
 import { CookieComponent } from "./cookie/cookie.component";
@@ -109,17 +108,16 @@ import { WachtwoordVeranderdComponent } from "./wachtwoord-veranderd/wachtwoord-
 import { ContactComponent } from "./contact/contact.component";
 
 import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { StudentformComponent } from './studentform/studentform.component';
-import { CompanyformComponent } from './companyform/companyform.component';
+import { StudentformComponent } from "./studentform/studentform.component";
+import { CompanyformComponent } from "./companyform/companyform.component";
 
 import { UnverifiedTableComponent } from "./unverified-table/unverified-table.component";
 import { VerifiedTableComponent } from "./verified-table/verified-table.component";
-import {MatTableModule} from '@angular/material/table';
-
+import { MatTableModule } from "@angular/material/table";
 
 const appRoutes: Routes = [
   { path: "owned", component: CompanyVacaturesComponent },
-  { path: "verify", component: VerifyComponent },
+  { path: "unverified-table", component: UnverifiedTableComponent },
   { path: "", component: HomeComponent },
   { path: "vactures", component: VacturesComponent },
   { path: "vacture-toevoegen", component: ReactiveFormComponent },
@@ -175,77 +173,76 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-   declarations: [
-      AppComponent,
-      VactureItemComponent,
-      VacturesComponent,
-      ProfileComponent,
-      ProfileEditComponent,
-      VactureDetailComponent,
-      VactureFilterComponent,
-      NavbarComponent,
-      HomeComponent,
-      FooterComponent,
-      ReactiveFormComponent,
-      AdminComponent,
-      LoginComponent,
-      FavorietenComponent,
-      RegisterComponent,
-      SollicitatieDialogComponent,
-      UploadComponent,
-      FaqComponent,
-      SelectStudiegebiedenComponent,
-      NavormingComponent,
-      JwPaginationComponent,
-      CookieComponent,
-      PagingComponent,
-      VerifyComponent,
-      CompanyVacaturesComponent,
-      ResetPasswordComponent,
-      EmailPasswordRequestComponent,
-      MessageComponent,
-      WachtwoordVeranderdComponent,
-      PolicyComponent,
-      ContactComponent,
-      StudentformComponent,
-      CompanyformComponent,
-      UnverifiedTableComponent,
-      VerifiedTableComponent
-   ],
-   imports: [
-      ReactiveFormsModule,
-      BrowserModule,
-      AppRoutingModule,
-      MatAutocompleteModule,
-      MatFormFieldModule,
-      MatSelectModule,
-      MatInputModule,
-      HttpClientModule,
-      BrowserAnimationsModule,
-      MatMenuModule,
-      MatCardModule,
-      MatExpansionModule,
-      NgMultiSelectDropDownModule,
-      MatStepperModule,
-      MatCheckboxModule,
-      MatDialogModule,
-      MatIconModule,
-      NgSelectModule,
-      MatPaginatorModule,
-      FormsModule,
-      AngularStickyThingsModule,
-      MatSnackBarModule,
-      MatTableModule,
-      MatProgressSpinnerModule,
-      MatSortModule,
-      BsDatepickerModule.forRoot(),
-      ButtonsModule.forRoot(),
-      //ngx-translateandtheloadermodule\\\\r\\\\nHttpClientModule,
-      HttpClientModule,
-      RouterModule.forRoot(appRoutes, {
-        onSameUrlNavigation: "reload",
-        anchorScrolling: 'enabled',
-      }),
+  declarations: [
+    AppComponent,
+    VactureItemComponent,
+    VacturesComponent,
+    ProfileComponent,
+    ProfileEditComponent,
+    VactureDetailComponent,
+    VactureFilterComponent,
+    NavbarComponent,
+    HomeComponent,
+    FooterComponent,
+    ReactiveFormComponent,
+    AdminComponent,
+    LoginComponent,
+    FavorietenComponent,
+    RegisterComponent,
+    SollicitatieDialogComponent,
+    UploadComponent,
+    FaqComponent,
+    SelectStudiegebiedenComponent,
+    NavormingComponent,
+    JwPaginationComponent,
+    CookieComponent,
+    PagingComponent,
+    CompanyVacaturesComponent,
+    ResetPasswordComponent,
+    EmailPasswordRequestComponent,
+    MessageComponent,
+    WachtwoordVeranderdComponent,
+    PolicyComponent,
+    ContactComponent,
+    StudentformComponent,
+    CompanyformComponent,
+    UnverifiedTableComponent,
+    VerifiedTableComponent
+  ],
+  imports: [
+    ReactiveFormsModule,
+    BrowserModule,
+    AppRoutingModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatMenuModule,
+    MatCardModule,
+    MatExpansionModule,
+    NgMultiSelectDropDownModule,
+    MatStepperModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
+    NgSelectModule,
+    MatPaginatorModule,
+    FormsModule,
+    AngularStickyThingsModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    BsDatepickerModule.forRoot(),
+    ButtonsModule.forRoot(),
+    //ngx-translateandtheloadermodule\\\\r\\\\nHttpClientModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes, {
+      onSameUrlNavigation: "reload",
+      anchorScrolling: "enabled"
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

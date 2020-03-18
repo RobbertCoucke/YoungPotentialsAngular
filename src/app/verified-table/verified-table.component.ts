@@ -12,6 +12,7 @@ import { MatTableDataSource, MatPaginator } from "@angular/material";
 import { MatSort } from "@angular/material/sort";
 import { SelectionModel } from "@angular/cdk/collections";
 
+
 /**
  * * Interface voor de velden die we willen weergeven in tabel
  */

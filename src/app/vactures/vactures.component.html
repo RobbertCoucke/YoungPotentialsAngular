@@ -9,25 +9,12 @@
     </div>
     
     <div class="row vacaturebody">
-        <!-- <div name="sorting" id="vacaturelist-sorting" class="">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Datum aflopend
-            </button>
-            <ul class="custom-select-list dropdown-menu">
-                <li class="custom-select-option" data-value="1" value="1" data-gtm-mod="sort" selected="true">Datum aflopend</li>
-                <li class="custom-select-option" data-value="2" value="2" data-gtm-mod="sort">Datum oplopend</li>
-            </ul>
-        </div> -->
+
         <div class="col-lg-5">
             <app-vacture-filter (filterEvent)="handleFilter($event)" [height]='viewHeight'></app-vacture-filter>
         </div>
         <div class="text-center col-lg-7">
-
             <div *ngIf="loadingFilter" #vacaturewrapper>
-                <!-- Warning is niet nodig, favorieten is disabled. -->
-                <!-- <div *ngIf="!currentUser || currentUser.role != 'User'" class="alert alert-warning" role="alert">
-                    <p class="removeMarginbottom">{{favoriteError}}</p>
-                </div> -->
                 <ng-container *ngFor="let vacature of pageOfItems">
                     <ng-container *ngIf="vacature.vacature.description != null">
                         <app-vacture-item [showTrashcan]="false"
