@@ -1,6 +1,7 @@
 # Project Young Potentials
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.24.
+Dit project heeft 2 verschillende repositories, één voor de Frontend en één voor de backend. Beide zijn terug te vinden op de github repositories en op DMSF.
 
 ## Omschrijving project
 
