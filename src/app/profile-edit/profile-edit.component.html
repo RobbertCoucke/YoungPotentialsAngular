@@ -62,6 +62,17 @@
            <div *ngIf="uf.address.errors.required">{{"register.adresreq" | translate}}</div>
        </div> 
       </div>
+
+      
+      <div *ngIf="!isStudent" class="form-label-group ruimte">
+        <label><h5>{{"register.stad" | translate}}</h5></label>
+        <input type="text" class="form-control" formControlName="city"
+        [ngClass]="{ 'is-invalid': submitted && uf.city.errors }"/>
+        <div *ngIf=" submitted && uf.city.invalid && (uf.city.dirty
+        || uf.city.touched)" class="invalid-feedback">
+           <div *ngIf="uf.city.errors.required">{{"register.stadreq" | translate}}</div>
+       </div> 
+      </div>
       
       <div class="ruimtebtn">
         <button class="btn btn-lg btn-primary" type="submit">Opslaan</button>
