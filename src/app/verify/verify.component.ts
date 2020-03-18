@@ -19,7 +19,8 @@ export class VerifyComponent {
     private router: Router
   ) {
     this.authenticationService.currentUser.subscribe(u => {
-      console.log(u);
+      
+      //if user isn't logged in or his role isn't admin then return to home
       if (!u || u.role !== 'Admin') {
         this.router.navigate(["/"]);
       }

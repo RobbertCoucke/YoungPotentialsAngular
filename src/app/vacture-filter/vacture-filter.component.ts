@@ -136,40 +136,58 @@ export class VactureFilterComponent implements OnInit {
     } else {
       // check if checkbox is checked to add or unchecked to delete
       if (event.target.checked) {
+        //gets selected studiegebiedObject
         let selectedObject = this.findStudiegebied(selectedVal);
+        //if undefined its not a studiegebied so we get selected opleidingObject
         if (selectedObject === undefined) {
+          //get opleidingObject inside corresponding studiegebiedObject
           selectedObject = this.findOpleiding(selectedVal);
 
-          // check if studiegebied is already in selected
+          // check if studiegebied is already in selected 
           let updateObject = this.selectedgebieds.find(
             s => s.id === selectedObject.id
           );
 
+          //if studiegebied is already in selected add opleiding to opleidingen of studiegebied thats already in selected,  else just add studiegebiedobject with the opleiding inside to selected
           if (updateObject != undefined) {
             let index = this.selectedgebieds.indexOf(updateObject);
 
             updateObject.opleiding.push(selectedObject.opleiding[0]);
             this.selectedgebieds[index] = updateObject;
-          } else {
+          } 
+          else {
+            //add studiegebied with opleiding to selected
             this.selectedgebieds.push(selectedObject);
-            // console.log(this.studiegebieds);
           }
         } else {
+          //add studiegebied to selected
           let gebied = new Studiegebied(selectedObject.id, selectedObject.naam, selectedObject.kleur, []);  // nodig want anders zet hij de opleidingen in studiegebied op lege array (onbekende reden) en kan er dus ook niet meer op gefilterd worden
           this.selectedgebieds.push(gebied);
         }
       } else {
+        //get length of original selected
         var length = this.selectedgebieds.length;
+
+        //remove from selected if selectedVal is an id from a studiegebied
         this.selectedgebieds = this.selectedgebieds.filter(
           s => s.id != selectedVal
         );
+
+        //if original length equals selectedgebiedlength then no value was removed and the id is from an opleiding
         if (length === this.selectedgebieds.length) {
+
+          //get opleidingObject with corresponding studiegebiedObject
           var studiegebied = this.findOpleiding(selectedVal);
+
+          //get studeigebiedObject we need to remove opleiding from
           let updateObject = this.selectedgebieds.find(
             s => s.id === studiegebied.id
           );
 
+          //get index of studiegebiedObject
           let index = this.selectedgebieds.indexOf(updateObject);
+
+          //if in selected only has selected opleiding we can fully remove studiegebied from selected,  else we only delete the opleiding from the studiegebied in selected
           if (this.selectedgebieds[index].opleiding.length === 1) {
             this.selectedgebieds = this.selectedgebieds.filter(
               s => s.id != studiegebied.id
@@ -206,6 +224,7 @@ export class VactureFilterComponent implements OnInit {
   s = {};
   o = {};
 
+  //handle selecting a studiegebied
   onSelectStudie(id): void {
     const key = id;
     var selectedStudiegebied = this.studiegebieds.filter(

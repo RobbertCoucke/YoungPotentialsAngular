@@ -115,10 +115,15 @@ export class VerifiedTableComponent {
    */
   unverifyCompany() {
     this.Selectedcompanies = this.selection.selected;
-    this.Selectedcompanies.forEach(element => {
-      console.log(element.id);
-      console.log("verwijderen");
-      this.companyService.deleteCompany(element.id).subscribe();
+    this.Selectedcompanies.forEach((element,index) => {
+      if(index === this.Selectedcompanies.length -1){
+        this.companyService.deleteCompany(element.id).subscribe( data => {
+          this.clearTable();
+        });
+      }else{
+        this.companyService.deleteCompany(element.id).subscribe();
+      }
+      
     });
   }
 
@@ -129,7 +134,14 @@ export class VerifiedTableComponent {
   unverifyCompanyEnkel(objectID) {
     console.log("verwijdern:");
     console.log(objectID);
-    this.companyService.deleteCompany(objectID).subscribe();
+    this.companyService.deleteCompany(objectID).subscribe(data => {
+      this.clearTable();
+    });
+  }
+
+  clearTable(){
+    this.Selectedcompanies = [];
+    this.fetchData();
   }
 
   /**
@@ -138,6 +150,7 @@ export class VerifiedTableComponent {
    * Er wordt ook een nieuwe rij met posititie toegevoegd, deze is nodig voor de sorting
    */
   fetchData() {
+    this.companies = [];
     this.companyService.getAllVerifiedCompanies().subscribe(c => {
       for (let index = 0; index < c.length; index++) {
         const positie = c[index];

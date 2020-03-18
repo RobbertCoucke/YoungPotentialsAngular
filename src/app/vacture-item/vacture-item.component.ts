@@ -44,32 +44,36 @@ export class VactureItemComponent implements OnInit {
 
   }
 
+  /**
+   * @description delete vacature and do a callback to parent
+   */
   delete(){
     this.vacatureService.deleteVacature(this.vacature.id).subscribe();
     this.removeFavoriteEvent.emit(this.favorite);
   }
 
+
+  //handle liking and unliking a vacature
   onLike(){
     if(this.liked)
     {
+      //set liked back to false
       this.liked = false;
       if(this.currentUser && this.currentUser.role == Role.User){
         this.favorietService.deleteFavorite(this.favorietId).subscribe(f => {
           this.favorite.id = null;
           this.favorietId = null;
-          console.log(this.favorite);
-          console.log(this.currentUser);
         });
+        //callback to parent to remove from list
         this.removeFavoriteEvent.emit(this.favorite);
       }
-      //deletefavorite(vacature.id, currentUser.id)
     }else{
+      //set liked to true
       this.liked = true;
       if(this.currentUser && this.currentUser.role == Role.User){
         this.favorietService.addFavorite(this.currentUser.id, this.vacature.id).subscribe(f => {
           this.favorietId = f.id;
           this.favorite.id = f.id;
-          console.log(this.favorite);
         });
         
       }
