@@ -95,7 +95,6 @@ import { NavormingComponent } from "./navorming/navorming.component";
 
 import { VerifyComponent } from "./verify/verify.component";
 import { CompanyVacaturesComponent } from "./company-vacatures/company-vacatures.component";
-import { CompanyItemComponent } from "./company-item/company-item.component";
 
 import { CookieComponent } from "./cookie/cookie.component";
 import { PagingComponent } from "./paging/paging.component";
@@ -202,7 +201,6 @@ const appRoutes: Routes = [
       PagingComponent,
       VerifyComponent,
       CompanyVacaturesComponent,
-      CompanyItemComponent,
       ResetPasswordComponent,
       EmailPasswordRequestComponent,
       MessageComponent,

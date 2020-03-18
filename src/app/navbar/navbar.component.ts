@@ -99,13 +99,15 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  getCookieCheck(){
+    return getCookie("language");
+  }
+
   /**
    * @description Uitloggen van een user
    */
   logout() {
     this.authenticationService.logout();
-    // TODO: Overbodig commentaar?
-    //this.router.navigate(['/login']);
   }
 
   /**

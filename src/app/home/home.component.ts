@@ -24,10 +24,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    // TODO: Eventueel code opkuis
-    // this.userService.getById(this.currentUser.id).pipe(first()).subscribe(user => {
-    //     this.userFromApi = user;
-    // });
   }
 
   /**

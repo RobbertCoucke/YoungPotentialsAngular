@@ -22,6 +22,8 @@ export class FavorietenComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
               private favorieteService: FavoritesService, private router: Router) {
+
+    //* checks if the user is authorized to enter this page
     this.authenticationService.currentUser.subscribe(u => {
       this.currentUser = u;
       if(!u || u.role !== Role.User){
@@ -31,15 +33,16 @@ export class FavorietenComponent implements OnInit {
    }
 
 
+
   ngOnInit() {
+    //* gets all favorites from user and loads them in
     this.favorieteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe( (data) => {
 
       this.offerList = this.mapJSONToModel(data);
       this.loader(this.offerList);
     });
-    
-
   }
+
 
   loader(x)
    {
@@ -55,6 +58,7 @@ export class FavorietenComponent implements OnInit {
       }
    }
 
+   //* callback function to remove removed favorite from list
   removeEvent(favorite: Favoriet){
 
     setTimeout( () => this.offerList = this.offerList.filter(o => o !== favorite), 1000);

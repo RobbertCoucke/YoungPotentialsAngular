@@ -24,6 +24,7 @@ export class EmailPasswordRequestComponent implements OnInit {
     })
   }
 
+  
   onSubmit()
   {
     if(this.emailForm.invalid)

@@ -28,6 +28,13 @@ export class CompanyVacaturesComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.fillVacatures();
+  }
+
+  /**
+   * @description gets company and all vacatures of said company and transfers them to a favoriteObject because vacatureListItem expects a favoriteObject
+   */
+  fillVacatures(){
     console.log("in component");
     //get logged in user
     this.authenticationService.currentUser.subscribe(u => {

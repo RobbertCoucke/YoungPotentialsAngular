@@ -5,7 +5,6 @@ import { User, Role } from '@/_models';
 import { VacatureService } from '@/_services/Vacature/vacature.service';
 import { Favoriet } from '@/_models/favoriet';
 import { Vacature } from '@/_models/vacature';
-import { StudieGebied } from '@/Model/StudieGebied';
 import { PagingService } from '@/_services/Paging/paging.service';
 
 @Component({

@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
             return;
         }
 
+        //tries to authenticate the user
         this.loading = true;
         this.authenticationService.login(this.f.username.value, this.f.password.value)
             .pipe(first())

@@ -69,6 +69,7 @@ export class ReactiveFormComponent implements OnInit {
   selectValue: any;
   tags: Studiegebied[];
   types: Type[];
+  fileName : string;
 
   minDate: Date; // min datum datepicker
   maxDate: Date; // max datum datepicker
@@ -100,6 +101,8 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    //gets logged in company, else navigates to home
     this.authenticationService.currentUser.subscribe(u => {
       if (u && u.role === "Company") {
         this.currentUser = u;
@@ -113,6 +116,7 @@ export class ReactiveFormComponent implements OnInit {
         this.router.navigate(["/"]);
       }
     });
+
     this.vacatureService.getAllTypes().subscribe(types => {
       this.types = types;
     });
@@ -218,16 +222,22 @@ export class ReactiveFormComponent implements OnInit {
     let snackBarRef = this.snackBar.open("Vacature verzonden", "Ok");
   }
 
+  //callback function van uploadcomponent voor het uploaden van een bijlage
   handleUpload(formData: FormData) {
     this.uploadFile = formData;
+    var file: any = formData.get('file');
+    this.fileName = file.name;
   }
+
 
   handleStudiegebieden(studiegebieden: Studiegebied[]) {
     this.tags = studiegebieden;
   }
 
+
   removeFile() {
     this.uploadFile = null;
+    this.fileName =null
   }
 
   /**
