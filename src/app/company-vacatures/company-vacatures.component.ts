@@ -38,15 +38,12 @@ export class CompanyVacaturesComponent implements OnInit {
     console.log("in component");
     //get logged in user
     this.authenticationService.currentUser.subscribe(u => {
-      console.log("in user");
       //get company by user Id
       this.currentUser = u;
       if(this.currentUser && this.currentUser.role == Role.Company){
-        console.log("in if");
         this.userService.getById(this.currentUser.id).subscribe(c => {
           this.company = c;
           //get all vacatures by companyId
-          console.log(this.company);
           this.vacatureService.getAllVacaturesByCompany(this.company.id).subscribe(vacatures => {
               //transfer vacatureObject to FavoriteObject for vacature-listItem and add to vacaturesList
               vacatures.forEach(element => {
@@ -54,15 +51,12 @@ export class CompanyVacaturesComponent implements OnInit {
               });
               if(this.vacatures.length != 0)
               {
-                console.log('Loading off');
-                console.log(this.vacatures)
                 this.loading = false;
               }
               else
               {
                 this.loading=false;
                 this.error=true;
-                console.log("ERROR")
               }
           });
         });

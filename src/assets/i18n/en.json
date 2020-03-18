@@ -246,6 +246,17 @@
         "vragen": "Questions and feedback",
         "vragensub": "informatieveiligheid@vives.be"
     
+    },
+
+    "cookie":{
+        "cookiegebruik": "VIVES University of Applied Sciences uses cookies to optimize your user experience. Click on Agree to consent to the use of these cookies or on Find out more for our privacy statement. ",
+        "cookiegebruik2": "Find out more",
+        "akkoord": "Agree",
+        "negeer": "Ignore"
+    },
+
+    "vacatures":{
+        "error": "There are no vacancies to be found."
     }
 
 }

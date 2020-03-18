@@ -30,6 +30,7 @@
               <div *ngIf=" submitted && cf.email.invalid && (cf.email.dirty
                     || cf.email.touched)" class="invalid-feedback">
                   <div *ngIf="cf.email.errors.required">{{ "contact.error" | translate}}</div>
+                  <div *ngIf="cf.email.errors.pattern">{{"register.emailpatern" | translate}}</div>
                </div>
              </div>
 

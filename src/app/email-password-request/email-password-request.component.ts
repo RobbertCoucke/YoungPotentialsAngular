@@ -19,6 +19,7 @@ export class EmailPasswordRequestComponent implements OnInit {
     , private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+    //emailform
     this.emailForm = this.formBuilder.group({
       email: ['']
     })
@@ -27,22 +28,22 @@ export class EmailPasswordRequestComponent implements OnInit {
   
   onSubmit()
   {
+    //als de email niet ingevuld is, dan wordt geen request gestuurd om password te veranderen 
     if(this.emailForm.invalid)
     {
       return;
     }
 
+    //de ingevulde email
     var email = this.emailForm.controls.email.value;
-    console.log(email);
+    //EmailRequest object maken
     const emrq = new EmailRequest(email);
-    console.log(emrq);
 
+    //request naar het api sturen
     this.userService.forgotPassword(emrq).subscribe(data => {
-      //this.error = false;
       this.router.navigate(['/message']);
     },
     error => {
-      console.log(error);
       this.error = error;
     })
   }

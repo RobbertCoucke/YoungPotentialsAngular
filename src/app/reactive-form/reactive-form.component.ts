@@ -1,10 +1,16 @@
+/**
+ * ! Gebruikte documentatie:
+ * ! voor basis input velden --> Angular material form field: https://material.angular.io/components/form-field/overview
+ * ! datepicker --> Ngx-bootstrap: https://valor-software.com/ngx-bootstrap/#/datepicker
+ */
+
 import { StudiegebiedService } from "@/_services/studiegebied/studiegebied.service";
 import { Component, OnInit } from "@angular/core";
 import { Validators, FormGroup, FormBuilder } from "@angular/forms";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
-import cities from "../../assets/cities.json";
+import cities from "../../assets/cities.json"; //json file met alle steden in België
 import { Studiegebied } from "app/_models/studiegebied";
 import { AuthenticationService } from "../_services/Authentication/authentication.service";
 import { User, Company } from "@/_models";
@@ -34,7 +40,7 @@ export class ReactiveFormComponent implements OnInit {
   filteredSteden: Observable<Stad[]>; // Array met alle steden in België gefilterd
 
   /**
-   * *Formcontrols
+   * *Formcontrols voor validatie
    */
   locatieControl = new FormControl("", Validators.required);
   studiegebiedControl = new FormControl("", Validators.required);
@@ -74,11 +80,7 @@ export class ReactiveFormComponent implements OnInit {
   minDate: Date; // min datum datepicker
   maxDate: Date; // max datum datepicker
 
-  /**
-   * @description Array met types
-   */
-
-  studiegebieden: any[] = []; // declaratie array voor in te laden studiegebieden
+  studiegebieden: any[] = []; // declaratie array met types voor het inladen van studiegebieden
 
   constructor(
     private fb: FormBuilder,
@@ -90,7 +92,7 @@ export class ReactiveFormComponent implements OnInit {
     private vacatureService: VacatureService,
     private snackBar: MatSnackBar
   ) {
-    this.steden = cities;
+    this.steden = cities; //we laden json file in de array steden
     this.minDate = new Date();
     this.maxDate = new Date();
     this.minDate.setDate(this.minDate.getDate()); // min datum is de dag zelf
@@ -101,14 +103,12 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    //gets logged in company, else navigates to home
+    // redirecten van gebruiker naar homepage als deze niet ingelogd is als bedrijf
     this.authenticationService.currentUser.subscribe(u => {
       if (u && u.role === "Company") {
         this.currentUser = u;
         this.userService.getById(u.id).subscribe(c => {
           this.company = c;
-          console.log(this.company);
           this.emailValue = c.email;
           this.addressValue = c.address;
         });
@@ -178,11 +178,10 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   /**
-   * @description post de values van formvelden in console
+   * @description doorsturen form naar backend
    * @param uploadVacForm form
    */
   onSubmit() {
-    console.log(this.selectValue);
     var typeObject = this.types.filter(t => t.name === this.selectValue)[0];
     var vacature = {
       title: this.titleValue,
@@ -199,14 +198,11 @@ export class ReactiveFormComponent implements OnInit {
     if (this.uploadFile) {
       this.uploadFile.set("isUser", "false");
     }
-    console.log(vacature);
     this.vacatureService.createVacature(vacature).subscribe(v => {
-      console.log("added vacature");
       if (this.uploadFile) {
         this.uploadFile.set("id", v.id.toString());
         this.uploadService.upload(this.uploadFile).subscribe(p => {
-          console.log(p);
-          // this.openSnackBar();
+          this.openSnackBar();
           this.router.navigate(["/"]);
         });
       } else {
@@ -222,19 +218,27 @@ export class ReactiveFormComponent implements OnInit {
     let snackBarRef = this.snackBar.open("Vacature verzonden", "Ok");
   }
 
-  //callback function van uploadcomponent voor het uploaden van een bijlage
+  /**
+   * @param formData upgeloade file in formdata veld
+   * @description stopt upgeloade file in uploafFile veld
+   */
   handleUpload(formData: FormData) {
     this.uploadFile = formData;
     var file: any = formData.get('file');
     this.fileName = file.name;
   }
 
-
+  /**
+   * @param studiegebieden array met alle studiegebieden
+   * @description laadt studiegebieden in de tags array
+   */
   handleStudiegebieden(studiegebieden: Studiegebied[]) {
     this.tags = studiegebieden;
   }
 
-
+  /**
+   * @description verwijderen van file door value null
+   */
   removeFile() {
     this.uploadFile = null;
     this.fileName =null

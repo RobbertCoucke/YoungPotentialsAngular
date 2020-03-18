@@ -16,6 +16,7 @@ export class CompanyformComponent implements OnInit {
   submitted = false;
   @Output() register : EventEmitter<Register> = new EventEmitter<Register>();
   companyForm: FormGroup;
+  //error message
   error: string;
   //storen alle sectoren in sectors array
   sectors: any[];
@@ -42,8 +43,8 @@ export class CompanyformComponent implements OnInit {
         this.router.navigate(['/']);
     }
 
+    //krijg alle sectors
     this.sectorService.GetAll().subscribe(sectoren => {
-      console.log(sectoren);
       this.sectors = sectoren; });
   }
 
@@ -61,6 +62,7 @@ export class CompanyformComponent implements OnInit {
       
     },
     {
+      //password en confirmPassword moeten gelijk zijn
       validator: MustMatch('password', 'confirmPassword')
     }
     )
@@ -88,7 +90,7 @@ export class CompanyformComponent implements OnInit {
     this.register.emit(model);
   }
 
-  //wanneer de gebruiker een sector geselecteerd heeft dan wordt de geselecteerde sector getoond
+  //wanneer de gebruiker een sector geselecteerd heeft, dan wordt de geselecteerde sector getoond
   changSector(s) {
     this.companyForm.controls.sector.patchValue(s.target.value, {
       onlySelf: true

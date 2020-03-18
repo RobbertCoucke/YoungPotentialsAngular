@@ -13,16 +13,13 @@ import { PagingService } from '@/_services/Paging/paging.service';
   styleUrls: ['./vactures.component.scss']
 })
 export class VacturesComponent implements OnInit {
-  @ViewChild('vacaturewrapper', {read: ElementRef, static: false}) elementView: ElementRef;
+  @ViewChild('vacaturewrapper', { read: ElementRef, static: false }) elementView: ElementRef;
 
   viewHeight: number;
-  // isShow: boolean;
-  // topPosToStartShowing = 100;
 
   currentUser: User;
   vacatures: Favoriet[] = [];
   favorites: Favoriet[] = [];
-  // tslint:disable-next-line: quotemark
   favoriteError = "liking and unliking offers will not be saved unless you login as a Student";
   items: any[] = [];
   pageOfItems: Array<any>;
@@ -32,42 +29,19 @@ export class VacturesComponent implements OnInit {
    * de load image wordt getoond totdat alle vacatures zijn ingeladen.
   */
   loading: boolean = true;
-  //Houdt bij wanneer de vacatures moeten getoond worden, indien er geen vacatures zijn wordt een foutmelding getoond.
+  // Houdt bij wanneer de vacatures moeten getoond worden, indien er geen vacatures zijn wordt een foutmelding getoond.
   loadingFilter: boolean = true;
-  //Sorting
+  // Sorting
   selectedSorting: string = 'dateDescend';
-
-  // tslint:disable-next-line: no-trailing-whitespace
 
   constructor(private authenticationService: AuthenticationService,
     private vacatureService: VacatureService, private favoriteService: FavoritesService, private pagingService: PagingService) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-
   }
 
-  //   @HostListener('window:scroll')
-  //   checkScroll() {
-
-  //     // window의 scroll top
-  //     // Both window.pageYOffset and document.documentElement.scrollTop returns the same result in all the cases. window.pageYOffset is not supported below IE 9.
-
-  //     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-
-  //     console.log('[scroll]', scrollPosition);
-
-  //     if (scrollPosition >= this.topPosToStartShowing) {
-  //       this.isShow = true;
-  //     } else {
-  //       this.isShow = false;
-  //     }
-  //   }
-
-  //   scrollTo(className: string):void {
-  //     const elementList = document.querySelectorAll('.' + className);
-  //     const element = elementList[0] as HTMLElement;
-  //     element.scrollIntoView({ behavior: 'smooth' });
-  //  }
-  // tslint:disable-next-line: one-line
+  /**
+   * @description Deze methode zorgt voor het inladen van de vacatures
+   */
   fillVacatures() {
     this.vacatures = [];
 
@@ -86,7 +60,7 @@ export class VacturesComponent implements OnInit {
           this.sortFunction();
           //Alle vacatures worden in de variabele items gekopieerd omdat deze wordt gebruikt bij het pagineren.
           this.items = this.vacatures;
-          
+
           //Indien alle vacatures geladen zijn word de div waarin de vacatures zitten zichtbaar gemaakt.
           this.loadingFilter = true;
         });
@@ -106,11 +80,18 @@ export class VacturesComponent implements OnInit {
       });
     }
   }
-  setHeight(){
+
+  /**
+   * TODO: Hier is er nog een bug, de bug is er doordat de vacatures pas achteraf ingeladen wordt waardoor de height verkeerd is
+   * @description Slaat de height van de vacaturecomponent op in de @param viewHeight
+   */
+  setHeight() {
     this.viewHeight = this.elementView.nativeElement.offsetHeight;
-    console.log("viewHeight:")
-    console.log(this.viewHeight);
   }
+
+  /**
+   * @description Controleert welke sorteermethode is geselecteerd en roept daarna de correcte methode aan.
+   */
   sortFunction() {
     switch (this.selectedSorting) {
       case 'dateDescend': {
@@ -126,26 +107,46 @@ export class VacturesComponent implements OnInit {
     this.items = this.vacatures;
   }
 
+  /**
+   * @description Sorteermethode datum aflopend (Van recent naar oud)
+   * @param vac1 Vacature 1 die moet vergeleken worden met Vacature 2
+   * @param vac2 Vacature 2 die moet vergeleken worden met Vacature 1
+   * @returns het verschil van de twee data
+   */
   compareDesc(vac1, vac2) {
     let date1 = new Date(vac1.vacature.created).getTime();
     let date2 = new Date(vac2.vacature.created).getTime();
     return date2 - date1;
   }
+
+  /**
+   * @description Sorteermethode datum oplopend (Van oud naar nieuw)
+   * @param vac1 Vacature 1 die moet vergeleken worden met Vacature 2
+   * @param vac2 Vacature 2 die moet vergeleken worden met Vacature 1
+   * @returns het verschil van de twee data
+   */
   compareAsc(vac1, vac2) {
     let date1 = new Date(vac1.vacature.created).getTime();
     let date2 = new Date(vac2.vacature.created).getTime();
     return date1 - date2;
   }
 
+  /**
+   * @description Sorteert de gegevens en reload het paging component met de gesorteerde data.
+   */
   sortingChange() {
-    //
-  
     this.sortFunction();
-    //this.firstPage();
-    //Niet de mooiste oplossing, want werkt niet als je op een andere pagina bevindt
+    // De methode hieronder werkt nog niet optimaal
+    // this.firstPage();
+    // Niet de mooiste oplossing, want werkt niet als je op een andere pagina bevindt
     this.onChangePage(this.items.slice(0, 10));
   }
-  
+
+  /**
+   * TODO: Deze functie bevat nog een bug waardoor de sorting niet meer werkt,
+   * geen idee waarom de sorting niet meer werkt na het filteren.
+   * @description Zet de pagina op bladzijde 1
+   */
   firstPage() {
     this.pagingService.setFirstPage(1);
   }
@@ -177,10 +178,12 @@ export class VacturesComponent implements OnInit {
   ngOnInit() {
     this.fillVacatures();
   }
-  ngAfterViewInit(){
-    
-  }
 
+  /**
+   * @description Aan de hand van de parameters de vacatures filteren
+   * @param filterArr een Array met alle geselecteerde studiegebieden
+   * @param typeArr een Array met alle geselecteerde types
+   */
   filterVacatures(filterArr, typeArr) {
     this.vacatureService.filterVacatures(filterArr, typeArr).subscribe(vacatures => {
 
@@ -203,72 +206,77 @@ export class VacturesComponent implements OnInit {
           this.vacatures.push(new Favoriet(null, new Vacature(vacatures[i])));
         }
       }
-        
-        this.sortFunction();
-        //Alle vacatures worden in de variabele items gekopieerd omdat deze wordt gebruikt bij het pagineren.
-        this.items = this.vacatures;
-      
-      //Controle om te checken als items leeg is.
+      this.sortFunction();
+      // Alle vacatures worden in de variabele items gekopieerd omdat deze wordt gebruikt bij het pagineren.
+      this.items = this.vacatures;
+
+      // Controle om te checken als items leeg is.
       if (this.items.length == 0) {
-        //Indien leeg, wordt loader image verborgen en wordt er een foutmelding getoond dat er geen vacatures zijn.
+        // Indien leeg, wordt loader image verborgen en wordt er een foutmelding getoond dat er geen vacatures zijn.
         this.loading = false;
         this.loadingFilter = false;
       }
       else {
-        //Indien niet leeg wordt de lijst van vacatures afgebeeld.
+        // Indien niet leeg wordt de lijst van vacatures afgebeeld.
         this.loadingFilter = true;
-        
-        console.log(this.vacatures);
       }
     });
   }
 
-
-
+  /**
+   * @description Behandelt de filter logica
+   * @param filters Alle aangevinkte filters
+   */
   handleFilter(filters) {
     var filterArr = filters.filter;
     var typeArr = filters.types;
-    //Indien een filter wordt aangeklikt wordt de lijst met vacatures onzichtbaar gemaakt.
+
+    // Indien een filter wordt aangeklikt wordt de lijst met vacatures onzichtbaar gemaakt.
     this.loadingFilter = false;
-    //De load image wordt getoond wanneer een filter wordt aangeklikt.
+
+    // De load image wordt getoond wanneer een filter wordt aangeklikt.
     this.loading = true;
 
     if (filterArr === null && typeArr === null) {
+      // Indien geen filters zijn aangekruist dan worden alle vacatures getoond
       this.fillVacatures();
     } else {
       if (this.currentUser != null && this.currentUser.role === 'User') {
+        // Alle favoriet vacatures ophalen en in variabele opslaan en methode filterVacatures aanroepen
         this.favoriteService.getAllFavoritesFromUserId(this.currentUser.id).subscribe(f => {
           this.favorites = f;
           this.filterVacatures(filterArr, typeArr);
         });
       } else {
+        // Methode filterVacatures aanroepen
         this.filterVacatures(filterArr, typeArr);
       }
     }
 
   }
 
+  /**
+   * @description moet hier niet uit lijst verwijderen, echte implementatie zit in favorietencompenent.
+   * moet deze methode wel meegeven anders gaat hij errors geven  --> opzoeken
+   * hoe je kan checken in het vacature-item of de parent-function (evenEmitter) meegegeven is of niet.
+   * @param favorite
+   */
   removeEventAbstract(favorite: Favoriet) {
-    //moet hier niet uit lijst verwijderen, echte implementatie zit in favorietencompenent.
-    //moet deze methode wel meegeven anders gaat hij errors geven  --> opzoeken hoe je kan checken in het vacature-item of de parent-function (evenEmitter) meegegeven is of niet.
+    // Methode niet verwijderen anders error
   }
 
+  /**
+   * @description Controleert indien vacature bestaat
+   * @param vacature de vacature die gecontroleerd moet worden indien hij bestaat.
+   */
   private checkIfVacatureAlreadyExists(vacature: Vacature) {
     if (this.vacatures) {
       for (var i = 0; i < this.favorites.length; i++) {
         if (vacature.id === this.favorites[i].vacature.id) {
-
           return true;
         }
       }
-
     }
-
     return false;
   }
-
-  //   scroll(el: HTMLElement) {
-  //     el.scrollIntoView();
-  // }
-
 }

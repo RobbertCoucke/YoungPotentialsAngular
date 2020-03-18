@@ -249,6 +249,17 @@
         "vragen": "Vragen en feedback",
         "vragensub": "informatieveiligheid@vives.be"
     
+    },
+
+    "cookie":{
+        "cookiegebruik": "Hogeschool VIVES maakt gebruik van cookies om je gebruikservaring te optimaliseren. Klik op Akkoord om in te stemmen met het gebruik van deze cookies of op Meer weten voor onze privacyverklaring. ",
+        "cookiegebruik2": "Meer weten",
+        "akkoord": "Akkoord",
+        "negeer": "Negeer"
+    },
+
+    "vacatures":{
+        "error": "Er zijn geen openstaande vacatures te vinden."
     }
 
 }

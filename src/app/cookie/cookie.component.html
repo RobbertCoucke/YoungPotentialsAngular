@@ -2,13 +2,12 @@
   <div class="popup-content info">
     <div id="popup-text">
       <p class="removeMarginbottom">
-        Hogeschool VIVES maakt gebruik van cookies om je gebruikservaring te optimaliseren. 
-        Klik op Akkoord om in te stemmen met het gebruik van deze cookies of op Meer weten voor onze privacyverklaring. <a routerLink="/policy" routerLinkActive="True" class="hyperlink">Meer weten</a>
+        {{"cookie.cookiegebruik" | translate}}<a routerLink="/policy" routerLinkActive="True" class="hyperlink">{{"cookie.cookiegebruik2" | translate}}</a>
       </p>
     </div>
     <div id="popup-buttons">
-      <button type="button" class="agree-button eu-cookie-compliance-secondary-button btn-primary" (click)="btnClick(true)">Akkoord</button>
-      <button type="button" class="decline-button eu-cookie-compliance-default-button btn-primary" (click)="btnClick(false)">Negeer</button>
+      <button type="button" class="agree-button eu-cookie-compliance-secondary-button btn-primary" (click)="btnClick(true)">{{"cookie.akkoord" | translate}}</button>
+      <button type="button" class="decline-button eu-cookie-compliance-default-button btn-primary" (click)="btnClick(false)">{{"cookie.negeer" | translate}}</button>
     </div>
   </div>
 </div>

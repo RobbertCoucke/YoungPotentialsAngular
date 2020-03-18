@@ -12,6 +12,11 @@ import { Router } from '@angular/router';
 })
 export class ContactComponent implements OnInit {
 
+  private emailValidators = [
+    Validators.maxLength(250),
+    Validators.required,
+    Validators.pattern(/.+@.+\..+/)
+];
   
   contactForm: FormGroup;
   submitted = false;
@@ -25,7 +30,7 @@ export class ContactComponent implements OnInit {
   createContactForm(){
     this.contactForm = this.formBuilder.group({
       fullName: [''],  
-      email: [''],
+      email: ['', this.emailValidators],
       subject:[''],
       message: ['']
     });

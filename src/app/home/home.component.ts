@@ -6,7 +6,6 @@ import { first } from 'rxjs/operators';
 import { User } from '@/_models';
 import { AuthenticationService } from '@/_services/Authentication/authentication.service';
 import { UserService } from '@/_services';
-import { getCookie } from '../cookie/cookie.component';
 //import { FilterService } from '@/_services';
 
 @Component({
@@ -32,7 +31,7 @@ export class HomeComponent implements OnInit {
    *          false: De taal is wel Engels
    */
   checkIfLanguageIsEnglish() {
-    return getCookie("language") != "en";
+    return this.getCookie("language") != "en";
   }
 
   /**
@@ -40,5 +39,18 @@ export class HomeComponent implements OnInit {
    */
   setCheckbox(name: string) {
     this.filterService.setCheckbox(name);
+  }
+  
+  /**
+   * @description Cookie opvragen
+   * @param name naam van de cookie
+   */
+  getCookie(name: string) {
+    const value = "; " + document.cookie;
+    const parts = value.split("; " + name + "=");
+
+    if (parts.length == 2) {
+      return parts.pop().split(";").shift();
+    }
   }
 }

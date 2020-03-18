@@ -8,8 +8,6 @@ import { TranslateCacheService } from 'ngx-translate-cache';
 import { AuthenticationService } from './../_services/Authentication/authentication.service';
 import { User, Role } from './../_models';
 import { Router } from '@angular/router';
-//Import function getCookie
-import { getCookie } from '../cookie/cookie.component';
 
 @Component({
   selector: 'app-navbar',
@@ -93,14 +91,14 @@ export class NavbarComponent implements OnInit {
    *              in de cookie bevindt en roept hij de methode changeLanguage aan.
    */
   getCookieIfItExists() {
-    if (getCookie("language") !== undefined) {
-      this.selectedLanguage = getCookie("language");
+    if (this.getCookie("language") !== undefined) {
+      this.selectedLanguage = this.getCookie("language");
       this.changeLanguage(this.selectedLanguage);
     }
   }
 
   getCookieCheck(){
-    return getCookie("language");
+    return this.getCookie("language");
   }
 
   /**
@@ -163,6 +161,19 @@ export class NavbarComponent implements OnInit {
   changeLanguage(language: string) {
     this.selectedLanguage = language;
     this.dropdownLanguages = this.languages.filter(e => e !== this.selectedLanguage);
+  }
+  
+  /**
+   * @description Cookie opvragen
+   * @param name naam van de cookie
+   */
+  getCookie(name: string) {
+    const value = "; " + document.cookie;
+    const parts = value.split("; " + name + "=");
+
+    if (parts.length == 2) {
+      return parts.pop().split(";").shift();
+    }
   }
 }
 
