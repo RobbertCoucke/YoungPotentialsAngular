@@ -16,7 +16,7 @@ import { MatSnackBar } from "@angular/material";
  * @description Interface om data door te geven naar dialog
  */
 export interface DialogData {
-  hasBijlage: any;
+  hasBijlage: boolean;
   UseremailValue: string;
   companyEmailValue: string;
 }
@@ -30,7 +30,7 @@ export class VactureDetailComponent {
   id: number; // id van vacature
   vacature: Vacature; // Vacature object met alle velden van vacature
 
-  hasBijlage: str; //tells if vacature has bijlage attached to it
+  hasBijlage: boolean; //tells if vacature has bijlage attached to it
 
   student: boolean; // true = student | false = bedrijf
 
@@ -84,12 +84,12 @@ export class VactureDetailComponent {
   }
 
   loader(x) {
-    this.loading = false;
+    this.loading = false; //stoppen loader
   }
 
   /**
    * @description opent sollicitatie dialoog
-   * *data: values die we willen gebruiken in dialoog
+   * *data: values die we willen gebruiken in solllicitatie-dialog component
    */
   openDialog(): void {
     const dialogRef = this.dialog.open(SollicitatieDialogComponent, {
@@ -101,7 +101,6 @@ export class VactureDetailComponent {
         hasBijlage: this.hasBijlage
       }
     });
-    // console.log(this.$vacature);
   }
 
   /**
@@ -114,8 +113,6 @@ export class VactureDetailComponent {
       .downloadLink(false, this.id)
       .subscribe((resp: HttpResponse<Blob>) => {
         const data = resp.body;
-        console.log("body:");
-        console.log(data);
         var pdf = new Blob([data], { type: "application/pdf" });
         FileSaver.saveAs(pdf, this.vacature.title + "_bijlage.pdf");
       });
