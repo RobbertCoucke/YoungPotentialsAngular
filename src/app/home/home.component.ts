@@ -19,12 +19,14 @@ export class HomeComponent implements OnInit {
     private authenticationService: AuthenticationService, private filterService: FilterService) { this.currentUser = this.authenticationService.currentUserValue; }
 
   ngOnInit() {
+    // TODO: Eventueel code opkuis
     // this.userService.getById(this.currentUser.id).pipe(first()).subscribe(user => {
     //     this.userFromApi = user;
     // });
   }
+
+  //Klikt de checkbox aan die overeenkomt met de selectie die wordt meegegeven
   setCheckbox(name: string) {
-    console.log("home setCheckbox")
     this.filterService.setCheckbox(name);
   }
   //Functie om een cookie op te vragen.
