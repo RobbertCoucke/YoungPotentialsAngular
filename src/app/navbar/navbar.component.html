@@ -15,7 +15,7 @@
 
       </li>
       <li *ngIf="currentUser && currentUser.role === 'Admin'" class="nav-item">
-        <a class="nav-link" routerLink="/verify" routerLinkActive="active">{{"navbar.verify" | translate}}</a>
+        <a class="nav-link" routerLink="/unverified-table" routerLinkActive="active">{{"navbar.verify" | translate}}</a>
       </li>
       <li *ngIf="currentUser && currentUser.role === 'Admin'" class="nav-item">
         <a class="nav-link" routerLink="/bedrijven" routerLinkActive="active">{{"navbar.overzicht" | translate}}</a>
